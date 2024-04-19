@@ -17,7 +17,6 @@ const MainLayout = () => {
 
         <div
           className="  hover:bg-[#2C6975] text-[#626262] hover:text-white h-[50px] pt-[10px] pr-[40px] ">
-            <FontAwesomeIcon icon="fa-solid fa-user-group" />
           <img src="src/assets/Vector.png" alt="" className="absolute w-[30px] left-[30px] top-[150px] " />
           <Link to={"/input-simpanan"}> <h2>Input Simpanan</h2></Link>
 
