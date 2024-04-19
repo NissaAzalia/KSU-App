@@ -1,9 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
+import DasboardInputSimpanan from "../dasboard/DasboardInputSimpanan"
 
 const MainLayout = () => {
   return (
-    <div className="bg-[#E0ECDE]">
+    <>
+      <div className="bg-[#E0ECDE] flex">
       <div className="text-center bg-white w-[300px] h-screen ">
+        <DasboardInputSimpanan/>
+        
 
         <div className="absolute left-[15px] top-[10px]"> <img src="src/assets/logoKSU.png" alt="" className="w-[45px] " /> </div>
         <h1 className=" pt-[15px] pr-[35px] font-bold">Teknika mandiri</h1>
@@ -33,13 +37,10 @@ const MainLayout = () => {
           {/* <img src="src/assets/Vector2.png" alt="" className="absolute w-[30px] left-[30px] top-[200px] " /> */}
           <Link to={"/info-pinjaman"}><h2 className="">Logout</h2></Link>
         </div>
-
-
-
-
       </div>
-
     </div>
+    
+    </>
   )
 }
 

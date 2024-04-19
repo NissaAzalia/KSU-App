@@ -9,10 +9,6 @@ import DashboardNasabah from './modules/dashboard/DashboardAdmin.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Login/>
-    {/* <AppRoutes /> */}
-    <DashboardAdmin/>
-   <DashboardNasabah/>
-
+    <AppRoutes/>
   </React.StrictMode>,
 )
