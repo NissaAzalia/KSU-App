@@ -1,11 +1,13 @@
 import { Link, Outlet } from "react-router-dom"
 import DasboardInputSimpanan from "../dasboard/DasboardInputSimpanan"
+import DasboardAdmin from "../dashboard/DashboardAdmin"
 
 const MainLayout = () => {
   return (
     <>
       <div className="bg-[#E0ECDE] flex">
       <div className="text-center bg-white w-[300px] h-screen ">
+        <DasboardAdmin/>
         <DasboardInputSimpanan/>
         
 

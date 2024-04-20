@@ -9,11 +9,35 @@ const DasboardAdmin = () => {
                     </div>
                 </div>
                 <div>
-                    <h2 className="text-[#2C6975] mx-[500px] font-medium pt-[10px]">Daftar Anggota</h2>
+                    <h2 className="text-[#2C6975] mx-[500px] font-medium pt-[10px] text-lg">Daftar Anggota</h2>
                 </div>
                 <div className="mx-[500px] pt-[10px]">
                     <input className="rounded-xl w-[600px] h-[40px] border-solid border-[1px]  shadow-lg" type="text" placeholder="" />
-                        
+                </div>
+
+                <div className="mx-[500px] pt-[20px]">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                            <tr>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                            <tr>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
