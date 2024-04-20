@@ -18,7 +18,7 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {
+        {/* {
           isLoggedIn !== true?
 
             <Route>
@@ -34,8 +34,8 @@ const AppRoutes = () => {
               <Route path='/info' element={<InfoDashboard />} />
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
-        }
-        {/* <Route path='' element={<DashboardNasabah/>} /> */}
+        } */}
+        <Route path='' element={<DashboardNasabah/>} />
 
         {/* write other routes here */}
       </Routes>

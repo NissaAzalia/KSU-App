@@ -18,14 +18,44 @@ const DasboardNasabah = () => {
                 <h1 className="text-2xl text-[#2C6975] mt-[20px] ml-[50px] font-bold">Info Simpanan</h1>
             </div>
 
-            <div>
+            <div className="simpanan">
                 <h2 className="text-xl text-black mt-[15px] ml-[100px] ">Simpanan</h2>
+                <div className="flex  ">
+                    <div className="1 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white "></div>
+                    <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                    <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                    <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                </div>
+            </div>
 
-                <div className="flex mr-[5px] ">
-                    <div className="1 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px]   flex flex-col items-center  shadow-2xl bg-white ">
-                        <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px]   flex flex-col items-center  shadow-2xl bg-white"></div>
-                        <div className="3 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px]   flex flex-col items-center  shadow-2xl bg-white"></div>
-                        <div className="4 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+            <div className="layanan">
+                <div className="ml-[50px]">
+                    <h1 className="text-2xl text-[#2C6975] mt-[20px] ml-[50px] font-bold">Info Simpanan</h1>
+                    <h2 className="text-xl text-black mt-[15px] ml-[100px] ">Informasi</h2>
+                </div>
+
+
+                <div className="flex ">
+                    <div className="2 rounded-[10px] w-[400px] h-[80px] mt-[50px] mx-[50px] mr-[5px] p-[10px] flex flex-col items-center shadow-2xl bg-white">
+                        <h3>Sisa hutang dari pinjaman biasa </h3>
+
+                    </div>
+
+                    <div className="2 rounded-[10px] w-[400px] h-[80px] mt-[50px] mx-[50px] mr-[5px] p-[10px]  flex flex-col items-center  shadow-2xl bg-white">
+                        <h3>Sisa hutang dari pinjaman talangan </h3>
+                    </div>
+                </div>
+
+                <div className="">
+                    <h2 className="text-xl text-black mt-[15px] ml-[100px] ">Layanan</h2>
+
+                    <div className="flex  ">
+                        <div className="1 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white "></div>
+                        <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                        <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                        <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+                        <div className="2 rounded-3xl w-[250px] h-[250px] mt-[50px] mx-[50px] mr-[5px]   flex flex-col items-center  shadow-2xl bg-white"></div>
+
                     </div>
                 </div>
             </div>
