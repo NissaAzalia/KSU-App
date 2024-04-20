@@ -15,7 +15,7 @@ const SideBar = () => {
                 </div>
 
                 
-                <NavLink to={"/daftar-anggota"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
+                <NavLink to={"/daftar-anggota"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
                     background: isActive ? "#2C6975" : "transparent",
                     color: isActive ? "white" : "#626262"
                 })}>
@@ -25,7 +25,7 @@ const SideBar = () => {
 
 
 
-                <NavLink to={"/input-simpanan"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
+                <NavLink to={"/input-simpanan"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
                     background: isActive ? "#2C6975" : "transparent",
                     color: isActive ? "white" : "#626262"
                 })}>
@@ -35,7 +35,7 @@ const SideBar = () => {
 
 
                 
-                <NavLink to={"/info"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
+                <NavLink to={"/info"} className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({isActive}) => ({
                     background: isActive ? "#2C6975" : "transparent",
                     color: isActive ? "white" : "#626262"
                 })}>
@@ -46,7 +46,7 @@ const SideBar = () => {
 
                 <NavLink to={"/"}>
                     <div
-                        className="animate flex hover:bg-[#2C6975] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] px-[100px] mt-[257px] ">
+                        className="animate flex hover:bg-[#2C6975] hover:text-white gap-[10px] h-[50px] pt-[10px] px-[100px] mt-[257px] ">
                         <FontAwesomeIcon className="mt-[5px] " icon={faArrowLeft} />
                         <h2>Logout</h2>
                     </div>
