@@ -17,32 +17,6 @@ const DashboardAdmin = () => {
                     <input className="rounded-xl w-[600px] h-[40px] border-solid border-[1px]  shadow-lg" type="text" placeholder="" />
                 </div>
             </div>
-
-            <div className="mx-[100px] pt-[20px]">
-                    <table>
-                        <tbody className="rounded-lg">
-                            <tr>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                            <tr>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                            <tr>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[100px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
         </div>
     )
 
