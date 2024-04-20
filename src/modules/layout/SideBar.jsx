@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import { Link, Outlet } from "react-router-dom"
-import DasboardInputSimpanan from "../dashboard/dasboardInputSimpanan"
-=======
 import { NavLink, Outlet } from "react-router-dom"
->>>>>>> 43802a7de9cdf6ea703b2ba72f5bdb8655d23336
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserGroup, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
