@@ -6,9 +6,6 @@ const Login = ({login}) => {
     login(true);
   }
 
-
-
-
   return (
     <div className="flex bg-[#fffff]  ">
 
