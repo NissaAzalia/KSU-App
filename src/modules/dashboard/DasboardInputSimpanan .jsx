@@ -21,11 +21,11 @@ const DasboardInputSimpanan = () => {
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
                             <div>
                                 <select className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
-                                    <option disabled selected>Pilih Simpanan</option>
-                                    <option value="">Simpanan Pokok</option>
-                                    <option value="">Simpanan Wajib</option>
-                                    <option value="">Simpanan Sukarela</option>
-                                    <option value="">Simpanan Hari Raya</option>
+                                    <option disabled>Pilih Simpanan</option>
+                                    <option>Simpanan Pokok</option>
+                                    <option>Simpanan Wajib</option>
+                                    <option>Simpanan Sukarela</option>
+                                    <option>Simpanan Hari Raya</option>
                                 </select>
                             </div>
                             <button className="rounded bg-[#2C6975] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
