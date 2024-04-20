@@ -1,6 +1,6 @@
 const InfoDashboard = () => {
     return (
-        <div className="bg-[#E0ECDE] w-screen h-screen ">
+        <div className="bg-[#E0ECDE] w-screen h-auto ">
             {/* <div className=" h-screen pt-[60px] bg-black"> */}
 
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
@@ -14,7 +14,31 @@ const InfoDashboard = () => {
             <div className="ml-[100px] mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Info Pinjaman Anggota</h2>
                 <div>
-                    <table>Info</table>
+                    <table  className="rounded-xl">
+                        <tbody>
+                            <tr>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                            <tr>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                            <tr>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div className="  ">

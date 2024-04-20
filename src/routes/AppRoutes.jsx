@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from '../modules/layout/MainLayout'
 import Login from '../modules/auth/Login'
 import LoginAdmin from '../modules/auth/LoginAdmin'
-import DasboardInputSimpanan from '../modules/dasboard/DasboardInputSimpanan'
 import DashboardAdmin from '../modules/dashboard/DashboardAdmin'
 import DashboardNasabah from '../modules/dashboard/DashboardNasabah'
 import { useState } from 'react'
 import SideBar from '../modules/layout/SideBar'
 import InfoDashboard from '../modules/dashboard/InfoDashboard'
+import DasboardInputSimpanan from '../modules/dashboard/dasboardInputSimpanan'
 
 const AppRoutes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,7 +18,7 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* {
+        {
           isLoggedIn !== true?
 
             <Route>
@@ -34,8 +34,8 @@ const AppRoutes = () => {
               <Route path='/info' element={<InfoDashboard />} />
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
-        } */}
-        <Route path='' element={<DashboardNasabah/>} />
+        }
+        {/* <Route path='' element={<DashboardNasabah/>} /> */}
 
         {/* write other routes here */}
       </Routes>

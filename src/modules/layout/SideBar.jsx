@@ -1,5 +1,5 @@
 import { Link, Outlet } from "react-router-dom"
-import DasboardInputSimpanan from "../dasboard/DasboardInputSimpanan"
+import DasboardInputSimpanan from "../dashboard/dasboardInputSimpanan"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserGroup, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
