@@ -14,31 +14,7 @@ const InfoDashboard = () => {
             <div className="ml-[100px] mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Info Pinjaman Anggota</h2>
                 <div>
-                    <table  className="rounded-xl">
-                        <tbody>
-                            <tr>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                            <tr>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                            <tr>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                                <td className="px-[70px] py-[20px] border border-[#7D7D7D]"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <table>Info</table>
                 </div>
 
                 <div className="  ">
