@@ -1,5 +1,4 @@
 import { Link, Outlet } from "react-router-dom"
-import DasboardInputSimpanan from "../dasboard/DasboardInputSimpanan"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserGroup, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,7 +15,7 @@ const SideBar = () => {
                 </div>
 
                 <Link to={"/daftar-anggota"}>
-                    <div className="flex hover:bg-[#2C6975] hover:text-white text-[#626262] w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] mt-[50px]">
+                    <div className="animate flex hover:bg-[#2C6975] hover:text-white text-[#626262] w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] mt-[50px]">
                         <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
                         <Link to={"/daftar-anggota"}><h2 >Daftar Anggota</h2></Link>
 
@@ -26,7 +25,7 @@ const SideBar = () => {
 
 
                 <Link to={"/input-simpanan"} ><div
-                    className=" flex hover:bg-[#2C6975] text-[#626262] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] ">
+                    className="animate flex hover:bg-[#2C6975] text-[#626262] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] ">
                     <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
                     <h2>Input Simpanan</h2>
 
@@ -35,7 +34,7 @@ const SideBar = () => {
 
                 <Link to={"/info"}>
                     <div
-                        className="flex hover:bg-[#2C6975] hover:text-white text-[#626262]  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] ">
+                        className="animate flex hover:bg-[#2C6975] hover:text-white text-[#626262]  w-screen gap-[10px] h-[50px] pt-[10px] pl-[30px] ">
                         <FontAwesomeIcon className="mt-[5px]" icon={faUserGroup} />
                         <h2>Info Pinjaman Anggota</h2>
                     </div>
@@ -44,7 +43,7 @@ const SideBar = () => {
 
                 <Link to={"/"}>
                     <div
-                        className=" flex hover:bg-[#2C6975] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] px-[100px] mt-[257px] ">
+                        className="animate flex hover:bg-[#2C6975] hover:text-white  w-screen gap-[10px] h-[50px] pt-[10px] px-[100px] mt-[257px] ">
                         <FontAwesomeIcon className="mt-[5px] " icon={faArrowLeft} />
                         <h2>Logout</h2>
                     </div>
@@ -52,9 +51,6 @@ const SideBar = () => {
                 </Link>
             </div>
             <Outlet />
-
-
-
         </>
     )
 }
