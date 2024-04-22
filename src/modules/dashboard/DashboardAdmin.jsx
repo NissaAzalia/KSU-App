@@ -1,6 +1,6 @@
 const DashboardAdmin = () => {
     return (
-        <div className="bg-[#E0ECDE] w-screen h-screen ">
+        <div className="bg-[#F4F4F4] w-screen h-screen ">
 
 
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >

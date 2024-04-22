@@ -1,6 +1,6 @@
 const DasboardInputSimpanan = () => {
     return (
-        <div className=" bg-[#E0ECDE] w-screen h-screen   ">
+        <div className=" bg-[#F4F4F4] w-screen h-screen   ">
 
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
 
@@ -28,11 +28,11 @@ const DasboardInputSimpanan = () => {
                                     <option>Simpanan Hari Raya</option>
                                 </select>
                             </div>
-                            <button className="rounded bg-[#2C6975] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button className="rounded bg-[#2C6975] hover:bg-[#23545d] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 </div>
-                
+    
             </div>
 
         </div>
