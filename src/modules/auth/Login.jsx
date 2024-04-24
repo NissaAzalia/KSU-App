@@ -33,7 +33,7 @@ const Login = ({login}) => {
             <p className="text-[#2C6975]">Password</p>
             <input className="rounded border-solid border-[1px] border-[#2C6975] w-[350px] h-[40px]" type="password" />
           </div>
-          <button onClick={handleClick} className="rounded bg-[#2C6975] hover:bg-[#23545d] w-[350px] h-[45px] text-white " >
+          <button onClick={handleClick} className="rounded bg-[#2C6975]  hover:bg-[#358595] w-[350px] h-[45px] text-white " >
             Login
           </button>
         </div>
