@@ -41,6 +41,8 @@ const AppRoutes = () => {
               <Route path='/input-tambah' element={<InputTambah />} />
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
+            
+
         }
         <Route path='nasabah' element={<DashboardNasabah/>} />
         <Route path='pinjaman-biasa' element={<PinjamBiasa/>} />
