@@ -46,7 +46,7 @@ const AppRoutes = () => {
         <Route path='pinjaman-biasa' element={<PinjamBiasa/>} />
         <Route path='pinjaman-talangan' element={<PinjamTalangan/>} />
         <Route path='pinjam-mobil' element={<PinjamMobil/>} />
-        <Route path='pinjam-barang' element={<BeliBarang/>} />
+        <Route path='beli-barang' element={<BeliBarang/>} />
         <Route path='servis' element={<Servis/>} />
 
 

@@ -3,10 +3,27 @@ import { useNavigate } from "react-router-dom"
 
 const DasboardNasabah = () => {
     const Navigate = useNavigate()
+
     const PinjamBiasa = async () => {
         Navigate('/pinjaman-biasa')
     }
-   
+
+    const PinjamTalangan = async () => {
+        Navigate('/pinjaman-talangan')
+    }
+
+    const PinjamMobil = async () => {
+        Navigate('/pinjam-mobil')
+    }
+
+    const BeliBarang = async () => {
+        Navigate('/beli-barang')
+    }
+
+    const Servis = async () => {
+        Navigate('/servis')
+    }
+
     return (
         <div className="w-screen h-auto bg-[#F4F4F4] ">
 
@@ -35,7 +52,7 @@ const DasboardNasabah = () => {
                 <div className="flex gap-[50px] mx-[50px] ">
                     <div className="1 rounded-3xl w-[250px] h-[150px] text-center flex flex-col items-center p-[20px]  shadow-2xl bg-white ">
                         <span className="text">Simpanan Pokok</span>
-                        <span  className="pt-[50px]" >Rp. 300,000</span>
+                        <span className="pt-[50px]" >Rp. 300,000</span>
                     </div>
                     <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Wajib</span>
@@ -59,19 +76,14 @@ const DasboardNasabah = () => {
                 </div>
 
 
-                <div className="flex ">
-                    <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
-                        <span className="text">Sisa hutang dari pinjaman biasa </span>
-                        <span>Rp. 300,000</span>
-                        
 
-                    </div>
-
-                    <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px]  flex flex-col   shadow-2xl bg-white">
-                        <span className="text">Sisa hutang dari pinjaman talangan </span>
-                        <span>Rp. 300,000</span>
-                    </div>
+                <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
+                    <span className="text">Sisa hutang dari pinjaman</span>
+                    <span>Rp. 300,000</span>
                 </div>
+
+
+
 
                 <div className="h-screen">
                     <h2 className="text-2xl text-black mt-[70px] mb-[25px] ml-[50px] ">Layanan</h2>
@@ -82,36 +94,37 @@ const DasboardNasabah = () => {
                             <span className="text">Pinjaman Biasa</span>
                             <div className="ajukan ">
 
-                                <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto   ">Ajukan</button>
-                                
+                                <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto">
+                                    Ajukan</button>
+
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Talangan</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={PinjamTalangan} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Mobil</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={PinjamMobil} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pembelian Barang</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={BeliBarang} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Servis</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={Servis} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
