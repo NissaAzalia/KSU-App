@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import { faMagnifyingGlass, faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-=======
->>>>>>> b478a5ef015d6f8829ddf3bb855035ad053a72ae
 const DashboardAdmin = () => {
     return (
         <div className="bg-[#F4F4F4] w-screen h-auto ">
