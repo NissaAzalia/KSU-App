@@ -8,6 +8,11 @@ import DashboardNasabah from '../modules/dashboard/DashboardNasabah'
 import { useState } from 'react'
 import SideBar from '../modules/layout/SideBar'
 import InfoDashboard from '../modules/dashboard/InfoDashboard'
+import PinjamBiasa from '../modules/layout/PinjamBiasa'
+import PinjamTalangan from '../modules/layout/PinjamTalangan'
+import PinjamMobil from '../modules/layout/PinjamMobil'
+import BeliBarang from '../modules/layout/BeliBarang'
+import Servis from '../modules/layout/Servis'
 
 const AppRoutes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,7 +40,19 @@ const AppRoutes = () => {
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
         }
-        {/* <Route path='' element={<DashboardNasabah/>} /> */}
+        <Route path='nasabah1' element={<DashboardNasabah/>} />
+        <Route path='biasa' element={<PinjamBiasa/>} />
+        <Route path='talangan' element={<PinjamTalangan/>} />
+        <Route path='mobil' element={<PinjamMobil/>} />
+        <Route path='barang' element={<BeliBarang/>} />
+        <Route path='servis' element={<Servis/>} />
+
+
+        
+
+
+
+
 
         {/* write other routes here */}
       </Routes>

@@ -21,7 +21,7 @@ const DasboardInputSimpanan = () => {
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
                             <div>
                                 <select className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
-                                    <option disabled>Pilih Simpanan</option>
+                                    <option disabled selected>Pilih Simpanan</option>
                                     <option>Simpanan Pokok</option>
                                     <option>Simpanan Wajib</option>
                                     <option>Simpanan Sukarela</option>
