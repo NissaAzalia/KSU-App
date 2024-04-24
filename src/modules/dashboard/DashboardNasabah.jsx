@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom"
+
+
 const DasboardNasabah = () => {
+    const Navigate = useNavigate()
+    const PinjamBiasa = async () => {
+        Navigate('/pinjaman-biasa')
+    }
+   
     return (
         <div className="h-auto bg-[#F4F4F4] ">
 
@@ -73,7 +81,8 @@ const DasboardNasabah = () => {
                         <div className="1 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
                             <span className="text">Pinjaman Biasa</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto   ">Ajukan</button>
+
+                                <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto   ">Ajukan</button>
                             </div>
                         </div>
 

@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from '../modules/layout/MainLayout'
 import Login from '../modules/auth/Login'
-import LoginAdmin from '../modules/auth/LoginAdmin'
 import DasboardInputSimpanan from '../modules/dashboard/DasboardInputSimpanan '
 import DashboardAdmin from '../modules/dashboard/DashboardAdmin'
 import DashboardNasabah from '../modules/dashboard/DashboardNasabah'
@@ -13,6 +12,8 @@ import PinjamTalangan from '../modules/layout/PinjamTalangan'
 import PinjamMobil from '../modules/layout/PinjamMobil'
 import BeliBarang from '../modules/layout/BeliBarang'
 import Servis from '../modules/layout/Servis'
+import InputTambah from '../modules/dashboard/InputTambah'
+import LoginNasabah from '../modules/auth/LoginNasabah'
 
 const AppRoutes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,7 +30,7 @@ const AppRoutes = () => {
             <Route>
               <Route path='/' element={<Login login={handleLogin} />} />
               <Route path='/Login' element={<Login login={handleLogin}/>} />
-              <Route path='/login-admin' element={<LoginAdmin />} />
+              <Route path='/login-nasabah' element={<LoginNasabah />} />
               <Route path='*' element={<Navigate to={"/"} />} />
             </Route>
             :
@@ -37,14 +38,15 @@ const AppRoutes = () => {
               <Route path='/daftar-anggota' element={<DashboardAdmin />} />
               <Route path='/input-simpanan' element={<DasboardInputSimpanan />} />
               <Route path='/info' element={<InfoDashboard />} />
+              <Route path='/input-tambah' element={<InputTambah />} />
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
         }
-        <Route path='nasabah1' element={<DashboardNasabah/>} />
-        <Route path='biasa' element={<PinjamBiasa/>} />
-        <Route path='talangan' element={<PinjamTalangan/>} />
-        <Route path='mobil' element={<PinjamMobil/>} />
-        <Route path='barang' element={<BeliBarang/>} />
+        <Route path='nasabah' element={<DashboardNasabah/>} />
+        <Route path='pinjaman-biasa' element={<PinjamBiasa/>} />
+        <Route path='pinjaman-talangan' element={<PinjamTalangan/>} />
+        <Route path='pinjam-mobil' element={<PinjamMobil/>} />
+        <Route path='pinjam-barang' element={<BeliBarang/>} />
         <Route path='servis' element={<Servis/>} />
 
 

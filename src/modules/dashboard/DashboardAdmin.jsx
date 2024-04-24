@@ -1,7 +1,3 @@
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
-
 const DashboardAdmin = () => {
     return (
         <div className="bg-[#F4F4F4] w-screen h-screen ">
@@ -16,11 +12,7 @@ const DashboardAdmin = () => {
             <div className="ml-[100px] mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
                 <div className=" mx-[10px] pt-[10px]">
-                    <input className="rounded-xl w-[600px] h-[40px] border-solid border-[1px]  shadow-lg" type="text" placeholder="" >
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </input>
-                    
-                    
+                    <input className="rounded-xl w-[600px] h-[40px] border-solid border-[1px]  shadow-lg" type="text" placeholder="" />
                 </div>
             </div>
 

@@ -40,6 +40,14 @@ const SideBar = () => {
                         <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
                         Info Pinjaman 
                     </NavLink>
+
+                    <NavLink to={"/input-tambah"} className="animate w-[271px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px] " style={({ isActive }) => ({
+                        background: isActive ? "#2C6975" : "transparent",
+                        color: isActive ? "white" : "#626262"
+                    })}>
+                        <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
+                        Tambah Nasabah
+                    </NavLink>
                 </div>
 
                 <NavLink to={"/"}>
