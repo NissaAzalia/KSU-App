@@ -1,11 +1,11 @@
 const InfoDashboard = () => {
     return (
-        <div className="bg-[#E0ECDE] w-screen h-auto ">
+        <div className="bg-[#F4F4F4] w-screen h-auto ">
             {/* <div className=" h-screen pt-[60px] bg-black"> */}
 
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
 
-                <div className="mx-[30px] py-[5px] mt-[25px]  ">
+                <div className="mx-[30px] py-[5px] mt-[30px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Teknika Mandiri</p>
                 </div>
@@ -37,7 +37,7 @@ const InfoDashboard = () => {
                             </tr>
                     </table>
 
-                <div className="  ">
+                <div className=" mb-[30px]  ">
                     <div className=" border-solid border-[1px] rounded-3xl w-[700px] py-[30px] h-[300px] flex flex-col items-center  shadow-2xl bg-white">
                         <h1 className=" text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjaman Anggota</h1>
                         <div className="flex flex-col gap-6 ">
@@ -48,6 +48,7 @@ const InfoDashboard = () => {
                         </div>
                     </div>
                 </div>
+
             </div>
             {/* </div> */}
         </div>

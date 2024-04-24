@@ -3,6 +3,7 @@ import SideBar from "./SideBar"
 const MainLayout = () => {
   return (
     <>
+      
     <div className="flex">
     <SideBar/>
     </div>

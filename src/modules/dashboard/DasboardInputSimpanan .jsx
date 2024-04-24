@@ -1,6 +1,6 @@
 const DasboardInputSimpanan = () => {
     return (
-        <div className=" bg-[#E0ECDE] w-screen h-screen   ">
+        <div className=" bg-[#F4F4F4] w-screen h-screen   ">
 
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
 
@@ -21,7 +21,7 @@ const DasboardInputSimpanan = () => {
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
                             <div>
                                 <select className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
-                                    <option disabled>Pilih Simpanan</option>
+                                    <option disabled selected>Pilih Simpanan</option>
                                     <option>Simpanan Pokok</option>
                                     <option>Simpanan Wajib</option>
                                     <option>Simpanan Sukarela</option>
@@ -32,7 +32,7 @@ const DasboardInputSimpanan = () => {
                         </div>
                     </div>
                 </div>
-                
+    
             </div>
 
         </div>
