@@ -8,7 +8,7 @@ const DasboardNasabah = () => {
     }
    
     return (
-        <div className="h-auto bg-[#F4F4F4] ">
+        <div className="w-screen h-auto bg-[#F4F4F4] ">
 
             <div className="logo flex ml-[55px]  ">
                 <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />
@@ -33,21 +33,21 @@ const DasboardNasabah = () => {
                 </div>
 
                 <div className="flex gap-[50px] mx-[50px] ">
-                    <div className="1 rounded-3xl w-[250px] h-[250px] text-center flex flex-col items-center p-[20px]  shadow-2xl bg-white ">
+                    <div className="1 rounded-3xl w-[250px] h-[150px] text-center flex flex-col items-center p-[20px]  shadow-2xl bg-white ">
                         <span className="text">Simpanan Pokok</span>
-                        <span className="pt-[150px]" >Rp. 300,000</span>
+                        <span  className="pt-[50px]" >Rp. 300,000</span>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[250px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
+                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Wajib</span>
-                        <span className="pt-[150px]">Rp. 300,000</span>
+                        <span className="pt-[50px]">Rp. 300,000</span>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[250px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
+                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Sukarela</span>
-                        <span className="pt-[150px]">Rp. 300,000</span>
+                        <span className="pt-[50px]">Rp. 300,000</span>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[250px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
+                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Hari Raya</span>
-                        <span className="pt-[150px]">Rp. 300,000</span>
+                        <span className="pt-[50px]">Rp. 300,000</span>
                     </div>
                 </div>
             </div>
@@ -73,41 +73,42 @@ const DasboardNasabah = () => {
                     </div>
                 </div>
 
-                <div className="">
+                <div className="h-screen">
                     <h2 className="text-2xl text-black mt-[70px] mb-[25px] ml-[50px] ">Layanan</h2>
 
                     <div className="flex flex-row flex-wrap gap-[50px] mx-[50px] mb-[50px]  ">
 
-                        <div className="1 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
+                        <div className="1 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
                             <span className="text">Pinjaman Biasa</span>
                             <div className="ajukan ">
 
                                 <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto   ">Ajukan</button>
+                                
                             </div>
                         </div>
 
-                        <div className="2 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
+                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Talangan</span>
                             <div className="ajukan ">
                                 <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
-                        <div className="2 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
+                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Mobil</span>
                             <div className="ajukan ">
                                 <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
-                        <div className="2 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
+                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pembelian Barang</span>
                             <div className="ajukan ">
                                 <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
-                        <div className="2 rounded-3xl w-[250px] h-[250px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
+                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Servis</span>
                             <div className="ajukan ">
                                 <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
