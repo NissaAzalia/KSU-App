@@ -28,7 +28,7 @@ const DasboardInputSimpanan = () => {
                                     <option>Simpanan Hari Raya</option>
                                 </select>
                             </div>
-                            <button className="rounded bg-[#2C6975] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 </div>
