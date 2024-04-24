@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const DashboardAdmin = () => {
     return (
         <div className="bg-[#F4F4F4] w-screen h-screen ">
-
-
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
@@ -26,6 +24,60 @@ const DashboardAdmin = () => {
                 </div>
             </div>
 
+            <div className="ml-[100px] mt-[50px]">
+                <table cellPadding={10} className="mb-10  ">
+                    <tr className="">
+                        <th className=" border border-[#7D7D7D]"></th>
+                        <th className="border border-[#7D7D7D]"></th>
+                        <th className=" border border-[#7D7D7D]"></th>
+                        <th className=" border border-[#7D7D7D]"></th>
+                    </tr>
+                    <tr>
+                        <td className=" py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className=" py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+                    <tr>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                    </tr>
+
+
+                </table>
+            </div>
         </div>
     )
 
