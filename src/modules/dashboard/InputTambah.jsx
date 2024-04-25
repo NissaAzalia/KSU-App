@@ -10,7 +10,7 @@ const InputTambah = () => {
                 </div>
             </div>
 
-            <div className="ml-[100px] mt-[50px]">
+            <div className="ml-[50px] mt-[50px]">
                 <h1 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Input Tambah Nasabah</h1>
 
                 <div className="  ">
