@@ -19,7 +19,7 @@ const InputTambah = () => {
                         <div className="flex flex-col gap-6 ">
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Nama" />
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="password" placeholder="Password" />
-                            <button className="rounded bg-[#2C6975] hover:bg-[#23545d] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 </div>
