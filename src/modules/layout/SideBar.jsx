@@ -46,7 +46,7 @@ const SideBar = () => {
                         color: isActive ? "white" : "#626262"
                     })}>
                         <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
-                        Tambah Nasabah
+                        Tambah Anggota
                     </NavLink>
                 </div>
 
