@@ -63,7 +63,7 @@ const DasboardNasabah = () => {
                         <div className="flex ">
                             <div className="bg-[#37808F] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
-                                <span>Pokok</span>
+                                <span>Wajib</span>
                                 <span className="font-bold">Rp.200,000</span>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ const DasboardNasabah = () => {
                         <div className="flex ">
                             <div className="bg-[#439FB1] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
-                                <span>Pokok</span>
+                                <span>Sukarela</span>
                                 <span className="font-bold">Rp.200,000</span>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ const DasboardNasabah = () => {
                         <div className="flex ">
                             <div className="bg-[#50BDD3] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
-                                <span>Pokok</span>
+                                <span>Hari Raya</span>
                                 <span className="font-bold">Rp.200,000</span>
                             </div>
                         </div>
