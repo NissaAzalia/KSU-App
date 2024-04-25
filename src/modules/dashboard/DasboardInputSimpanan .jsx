@@ -2,7 +2,7 @@ const DasboardInputSimpanan = () => {
     return (
         <div className=" bg-[#F4F4F4] w-screen h-screen   ">
 
-            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
+            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]   " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
@@ -10,7 +10,7 @@ const DasboardInputSimpanan = () => {
                 </div>
             </div>
 
-            <div className="ml-[100px] mt-[50px]">
+            <div className="ml-[50px] mt-[50px]">
                 <h1 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Input Simpanan</h1>
 
                 <div className="  ">

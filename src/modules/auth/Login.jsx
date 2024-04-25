@@ -12,7 +12,7 @@ const Login = ({login}) => {
       <div
         className="left text-white bg-[#2C6975] w-[600px] h-screen " >
         <div className="my-[230px] mx-[50px]">
-          <h1 className="text-5xl items-center  ">Welcome</h1>
+          <h1 className="text-5xl items-center  ">Welcome,Admin</h1>
           <p>Login untuk melanjutkan</p>
         </div>
 
