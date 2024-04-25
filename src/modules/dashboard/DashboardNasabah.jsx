@@ -27,24 +27,15 @@ const DasboardNasabah = () => {
     }
 
     return (
-<<<<<<< HEAD
         <div className="w-full h-auto bg-[#F4F4F4] ">
-=======
-        <div className="h-auto bg-[#F4F4F4] ">
->>>>>>> 3cee5d4f61048a38161d3f1fa564ade7d1e7c9fd
 
             <div className="logo flex ml-[55px]  ">
                 <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />
                 <h1 className=" pl-[15px] pt-[13px]  font-bold">Teknika Mandiri</h1>
             </div>
 
-<<<<<<< HEAD
             <div className="ml-[50px] b  ">
                 <div className="rounded-s-xl rounded-e-xl h-[90px] w-[95%]  bg-gradient-to-r from-[#2C6975] to-[#52C5DB]  " >
-=======
-            <div className="ml-[50px]">
-                <div className="rounded-s-xl rounded-e-xl h-[90px] w-[95%]  bg-[#2C6975]  " >
->>>>>>> 3cee5d4f61048a38161d3f1fa564ade7d1e7c9fd
 
                     <div className="mx-[30px] py-[5px] mt-[25px]   ">
                         <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
