@@ -1,14 +1,21 @@
 
 import { faX } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom'
+
 const PinjamTalangan = () => {
+    const Navigate = useNavigate()
+    const handleClick = async ()=>{
+        Navigate('/nasabah')
+    }
 
     return (
         <>
-            <div className="mx-[250px] mt-[50px]  ">
+        <div className="h-screen bg-[#F4F4F4]">
+            <div className="mx-[350px] pt-[50px]  ">
                 <div className=" border-solid border-[1px] rounded-3xl w-[550px] py-[10px] h-[320px] flex flex-col items-center  shadow-2xl bg-white">
                     <div className='mr-[430px] pt-[10px]'>
-                        <FontAwesomeIcon icon={faX} style={{ color: "#2C6975", }} />
+                        <FontAwesomeIcon onClick={handleClick} icon={faX} style={{ color: "#2C6975", }} />
                     </div>
                     <h1 className=" text-center text-xl font-bold  text-[#2C6975] mb-[20px] ">Pinjaman Talangan</h1>
 
@@ -19,7 +26,7 @@ const PinjamTalangan = () => {
                     </div>
                 </div>
             </div>
-
+</div>
         </>
     )
 }

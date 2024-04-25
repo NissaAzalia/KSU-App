@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
-const LoginAdmin = () => {
+const LoginNasabah = () => {
   const Navigate = useNavigate()
 
   const handleClick = async () => {
-    Navigate('/dashboard')
+    Navigate('/nasabah')
   }
   return (
     <div className="flex">
       <div className="bg-[#2C6975] text-[#FAFAFA] h-screen w-[520px] justify-content: center text-[4xl]">
         <div className="mx-[60px] my-[230px]">
-        <h1 className="text-5xl">Welcome,Admin</h1>
+        <h1 className="text-5xl">Welcome</h1>
         <p className="text-2xl">Login untuk melanjutkan</p>
         </div>
       </div>
@@ -37,4 +37,4 @@ const LoginAdmin = () => {
   );
 }
 
-export default LoginAdmin
+export default LoginNasabah

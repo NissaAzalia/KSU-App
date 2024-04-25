@@ -1,4 +1,29 @@
+import { useNavigate } from "react-router-dom"
+
+
 const DasboardNasabah = () => {
+    const Navigate = useNavigate()
+
+    const PinjamBiasa = async () => {
+        Navigate('/pinjaman-biasa')
+    }
+
+    const PinjamTalangan = async () => {
+        Navigate('/pinjaman-talangan')
+    }
+
+    const PinjamMobil = async () => {
+        Navigate('/pinjam-mobil')
+    }
+
+    const BeliBarang = async () => {
+        Navigate('/beli-barang')
+    }
+
+    const Servis = async () => {
+        Navigate('/servis')
+    }
+
     return (
         <div className="w-screen h-auto bg-[#F4F4F4] ">
 
@@ -63,7 +88,18 @@ const DasboardNasabah = () => {
             <div className="layanan">
                 <div className="ml-[50px]">
                     <h1 className="text-3xl text-[#2C6975] mt-[60px]  font-bold">Daftar Layanan</h1>
+                    <h2 className="text-2xl text-black mt-[40px] mb-[25px] ">Informasi</h2>
                 </div>
+
+
+
+                <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
+                    <span className="text">Sisa hutang dari pinjaman</span>
+                    <span>Rp. 300,000</span>
+                </div>
+
+
+
 
                 <div className="h-screen">
                     <h2 className="text-2xl text-black mt-[70px] mb-[25px] ml-[50px] ">Layanan</h2>
@@ -80,28 +116,28 @@ const DasboardNasabah = () => {
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Talangan</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={PinjamTalangan} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pinjaman Mobil</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={PinjamMobil} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Pembelian Barang</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={BeliBarang} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
                         <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
                             <span className="text">Servis</span>
                             <div className="ajukan ">
-                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
+                                <button onClick={Servis} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
                             </div>
                         </div>
 
