@@ -13,7 +13,7 @@ const DashboardAdmin = () => {
                 </div>
             </div>
 
-            <div className="ml-[50px] mt-[50px]">
+            <div className="ml-[100px] mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
                 <div className=" mx-[10px] pt-[10px] flex">
                     <div className="flex">
@@ -25,7 +25,7 @@ const DashboardAdmin = () => {
                 </div>
             </div>
 
-            <div className="ml-[50px] mt-[50px]">
+            <div className="ml-[100px] mt-[50px]">
                 <table cellPadding={10} className="mb-10  ">
                     <tr className=''>
                         <th className="border border-gray-600 border-b-0" colspan="1"><div className="mt-[40px]  w-[170px]">Nama</div></th>
@@ -59,20 +59,20 @@ const DashboardAdmin = () => {
 
                     </tr>
                     <tr>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
                     </tr>
                     <tr>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[100px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
+                        <td className="px-[70px] py-[20px] border border-[#7D7D7D] bg-white"></td>
                     </tr>
 
                 </table>

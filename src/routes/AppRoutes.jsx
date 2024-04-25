@@ -7,13 +7,12 @@ import DashboardNasabah from '../modules/dashboard/DashboardNasabah'
 import { useState } from 'react'
 import SideBar from '../modules/layout/SideBar'
 import InfoDashboard from '../modules/dashboard/InfoDashboard'
-import PinjamBiasa from '../modules/layout/PinjamBiasa'
-import PinjamTalangan from '../modules/layout/PinjamTalangan'
 import PinjamMobil from '../modules/layout/PinjamMobil'
 import BeliBarang from '../modules/layout/BeliBarang'
 import Servis from '../modules/layout/Servis'
 import InputTambah from '../modules/dashboard/InputTambah'
 import LoginNasabah from '../modules/auth/LoginNasabah'
+import PinjamUang from '../modules/layout/PinjamUang'
 
 const AppRoutes = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,10 +40,11 @@ const AppRoutes = () => {
               <Route path='/input-tambah' element={<InputTambah />} />
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
+            
+
         }
         <Route path='nasabah' element={<DashboardNasabah/>} />
-        <Route path='pinjaman-biasa' element={<PinjamBiasa/>} />
-        <Route path='pinjaman-talangan' element={<PinjamTalangan/>} />
+        <Route path='pinjaman-uang' element={<PinjamUang/>} />
         <Route path='pinjam-mobil' element={<PinjamMobil/>} />
         <Route path='beli-barang' element={<BeliBarang/>} />
         <Route path='servis' element={<Servis/>} />
