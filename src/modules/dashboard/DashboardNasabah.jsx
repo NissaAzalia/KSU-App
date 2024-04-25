@@ -25,7 +25,7 @@ const DasboardNasabah = () => {
     }
 
     return (
-        <div className="w-screen h-auto bg-[#F4F4F4] ">
+        <div className="h-auto bg-[#F4F4F4] ">
 
             <div className="logo flex ml-[55px]  ">
                 <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />
@@ -46,7 +46,7 @@ const DasboardNasabah = () => {
             <div className="simpanan">
                 <div className="ml-[50px]">
                     <h1 className="text-3xl text-[#2C6975] mt-[30px]  font-bold">Info Simpanan</h1>
-                    <h2 className="text-2xl text-black mt-[40px] mb-[25px] bg  ">Simpanan</h2>
+                    <h2 className="text-2xl text-black mt-[40px] mb-[25px]">Simpanan</h2>
                 </div>
 
                 <div className="flex gap-[50px] mx-[50px] ">
@@ -88,18 +88,7 @@ const DasboardNasabah = () => {
             <div className="layanan">
                 <div className="ml-[50px]">
                     <h1 className="text-3xl text-[#2C6975] mt-[60px]  font-bold">Daftar Layanan</h1>
-                    <h2 className="text-2xl text-black mt-[40px] mb-[25px] ">Informasi</h2>
                 </div>
-
-
-
-                <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
-                    <span className="text">Sisa hutang dari pinjaman</span>
-                    <span>Rp. 300,000</span>
-                </div>
-
-
-
 
                 <div className="h-screen">
                     <h2 className="text-2xl text-black mt-[70px] mb-[25px] ml-[50px] ">Layanan</h2>
