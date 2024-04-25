@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const DashboardAdmin = () => {
     return (
-        <div className="bg-[#F4F4F4] w-screen h-auto ">
+        <div className="bg-[#F4F4F4] w-screen h-screen ">
             <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
@@ -41,12 +41,12 @@ const DashboardAdmin = () => {
                         <th className=" border border-[#7D7D7D] border-t-0"></th>
                     </tr>
                     <tr>
-                        <td className=" py-[20px] border border-[#7D7D7D] bg-white">jhxgasxvgsajxgsx</td>
-                        <td className=" py-[20px] border border-[#7D7D7D] bg-white"></td>
-                        <td className="py-[20px] border border-[#7D7D7D] bg-white"></td>
-                        <td className="py-[20px] border border-[#7D7D7D] bg-white"></td>
-                        <td className="py-[20px] border border-[#7D7D7D] bg-white"></td>
-                        <td className="py-[20px] border border-[#7D7D7D] bg-white">
+                        <td className="border border-[#7D7D7D] bg-white"></td>
+                        <td className="border border-[#7D7D7D] bg-white"></td>
+                        <td className="border border-[#7D7D7D] bg-white"></td>
+                        <td className="border border-[#7D7D7D] bg-white"></td>
+                        <td className="border border-[#7D7D7D] bg-white"></td>
+                        <td className="border border-[#7D7D7D] bg-white">
                             <div className='flex'>
                                 <div className="bg-[#D9D9D9] ml-[35px] w-[40px] h-[40px] rounded-lg ">
                                     <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="pl-[10px] pt-[8px]" />
