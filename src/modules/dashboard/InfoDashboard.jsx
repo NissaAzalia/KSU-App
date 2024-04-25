@@ -3,7 +3,7 @@ const InfoDashboard = () => {
         <div className="bg-[#F4F4F4] w-screen h-auto ">
             {/* <div className=" h-screen pt-[60px] bg-black"> */}
 
-            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-[#2C6975]   " >
+            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]  " >
 
                 <div className="mx-[30px] py-[5px] mt-[30px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>

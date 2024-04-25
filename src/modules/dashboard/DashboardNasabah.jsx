@@ -1,3 +1,5 @@
+import { faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from "react-router-dom"
 
 
@@ -25,7 +27,7 @@ const DasboardNasabah = () => {
     }
 
     return (
-        <div className="w-screen h-auto bg-[#F4F4F4] ">
+        <div className="w-full h-auto bg-[#F4F4F4] ">
 
             <div className="logo flex ml-[55px]  ">
                 <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />
@@ -33,7 +35,7 @@ const DasboardNasabah = () => {
             </div>
 
             <div className="ml-[50px] b  ">
-                <div className="rounded-s-xl rounded-e-xl h-[90px] w-[95%]  bg-[#2C6975]  " >
+                <div className="rounded-s-xl rounded-e-xl h-[90px] w-[95%]  bg-gradient-to-r from-[#2C6975] to-[#52C5DB]  " >
 
                     <div className="mx-[30px] py-[5px] mt-[25px]   ">
                         <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
@@ -49,23 +51,40 @@ const DasboardNasabah = () => {
                     <h2 className="text-2xl text-black mt-[40px] mb-[25px] bg  ">Simpanan</h2>
                 </div>
 
-                <div className="flex gap-[50px] mx-[50px] ">
-                    <div className="1 rounded-3xl w-[250px] h-[150px] text-center flex flex-col items-center p-[20px]  shadow-2xl bg-white ">
-                        <span className="text">Simpanan Pokok</span>
-                        <span className="pt-[50px]" >Rp. 300,000</span>
+                <div className="flex gap-[50px] mx-[40px]  ">
+                    <div className="1 rounded-xl w-[300px] h-[100px] text-center  items-center p-[13px]  shadow-2xl bg-white ">
+                        <div className=''>
+                            <div className='rounded bg-[#2D5275] w-[70px] h-[70px]  '>
+                                <FontAwesomeIcon icon={faHandHoldingDollar} size="2xl" style={{ color: "#fafafa", }} className='pt-[20px]' />
+                            </div>
+                        </div>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
-                        <span className="text">Simpanan Wajib</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+
+                    <div className="1 rounded-xl w-[300px] h-[100px] text-center  items-center p-[13px]  shadow-2xl bg-white ">
+                        <div className=''>
+                            <div className='rounded bg-[#37808F] w-[70px] h-[70px]  '>
+                                <FontAwesomeIcon icon={faHandHoldingDollar} size="2xl" style={{ color: "#fafafa", }} className='pt-[20px]' />
+                            </div>
+                        </div>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
-                        <span className="text">Simpanan Sukarela</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+
+                    <div className="1 rounded-xl w-[300px] h-[100px] text-center  items-center p-[13px]  shadow-2xl bg-white ">
+                        <div className=''>
+                            <div className='rounded bg-[#439FB1] w-[70px] h-[70px]  '>
+                                <FontAwesomeIcon icon={faHandHoldingDollar} size="2xl" style={{ color: "#fafafa", }} className='pt-[20px]' />
+                            </div>
+                        </div>
                     </div>
-                    <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
-                        <span className="text">Simpanan Hari Raya</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+
+                    <div className="1 rounded-xl w-[300px] h-[100px] text-center  items-center p-[13px]  shadow-2xl bg-white ">
+                        <div className=''>
+                            <div className='rounded bg-[#50BDD3] w-[70px] h-[70px]  '>
+                                <FontAwesomeIcon icon={faHandHoldingDollar} size="2xl" style={{ color: "#fafafa", }} className='pt-[20px]' />
+                            </div>
+                        </div>
                     </div>
+
+
                 </div>
             </div>
 
