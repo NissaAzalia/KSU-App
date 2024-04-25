@@ -7,7 +7,7 @@ const DasboardNasabah = () => {
                 <h1 className=" pl-[15px] pt-[13px]  font-bold">Teknika Mandiri</h1>
             </div>
 
-            <div className="ml-[50px] b  ">
+            <div className="ml-[50px]">
                 <div className="rounded-s-xl rounded-e-xl h-[90px] w-[95%]  bg-[#2C6975]  " >
 
                     <div className="mx-[30px] py-[5px] mt-[25px]   ">
@@ -27,19 +27,35 @@ const DasboardNasabah = () => {
                 <div className="flex gap-[50px] mx-[50px] ">
                     <div className="1 rounded-3xl w-[250px] h-[150px] text-center flex flex-col items-center p-[20px]  shadow-2xl bg-white ">
                         <span className="text">Simpanan Pokok</span>
-                        <span  className="pt-[50px]" >Rp. 300,000</span>
+                        <span className="pt-[25px] text-2xl" >Rp. 300,000</span>
                     </div>
                     <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Wajib</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+                        <span className="pt-[25px] text-2xl">Rp. 300,000</span>
                     </div>
                     <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Sukarela</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+                        <span className="pt-[25px] text-2xl">Rp. 300,000</span>
                     </div>
                     <div className="2 rounded-3xl w-[250px] h-[150px]  text-center flex flex-col items-center p-[20px] shadow-2xl bg-white">
                         <span className="text">Simpanan Hari Raya</span>
-                        <span className="pt-[50px]">Rp. 300,000</span>
+                        <span className="pt-[25px] text-2xl">Rp. 300,000</span>
+                    </div>
+                </div>
+
+                <div className="ml-[50px]">
+                    <h2 className="text-2xl text-black mt-[40px] mb-[25px] ">Informasi</h2>
+
+                    <div className="flex ">
+                        <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
+                            <span className="text">Sisa hutang dari pinjaman biasa </span>
+                            <span>Rp. 300,000</span>
+                        </div>
+
+                        <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px]  flex flex-col   shadow-2xl bg-white">
+                            <span className="text">Sisa hutang dari pinjaman talangan </span>
+                            <span>Rp. 300,000</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,33 +63,17 @@ const DasboardNasabah = () => {
             <div className="layanan">
                 <div className="ml-[50px]">
                     <h1 className="text-3xl text-[#2C6975] mt-[60px]  font-bold">Daftar Layanan</h1>
-                    <h2 className="text-2xl text-black mt-[40px] mb-[25px] ">Informasi</h2>
-                </div>
-
-
-                <div className="flex ">
-                    <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px] flex flex-col  shadow-2xl bg-white">
-                        <span className="text">Sisa hutang dari pinjaman biasa </span>
-                        <span>Rp. 300,000</span>
-                        
-
-                    </div>
-
-                    <div className="2 rounded-[10px] w-[400px] h-[90px] mx-[50px] mr-[5px] p-[20px]  flex flex-col   shadow-2xl bg-white">
-                        <span className="text">Sisa hutang dari pinjaman talangan </span>
-                        <span>Rp. 300,000</span>
-                    </div>
                 </div>
 
                 <div className="h-screen">
                     <h2 className="text-2xl text-black mt-[70px] mb-[25px] ml-[50px] ">Layanan</h2>
 
-                    <div className="flex flex-row flex-wrap gap-[50px] mx-[50px] mb-[50px]  ">
+                    <div className="flex flex-row flex-wrap gap-[50px] mx-[50px]">
 
                         <div className="1 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
                             <span className="text">Pinjaman Biasa</span>
                             <div className="ajukan ">
-                                <button  className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px]  h-[35px] p-auto   ">Ajukan</button>
+                                <button className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px]  h-[35px] p-auto   ">Ajukan</button>
                             </div>
                         </div>
 
