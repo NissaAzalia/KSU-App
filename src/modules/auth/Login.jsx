@@ -1,7 +1,7 @@
 const Login = () => {
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="flex flex-wrap w-full max-h-full">
+      <input type="date" />
     </div>
   )
 }
