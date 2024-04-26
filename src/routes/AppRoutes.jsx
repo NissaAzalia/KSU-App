@@ -48,15 +48,6 @@ const AppRoutes = () => {
         <Route path='pinjam-mobil' element={<PinjamMobil/>} />
         <Route path='beli-barang' element={<BeliBarang/>} />
         <Route path='servis' element={<Servis/>} />
-
-
-        
-
-
-
-
-
-        {/* write other routes here */}
       </Routes>
     </BrowserRouter>
   )
