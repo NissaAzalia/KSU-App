@@ -51,9 +51,7 @@ const DashboardAdmin = () => {
                                 <div className="bg-[#D9D9D9] ml-[35px] w-[40px] h-[40px] rounded-lg ">
                                     <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="pl-[10px] pt-[8px]" />
                                 </div>
-                                <div className='bg-[#D9D9D9] ml-[20px] w-[40px] h-[40px] rounded-lg'>
-                                    <FontAwesomeIcon icon={faPenToSquare} size="xl" style={{ color: "#626262", }} className="pl-[10px] pt-[8px]" />
-                                </div>
+                        
                             </div>
                         </td>
 
