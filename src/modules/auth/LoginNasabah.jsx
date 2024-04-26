@@ -50,9 +50,9 @@ const Login = ({ login }) => {
             />
             {/* Tampilkan ikon mata */}
             {showPassword ? (
-              <FontAwesomeIcon icon={faEye} className="absolute top-[70%] right-4 transform -translate-y-1/2 h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+              <FontAwesomeIcon icon={faEye} className=" absolute top-[65%] right-[1px] absolute top-[70%]  right-[10px] transform -translate-y-1/2 h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
             ) : (
-              <FontAwesomeIcon icon={faEyeSlash} className="absolute top-[70%] right-4 transform -translate-y-1/2 h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
+              <FontAwesomeIcon icon={faEyeSlash} className=" absolute top-[65%] right-[1px] absolute top-[70%] right-[10px] transform -translate-y-1/2 h-6 w-6 text-gray-400 cursor-pointer" onClick={togglePasswordVisibility} />
 
             )}
           </div>
