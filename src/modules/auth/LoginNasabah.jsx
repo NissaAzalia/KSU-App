@@ -16,7 +16,6 @@ const LoginNasabah = () => {
           <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
       </div>
-
       <div className="flex flex-col bg-[#FFFFFF] text-[#2C6975] h-[100%] md:w-full justify-center ">
 
         <div className="md:px-full px-[25px] md:my-[120px] my-[40px]">
@@ -33,7 +32,6 @@ const LoginNasabah = () => {
           </div>
 
           <button onClick={handleClick} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white  w-full h-[50px]"> Login </button>
-
         </div>
       </div>
     </div>
