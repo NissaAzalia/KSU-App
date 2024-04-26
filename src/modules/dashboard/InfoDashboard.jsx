@@ -14,7 +14,7 @@ const InfoDashboard = () => {
             <div className="ml-[50px] mt-[50px] ">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Info Pinjaman Anggota</h2>
                 
-                {/* <table cellPadding={10} className=" mx-[10px]  ">
+                <table cellPadding={10} className=" mx-[10px]  ">
                     <tr>
                         <th className=" border border-[#7D7D7D]">Nama</th>
                         <th className="border border-[#7D7D7D]">Jenis Pinjaman</th>
@@ -36,7 +36,7 @@ const InfoDashboard = () => {
                         <td className=" py-[20px] border border-[#7D7D7D] bg-white"></td>
                         <td className=" py-[20px] border border-[#7D7D7D] bg-white"></td>
                     </tr>
-                </table> */}
+                </table>
 
                 <div className=" mb-[30px]  ">
                     <div className=" border-solid border-[1px] rounded-3xl w-[700px] py-[30px] h-[300px] flex flex-col items-center  shadow-2xl bg-white">

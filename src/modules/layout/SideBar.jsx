@@ -7,7 +7,7 @@ const SideBar = () => {
 
     return (
         <>
-            <div className="text-center  bg-white w-[350px] h-screen  ">
+            <div  className="  text-center  bg-white w-[350px] h-screen  ">
 
                 <div className="flex fixed">
                     <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />
@@ -46,7 +46,7 @@ const SideBar = () => {
                         color: isActive ? "white" : "#626262"
                     })}>
                         <FontAwesomeIcon icon={faUserGroup} className="mt-[5px]" />
-                        Tambah Nasabah
+                        Tambah Anggota
                     </NavLink>
                 </div>
 
