@@ -22,3 +22,5 @@ useEffect(() => {
         setIsLoggedin (true)
     }
 }, [])
+
+export {AuthProvider,useAuth}
