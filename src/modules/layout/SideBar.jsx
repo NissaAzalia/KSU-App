@@ -7,7 +7,7 @@ const SideBar = () => {
 
     return (
         <>
-            <div className="text-center  bg-white w-[350px] h-screen  ">
+            <div  className="  text-center  bg-white w-[350px] h-screen  ">
 
                 <div className="flex fixed">
                     <img src="src/assets/logoKSU.png" alt="" className="w-[50px]  pl-[15px] pt-[10px] " />

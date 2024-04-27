@@ -7,44 +7,36 @@ const Login = ({login}) => {
   }
 
   return (
-    <div className="flex bg-[#fffff]  ">
+    <div className="flex  flex-col md:flex-row">
 
-      <div
-        className="left text-white bg-[#2C6975] w-[600px] h-screen " >
-        <div className="my-[230px] mx-[50px]">
-          <h1 className="text-5xl items-center  ">Welcome,Admin</h1>
-          <p>Login untuk melanjutkan</p>
+      <div className="bg-[#2C6975] text-[#FAFAFA] md:h-screen h-[400px] md:w-[520px] w-full text-[4xl]">
+        <div className="mx-[60px] my-[230px]">
+          <h1 className="md:text-5xl text-4xl">Welcome,Admin</h1>
+          <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
-
       </div>
 
-      <div
-        className="right  bg-white h-screen  ">
+      <div className="bg-[#FFFFFF] text-[#2C6975] h-auto md:w-[550px] w-full ">
 
-        <div className="my-[120px] mx-[200px] ">
-          <h1 className="font-bold text-4xl justify-center text-[#2C6975] text-center mb-[20px]  ">Login</h1>
+        <div className="md:px-[200px] px-[25px]  md:my-[120px] my-[40px]">
+          <h1 className="font-bold text-4xl md:mb-[25px] mb-[25px] text-center md:ml-[120px]">Login</h1>
 
-          <div className="mb-[20px]">
-            <p className="text-[#2C6975]">UserName</p>
-            <input className="rounded border-solid border-[1px] border-[#2C6975] w-[350px] h-[40px]" type="text" />
+          <div className="mb-[25px]">
+            <h1>Username</h1>
+            <input className="border-solid border-[1px] border-[#2C6975] rounded w-[360px] h-[50px] " type="text" />
           </div>
 
-          <div className="mb-[20px]">
-            <p className="text-[#2C6975]">Password</p>
-            <input className="rounded border-solid border-[1px] border-[#2C6975] w-[350px] h-[40px]" type="password" />
+          <div className="mb-[25px]">
+            <h1>Password</h1>
+            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[360px] h-[50px]" type="password" />
           </div>
-          <button onClick={handleClick} className="rounded bg-[#2C6975]  hover:bg-[#358595] w-[350px] h-[45px] text-white " >
-            Login
-          </button>
+
+          <button onClick={handleClick} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white  w-[360px] h-[50px]"> Login </button>
+
         </div>
-
-
       </div>
-
     </div>
-
-
-  )
+  );
 
 }
 
