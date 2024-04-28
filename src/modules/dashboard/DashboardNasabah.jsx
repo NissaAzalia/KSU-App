@@ -120,14 +120,14 @@ const DasboardNasabah = () => {
                         <div className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
                             <div className="flex gap-[25px] ">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
-                                <span onClick={Servis} className="text-white md:text-3xl text-2xl  mt-[14px] cursor-pointer  hover:text-[#439FB1]">Servis</span>
+                                <span onClick={Servis} className="text-white md:text-3xl text-2xl  mt-[14px] cursor-pointer  hover:text-[#7D7D7D]">Servis</span>
                             </div>
                         </div>
 
                         <div className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#307280] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
-                                <span onClick={BeliBarang} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#439FB1]">Pembelian Barang</span>
+                                <span onClick={BeliBarang} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
                             </div>
                         </div>
 
@@ -136,14 +136,14 @@ const DasboardNasabah = () => {
                                 {/* <div className="bg-[#687D87]  w-[90px] h-[65px] rounded-full   "> */}
                                 <FontAwesomeIcon className="mt-[10px] ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
                                 {/* </div> */}
-                                <span onClick={PinjamMobil} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#439FB1]">Pinjaman Mobil</span>
+                                <span onClick={PinjamMobil} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
                             </div>
                         </div>
 
                         <div className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
-                                <span onClick={PinjamUang} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#439FB1]">Pinjaman Uang</span>
+                                <span onClick={PinjamUang} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
                             </div>
                         </div>
 
