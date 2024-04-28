@@ -67,8 +67,4 @@ const LoginNasabah = () => {
   );
 };
 
-<<<<<<< HEAD
-export default Login
-=======
 export default LoginNasabah;
->>>>>>> 71af55af4716318ef818fa8391c118a933dd8294
