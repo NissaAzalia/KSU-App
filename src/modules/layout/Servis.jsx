@@ -24,7 +24,7 @@ const Servis = () => {
                             <input className="border-solid border-[1px] border-[#2C6975] rounded-[12px]  md:w-[450px] w-[300px] h-[50px] px-[15px]" type="text" placeholder="Jenis Barang" />
                             <input className="border-solid border-[1px] border-[#2C6975] rounded-[12px]  md:w-[450px] w-[300px] h-[50px] px-[15px]" type="text" placeholder="Alamat" />
                             <input className="border-solid border-[1px] border-[#2C6975] rounded-[12px]  md:w-[450px] w-[300px] h-[50px] px-[15px]" type="number" placeholder="Tanggal" />
-                            <button className="rounded-[12px] bg-[#2C6975] hover:bg-[#23545d] text-white  md:w-[450px] w-[300px] h-[50px] mb-[20px] ">Kirim</button>
+                            <button className="rounded-[12px] bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[450px] w-[300px] h-[50px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 </div>

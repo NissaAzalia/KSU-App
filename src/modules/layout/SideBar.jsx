@@ -45,7 +45,7 @@ const SideBar = () => {
 
                 <NavLink to={"/"}>
                     <div
-                        className="animate w-[274px] fixed  flex hover:bg-[#2C6975] hover:text-white gap-[10px]  h-screen pt-[10px] px-[100px] mt-[500px] ">
+                        className="animate fixed  flex hover:bg-[#2C6975] hover:text-white gap-[10px]  h-[50px] pt-[10px] px-[100px] mt-[500px] ">
                         <FontAwesomeIcon className="mt-[5px] " icon={faArrowLeft} />
                         <h2>Logout</h2>
                     </div>
