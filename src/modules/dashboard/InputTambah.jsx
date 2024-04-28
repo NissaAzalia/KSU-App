@@ -11,10 +11,10 @@ const InputTambah = () => {
             </div>
 
             <div className="ml-[50px] mt-[50px]">
-                <h1 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Input Tambah Anggota</h1>
+                <h1 className="text-2xl text-[#2C6975] mb-[50px] font-bold">Input Tambah Anggota</h1>
 
                 <div className="  ">
-                    <div className=" border-solid border-[1px] rounded-3xl w-[700px] py-[10px] h-[320px] flex flex-col items-center  shadow-2xl bg-white">
+                    <div className=" mx-[10%] border-solid border-[1px] rounded-3xl w-[700px] py-[10px] h-[320px] flex flex-col items-center  shadow-2xl bg-white">
                         <h1 className=" text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota</h1>
                         <div className="flex flex-col gap-6 ">
                             <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Nama" />
