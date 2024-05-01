@@ -5,11 +5,12 @@ import { useState } from 'react';
 
 const DashboardAdmin = () => {
 
-    const [showForm, setShowForm] = useState(false);
-    
+    const [showFormSimpanan, setShowFormSimpanan] = useState(false);
+    const [showFormTambah, setShowFormTambah] = useState(false);
+
     return (
-        <div className="bg-[#F4F4F4] w-screen h-full ">
-            <div className="rounded-xl h-[80px] ml-[50px] w-[850px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]  " >
+        <div className="bg-[#F4F4F4] w-screen h-[100vh] p-[50px] ">
+            <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB] " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
@@ -17,7 +18,7 @@ const DashboardAdmin = () => {
                 </div>
             </div>
 
-            <div className="ml-[50px] mt-[50px]">
+            <div className="mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
 
                 <div className="flex  pt-[10px] mb-[25px]">
@@ -27,12 +28,12 @@ const DashboardAdmin = () => {
                     </div>
                 </div>
 
-                {showForm && (
+                {showFormSimpanan && (
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px] ">
                             <button
                                 className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowForm(false)}
+                                onClick={() => setShowFormSimpanan(false)}
                             >
                                 X
                             </button>
@@ -55,65 +56,89 @@ const DashboardAdmin = () => {
                         </div>
                     </div>
                 )}
-                <div className=" mb-[30px]  ">
-                    <button
-                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[20px]"
-                        onClick={() => setShowForm(!showForm)}
-                    >
-                        {showForm ? '' : 'Input Simpanan'}
-                    </button>
+
+                {showFormTambah && (
+                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
+                        <div className="w-[600px] ">
+                            <button
+                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
+                                onClick={() => setShowFormTambah(false)}
+                            >
+                                X
+                            </button>
+                        </div>
+
+                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota Anggota</h1>
+                        <div className="flex flex-col gap-6 ">
+                            <div className="flex flex-col gap-6 ">
+                                <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Nama" />
+                                <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="password" placeholder="Password" />
+                            </div>
+                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                        </div>
+                    </div>
+                )}
+
+                <div className="flex gap-5">
+                    <div className=" mb-[30px]  ">
+                        <button
+                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[20px]"
+                            onClick={() => setShowFormSimpanan(!showFormSimpanan)}
+                        >
+                            {showFormSimpanan ? 'Input Simpanan Anggota' : 'Input Simpanan Anggota'}
+                        </button>
+                    </div>
+
+                    <div className=" mb-[30px]  ">
+                        <button
+                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[20px]"
+                            onClick={() => setShowFormTambah(!showFormTambah)}
+                        >
+                            {showFormTambah ? 'Tambah Anggota' : 'Tambah Anggota'}
+                        </button>
+                    </div>
                 </div>
 
             </div>
 
-            <div className="ml-[50px] mt-[30px]">
-                <table cellPadding={10} className="mb-10  ">
-                    <tr className=''>
-                        <th className="border border-gray-600  border-b-0" colspan="1"><div className="mt-[40px]  w-[170px]">Nama</div></th>
-                        <th className="border border-gray-600 " colspan="4">Simpanan</th>
-                        <th className="border border-gray-600 border-b-0 "><div className="mt-[40px]  w-[170px]">Action</div></th>
-                    </tr>
-                    <tr className="">
-                        <th className=" border border-[#7D7D7D] border-t-0"></th>
-                        <th className="border border-[#7D7D7D] px-[30px]">Pokok</th>
-                        <th className=" border border-[#7D7D7D] px-[30px]">Wajib</th>
-                        <th className=" border border-[#7D7D7D] px-[30px]">Sukarela</th>
-                        <th className=" border border-[#7D7D7D] px-[30px]">Hari Raya</th>
-                        <th className=" border border-[#7D7D7D] border-t-0"></th>
-                    </tr>
-                    <tr>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className="border border-[#7D7D7D] bg-white">
-
-                            <div className='flex'>
-                                <div className="bg-[#D9D9D9] mx-[65px] w-[40px] h-[40px] rounded-lg ">
-                                    <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+            <div className=" mt-[30px] mr-[100px] w-[100%] overflow-x-auto">
+                <table className="table-auto w-full">
+                    <thead>
+                        <tr>
+                            <th className="border border-gray-600  border-b-0">
+                                <div className="mt-[40px]  w-[170px]">Nama</div>
+                            </th>
+                            <th className="border border-gray-600 " colSpan="4">Simpanan</th>
+                            <th className="border border-gray-600 border-b-0 ">
+                                <div className="mt-[40px]  w-[170px]">Action</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th className=" border border-[#7D7D7D] border-t-0"></th>
+                            <th className="border border-[#7D7D7D] px-[30px]">Pokok</th>
+                            <th className=" border border-[#7D7D7D] px-[30px]">Wajib</th>
+                            <th className=" border border-[#7D7D7D] px-[30px]">Sukarela</th>
+                            <th className=" border border-[#7D7D7D] px-[30px]">Hari Raya</th>
+                            <th className=" border border-[#7D7D7D] border-t-0"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td className="border border-[#7D7D7D] bg-white">Ridho</td>
+                            <td className="border border-[#7D7D7D] bg-white">750000</td>
+                            <td className="border border-[#7D7D7D] bg-white">10000</td>
+                            <td className="border border-[#7D7D7D] bg-white">10000</td>
+                            <td className="border border-[#7D7D7D] bg-white">10000</td>
+                            <td className="border border-[#7D7D7D] bg-white">
+                                <div className='flex'>
+                                    <div className="bg-[#D9D9D9] mx-[65px] w-[40px] h-[40px] rounded-lg ">
+                                        <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                    </tr>
-                    <tr>
-                        <td className="border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                        <td className=" border border-[#7D7D7D] bg-white"></td>
-                    </tr>
-
+                            </td>
+                        </tr>
+                        {/* Tambahkan baris-baris data lainnya di sini */}
+                    </tbody>
                 </table>
             </div>
         </div>

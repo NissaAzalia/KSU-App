@@ -24,9 +24,9 @@ const InputPinjam = ({onTambahSimpanan}) => {
     };
 
     return (
-        <div className=" bg-[#F4F4F4] w-screen h-screen   ">
+        <div className=" bg-[#F4F4F4] w-screen h-[100vh] p-[50px]   ">
 
-            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]   " >
+            <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB] " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
@@ -34,8 +34,8 @@ const InputPinjam = ({onTambahSimpanan}) => {
                 </div>
             </div>
 
-            <div className="ml-[50px] mt-[50px]">
-                <h1 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Input Pinjaman</h1>
+            <div className="ml-[50px] mt-[500px]">
+                <h1 className="text-2xl text-[#2C6975] mb-[20px] font-bold ">Input Pinjaman</h1>
 
                 <div className="  ">
                     <div className="  mx-[10%] border-solid border-[1px] rounded-3xl w-[700px] py-[10px] h-[320px] flex flex-col items-center  shadow-2xl bg-white">
