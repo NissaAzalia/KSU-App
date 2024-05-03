@@ -1,7 +1,15 @@
 import React, { createContext, useContext, useState } from 'react';
 
+const initialMembersState = {
+  members: [],
+  curentMembers: null,
+  handleFetchId: () => {},
+  addMember: () => {},
+  deleteMember: () => {}
+}
+
 // Buat konteks untuk data anggota koperasi
-const MemberContext = createContext();
+const MemberContext = createContext(initialMembersState);
 
 // Custom hook untuk menggunakan konteks data anggota koperasi
 const useMembers = () => useContext(MemberContext);
@@ -10,6 +18,7 @@ const useMembers = () => useContext(MemberContext);
 const MemberProvider = ({ children }) => {
   // State untuk menyimpan data anggota koperasi
   const [members, setMembers] = useState([]);
+  const [curentMembers, setcurentMembers] = useState(null)
 
   // Fungsi untuk menambah anggota koperasi
   const addMember = (member) => {

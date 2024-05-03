@@ -26,7 +26,7 @@ const DasboardInputSimpanan = ({onTambahSimpanan}) => {
     return (
         <div className=" bg-[#F4F4F4] w-screen h-screen   ">
 
-            <div className="rounded-s-xl rounded-e-xl h-[80px] ml-[50px] w-[850px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]   " >
+            <div className="rounded-s-xl mb-[50px] mr-[50px] rounded-e-xl h-[80px] ml-[50px] w-[screen]] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]  " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
