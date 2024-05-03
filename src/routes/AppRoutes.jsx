@@ -10,7 +10,7 @@ import InfoDashboard from '../modules/dashboard/InfoDashboard'
 import PinjamMobil from '../modules/layout/PinjamMobil'
 import BeliBarang from '../modules/layout/BeliBarang'
 import Servis from '../modules/layout/Servis'
-import InputTambah from '../modules/dashboard/InputTambah'
+// import InputTambah from '../modules/dashboard/InputTambah'
 import LoginNasabah from '../modules/auth/LoginNasabah'
 import PinjamUang from '../modules/layout/PinjamUang'
 import InputPinjam from '../modules/dashboard/InputPinjam'
@@ -38,7 +38,7 @@ const AppRoutes = () => {
               <Route path='/daftar-anggota' element={<DashboardAdmin />} />
               {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
               <Route path='/info' element={<InfoDashboard />} />
-              <Route path='/input-tambah' element={<InputTambah />} />
+              {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
             
