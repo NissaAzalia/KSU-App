@@ -40,8 +40,8 @@ const AppRoutes = () => {
 
             <Route>
               <Route path='admin' element={<Login Oty={handleOtority} login={handleLogin} />} />
-              <Route path='/' element={<LoginNasabah Oty={handleOtority} login={handleLogin}/>} />
-              <Route path='*' element={<Navigate to={"/"} />} />
+              <Route path='login' element={<LoginNasabah Oty={handleOtority} login={handleLogin}/>} />
+              <Route path='*' element={<Navigate to={"/login"} />} />
             </Route>
             :
             <Route>
