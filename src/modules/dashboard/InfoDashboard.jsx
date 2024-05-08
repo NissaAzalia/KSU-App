@@ -4,31 +4,31 @@ import { useState } from 'react';
 
 const InfoDashboard = () => {
 
+    const [showForm, setShowForm] = useState(false);
+
     const [pinjamanAnggota, setPinjamanAnggota] = useState([]);
+
     const [nama, setNama] = useState('');
     const [nominal, setNominal] = useState('');
-    const [jenisPinjaman, setJenisPinjaman] = useState('');
 
-    const [showForm, setShowForm] = useState(false);
+
 
 
 
     const tambahPinjaman = () => {
-        // Buat objek baru untuk data pinjaman yang akan ditambahkan
+        
         const newData = {
             nama: nama,
-            pinjaman: nominal,
-            jenisPinjaman: jenisPinjaman,
-            sisaHutang: '', // Anda dapat mengisinya sesuai kebutuhan
+            nominal: nominal,
+            sisaHutang: '', 
         };
 
-        // Tambahkan data baru ke dalam state
+        
         setPinjamanAnggota([...pinjamanAnggota, newData]);
 
-        // Reset nilai input setelah data ditambahkan
         setNama('');
         setNominal('');
-        setJenisPinjaman('');
+      
     };
 
     return (
@@ -61,13 +61,7 @@ const InfoDashboard = () => {
                         <div className="flex flex-col gap-6 ">
                             <input type="text" placeholder="Nama" value={nama} onChange={(e) => setNama(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" />
                             <input type="number" placeholder="Nominal" value={nominal} onChange={(e) => setNominal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" />
-                            <div>
-                                <select value={jenisPinjaman} onChange={(e) => setJenisPinjaman(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
-                                    <option disabled selected value="" >Jenis Pinjaman</option>
-                                    <option value="Biasa">Biasa</option>
-                                    <option value="Talangan">Talangan</option>
-                                </select>
-                            </div>
+                    
                             <button onClick={tambahPinjaman} className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
@@ -87,7 +81,7 @@ const InfoDashboard = () => {
                             <tr>
                                 <th className="border px-[50px] border-[#7D7D7D]">Nama</th>
                                 <th className="border px-[50px] border-[#7D7D7D]">Pinjaman</th>
-                                <th className="border px-[50px] border-[#7D7D7D]">Jenis Pinjaman</th>
+                                
                                 <th className="border px-[50px] border-[#7D7D7D]">Sisa Hutang</th>
                                 <th className="border px-[50px] border-[#7D7D7D]">Action</th>
                             </tr>
