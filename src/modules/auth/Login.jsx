@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-const Login = ({ login }) => {
+const Login = ({ login,Oty }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,6 +10,7 @@ const Login = ({ login }) => {
 
   const handleClick = () => {
     login(true);
+    Oty('Admin');
   };
 
   const handleTogglePassword = () => {
