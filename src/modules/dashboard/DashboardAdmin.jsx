@@ -106,11 +106,11 @@ const DashboardAdmin = () => {
                     <thead>
                         <tr>
                             <th className="border border-gray-600  border-b-0">
-                                <div className="mt-[40px]  w-[170px]">Nama</div>
+                                <div className="mt-[35px] ml-[25px] w-[170px]">Nama</div>
                             </th>
                             <th className="border border-gray-600 " colSpan="4">Simpanan</th>
                             <th className="border border-gray-600 border-b-0 ">
-                                <div className="mt-[40px]  w-[170px]">Action</div>
+                                <div className="mt-[35px] ml-[25px] w-[170px]">Action</div>
                             </th>
                         </tr>
                         <tr>
@@ -130,9 +130,9 @@ const DashboardAdmin = () => {
                             <td className="border border-[#7D7D7D] bg-white">10000</td>
                             <td className="border border-[#7D7D7D] bg-white">10000</td>
                             <td className="border border-[#7D7D7D] bg-white">
-                                <div className='flex'>
-                                    <div className="bg-[#D9D9D9] mx-[65px] w-[40px] h-[40px] rounded-lg ">
-                                        <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+                                <div className=''>
+                                    <div className="bg-[#D9D9D9] mx-[70px] w-[35px] h-[35px] rounded-lg hover:bg-[#439FB1]">
+                                        <FontAwesomeIcon icon={faTrashCan} size="lg" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
                                     </div>
                                 </div>
                             </td>

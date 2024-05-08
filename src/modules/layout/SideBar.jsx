@@ -1,13 +1,14 @@
 import { NavLink, Outlet } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserGroup, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faUserGroup, faArrowLeft, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 
 const SideBar = () => {
+    
     return (
         <>
 
-            <div className=" text-center bg-white min-w-[274px] h-screen">
+            <div className=" text-center bg-white min-w-[274px] h-screen" >
 
 
 
@@ -17,7 +18,9 @@ const SideBar = () => {
                         <h1 className=" pl-[15px] pt-[13px]  font-bold">Teknika Mandiri</h1>
                     </div>
 
-                    <button className="items-end">x</button>
+                    <button className="ml-[40px] mt-[5px]">
+                        <FontAwesomeIcon icon={faBars} size="lg" style={{ color: "#000000" }} />
+                    </button>
                 </div>
 
                 <div className=" mt-[80px] fixed">
@@ -51,7 +54,7 @@ const SideBar = () => {
 
                 <NavLink to={"/"}>
                     <div
-                        className="animate fixed  flex hover:bg-[#2C6975] hover:text-white gap-[10px]  h-[50px] pt-[10px] px-[100px] mt-[500px] ">
+                        className="animate fixed  flex hover:bg-[#2C6975] hover:text-wh ite gap-[10px]  h-[50px] pt-[10px] px-[100px] mt-[500px] ">
                         <FontAwesomeIcon className="mt-[5px] " icon={faArrowLeft} />
                         <h2>Logout</h2>
                     </div>

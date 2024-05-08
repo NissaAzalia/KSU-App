@@ -242,48 +242,6 @@ const DasboardNasabah = () => {
                         </div>
 
                     </div>
-
-                    {/* <div className="flex flex-row flex-wrap gap-[50px] mx-[50px] mb-[50px]  ">
-
-                        <div className="1 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
-                            <span className="text">Pinjaman Biasa</span>
-                            <div className="ajukan ">
-
-                                <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto">
-                                    Ajukan</button>
-
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pinjaman Talangan</span>
-                            <div className="ajukan ">
-                                <button onClick={PinjamTalangan} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pinjaman Mobil</span>
-                            <div className="ajukan ">
-                                <button onClick={PinjamMobil} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pembelian Barang</span>
-                            <div className="ajukan ">
-                                <button onClick={BeliBarang} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Servis</span>
-                            <div className="ajukan ">
-                                <button onClick={Servis} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                    </div> */}
                 </div>
             </div>
 
