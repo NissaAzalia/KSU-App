@@ -39,7 +39,7 @@ const AppRoutes = () => {
           isLoggedIn !== true ?
 
             <Route>
-              <Route path='/admin' element={<Login Oty={handleOtority} login={handleLogin} />} />
+              <Route path='admin' element={<Login Oty={handleOtority} login={handleLogin} />} />
               <Route path='/' element={<LoginNasabah Oty={handleOtority} login={handleLogin}/>} />
               <Route path='*' element={<Navigate to={"/"} />} />
             </Route>
@@ -49,9 +49,9 @@ const AppRoutes = () => {
                 otority === 'Admin' ? 
 
                 <Route element={<MainLayout />}>
-                <Route path='/daftar-anggota' element={<DashboardAdmin />} />
+                <Route path='daftar-anggota' element={<DashboardAdmin />} />
                 {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
-                <Route path='/info' element={<InfoDashboard />} />
+                <Route path='info' element={<InfoDashboard />} />
                 {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
                 <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
               </Route>
