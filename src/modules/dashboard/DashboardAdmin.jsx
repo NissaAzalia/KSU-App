@@ -161,11 +161,11 @@ const DashboardAdmin = () => {
                         
                         <tr>
                             <th className="border border-gray-600  border-b-0">
-                                <div className="mt-[40px]  w-[170px]">Nama</div>
+                                <div className="mt-[35px] ml-[25px] w-[170px]">Nama</div>
                             </th>
                             <th className="border border-gray-600 " colSpan="4">Simpanan</th>
                             <th className="border border-gray-600 border-b-0 ">
-                                <div className="mt-[40px]  w-[170px]">Action</div>
+                                <div className="mt-[35px] ml-[25px] w-[170px]">Action</div>
                             </th>
                         </tr>
                         <tr>
