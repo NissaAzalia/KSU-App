@@ -27,19 +27,3 @@ export const getToken = (token) => {
   localStorage.removeItem('token')
  }
 
-export const tampilkan = async () => {
-    const token = getToken();
-    const dashboard = await axios
-      .get(http + "dashboard", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        return response;
-      })
-      .catch((eror) => {
-        return eror.response;
-      });
-    return dashboard;
-  };

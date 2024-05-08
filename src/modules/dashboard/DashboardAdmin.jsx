@@ -8,8 +8,45 @@ const DashboardAdmin = () => {
     const [showFormSimpanan, setShowFormSimpanan] = useState(false);
     const [showFormTambah, setShowFormTambah] = useState(false);
 
+    const [simpananAnggota, setSimpananAnggota] = useState([]);
+    const [Anggota, setAnggota] = useState([]);
+
+    const [nama, setNama] = useState('')
+    const [password, setPassword] = useState('')
+    const [jenisSimpanan, setJenisSimpanan] = useState('')
+    const [nominal, setNominal] = useState('')
+
+    const tambahAnggota = () => {
+        const newData = {
+            nama: nama,
+            password: password,
+            simpanan: nominal,
+        };
+
+
+        setAnggota([...Anggota, newData]);
+        setNama('')
+        setPassword('')
+    };
+
+    const tambahSimpanan = () => {
+        const newData = {
+            nama:nama,
+            nominal:nominal,
+            jenis:jenisSimpanan,
+        };
+        setAnggota([...Anggota,newData])
+        setNama('')
+        setNominal('')
+    }
+
+
+
+
+
+
     return (
-        <div className="bg-[#F4F4F4] w-screen h-[100vh] p-[50px] ">
+        <div className="bg-[#F4F4F4] w-screen h-full p-[50px] ">
             <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB] " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
@@ -41,10 +78,19 @@ const DashboardAdmin = () => {
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
                         <div className="flex flex-col gap-6 ">
-                            <input type="text" placeholder="Nama" className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" />
-                            <input type="number" placeholder="Nominal" className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" />
+                            <input 
+                            type="text" placeholder="Nama" 
+                            className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
+                            value={nama}
+                            onChange={(e) => setNama(e.target.value)} />
+                            <input 
+                            type="number" placeholder="Nominal"
+                             className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
+                             value={nominal}
+                             onChange={(e) => setNominal(e.target.value)}
+                             />
                             <div>
-                                <select className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
+                                <select value={jenisSimpanan} onChange={(e) => setJenisSimpanan(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
                                     <option disabled selected value="">Pilih Simpanan</option>
                                     <option value="pokok">Simpanan Pokok</option>
                                     <option value="wajib">Simpanan Wajib</option>
@@ -52,7 +98,7 @@ const DashboardAdmin = () => {
                                     <option value="hari raya">Simpanan Hari Raya</option>
                                 </select>
                             </div>
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button onClick={tambahSimpanan}  className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 )}
@@ -71,10 +117,18 @@ const DashboardAdmin = () => {
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota Anggota</h1>
                         <div className="flex flex-col gap-6 ">
                             <div className="flex flex-col gap-6 ">
-                                <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Nama" />
-                                <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="password" placeholder="Password" />
+                                <input
+                                    className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
+                                    type="text" placeholder="Nama"
+                                    value={nama}
+                                    onChange={(e) => setNama(e.target.value)} />
+                                <input
+                                    className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
+                                    type="password" placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)} />
                             </div>
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button onClick={tambahAnggota} className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
                         </div>
                     </div>
                 )}
@@ -102,8 +156,9 @@ const DashboardAdmin = () => {
             </div>
 
             <div className=" mt-[30px] mr-[100px] w-[100%] overflow-x-auto">
-                <table className="table-auto w-full">
+                <table className="table-auto w-full ">
                     <thead>
+                        
                         <tr>
                             <th className="border border-gray-600  border-b-0">
                                 <div className="mt-[35px] ml-[25px] w-[170px]">Nama</div>
@@ -123,20 +178,23 @@ const DashboardAdmin = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="border border-[#7D7D7D] bg-white">Ridho</td>
-                            <td className="border border-[#7D7D7D] bg-white">750000</td>
-                            <td className="border border-[#7D7D7D] bg-white">10000</td>
-                            <td className="border border-[#7D7D7D] bg-white">10000</td>
-                            <td className="border border-[#7D7D7D] bg-white">10000</td>
-                            <td className="border border-[#7D7D7D] bg-white">
-                                <div className=''>
-                                    <div className="bg-[#D9D9D9] mx-[70px] w-[35px] h-[35px] rounded-lg hover:bg-[#439FB1]">
-                                        <FontAwesomeIcon icon={faTrashCan} size="lg" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+                        {Anggota.map((anggota, index) => (
+                            <tr key={index}>
+                                <td className=" p-[10px] border border-[#7D7D7D] bg-white">{anggota.nama}</td>
+                                <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
+                                <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
+                                <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
+                                <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
+                                <td className="p-[10px] border border-[#7D7D7D] bg-white">
+                                    <div className='flex'>
+                                        <div className="bg-[#D9D9D9] mx-[65px] w-[40px] h-[40px] rounded-lg ">
+                                            <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        ))}
+
                         {/* Tambahkan baris-baris data lainnya di sini */}
                     </tbody>
                 </table>
