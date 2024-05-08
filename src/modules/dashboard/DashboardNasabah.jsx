@@ -10,6 +10,34 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
+    const openServisForm = () => {
+        setShowFormServis(true);
+        setShowFormBeliBarang(false);
+        setShowFormPinjamMobil(false);
+        setShowFormPinjamUang(false);
+    };
+
+    const openBeliBarangForm = () => {
+        setShowFormServis(false);
+        setShowFormBeliBarang(true);
+        setShowFormPinjamMobil(false);
+        setShowFormPinjamUang(false);
+    };
+
+    const openPinjamMobilForm = () => {
+        setShowFormServis(false);
+        setShowFormBeliBarang(false);
+        setShowFormPinjamMobil(true);
+        setShowFormPinjamUang(false);
+    };
+
+    const openPinjamUangForm = () => {
+        setShowFormServis(false);
+        setShowFormBeliBarang(false);
+        setShowFormPinjamMobil(false);
+        setShowFormPinjamUang(true);
+    };
+
     return (
         <div className="w-full md:w-full h-auto bg-[#F4F4F4] ">
 
@@ -105,185 +133,140 @@ const DasboardNasabah = () => {
 
                     <div className="flex  flex-col md:flex-row md:gap-[50px] gap-[10px] md:mx-[50px] mx-[30px]  ">
 
-                    {showFormServis && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
-                            <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormServis(false)}
-                            >
-                                X
-                            </button>
-                        </div>
+                        {showFormServis && (
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                <div className="md:w-[600px] ">
+                                    <button
+                                        className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
+                                        onClick={() => setShowFormServis(false)}
+                                    >
+                                        X
+                                    </button>
+                                </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Servis</h1>
-    
+                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Servis</h1>
 
-                        <div className="flex flex-col gap-6 ">
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
-                        </div>
-                    </div>
-                )}
 
-                        <div   onClick={() => setShowFormServis(!showFormServis)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
+                                <div className="flex flex-col gap-6 ">
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
+                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                </div>
+                            </div>
+                        )}
+
+                        <div onClick={() => setShowFormServis(!showFormServis)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
                             <div className="flex gap-[25px] ">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
-                                <span className="text-white md:text-3xl text-2xl  mt-[14px] cursor-pointer  hover:text-[#7D7D7D]">Servis</span>
+                                <span onClick={openServisForm} className="text-white md:text-3xl text-2xl  mt-[14px] cursor-pointer  hover:text-[#7D7D7D]">Servis</span>
                             </div>
                         </div>
 
 
 
                         {showFormBeliBarang && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
-                            <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormBeliBarang(false)}
-                            >
-                                X
-                            </button>
-                        </div>
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                <div className="md:w-[600px] ">
+                                    <button
+                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                        onClick={() => setShowFormBeliBarang(false)}
+                                    >
+                                        X
+                                    </button>
+                                </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
-    
+                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
 
-                        <div className="flex flex-col gap-6 ">
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
-                        </div>
-                    </div>
-                )}
 
-                        <div  onClick={() => setShowFormBeliBarang(!showFormBeliBarang)}  className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#307280] ">
+                                <div className="flex flex-col gap-6 ">
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
+                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                </div>
+                            </div>
+                        )}
+
+                        <div onClick={() => setShowFormBeliBarang(!showFormBeliBarang)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#307280] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
-                                <span  className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
+                                <span onClick={openBeliBarangForm} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
                             </div>
                         </div>
 
                         {showFormPinjamMobil && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
-                            <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormPinjamMobil(false)}
-                            >
-                                X
-                            </button>
-                        </div>
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                <div className="md:w-[600px] ">
+                                    <button
+                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                        onClick={() => setShowFormPinjamMobil(false)}
+                                    >
+                                        X
+                                    </button>
+                                </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
-    
-
-                        <div  className="flex flex-col gap-6 ">
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
-                            <select className="border-solid border-[1px] border-[#2C6975] rounded   w-[600px] h-[40px] px-[15px]">
-                                <option disabled selected>Sopir</option>
-                                <option>Pakai</option>
-                                <option>Tidak</option>
-
-                            </select>
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
-                        </div>
-                    </div>
-                )}
+                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
 
 
-                        <div  onClick={() => setShowFormPinjamMobil(!showFormPinjamMobil)}  className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
+                                <div className="flex flex-col gap-6 ">
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
+                                    <select className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]">
+                                        <option disabled selected>Sopir</option>
+                                        <option>Pakai</option>
+                                        <option>Tidak</option>
+
+                                    </select>
+                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                </div>
+                            </div>
+                        )}
+
+
+                        <div onClick={() => setShowFormPinjamMobil(!showFormPinjamMobil)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
                             <div className="flex gap-[25px] text-left">
                                 {/* <div className="bg-[#687D87]  w-[90px] h-[65px] rounded-full   "> */}
                                 <FontAwesomeIcon className="mt-[10px] ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
                                 {/* </div> */}
-                                <span  className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
+                                <span onClick={openPinjamMobilForm} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
                             </div>
                         </div>
 
 
                         {showFormPinjamUang && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
-                            <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormPinjamUang(false)}
-                            >
-                                X
-                            </button>
-                        </div>
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                <div className="md:w-[600px] ">
+                                    <button
+                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                        onClick={() => setShowFormPinjamUang(false)}
+                                    >
+                                        X
+                                    </button>
+                                </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
-    
+                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Uang </h1>
 
-                        <div  className="flex flex-col gap-6 ">
-                            <input className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
-                            <div>
-                            <select className="border-solid border-[1px] border-[#2C6975] rounded   w-[600px] h-[40px] px-[15px]">
-                                <option disabled selected>Jenis Pinjaman</option>
-                                <option>Biasa</option>
-                                <option>Talangan</option>
 
-                            </select>
-                        </div>
-                            <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
-                        </div>
-                    </div>
-                )}
+                                <div className="flex flex-col gap-6 ">
+                                <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                        <div onClick={()=> setShowFormPinjamUang(!showFormPinjamUang)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
+                                   
+                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                </div>
+                            </div>
+                        )}
+
+                        <div onClick={() => setShowFormPinjamUang(!showFormPinjamUang)} className="1 rounded-[8px] md:w-[250px] w-[350px] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
-                                <span className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
+                                <span onClick={openPinjamUangForm} className="text-white text-2xl  md:mt-[1px] mt-[20px] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
                             </div>
                         </div>
 
                     </div>
 
-                    {/* <div className="flex flex-row flex-wrap gap-[50px] mx-[50px] mb-[50px]  ">
 
-                        <div className="1 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center   shadow-2xl bg-white ">
-                            <span className="text">Pinjaman Biasa</span>
-                            <div className="ajukan ">
-
-                                <button onClick={PinjamBiasa} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto">
-                                    Ajukan</button>
-
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pinjaman Talangan</span>
-                            <div className="ajukan ">
-                                <button onClick={PinjamTalangan} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pinjaman Mobil</span>
-                            <div className="ajukan ">
-                                <button onClick={PinjamMobil} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Pembelian Barang</span>
-                            <div className="ajukan ">
-                                <button onClick={BeliBarang} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl  w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                        <div className="2 rounded-3xl w-[250px] h-[150px]  flex flex-col p-[20px] items-center  shadow-2xl bg-white">
-                            <span className="text">Servis</span>
-                            <div className="ajukan ">
-                                <button onClick={Servis} className="bg-[#2C6975] hover:bg-[#23545d] text-white rounded-xl w-[120px] h-[35px] p-auto  ">Ajukan</button>
-                            </div>
-                        </div>
-
-                    </div> */}
                 </div>
             </div>
 
