@@ -95,7 +95,7 @@ const InfoDashboard = () => {
                         <tbody>
                             {pinjamanAnggota.map((pinjaman, index) => (
                                 <tr key={index}>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">Ridho {pinjaman.nama}</td>
+                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.nama}</td>
                                     <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.pinjaman}</td>
                                     <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.jenisPinjaman}</td>
                                     <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.sisaHutang}</td>

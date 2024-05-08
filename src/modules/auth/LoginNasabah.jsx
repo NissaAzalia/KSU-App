@@ -3,25 +3,27 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-const LoginNasabah = () => {
+const LoginNasabah = ({login,Oty}) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleClick = async () => {
-    navigate('/nasabah');
-  };
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleClick = () => {
+    login(true);
+    Oty("Nasabah");
+  }
+
   return (
     <div className="flex flex-col md:flex-row w-full">
       <div className="bg-[#2C6975] text-[#FAFAFA] md:h-screen md:w-full text-[4xl]">
         <div className="mx-[60px] my-[230px]">
-          <h1 className="md:text-5xl text-4xl">Welcome,Admin</h1>
+          <h1 className="md:text-5xl text-4xl">Welcome</h1>
           <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
       </div>

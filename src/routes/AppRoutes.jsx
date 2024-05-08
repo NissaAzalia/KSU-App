@@ -14,41 +14,58 @@ import Servis from '../modules/layout/Servis'
 import LoginNasabah from '../modules/auth/LoginNasabah'
 import PinjamUang from '../modules/layout/PinjamUang'
 import InputPinjam from '../modules/dashboard/InputPinjam'
+import { useTransition } from 'react'
 
 const AppRoutes = () => {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [otority,setOtority] = useState(null);
+
   function handleLogin(val) {
     setIsLoggedIn(val)
   }
+
+  function handleOtority(val){
+    setOtority(val);
+  }
+
+  console.log(otority)
 
   return (
     <BrowserRouter>
       <Routes>
         {
-          isLoggedIn !== true?
+          isLoggedIn !== true ?
 
             <Route>
-              <Route path='/' element={<Login login={handleLogin} />} />
-              <Route path='/Login' element={<Login login={handleLogin}/>} />
-              <Route path='/login-nasabah' element={<LoginNasabah />} />
+              <Route path='/admin' element={<Login Oty={handleOtority} login={handleLogin} />} />
+              <Route path='/' element={<LoginNasabah Oty={handleOtority} login={handleLogin}/>} />
               <Route path='*' element={<Navigate to={"/"} />} />
             </Route>
             :
-            <Route element={<MainLayout />}>
-              <Route path='/daftar-anggota' element={<DashboardAdmin />} />
-              {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
-              <Route path='/info' element={<InfoDashboard />} />
-              {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
-              <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
+            <Route>
+              {
+                otority === 'Admin' ? 
+
+                <Route element={<MainLayout />}>
+                <Route path='/daftar-anggota' element={<DashboardAdmin />} />
+                {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
+                <Route path='/info' element={<InfoDashboard />} />
+                {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
+                <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
+              </Route>
+
+              :
+              <Route>
+              <Route path='nasabah' element={<DashboardNasabah />} />
+              <Route path='*' element={<Navigate to={"/nasabah"} />} />
             </Route>
-            
+              }
+            </Route>
 
         }
-        <Route path='nasabah' element={<DashboardNasabah/>} />
-        <Route path='pinjaman-uang' element={<PinjamUang/>} />
-        <Route path='pinjam-mobil' element={<PinjamMobil/>} />
-        <Route path='beli-barang' element={<BeliBarang/>} />
-        <Route path='servis' element={<Servis/>} />
+
       </Routes>
     </BrowserRouter>
   )
