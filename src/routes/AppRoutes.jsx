@@ -36,19 +36,15 @@ const AppRoutes = () => {
             :
             <Route element={<MainLayout />}>
               <Route path='/daftar-anggota' element={<DashboardAdmin />} />
-              {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
               <Route path='/info' element={<InfoDashboard />} />
-              {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
+
               <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
             </Route>
             
 
         }
         <Route path='nasabah' element={<DashboardNasabah/>} />
-        <Route path='pinjaman-uang' element={<PinjamUang/>} />
-        <Route path='pinjam-mobil' element={<PinjamMobil/>} />
-        <Route path='beli-barang' element={<BeliBarang/>} />
-        <Route path='servis' element={<Servis/>} />
+        
       </Routes>
     </BrowserRouter>
   )

@@ -21,7 +21,7 @@ const LoginNasabah = () => {
     <div className="flex flex-col md:flex-row w-full">
       <div className="bg-[#2C6975] text-[#FAFAFA] md:h-screen md:w-full text-[4xl]">
         <div className="mx-[60px] my-[230px]">
-          <h1 className="md:text-5xl text-4xl">Welcome,Admin</h1>
+          <h1 className="md:text-5xl text-4xl">Welcome</h1>
           <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
       </div>
