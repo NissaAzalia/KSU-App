@@ -46,7 +46,7 @@ const DashboardAdmin = () => {
 
 
     return (
-        <div className="bg-[#F4F4F4] w-screen h-full p-[50px] ">
+        <div className="bg-[#F4F4F4] w-[100%] h-full p-[50px] ">
             <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB] " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
@@ -159,21 +159,21 @@ const DashboardAdmin = () => {
                 <table className="table-auto w-full ">
                     <thead>
                         
-                        <tr>
+                        <tr>    
                             <th className="border border-gray-600  border-b-0">
-                                <div className="mt-[35px] ml-[25px] w-[170px]">Nama</div>
+                                <div className="mt-[35px] ml-[25px] w-[50%]">Nama</div>
                             </th>
                             <th className="border border-gray-600 " colSpan="4">Simpanan</th>
                             <th className="border border-gray-600 border-b-0 ">
-                                <div className="mt-[35px] ml-[25px] w-[170px]">Action</div>
+                                <div className="mt-[35px] ml-[25px] w-[50%]">Action</div>
                             </th>
                         </tr>
                         <tr>
                             <th className=" border border-[#7D7D7D] border-t-0"></th>
-                            <th className="border border-[#7D7D7D] px-[30px]">Pokok</th>
-                            <th className=" border border-[#7D7D7D] px-[30px]">Wajib</th>
-                            <th className=" border border-[#7D7D7D] px-[30px]">Sukarela</th>
-                            <th className=" border border-[#7D7D7D] px-[30px]">Hari Raya</th>
+                            <th className="border border-[#7D7D7D] ">Pokok</th>
+                            <th className=" border border-[#7D7D7D] ">Wajib</th>
+                            <th className=" border border-[#7D7D7D] ">Sukarela</th>
+                            <th className=" border border-[#7D7D7D] ">Hari Raya</th>
                             <th className=" border border-[#7D7D7D] border-t-0"></th>
                         </tr>
                     </thead>
@@ -186,9 +186,12 @@ const DashboardAdmin = () => {
                                 <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
                                 <td className="p-[10px] border border-[#7D7D7D] bg-white">{anggota.nominal}</td>
                                 <td className="p-[10px] border border-[#7D7D7D] bg-white">
-                                    <div className='flex'>
-                                        <div className="bg-[#D9D9D9] mx-[65px] w-[40px] h-[40px] rounded-lg ">
+                                    <div className='flex gap-[20%] px-[25%]'>
+                                        <div className="bg-[#D9D9D9]  w-[40px] h-[40px] rounded-lg ">
                                             <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
+                                        </div>
+                                        <div className="bg-[#D9D9D9]  w-[40px] h-[40px] rounded-lg ">
+                                            <FontAwesomeIcon icon={faPenToSquare} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
                                         </div>
                                     </div>
                                 </td>
