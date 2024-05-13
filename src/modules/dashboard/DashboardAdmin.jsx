@@ -10,8 +10,6 @@ const DashboardAdmin = () => {
 
     const [simpananAnggota, setSimpananAnggota] = useState([]);
     const [Anggota, setAnggota] = useState([
-        { id: 1, nama: 'tes', simpananPokok: '1', simpananWajib: '2', simpananSukarela: '3', simpananHariRaya: '4' },
-        { id: 2, nama: 'tesstt', simpananPokok: '5', simpananWajib: '6', simpananSukarela: '7', simpananHariRaya: '8' },
 
     ]);
     const [nama, setNama] = useState('')
