@@ -55,6 +55,7 @@ const DashboardAdmin = () => {
 
             // Menyimpan perubahan ke state
             setAnggota(updatedAnggota);
+            setNama('');
 
             // Menutup form edit
             setShowFormSimpanan(false);
@@ -63,6 +64,15 @@ const DashboardAdmin = () => {
             console.error("Anggota tidak ditemukan!");
         }
     };
+
+    const handleClose = () =>{
+        setShowFormTambah(false);
+        setShowFormSimpanan(false);
+        setNama('');
+        setPassword('');
+
+
+    }
     // const tambahSimpanan = () => {
     //     const newData = {
     //         nama:nama,
@@ -105,17 +115,17 @@ const DashboardAdmin = () => {
 
                 {/* //form edit simpanan */}
                 {showFormSimpanan && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
+                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                        <div className="">
                             <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormSimpanan(false)}
+                                className="absolute top-2 left-6 text-gray-500 hover:text-gray-700"
+                                onClick={handleClose}
                             >
                                 X
                             </button>
                         </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
+                        <h1 className="text-center text-2xl font-bold text-[#2C6975] ">Simpanan</h1>
                         <div className="flex flex-col gap-6 ">
 
                             <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
@@ -160,7 +170,7 @@ const DashboardAdmin = () => {
                                     <option value="hari raya">Simpanan Hari Raya</option>
                                 </select>
                             </div> */}
-                            <button onClick={editSimpanan} className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px] mb-[20px] ">Kirim</button>
+                            <button onClick={editSimpanan} className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px]  ">Kirim</button>
                         </div>
                     </div>
                 )}
@@ -171,7 +181,7 @@ const DashboardAdmin = () => {
                         <div className="w-[600px] ">
                             <button
                                 className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormTambah(false)}
+                                onClick={handleClose}
                             >
                                 X
                             </button>
