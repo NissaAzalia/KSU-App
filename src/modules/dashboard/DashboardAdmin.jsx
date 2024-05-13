@@ -10,6 +10,8 @@ const DashboardAdmin = () => {
 
     const [simpananAnggota, setSimpananAnggota] = useState([]);
     const [Anggota, setAnggota] = useState([
+        { id: 1, nama: 'tes', simpananPokok: '1', simpananWajib: '2', simpananSukarela: '3', simpananHariRaya: '4' },
+        { id: 2, nama: 'tesstt', simpananPokok: '5', simpananWajib: '6', simpananSukarela: '7', simpananHariRaya: '8' },
 
     ]);
     const [nama, setNama] = useState('')
@@ -114,12 +116,8 @@ const DashboardAdmin = () => {
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
                         <div className="flex flex-col gap-6 ">
-                            <input
-                                type="text" placeholder="Nama"
-                                className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
-                                value={nama}
-                                id=""
-                                onChange={(e) => setNama(e.target.value)} />
+
+                            <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                             <p>simpanan pokok</p>
                             <input
                                 type="number" placeholder="Nominal"
