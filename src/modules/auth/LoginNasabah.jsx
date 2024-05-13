@@ -20,13 +20,14 @@ const LoginNasabah = ({login,Oty}) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row w-full">
-      <div className="bg-[#2C6975] text-[#FAFAFA] md:h-screen md:w-full text-[4xl]">
+       <div className="flex flex-col md:flex-row h-[100vh] w-full ">
+        <div className="flex flex-col bg-[#2C6975] text-[#fafafa] h-[100%] md:w-full justify-center">
         <div className="mx-[60px] my-[230px]">
           <h1 className="md:text-5xl text-4xl">Welcome</h1>
           <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
       </div>
+
       <div className="flex flex-col bg-[#FFFFFF] text-[#2C6975] h-[100%] md:w-full justify-center">
         <div className="md:px-full px-[25px] md:my-[120px] my-[40px]">
           <h1 className="font-bold text-4xl md:mb-[25px] mb-[25px] text-center md:ml">Login</h1>
@@ -49,9 +50,9 @@ const LoginNasabah = ({login,Oty}) => {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                className="absolute top-[50%] right-[10px] transform -translate-y-1/2 flex items-center px-3 text-[#2C6975] focus:outline-none"
+                />
+                <button
+                  className="absolute top-[50%] right-[10px] transform -translate-y-1/2 flex items-center px-3 text-[#2C6975] focus:outline-none"
                 onClick={handleTogglePassword}
               >
                 <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />

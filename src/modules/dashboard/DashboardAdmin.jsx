@@ -55,7 +55,7 @@ const DashboardAdmin = () => {
 
             // Menyimpan perubahan ke state
             setAnggota(updatedAnggota);
-
+            setNama('')
             // Menutup form edit
             setShowFormSimpanan(false);
         } else {
@@ -84,7 +84,7 @@ const DashboardAdmin = () => {
 
 
     return (
-        <div className="bg-[#F4F4F4] w-[100%] h-full p-[50px] ">
+        <div className="bg-[#F4F4F4] w-[100%] h-[100vh] p-[50px] ">
             <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB] " >
 
                 <div className="mx-[30px] py-[5px] mt-[25px]  ">
@@ -109,7 +109,7 @@ const DashboardAdmin = () => {
                         <div className="w-[600px] ">
                             <button
                                 className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => setShowFormSimpanan(false)}
+                                onClick={() => {setShowFormSimpanan(false), setNama('')}}
                             >
                                 X
                             </button>
@@ -198,7 +198,7 @@ const DashboardAdmin = () => {
                     </div>
                 )}
 
- {/* //button kirim tambah simpanan sudah pindah kebawah */}
+                {/* //button kirim tambah simpanan sudah pindah kebawah */}
                 <div className="flex gap-5">
                     {/* <div className=" mb-[30px]  ">
                         <button
@@ -209,7 +209,7 @@ const DashboardAdmin = () => {
                         </button>
                     </div> */}
 
-      {/* //button kirim tambah anggota */}
+                    {/* //button kirim tambah anggota */}
                     <div className=" mb-[30px]  ">
                         <button
                             className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[20px]"
@@ -223,7 +223,7 @@ const DashboardAdmin = () => {
             </div>
 
             <div className=" mt-[30px] mr-[100px] w-[100%] overflow-x-auto">
-            <table className="table-auto w-full ">
+                <table className="table-auto w-full ">
                     <thead>
 
                         <tr>
@@ -255,7 +255,7 @@ const DashboardAdmin = () => {
                                 <td className="flex flex-col justify-center items-center  p-[10px] border border-[#7D7D7D] bg-white">
                                     <div div className='flex gap-[20%] px-[25%]'>
 
-                                        <div onClick={()=>hapusAnggota(id)} className="bg-[#D9D9D9]  w-[40px] h-[40px] rounded-lg ">
+                                        <div onClick={() => hapusAnggota(id)} className="bg-[#D9D9D9]  w-[40px] h-[40px] rounded-lg ">
                                             <FontAwesomeIcon icon={faTrashCan} size="xl" style={{ color: "#626262", }} className="px-[10px] pt-[8px]" />
                                         </div>
                                         <div className="bg-[#D9D9D9]  w-[40px] h-[40px] rounded-lg "
