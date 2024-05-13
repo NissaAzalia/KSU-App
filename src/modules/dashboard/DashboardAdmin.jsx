@@ -9,9 +9,7 @@ const DashboardAdmin = () => {
     const [showFormTambah, setShowFormTambah] = useState(false);
 
     const [simpananAnggota, setSimpananAnggota] = useState([]);
-    const [Anggota, setAnggota] = useState([
-
-    ]);
+    const [Anggota, setAnggota] = useState([]);
     const [nama, setNama] = useState('')
     const [password, setPassword] = useState('')
     const [jenisSimpanan, setJenisSimpanan] = useState('')
@@ -31,6 +29,7 @@ const DashboardAdmin = () => {
         setAnggota([...Anggota, newData]);
         setNama('')
         setPassword('')
+        setShowFormTambah(false)
     };
 
     const editSimpanan = () => {
