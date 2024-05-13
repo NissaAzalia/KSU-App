@@ -22,7 +22,7 @@ const SideBar = () => {
             )}
 
             {bar && (
-                <div className="flex flex-col text-center bg-[#fafafa] min-w-[274px] h-screen pb-[50px]">
+                <div className="flex flex-col text-center bg-[#fafafa] min-w-[274px] h-screen pb-25px]">
                     <div className="flex pl-[15px] pt-[10px] pr-[15px]">
                         <div className="flex">
                             <img src="src/assets/logoKSU.png" alt="" className="w-[50px]" />
