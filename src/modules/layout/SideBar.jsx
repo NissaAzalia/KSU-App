@@ -28,7 +28,7 @@ const SideBar = () => {
                             <img src="src/assets/logoKSU.png" alt="" className="w-[50px]" />
                             <h1 className="pl-[15px] pt-[13px] font-bold">Teknika Mandiri</h1>
                         </div>
-                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="lg" /></button>
+                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="xl" /></button>
                     </div>
                     <div className="flex flex-col justify-between text-center bg-[#fafafa] min-w-[274px] h-screen pb-[50px]">
                         <div className="mt-[40px]">
