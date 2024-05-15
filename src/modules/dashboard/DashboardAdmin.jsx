@@ -34,7 +34,7 @@ const DashboardAdmin = () => {
     const [currentId, setCurrentId] = useState(null);
 
     // Menggabungkan data users dan simpanans
-    const initialAnggota = users.map(user => {
+    const initialNasabah = users.map(user => {
         const simpanan = simpanans.find(s => s.user_id === user.id_user) || {
             simpanan_pokok: 0,
             simpanan_wajib: 0,
@@ -52,7 +52,7 @@ const DashboardAdmin = () => {
         };
     });
 
-    const [Anggota, setAnggota] = useState(initialAnggota);
+    const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('');
     const [password, setPassword] = useState('');
     const [simpananPokok, setSimpananPokok] = useState('');
@@ -60,9 +60,9 @@ const DashboardAdmin = () => {
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
-    const tambahAnggota = () => {
+    const tambahNasabah = () => {
         const newData = {
-            id: Anggota.length + 1,
+            id: nasabah.length + 1,
             nama: nama,
             password: password,
             simpananPokok: 0,
@@ -71,27 +71,27 @@ const DashboardAdmin = () => {
             simpananHariRaya: 0
         };
 
-        setAnggota([...Anggota, newData]);
+        setNasabah([...nasabah, newData]);
         setNama('');
         setPassword('');
         setShowFormTambah(false);
     };
 
     const editSimpanan = () => {
-        const updatedAnggota = Anggota.map(anggota => {
-            if (anggota.id === currentId) {
+        const updatedNasabah = nasabah.map(nasabah => {
+            if (nasabah.id === currentId) {
                 return {
-                    ...anggota,
+                    ...nasabah,
                     simpananPokok: simpananPokok,
                     simpananWajib: simpananWajib,
                     simpananSukarela: simpananSukarela,
                     simpananHariRaya: simpananHariRaya
                 };
             }
-            return anggota;
+            return nasabah;
         });
 
-        setAnggota(updatedAnggota);
+        setNasabah(updatedNasabah);
         setShowFormSimpanan(false);
     };
 
@@ -102,23 +102,23 @@ const DashboardAdmin = () => {
         setPassword('');
     };
 
-    const hapusAnggota = id => {
-        const updatedAnggota = Anggota.filter(anggota => anggota.id !== id);
-        setAnggota(updatedAnggota);
+    const hapusNasabah = id => {
+        const updatedNasabah = nasabah.filter(nasabah => nasabah.id !== id);
+        setNasabah(updatedNasabah);
     };
 
     const handleEditClick = id => {
-        const anggota = Anggota.find(anggota => anggota.id === id);
-        setNama(anggota.nama);
-        setSimpananPokok(anggota.simpananPokok);
-        setSimpananWajib(anggota.simpananWajib);
-        setSimpananSukarela(anggota.simpananSukarela);
-        setSimpananHariRaya(anggota.simpananHariRaya);
+        const selectedNasabah = nasabah.find(n => n.id === id);
+        setNama(selectedNasabah.nama);
+        setSimpananPokok(selectedNasabah.simpananPokok);
+        setSimpananWajib(selectedNasabah.simpananWajib);
+        setSimpananSukarela(selectedNasabah.simpananSukarela);
+        setSimpananHariRaya(selectedNasabah.simpananHariRaya);
         setCurrentId(id);
         setShowFormSimpanan(true);
     };
 
-    console.log(Anggota)
+    console.log(nasabah)
     return (
         <div className="bg-[#F4F4F4] w-[100%] h-[100%] p-[50px]">
             <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
@@ -214,7 +214,7 @@ const DashboardAdmin = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
-                            <button onClick={tambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
+                            <button onClick={tambahNasabah} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
                                 Kirim
                             </button>
                         </div>
@@ -241,23 +241,23 @@ const DashboardAdmin = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {Anggota.map((anggota, index) => (
-                                <tr key={anggota.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border px-4 py-2">{anggota.nama}</td>
-                                    <td className="border px-4 py-2">{anggota.simpananPokok}</td>
-                                    <td className="border px-4 py-2">{anggota.simpananWajib}</td>
-                                    <td className="border px-4 py-2">{anggota.simpananSukarela}</td>
-                                    <td className="border px-4 py-2">{anggota.simpananHariRaya}</td>
+                            {nasabah.map((nasabah, index) => (
+                                <tr key={nasabah.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                                    <td className="border px-4 py-2">{nasabah.nama}</td>
+                                    <td className="border px-4 py-2">{nasabah.simpananPokok}</td>
+                                    <td className="border px-4 py-2">{nasabah.simpananWajib}</td>
+                                    <td className="border px-4 py-2">{nasabah.simpananSukarela}</td>
+                                    <td className="border px-4 py-2">{nasabah.simpananHariRaya}</td>
                                     <td className="border px-4 py-2 flex justify-around">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleEditClick(anggota.id)}
+                                            onClick={() => handleEditClick(nasabah.id)}
                                         >
                                             <FontAwesomeIcon icon={faPenToSquare} />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusAnggota(anggota.id)}
+                                            onClick={() => hapusNasabah(nasabah.id)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
