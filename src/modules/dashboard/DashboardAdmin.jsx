@@ -142,73 +142,7 @@ const DashboardAdmin = () => {
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px]">
                             <button
-<<<<<<< HEAD
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={() => {setShowFormSimpanan(false), setNama('')}}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
-
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] ">Simpanan</h1>
-                        <div className="flex flex-col gap-6 ">
-
-                            <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                            <p>simpanan pokok</p>
-                            <input
-                                type="number" placeholder="Nominal"
-                                className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
-                                value={simpananPokok}
-                                id=""
-                                onChange={(e) => setSimpananPokok(e.target.value)}
-                            />
-                            <p>simpanan wajib</p>
-                            <input
-                                type="number" placeholder="Nominal"
-                                className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
-                                value={simpananWajib}
-                                id=""
-                                onChange={(e) => setSimpananWajib(e.target.value)}
-                            />
-                            <p>simpanan sukarela</p>
-                            <input
-                                type="number" placeholder="Nominal"
-                                className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
-                                value={simpananSukarela}
-                                id=""
-                                onChange={(e) => setSimpananSukarela(e.target.value)}
-                            />
-                            <p>simpanan hari raya</p>
-                            <input
-                                type="number" placeholder="Nominal"
-                                className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]"
-                                value={simpananHariRaya}
-                                id=""
-                                onChange={(e) => setSimpananHariRaya(e.target.value)}
-                            />
-                            {/* <div>
-                                <select value={jenisSimpanan} onChange={(e) => setJenisSimpanan(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  w-[600px] h-[40px] px-[15px]">
-                                    <option disabled selected value="">Pilih Simpanan</option>
-                                    <option value="pokok">Simpanan Pokok</option>
-                                    <option value="wajib">Simpanan Wajib</option>
-                                    <option value="sukarela">Simpanan Sukarela</option>
-                                    <option value="hari raya">Simpanan Hari Raya</option>
-                                </select>
-                            </div> */}
-                            <button onClick={editSimpanan} className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  w-[600px] h-[40px]  ">Kirim</button>
-                        </div>
-                    </div>
-                )}
-
-                {/* //form tambah anggota */}
-                {showFormTambah && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px] ">
-                            <button
-                                className=" top-1 left-1 text-gray-500 hover:text-gray-700"
-=======
                                 className="top-1 left-1 text-gray-500 hover:text-gray-700"
->>>>>>> e7bc3f47ac0634fd7f60dd0afbe1f3fb123a0841
                                 onClick={handleClose}
                             >
                                 <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -260,7 +194,7 @@ const DashboardAdmin = () => {
                                 className="top-1 left-1 text-gray-500 hover:text-gray-700"
                                 onClick={handleClose}
                             >
-                                X
+                                <FontAwesomeIcon icon={faXmark} size="lg" />
                             </button>
                         </div>
 
