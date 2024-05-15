@@ -18,22 +18,22 @@ const Login = ({ login,Oty }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="bg-[#2C6975] text-[#FAFAFA] md:h-screen h-[400px] md:w-[520px] w-full text-[4xl]">
+    <div className="flex flex-col md:flex-row h-[100vh] w-full ">
+        <div className="flex flex-col bg-[#2C6975] text-[#fafafa] h-[100%] md:w-full justify-center">
         <div className="mx-[60px] my-[230px]">
           <h1 className="md:text-5xl text-4xl">Welcome,Admin</h1>
           <p className="md:text-2xl text-xl">Login untuk melanjutkan</p>
         </div>
       </div>
 
-      <div className="bg-[#FFFFFF] text-[#2C6975] h-auto md:w-[550px] w-full ">
-        <div className="md:px-[200px] px-[25px] md:my-[120px] my-[40px]">
-          <h1 className="font-bold text-4xl md:mb-[25px] mb-[25px] text-center md:ml-[120px]">Login</h1>
+      <div className="flex flex-col bg-[#FFFFFF] text-[#2C6975] h-[100%] md:w-full justify-center">
+        <div className="md:px-full px-[25px] md:my-[120px] my-[40px]">
+          <h1 className="font-bold text-4xl md:mb-[25px] mb-[25px] text-center md:ml">Login</h1>
 
-          <div className="mb-[25px]">
+          <div className="resize-none mb-[25px]">
             <h1>Username</h1>
             <input
-              className="border-solid border-[1px] border-[#2C6975] rounded min-w-[360px] h-[50px] px-[10px]"
+              className="resize-none border-solid border-[1px] border-[#2C6975] rounded w-full h-[50px] p-[10px]"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -44,13 +44,13 @@ const Login = ({ login,Oty }) => {
             <h1>Password</h1>
             <div className="relative">
               <input
-                className="border-solid border-[1px] border-[#2C6975] rounded min-w-[360px] h-[50px] px-[10px]"
+                className="border-solid border-[1px] border-[#2C6975] rounded w-full h-[50px] p-[10px]"
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-              />
-              <button
-                className="absolute top-[18px] left-[310px]  flex items-center px-3 text-[#2C6975] focus:outline-none"
+                />
+                <button
+                  className="absolute top-[50%] right-[10px] transform -translate-y-1/2 flex items-center px-3 text-[#2C6975] focus:outline-none"
                 onClick={handleTogglePassword}
               >
                 <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
@@ -58,7 +58,7 @@ const Login = ({ login,Oty }) => {
             </div>
           </div>
 
-          <button onClick={handleClick} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[360px] h-[50px]">
+          <button onClick={handleClick} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-full h-[50px]">
             Login
           </button>
         </div>
