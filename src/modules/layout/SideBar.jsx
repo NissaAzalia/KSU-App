@@ -14,7 +14,7 @@ const SideBar = () => {
         <>
         
         {!bar && (
-            <div onClick={() => setBar(!bar)} className="flex absolute fixed w-screen mx-[50px]">
+            <div onClick={() => setBar(!bar)} className="flex absolute fixed mx-[50px]">
                 <div className="flex gap-[25px]">
                     <span className="text-[#222a] md:text-2xl text-2xl md:mt-[70%] mt-[7%] cursor-pointer hover:text-[#7D7D7D]"><FontAwesomeIcon icon={faBars} /></span>
                 </div>
