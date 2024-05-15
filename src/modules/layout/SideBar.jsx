@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUserGroup, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faUserGroup, faArrowLeft, faBars, faXmark} from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 
 const SideBar = () => {
@@ -16,7 +16,7 @@ const SideBar = () => {
         {!bar && (
             <div onClick={() => setBar(!bar)} className="flex absolute fixed w-screen mx-[50px]">
                 <div className="flex gap-[25px]">
-                    <span className="text-[#222a] md:text-2xl text-2xl md:mt-[8%] mt-[7%] cursor-pointer hover:text-[#7D7D7D]">=</span>
+                    <span className="text-[#222a] md:text-2xl text-2xl md:mt-[70%] mt-[7%] cursor-pointer hover:text-[#7D7D7D]"><FontAwesomeIcon icon={faBars} /></span>
                 </div>
             </div>
             )}
@@ -28,7 +28,7 @@ const SideBar = () => {
                             <img src="src/assets/logoKSU.png" alt="" className="w-[50px]" />
                             <h1 className="pl-[15px] pt-[13px] font-bold">Teknika Mandiri</h1>
                         </div>
-                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}>X</button>
+                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="lg" /></button>
                     </div>
                     <div className="flex flex-col justify-between text-center bg-[#fafafa] min-w-[274px] h-screen pb-[50px]">
                         <div className="mt-[40px]">

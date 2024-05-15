@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking } from '@fortawesome/free-solid-svg-icons'
+import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 
 
@@ -143,7 +143,7 @@ const DasboardNasabah = () => {
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormServis(false)}
                                     >
-                                        X
+                                        <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
 
@@ -175,7 +175,7 @@ const DasboardNasabah = () => {
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormBeliBarang(false)}
                                     >
-                                        X
+                                        <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
 
@@ -205,7 +205,7 @@ const DasboardNasabah = () => {
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamMobil(false)}
                                     >
-                                        X
+                                        <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
 
@@ -243,7 +243,7 @@ const DasboardNasabah = () => {
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamUang(false)}
                                     >
-                                        X
+                                        <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
 

@@ -1,4 +1,4 @@
-import { faMagnifyingGlass, faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faTrashCan, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react';
 
@@ -121,7 +121,7 @@ const DashboardAdmin = () => {
                                 className=" top-1 left-1 text-gray-500 hover:text-gray-700"
                                 onClick={() => {setShowFormSimpanan(false), setNama('')}}
                             >
-                                X
+                                <FontAwesomeIcon icon={faXmark} size="lg" />
                             </button>
                         </div>
 
@@ -183,7 +183,7 @@ const DashboardAdmin = () => {
                                 className=" top-1 left-1 text-gray-500 hover:text-gray-700"
                                 onClick={handleClose}
                             >
-                                X
+                                <FontAwesomeIcon icon={faXmark} size="lg" />
                             </button>
                         </div>
 
