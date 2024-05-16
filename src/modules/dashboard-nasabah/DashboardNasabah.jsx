@@ -1,18 +1,18 @@
-
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 
-
-const DasboardNasabah = () => {
+const DasboardNasabah = ({doLogout}) => {
     const [showFormServis, setShowFormServis] = useState(false);
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
+     const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -22,7 +22,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false); ``
+        setShowFormServis(false);
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -34,6 +34,8 @@ const DasboardNasabah = () => {
         setShowFormPinjamMobil(true);
         setShowFormPinjamUang(false);
     };
+
+    
 
     const openPinjamUangForm = () => {
         setShowFormServis(false);
@@ -51,7 +53,7 @@ const DasboardNasabah = () => {
                     <h1 className="  md:pt-[17px] pt-[22px]  font-bold">Teknika Mandiri</h1>
                 </div>
                 <div className="md:pt-[17px] pt-[22px] font-semibold">
-                    <button>Logout</button>
+                    <button onClick={doLogout}>Logout</button>
                 </div>
             </div>
 
@@ -186,13 +188,13 @@ const DasboardNasabah = () => {
                     <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[60px]  font-bold">Daftar Layanan</h1>
                 </div>
 
-                <div className="h-auto md:pb-[50px] pb-[30px]">
+                <div className="h-auto md:pb-[50px] pb-[30px] flex flex-col">
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[50px] ml-[30px] ">Layanan</h2>
 
-                    <div className="flex  flex-col md:flex-row md:gap-[50px] gap-[10px] md:mx-[50px] mx-[30px]  ">
+                    <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
 
-                        {showFormServis && (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                        {showFormServis ? (
+                          <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
@@ -225,19 +227,19 @@ const DasboardNasabah = () => {
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
 
-                        <div onClick={() => setShowFormServis(!showFormServis)} className="1 rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
+                        <div onClick={openServisForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
                             <div className="flex gap-[25px] ">
-                                <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
-                                <span onClick={openServisForm} className="text-white md:text-2xl text-2xl  md:mt-[8%] mt-[7%] cursor-pointer hover:text-[#7D7D7D]">Servis</span>
+                                <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
+                                <span onClick={openServisForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Servis</span>
                             </div>
                         </div>
 
 
 
-                        {showFormBeliBarang && (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                        {showFormBeliBarang ? (
+                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -257,17 +259,17 @@ const DasboardNasabah = () => {
                                     <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
 
-                        <div onClick={() => setShowFormBeliBarang(!showFormBeliBarang)} className="1 rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#307280] ">
+                        <div onClick={openBeliBarangForm} className="1 flex rounded-[8px] md:w-[30%] w-[100%] h-[100px] text-center items-center p-[12px]  shadow-2xl bg-[#307280] ">
                             <div className="flex gap-[25px] text-left">
-                                <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
-                                <span onClick={openBeliBarangForm} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[2%] cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
+                                <FontAwesomeIcon className="h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
+                                <span className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
                             </div>
                         </div>
 
-                        {showFormPinjamMobil && (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                        {showFormPinjamMobil ?  (
+                          <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -308,20 +310,20 @@ const DasboardNasabah = () => {
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
 
 
-                        <div onClick={() => setShowFormPinjamMobil(!showFormPinjamMobil)} className="1 rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
+                        <div onClick={openPinjamMobilForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
                             <div className="flex gap-[25px] text-left">
                                 {/* <div className="bg-[#687D87]  w-[90px] h-[65px] rounded-full   "> */}
-                                <FontAwesomeIcon className="mt-[10px] ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
+                                <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
                                 {/* </div> */}
-                                <span onClick={openPinjamMobilForm} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[7%] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
+                                <span onClick={openPinjamMobilForm} className="text-white flex items-center md:text-2xl text-2xl cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
                             </div>
                         </div>
 
 
-                        {showFormPinjamUang && (
+                        {showFormPinjamUang ?  (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
@@ -350,12 +352,12 @@ const DasboardNasabah = () => {
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
-                        )}
+                        ) : null}
 
-                        <div onClick={() => setShowFormPinjamUang(!showFormPinjamUang)} className="1 rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
+                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
-                                <span onClick={openPinjamUangForm} className="text-white md:text-2xl text-2xl  md:mt-[1px] mt-[7%] cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
+                                <span onClick={openPinjamUangForm} className="text-white flex items-center md:text-2xl text-2xl cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
                             </div>
                         </div>
 
