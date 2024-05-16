@@ -11,7 +11,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, loadingSimpanan } = useDashboardNasabah()
+    const { simpanan,pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
