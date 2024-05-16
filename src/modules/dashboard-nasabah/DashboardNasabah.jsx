@@ -165,7 +165,17 @@ const DasboardNasabah = () => {
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa hutang dari pinjaman</h2>
-                        <span className="text-white text-xl">Rp. 300,000</span>
+                        <span className="text-white text-xl">
+                            {loadingPinjaman ?
+                                <>
+                                    Loading
+                                </>
+                                :
+                                <>
+                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString() : 0}
+                                </>
+                            }
+                        </span>
                     </div>
                 </div>
             </div>
@@ -256,14 +266,36 @@ const DasboardNasabah = () => {
                                 <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
 
 
-                                <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
-                                    <select className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]">
-                                        <option disabled selected>Sopir</option>
-                                        <option>Pakai</option>
-                                        <option>Tidak</option>
+                                <div className="flex flex-col gap-2">
+                                    <textarea
+                                        name=""
+                                        id=""
+                                        placeholder="waktu"
+                                        className="border border-gray-300 pl-2 pt-2"
+                                    ></textarea>
+                                    <p className="font-thin text-gray-600 mt-0">
+                                        <span className="text-red-700 text-2xl">*</span>contoh pengisian form : Tanggal peminjaman/durasi peminjaman mobil <br />
+                                        17 Mei 2024/2hari
+                                    </p>
 
-                                    </select>
+                                    <div className="flex flex-col gap/[10px] mb-[2px]">
+                                        <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
+                                        <div className="flex items-center pt-[10px]">
+                                            <input type="radio" id="sopir_ya" name="sopir" value="Ya" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                            <input type="radio" id="sopir_tidak" name="sopir" value="Tidak" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                        </div>
+                                    </div>
+
+                                    {/* <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            
+                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
+                                            17 Mei 2024/2hari
+                                        </p>
+                                    </div> */}
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
@@ -297,7 +329,14 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
+                                    <p className="font-thin text-gray-600 mt-0">
+                                        <span className="text-red-700 text-2xl">*</span>contoh pengisian form : 1 tahun diangsur 6 kali
+                                    </p>
+                                    {/* <div className="font-light text-gray-600">
+                                        contoh pengisian form : 1 tahun diangsur 6 kali
+                                    </div> */}
+
 
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
