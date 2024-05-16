@@ -173,7 +173,7 @@ const DasboardNasabah = () => {
                                 </>
                                 :
                                 <>
-                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString()  : 0}
+                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString() : 0}
                                 </>
                             }
                         </span>
@@ -208,7 +208,20 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="waktu" ></textarea>
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            jenis barang : mesin cuci
+                                        </p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            Alamat : Kab, Kec, Ds, Dk, RT/RW
+                                        </p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            Waktu : 
+                                        </p>
+
+                                    </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
@@ -287,7 +300,7 @@ const DasboardNasabah = () => {
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            
+
                                             Tanggal peminjaman/durasi peminjaman mobil<br></br>
                                             17 Mei 2024/2hari
                                         </p>
@@ -357,4 +370,4 @@ const DasboardNasabah = () => {
         </div>
     )
 }
-export default DasboardNasabah
+export default DasboardNasabah
