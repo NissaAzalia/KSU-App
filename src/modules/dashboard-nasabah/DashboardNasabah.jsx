@@ -88,7 +88,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_pokok : 0}
+                                            Rp {simpanan ? simpanan.simpanan_pokok.toLocaleString() : 0}
                                         </>
                                     }
 
@@ -132,7 +132,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_sukarela : 0}
+                                            Rp {simpanan ? simpanan.simpanan_sukarela.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -152,7 +152,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_hariraya : 0}
+                                            Rp {simpanan ? simpanan.simpanan_hariraya.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
