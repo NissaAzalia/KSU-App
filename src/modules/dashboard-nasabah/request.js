@@ -16,3 +16,19 @@ export const apiFetchSimpanan = async () => {
             return err.response.data
         })
 }
+
+export const apiFetchPinjaman = async () => {
+    const token = getToken();
+
+    return axios.get('https://apiksu.ndamelweb.com/pinjamanUser', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(response => {
+            return response
+        })
+        .catch(err => {
+            return err.response.data
+        })
+}
