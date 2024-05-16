@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
+import { useDashboardNasabah } from "./DashboardNasabahProvider"
 
 
 const DasboardNasabah = () => {
@@ -9,6 +10,8 @@ const DasboardNasabah = () => {
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
+
+    const { simpanan, loadingSimpanan } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -18,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);
+        setShowFormServis(false);``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -66,32 +69,53 @@ const DasboardNasabah = () => {
             <div className="simpanan">
                 <div className="md:ml-[4%] mx-[30px]">
                     <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[30px]   font-bold">Info Simpanan & Sisa Hutang</h1>
-                    <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[1px] ml-[1%]   ">Simpanan</h2>
+                    <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[1px] ml-[1%]">Simpanan</h2>
                 </div>
 
-                <div className="flex  flex-col md:flex-row gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
+                <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
 
-                    <div className="1   rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
+                    <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
                         <div className="flex ">
                             <div className="bg-[#2D5275] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
                                 <span>Pokok</span>
-                                <span className="font-bold">Rp.200,000</span>
+                                <span className="font-bold">
+                                    {loadingSimpanan ?
+                                        <>
+                                            Loading
+                                        </>
+                                        :
+                                        <>
+                                            Rp {simpanan ? simpanan.simpanan_pokok : 0}
+                                        </>
+                                    }
+
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="1  rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
+                    <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
                         <div className="flex ">
                             <div className="bg-[#37808F] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
                                 <span>Wajib</span>
-                                <span className="font-bold">Rp.200,000</span>
+                                <span className="font-bold">
+                                    {loadingSimpanan ?
+                                        <>
+                                            Loading
+                                        </>
+                                        :
+                                        <>
+                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
+                                        </>
+                                    }
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="1  rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
+                    <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
                         <div className="flex ">
                             <div className="bg-[#439FB1] w-[75px] h-[75px] ">
                                 <FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} />
@@ -99,17 +123,37 @@ const DasboardNasabah = () => {
 
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
                                 <span>Sukarela</span>
-                                <span className="font-bold">Rp.200,000</span>
+                                <span className="font-bold">
+                                    {loadingSimpanan ?
+                                        <>
+                                            Loading
+                                        </>
+                                        :
+                                        <>
+                                            Rp {simpanan ? simpanan.simpanan_sukarela : 0}
+                                        </>
+                                    }
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="1  rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
+                    <div className="rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
                         <div className="flex ">
                             <div className="bg-[#50BDD3] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
                                 <span>Hari Raya</span>
-                                <span className="font-bold">Rp.200,000</span>
+                                <span className="font-bold">
+                                    {loadingSimpanan ?
+                                        <>
+                                            Loading
+                                        </>
+                                        :
+                                        <>
+                                            Rp {simpanan ? simpanan.simpanan_hariraya : 0}
+                                        </>
+                                    }
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -253,7 +297,11 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" placeholder="waktu"></textarea>
+                                    <div className="font-light text-gray-600">
+                                        contoh pengisian form : 1 tahun diangsur 6 kali 
+                                    </div>
+
 
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>

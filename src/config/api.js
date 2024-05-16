@@ -19,11 +19,11 @@ export const handleLogin = async (user, password) => {
 
 export const setTokens = (token) => {
     localStorage.setItem('token', token)
-};
+}
 
 export const getToken = (token) => {
     return localStorage.getItem('token') ?? null;
-};
+}
 
 
  export const removeToken = () => {
