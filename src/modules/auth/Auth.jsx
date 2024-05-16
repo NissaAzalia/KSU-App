@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { handleLogin } from "../../config/api"
+import { handleLogin, handleLoginAdmin } from "../../config/api"
 import { saveToken } from "../../helpers/LocalStorage"
 
 // nilai default
@@ -7,6 +7,7 @@ const initialAuthState = {
     isLoggedin: false,
     authority: "",
     doLogin: () => { },
+    doLoginAdmin: () => {},
     doLogout: () => { },
     changeAuthority: () => {},
 }
@@ -51,6 +52,31 @@ const AuthProvider = ({ children }) => {
 
     }
 
+    const doLoginAdmin = async (user,password) => {
+        if (isLoading) return
+
+        setIsLoading(true)
+
+        // memanggil api dengan data email & password
+        // console.log("akan melakukan login dengan: ", user,password)
+
+        // memanggil api menggunakan axios
+        const apiResult = await handleLoginAdmin(user,password)
+        setIsLoading(false)
+        const { status, data, message } = apiResult.data
+
+        if (status !=  'success') {
+            // jika gagal tampilkan peringatan  
+            alert(`Login gagal: ${message}`)
+            return
+        }
+
+        saveToken(data.token)
+        // jika berhasil maka setIsLoggedin -> true
+        setIsLoggedin(true)
+
+    }
+
     const doLogout = () => {
         setIsLoggedin(false)
         
@@ -62,7 +88,7 @@ const AuthProvider = ({ children }) => {
 
     // return provider
     return(
-        <AuthContext.Provider value={ {isLoggedin, authority, setIsLoggedin, doLogin, doLogout, changeAuthority} }>
+        <AuthContext.Provider value={ {isLoggedin, authority, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority} }>
             {children}
         </AuthContext.Provider>
     )
