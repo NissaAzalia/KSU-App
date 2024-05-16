@@ -39,6 +39,8 @@ export const setTokens = (token) => {
 export const getToken = (token) => {
     return localStorage.getItem('token') ?? null;
 }
+
+
  export const removeToken = () => {
   localStorage.removeItem('token')
  }
