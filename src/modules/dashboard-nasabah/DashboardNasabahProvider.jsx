@@ -1,12 +1,14 @@
+
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchSimpanan } from "./request"
+import { apiFetchPinjaman, apiFetchSimpanan } from "./request"
 
 const initDashboardNasabah = {
     simpanan: null,
+    pinjaman: null,
     loadingSimpanan: false,
-    loadingLayanan: false,
+    loadingPinjaman: false,
     fetchSimpanan: () => {},
-    fetchLayanan: () => {}
+    fetchPinjaman: () => {}
 }
 
 const DashboardNasabahContext = createContext(initDashboardNasabah)
@@ -18,8 +20,9 @@ const useDashboardNasabah = () => {
 
 const DasboardNasabahProvider = ({children}) => {
     const [simpanan, setSimpanan] = useState(null)
+    const [pinjaman, setPinjaman] = useState(null)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
-    const [loadingLayanan, setLoadingLayanan] = useState(false)
+    const [loadingPinjaman, setLoadingPinjaman] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -34,30 +37,33 @@ const DasboardNasabahProvider = ({children}) => {
         setLoadingSimpanan(false)
     }
 
-    const fetchLayanan = async () => {
-        if (loadingLayanan == true) return
+    const fetchPinjaman = async () => {
+        if (loadingPinjaman == true) return
 
-
-        setLoadingLayanan(true)
+        setLoadingPinjaman(true)
         // call api
-        const apiCall = await apiFetchLayanan()
+        const apiCall = await apiFetchPinjaman()
         const {data} = apiCall.data
 
-        setLoadingSimpanan(data.simpanan)
+        setPinjaman(data.pinjaman)
 
-        setLoadingLayanan(false)
+        setLoadingPinjaman(false)
     }
 
     useEffect(() => {
+        // fetchPinjaman()
         fetchSimpanan()
     }, [])
 
+
     useEffect(() => {
-        fetchLayanan()
+        fetchPinjaman()
+        // fetchSimpanan()
     }, [])
+    
 
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, loadingSimpanan, loadingLayanan}}>
+        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, loadingSimpanan, loadingPinjaman}}>
             {children}
         </DashboardNasabahContext.Provider>
     )

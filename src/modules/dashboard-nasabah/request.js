@@ -17,7 +17,18 @@ export const apiFetchSimpanan = async () => {
         })
 }
 
+export const apiFetchPinjaman = async () => {
+    const token = getToken();
 
-export const apiFetchLayanan = async () => {
-    
+    return axios.get('https://apiksu.ndamelweb.com/pinjamanUser', {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        .then(response => {
+            return response
+        })
+        .catch(err => {
+            return err.response.data
+        })
 }

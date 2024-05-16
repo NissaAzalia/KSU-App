@@ -1,3 +1,4 @@
+
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -11,7 +12,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, loadingSimpanan, loadingLayanan } = useDashboardNasabah()
+    const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -40,16 +41,6 @@ const DasboardNasabah = () => {
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(true);
     };
-
-    const ShowLoading = () => (
-        <div className="">
-            <p className="size-40 text-[#3d3d3d]">Loading</p>
-        </div>
-    );
-
-    const showLoadinglayanan = () => {
-        <p>Loading...</p>
-    }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
@@ -92,11 +83,11 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            <ShowLoading />
+                                            Loading
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_pokok : 0}
+                                            Rp {simpanan ? simpanan.simpanan_pokok.toLocaleString() : 0}
                                         </>
                                     }
 
@@ -113,11 +104,11 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            <ShowLoading />
+                                            Loading
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
+                                            Rp {simpanan ? simpanan.simpanan_wajib.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -136,11 +127,11 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            <ShowLoading />
+                                            Loading
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_sukarela : 0}
+                                            Rp {simpanan ? simpanan.simpanan_sukarela.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -156,11 +147,11 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            <ShowLoading />
+                                            Loading
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_hariraya : 0}
+                                            Rp {simpanan ? simpanan.simpanan_hariraya.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -175,7 +166,17 @@ const DasboardNasabah = () => {
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa hutang dari pinjaman</h2>
-                        <span className="text-white text-xl">Rp. 300,000</span>
+                        <span className="text-white text-xl">
+                            {loadingPinjaman ?
+                                <>
+                                    Loading
+                                </>
+                                :
+                                <>
+                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString()  : 0}
+                                </>
+                            }
+                        </span>
                     </div>
                 </div>
             </div>
@@ -190,22 +191,12 @@ const DasboardNasabah = () => {
 
                     <div className="flex  flex-col md:flex-row md:gap-[50px] gap-[10px] md:mx-[50px] mx-[30px]  ">
 
-                        {loadingLayanan ?
-                            <>
-                                <ShowLoading />
-                            </>
-                            :
-                            <>
-
-                            </>
-                        }
-
                         {showFormServis && (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormServis(false,showLoadinglayanan())}
+                                        onClick={() => setShowFormServis(false)}
                                     >
                                         <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
@@ -247,10 +238,10 @@ const DasboardNasabah = () => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" placeholder="Jenis Barang"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
-                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="date" placeholder="Tanggal" />
+                                    <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>
                         )}
@@ -277,13 +268,30 @@ const DasboardNasabah = () => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
-                                    <select className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]">
-                                        <option disabled selected>Sopir</option>
-                                        <option>Pakai</option>
-                                        <option>Tidak</option>
+                                    <textarea
+                                        name=""
+                                        id=""
+                                        placeholder="waktu"
+                                        className=" border border-gray-300 pl-2 pt-2"
+                                    ></textarea>
+                                    <div className="flex flex-col gap/[10px] mb-[5px]">
+                                        <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
+                                        <div className="flex items-center pt-[10px]">
+                                            <input type="radio" id="sopir_ya" name="sopir" value="Ya" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                            <input type="radio" id="sopir_tidak" name="sopir" value="Tidak" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                        </div>
+                                    </div>
 
-                                    </select>
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            
+                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
+                                            17 Mei 2024/2hari
+                                        </p>
+                                    </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
@@ -317,7 +325,14 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            1 tahun diangsur 6 kali
+                                        </p>
+                                    </div>
+
 
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
@@ -342,4 +357,4 @@ const DasboardNasabah = () => {
         </div>
     )
 }
-export default DasboardNasabah
+export default DasboardNasabah
