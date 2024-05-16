@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { handleLogin } from "../../config/api"
 
 // nilai default
 const initialAuthState = {
@@ -20,19 +21,24 @@ const AuthProvider = ({ children }) => {
     // state
     const [isLoggedin, setIsLoggedin] = useState(false)
 
-    const doLogin = async (username, password) => {
-        
+    const doLogin = async (user,password) => {
+        // memanggil api dengan data email & password
+        console.log("akan melakukan login dengan: ", user,password)
 
-        // Lakukan verifikasi username dan password di sini
-        if (username === "admin" && password === "admin") {
-            setIsLoggedin(true); // Set isLoggedIn menjadi true jika login berhasil
-        } else {
-            setIsLoggedin(false); // Set isLoggedIn menjadi false jika login gagal
-        }
+        // memanggil api menggunakan axios
+        const apiResult = await handleLogin(user,password)
+        console.log(apiResult)
+
+        // jika berhasil maka setIsLoggedin -> true
+        
+        setIsLoggedin(true)
+        
+        // jika gagal tampilkan peringatan  
     }
 
-    const doLogout = () =>{
+    const doLogout = () => {
         setIsLoggedin(false)
+        
     }
 
     // return provider

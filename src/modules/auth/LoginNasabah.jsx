@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "./Auth";
 
-const LoginNasabah = ({login,Oty}) => {
+const LoginNasabah = () => {
+
+  const { doLogin } = useAuth()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
@@ -14,9 +17,10 @@ const LoginNasabah = ({login,Oty}) => {
     setShowPassword(!showPassword);
   };
 
-  const handleClick = () => {
-    login(true);
-    Oty("Nasabah");
+  const handleClick = async () => {
+    doLogin(username,password)
+    // login(true);
+    // Oty("Nasabah");
   }
 
   return (
