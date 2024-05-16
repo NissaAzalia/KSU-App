@@ -4,8 +4,8 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const Login = ({ login,Oty }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("alfian");
+  const [password, setPassword] = useState("12345");
   
 
   const handleClick = () => {
