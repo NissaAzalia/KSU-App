@@ -325,8 +325,11 @@ const DasboardNasabah = () => {
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
                                     <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
-                                    <div className="font-light text-gray-600">
-                                        contoh pengisian form : 1 tahun diangsur 6 kali 
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            1 tahun diangsur 6 kali
+                                        </p>
                                     </div>
 
 
