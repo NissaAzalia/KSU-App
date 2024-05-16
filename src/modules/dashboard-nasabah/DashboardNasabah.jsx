@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
+import { useAuth } from "../auth/Auth"
 
 const DasboardNasabah = ({doLogout}) => {
     const [showFormServis, setShowFormServis] = useState(false);
@@ -109,7 +110,7 @@ const DasboardNasabah = ({doLogout}) => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_wajib.toLocaleString() : 0}
+                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
                                         </>
                                     }
                                 </span>
@@ -252,9 +253,13 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" placeholder="Jenis Barang"></textarea>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="date" placeholder="Tanggal" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] text-gray-400" type="date" placeholder="Tanggal"
+                                     onChange={(e) => {
+                                        e.target.style.color = 'black'; // Mengubah warna teks menjadi hitam
+                                        e.target.classList.remove('text-gray-400'); // Menghapus kelas text-gray-400 agar warna teks menjadi hitam permanen
+                                    }}/>
                                     <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>

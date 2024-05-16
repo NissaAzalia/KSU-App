@@ -97,6 +97,7 @@ const AuthProvider = ({ children }) => {
     const doLogout = () => {
         setIsLoggedin(false)
         
+        
     }
 
     const changeAuthority = (auth) => {
