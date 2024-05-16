@@ -3,7 +3,7 @@ import MainLayout from '../modules/layout/MainLayout'
 import Login from '../modules/auth/Login'
 import DasboardInputSimpanan from '../modules/dashboard/DasboardInputSimpanan '
 import DashboardAdmin from '../modules/dashboard/DashboardAdmin'
-import DashboardNasabah from '../modules/dashboard/DashboardNasabah'
+import DashboardNasabah from '../modules/dashboard-nasabah/DashboardNasabah'
 import { useState } from 'react'
 import SideBar from '../modules/layout/SideBar'
 import InfoDashboard from '../modules/dashboard/InfoDashboard'
@@ -15,52 +15,49 @@ import LoginNasabah from '../modules/auth/LoginNasabah'
 import PinjamUang from '../modules/layout/PinjamUang'
 import InputPinjam from '../modules/dashboard/InputPinjam'
 import { useTransition } from 'react'
+import { useAuth } from '../modules/auth/Auth'
+import { DasboardNasabahProvider } from '../modules/dashboard-nasabah/DashboardNasabahProvider'
 
 const AppRoutes = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [otority,setOtority] = useState(null);
-
-  function handleLogin(val) {
-    setIsLoggedIn(val)
-  }
-
-  function handleOtority(val){
-    setOtority(val);
-  }
-
-  console.log(otority)
+  const {authority, isLoggedin} = useAuth()
 
   return (
     <BrowserRouter>
       <Routes>
         {
-          isLoggedIn !== true ?
-
+          isLoggedin !== true ?
+            // jika belum login
             <Route>
-              <Route path='admin' element={<Login Oty={handleOtority} login={handleLogin} />} />
-              <Route path='login' element={<LoginNasabah Oty={handleOtority} login={handleLogin}/>} />
+              <Route path='admin' element={<Login  />} />
+              <Route path='login' element={<LoginNasabah />} />
               <Route path='*' element={<Navigate to={"/login"} />} />
             </Route>
+
             :
+            // jika sudah login
             <Route>
               {
-                otority === 'Admin' ? 
+                authority === 'Admin' ?
+                  // jika yang login adalah admin
+                  <Route element={<MainLayout />}>
+                    <Route path='daftar-anggota' element={<DashboardAdmin />} />
+                    {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
+                    <Route path='info' element={<InfoDashboard />} />
+                    {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
+                    <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
+                  </Route>
 
-                <Route element={<MainLayout />}>
-                <Route path='daftar-anggota' element={<DashboardAdmin />} />
-                {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
-                <Route path='info' element={<InfoDashboard />} />
-                {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
-                <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
-              </Route>
-
-              :
-              <Route>
-              <Route path='nasabah' element={<DashboardNasabah />} />
-              <Route path='*' element={<Navigate to={"/nasabah"} />} />
-            </Route>
+                  :
+                  // jika yang login bukan admin
+                  <Route>
+                    <Route path='nasabah' element={
+                      <DasboardNasabahProvider>
+                        <DashboardNasabah />
+                      </DasboardNasabahProvider>
+                      } />
+                    <Route path='*' element={<Navigate to={"/nasabah"} />} />
+                  </Route>
               }
             </Route>
 
