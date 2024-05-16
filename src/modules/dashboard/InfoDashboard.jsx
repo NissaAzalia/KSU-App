@@ -1,4 +1,4 @@
-import { faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
@@ -86,7 +86,7 @@ const InfoDashboard = () => {
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px]">
                             <button className="top-1 left-1 text-gray-500 hover:text-gray-700" onClick={handleClose}>
-                                X
+                            <FontAwesomeIcon icon={faXmark} size="lg" />
                             </button>
                         </div>
 
@@ -121,7 +121,7 @@ const InfoDashboard = () => {
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px]">
                             <button className="top-1 left-1 text-gray-500 hover:text-gray-700" onClick={handleClose}>
-                                X
+                            <FontAwesomeIcon icon={faXmark} size="lg" />
                             </button>
                         </div>
 
