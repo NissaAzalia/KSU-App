@@ -11,7 +11,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, loadingSimpanan } = useDashboardNasabah()
+    const { simpanan, loadingSimpanan, loadingLayanan } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -21,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);``
+        setShowFormServis(false); ``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -40,6 +40,16 @@ const DasboardNasabah = () => {
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(true);
     };
+
+    const ShowLoading = () => (
+        <div className="">
+            <p className="size-40 text-[#3d3d3d]">Loading</p>
+        </div>
+    );
+
+    const showLoadinglayanan = () => {
+        <p>Loading...</p>
+    }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
@@ -82,7 +92,7 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            Loading
+                                            <ShowLoading />
                                         </>
                                         :
                                         <>
@@ -103,7 +113,7 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            Loading
+                                            <ShowLoading />
                                         </>
                                         :
                                         <>
@@ -126,7 +136,7 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            Loading
+                                            <ShowLoading />
                                         </>
                                         :
                                         <>
@@ -146,7 +156,7 @@ const DasboardNasabah = () => {
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
-                                            Loading
+                                            <ShowLoading />
                                         </>
                                         :
                                         <>
@@ -180,12 +190,22 @@ const DasboardNasabah = () => {
 
                     <div className="flex  flex-col md:flex-row md:gap-[50px] gap-[10px] md:mx-[50px] mx-[30px]  ">
 
+                        {loadingLayanan ?
+                            <>
+                                <ShowLoading />
+                            </>
+                            :
+                            <>
+
+                            </>
+                        }
+
                         {showFormServis && (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormServis(false)}
+                                        onClick={() => setShowFormServis(false,showLoadinglayanan())}
                                     >
                                         <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>

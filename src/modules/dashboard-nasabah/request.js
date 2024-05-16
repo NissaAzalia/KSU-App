@@ -16,3 +16,8 @@ export const apiFetchSimpanan = async () => {
             return err.response.data
         })
 }
+
+
+export const apiFetchLayanan = async () => {
+    
+}

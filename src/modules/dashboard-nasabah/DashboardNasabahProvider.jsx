@@ -4,7 +4,9 @@ import { apiFetchSimpanan } from "./request"
 const initDashboardNasabah = {
     simpanan: null,
     loadingSimpanan: false,
+    loadingLayanan: false,
     fetchSimpanan: () => {},
+    fetchLayanan: () => {}
 }
 
 const DashboardNasabahContext = createContext(initDashboardNasabah)
@@ -17,6 +19,7 @@ const useDashboardNasabah = () => {
 const DasboardNasabahProvider = ({children}) => {
     const [simpanan, setSimpanan] = useState(null)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
+    const [loadingLayanan, setLoadingLayanan] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -31,12 +34,30 @@ const DasboardNasabahProvider = ({children}) => {
         setLoadingSimpanan(false)
     }
 
+    const fetchLayanan = async () => {
+        if (loadingLayanan == true) return
+
+
+        setLoadingLayanan(true)
+        // call api
+        const apiCall = await apiFetchLayanan()
+        const {data} = apiCall.data
+
+        setLoadingSimpanan(data.simpanan)
+
+        setLoadingLayanan(false)
+    }
+
     useEffect(() => {
         fetchSimpanan()
     }, [])
 
+    useEffect(() => {
+        fetchLayanan()
+    }, [])
+
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, loadingSimpanan}}>
+        <DashboardNasabahContext.Provider value={{simpanan, loadingSimpanan, loadingLayanan}}>
             {children}
         </DashboardNasabahContext.Provider>
     )
