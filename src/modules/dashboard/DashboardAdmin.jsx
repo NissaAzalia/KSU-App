@@ -72,9 +72,9 @@ const DashboardAdmin = () => {
         };
 
         setNasabah([...nasabah, newData]);
+        setShowFormTambah(false);
         setNama('');
         setPassword('');
-        setShowFormTambah(false);
     };
 
     const editSimpanan = () => {

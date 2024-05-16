@@ -1,5 +1,6 @@
 import axios from "axios"
-import { http } from "./http"
+import { http } from "./url";
+// import { http } from "./http"
 
 export const handleLogin = async (user, password) => {
     const apiLogin = await axios
