@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
+import { useAuth } from "../auth/Auth"
 
 
 const DasboardNasabah = () => {
@@ -12,6 +13,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
     const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
+    const { doLogout } = useAuth()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -50,7 +52,7 @@ const DasboardNasabah = () => {
                     <h1 className="  md:pt-[17px] pt-[22px]  font-bold">Teknika Mandiri</h1>
                 </div>
                 <div className="md:pt-[17px] pt-[22px] font-semibold">
-                    <button>Logout</button>
+                    <button onClick={() => doLogout()} >Logout</button>
                 </div>
             </div>
 
