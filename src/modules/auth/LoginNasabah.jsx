@@ -6,11 +6,11 @@ import { useAuth } from "./Auth";
 
 const LoginNasabah = () => {
 
-  const { doLogin } = useAuth()
+  const { doLogin, changeAuthority } = useAuth()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("Rasya");
+  const [password, setPassword] = useState("admin");
 
 
   const handleTogglePassword = () => {
@@ -18,7 +18,8 @@ const LoginNasabah = () => {
   };
 
   const handleClick = async () => {
-    doLogin(username,password)
+    await doLogin(username,password)
+    changeAuthority('nasabah')
     // login(true);
     // Oty("Nasabah");
   }
