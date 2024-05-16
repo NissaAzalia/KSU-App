@@ -1,1 +1,1 @@
-export const http = ("http://apiksu.ndamelweb.com")
+export const http = ("https://apiksu.ndamelweb.com")
