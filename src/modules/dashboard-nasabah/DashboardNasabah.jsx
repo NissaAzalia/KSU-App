@@ -11,7 +11,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, loadingSimpanan } = useDashboardNasabah()
+    const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -21,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);``
+        setShowFormServis(false); ``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -86,7 +86,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_pokok : 0}
+                                            Rp {simpanan ? simpanan.simpanan_pokok.toLocaleString() : 0}
                                         </>
                                     }
 
@@ -107,7 +107,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
+                                            Rp {simpanan ? simpanan.simpanan_wajib.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -130,7 +130,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_sukarela : 0}
+                                            Rp {simpanan ? simpanan.simpanan_sukarela.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -150,7 +150,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_hariraya : 0}
+                                            Rp {simpanan ? simpanan.simpanan_hariraya.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -165,7 +165,17 @@ const DasboardNasabah = () => {
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa hutang dari pinjaman</h2>
-                        <span className="text-white text-xl">Rp. 300,000</span>
+                        <span className="text-white text-xl">
+                            {loadingPinjaman ?
+                                <>
+                                    Loading
+                                </>
+                                :
+                                <>
+                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString()  : 0}
+                                </>
+                            }
+                        </span>
                     </div>
                 </div>
             </div>
@@ -226,11 +236,11 @@ const DasboardNasabah = () => {
                                 <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
 
 
-                                <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                <div className="flex flex-col gap-6">
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" placeholder="Jenis Barang"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Tanggal" />
-                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="date" placeholder="Tanggal" />
+                                    <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>
                         )}
@@ -297,7 +307,7 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" placeholder="waktu"></textarea>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pl-2 pt-2" placeholder="waktu"></textarea>
                                     <div className="font-light text-gray-600">
                                         contoh pengisian form : 1 tahun diangsur 6 kali 
                                     </div>

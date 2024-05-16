@@ -1,10 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchSimpanan } from "./request"
+import { apiFetchPinjaman, apiFetchSimpanan } from "./request"
 
 const initDashboardNasabah = {
     simpanan: null,
+    pinjaman: null,
     loadingSimpanan: false,
+    loadingPinjaman: false,
     fetchSimpanan: () => {},
+    fetchPinjaman: () => {}
 }
 
 const DashboardNasabahContext = createContext(initDashboardNasabah)
@@ -16,7 +19,9 @@ const useDashboardNasabah = () => {
 
 const DasboardNasabahProvider = ({children}) => {
     const [simpanan, setSimpanan] = useState(null)
+    const [pinjaman, setPinjaman] = useState(null)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
+    const [loadingPinjaman, setLoadingPinjaman] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -31,12 +36,33 @@ const DasboardNasabahProvider = ({children}) => {
         setLoadingSimpanan(false)
     }
 
+    const fetchPinjaman = async () => {
+        if (loadingPinjaman == true) return
+
+        setLoadingPinjaman(true)
+        // call api
+        const apiCall = await apiFetchPinjaman()
+        const {data} = apiCall.data
+
+        setPinjaman(data.pinjaman)
+
+        setLoadingPinjaman(false)
+    }
+
     useEffect(() => {
+        // fetchPinjaman()
         fetchSimpanan()
     }, [])
 
+
+    useEffect(() => {
+        fetchPinjaman()
+        // fetchSimpanan()
+    }, [])
+    
+
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, loadingSimpanan}}>
+        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, loadingSimpanan, loadingPinjaman}}>
             {children}
         </DashboardNasabahContext.Provider>
     )
