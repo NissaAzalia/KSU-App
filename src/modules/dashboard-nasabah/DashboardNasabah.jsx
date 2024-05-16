@@ -11,7 +11,7 @@ const DasboardNasabah = () => {
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
 
-    const { simpanan, loadingSimpanan } = useDashboardNasabah()
+    const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -21,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);``
+        setShowFormServis(false); ``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -86,7 +86,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_pokok : 0}
+                                            Rp {simpanan ? simpanan.simpanan_pokok.toLocaleString() : 0}
                                         </>
                                     }
 
@@ -107,7 +107,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
+                                            Rp {simpanan ? simpanan.simpanan_wajib.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -130,7 +130,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_sukarela : 0}
+                                            Rp {simpanan ? simpanan.simpanan_sukarela.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -150,7 +150,7 @@ const DasboardNasabah = () => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_hariraya : 0}
+                                            Rp {simpanan ? simpanan.simpanan_hariraya.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>
@@ -165,7 +165,17 @@ const DasboardNasabah = () => {
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa hutang dari pinjaman</h2>
-                        <span className="text-white text-xl">Rp. 300,000</span>
+                        <span className="text-white text-xl">
+                            {loadingPinjaman ?
+                                <>
+                                    Loading
+                                </>
+                                :
+                                <>
+                                    Rp {pinjaman ? pinjaman.sisa_hutang.toLocaleString()  : 0}
+                                </>
+                            }
+                        </span>
                     </div>
                 </div>
             </div>
