@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "./Auth";
 
-const Login = ({ login,Oty }) => {
+const Login = () => {
+  const { doLoginAdmin, changeAuthority } = useAuth()
+
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("alfian");
-  const [password, setPassword] = useState("12345");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   
 
-  const handleClick = () => {
-    login(true);
-    Oty('Admin');
+  const handleClick = async () => {
+     await doLoginAdmin (username, password);
+     changeAuthority('Admin')
+
+    
   };
 
   const handleTogglePassword = () => {
