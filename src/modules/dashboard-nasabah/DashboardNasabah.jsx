@@ -274,7 +274,7 @@ const DasboardNasabah = () => {
                                         className="border border-gray-300 pl-2 pt-2"
                                     ></textarea>
                                     <p className="font-thin text-gray-600 mt-0">
-                                        <span className="text-red-700 text-2xl">*</span>contoh pengisian form : Tanggal peminjaman/durasi peminjaman mobil <br />
+                                        <span className="text-red-700 text-2xl">*</span>Tanggal peminjaman/durasi peminjaman mobil <br />
                                         17 Mei 2024/2hari
                                     </p>
 
