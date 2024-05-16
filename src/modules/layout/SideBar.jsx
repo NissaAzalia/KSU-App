@@ -2,8 +2,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup, faArrowLeft, faBars, faXmark} from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
+import { useAuth } from "../auth/Auth";
 
 const SideBar = () => {
+    const { doLogout } = useAuth()
     const [bar, setBar] = useState(false);
 
     const closeBar = () => {
@@ -42,7 +44,10 @@ const SideBar = () => {
                             </NavLink>
                         </div>
                         <NavLink to="/">
-                            <div className="animate flex hover:bg-[#2C6975] hover:text-white gap-[10px] h-[50px] pt-[10px] px-[100px]">
+                            <div
+                             className="animate flex hover:bg-[#2C6975] hover:text-white gap-[10px] h-[50px] pt-[10px] px-[100px]"
+                             onClick={ () => doLogout() }
+                             >
                                 <FontAwesomeIcon className="mt-[5px]" icon={faArrowLeft} />
                                 <h2>Logout</h2>
                             </div>

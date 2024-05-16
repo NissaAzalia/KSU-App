@@ -30,5 +30,5 @@ export const apiFetchPinjaman = async () => {
         })
         .catch(err => {
             return err.response.data
-        })
+})
 }

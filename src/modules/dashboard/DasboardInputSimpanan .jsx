@@ -1,5 +1,5 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react"
-import DashboardAdmin from './DashboardAdmin';
 
 const DasboardInputSimpanan = ({onTambahSimpanan}) => {
     const [simpanan, setSimpanan] = useState([]);

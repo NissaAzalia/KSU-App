@@ -1,6 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react"
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
+import { createContext, useContext, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
 import { saveToken } from "../../helpers/LocalStorage"
+import Swal from "sweetalert2"
 
 // nilai default
 const initialAuthState = {
@@ -42,13 +45,27 @@ const AuthProvider = ({ children }) => {
 
         if (status !=  'success') {
             // jika gagal tampilkan peringatan  
-            alert(`Login gagal: ${message}`)
-            return
+            // alert(`Login gagal: ${message}`)
+            Swal.fire({
+                title:`Login Gagal \n ${message}`,
+                icon:'error',
+                showConfirmButton:false,
+                timer:2500
+            })
+            return;
         }
 
         saveToken(data.token)
         // jika berhasil maka setIsLoggedin -> true
-        setIsLoggedin(true)
+        Swal.fire({
+            title:`Login Berhasil \n ${message}`,
+            icon:'success',
+            showConfirmButton:false,
+            timer:2000
+        })
+        setTimeout(() => {
+            setIsLoggedin(true)
+        },2500)
 
     }
 
@@ -79,6 +96,7 @@ const AuthProvider = ({ children }) => {
 
     const doLogout = () => {
         setIsLoggedin(false)
+        
         
     }
 

@@ -36,7 +36,7 @@ export const setTokens = (token) => {
     localStorage.setItem('token', token)
 }
 
-export const getToken = (token) => {
+export const getToken = () => {
     return localStorage.getItem('token') ?? null;
 }
 
