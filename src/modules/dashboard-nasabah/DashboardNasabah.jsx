@@ -21,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);
+        setShowFormServis(false);``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
