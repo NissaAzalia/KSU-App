@@ -4,7 +4,7 @@ import { http } from "./url";
 
 export const handleLogin = async (user, password) => {
     const apiLogin = await axios
-      .post(http + "auth/login", {
+      .post(http + "/auth/login", {
         user: user,
         password: password,
       })
