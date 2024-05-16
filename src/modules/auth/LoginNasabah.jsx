@@ -2,21 +2,26 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { useAuth } from "./Auth";
 
-const LoginNasabah = ({login,Oty}) => {
+const LoginNasabah = () => {
+
+  const { doLogin, changeAuthority } = useAuth()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("Rasya");
+  const [password, setPassword] = useState("admin");
 
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleClick = () => {
-    login(true);
-    Oty("Nasabah");
+  const handleClick = async () => {
+    await doLogin(username,password)
+    changeAuthority('nasabah')
+    // login(true);
+    // Oty("Nasabah");
   }
 
   return (
