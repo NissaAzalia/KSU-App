@@ -324,7 +324,7 @@ const DasboardNasabah = () => {
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pl-2 pt-2" placeholder="waktu"></textarea>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
                                     <div className="font-light text-gray-600">
                                         contoh pengisian form : 1 tahun diangsur 6 kali 
                                     </div>
