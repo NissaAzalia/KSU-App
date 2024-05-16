@@ -236,8 +236,8 @@ const DasboardNasabah = () => {
                                 <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
 
 
-                                <div className="flex flex-col gap-6">
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" placeholder="Jenis Barang"></textarea>
+                                <div className="flex flex-col gap-6 ">
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" placeholder="Jenis Barang"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="date" placeholder="Tanggal" />
                                     <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
