@@ -21,7 +21,7 @@ const DasboardNasabah = () => {
     };
 
     const openBeliBarangForm = () => {
-        setShowFormServis(false);``
+        setShowFormServis(false); ``
         setShowFormBeliBarang(true);
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(false);
@@ -257,13 +257,30 @@ const DasboardNasabah = () => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="waktu" />
-                                    <select className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]">
-                                        <option disabled selected>Sopir</option>
-                                        <option>Pakai</option>
-                                        <option>Tidak</option>
+                                    <textarea
+                                        name=""
+                                        id=""
+                                        placeholder="waktu"
+                                        className=" border border-gray-300 pl-2 pt-2"
+                                    ></textarea>
+                                    <div className="flex flex-col gap/[10px] mb-[5px]">
+                                        <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
+                                        <div className="flex items-center pt-[10px]">
+                                            <input type="radio" id="sopir_ya" name="sopir" value="Ya" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                            <input type="radio" id="sopir_tidak" name="sopir" value="Tidak" className="mr/[10px]" required />
+                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                        </div>
+                                    </div>
 
-                                    </select>
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="text-gray-600">contoh pengisian form :</p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            
+                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
+                                            17 Mei 2024/2hari
+                                        </p>
+                                    </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
                             </div>
