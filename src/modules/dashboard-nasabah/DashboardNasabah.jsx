@@ -209,20 +209,19 @@ const DasboardNasabah = ({doLogout}) => {
 
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Kerusakan" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="waktu" ></textarea>
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            jenis barang : mesin cuci
+                                            Jenis barang : mesin cuci
+                                        </p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            Kerusakan : mesin cuci tidak berputar 
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Alamat : Kab, Kec, Ds, Dk, RT/RW
                                         </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Waktu : 
-                                        </p>
-
                                     </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
@@ -283,12 +282,7 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <textarea
-                                        name=""
-                                        id=""
-                                        placeholder="tanggal"
-                                        className=" border border-gray-300 pl-2 pt-2"
-                                    ></textarea>
+                                <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
@@ -337,13 +331,13 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Nominal" />
 
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="Tenor"></textarea>
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            1 tahun diangsur 6 kali
+                                            Diangsur 6 kali
                                         </p>
                                     </div>
 
