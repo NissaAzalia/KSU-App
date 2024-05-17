@@ -253,13 +253,9 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang"></textarea>
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] text-gray-400" type="date" placeholder="Tanggal"
-                                     onChange={(e) => {
-                                        e.target.style.color = 'black'; // Mengubah warna teks menjadi hitam
-                                        e.target.classList.remove('text-gray-400'); // Menghapus kelas text-gray-400 agar warna teks menjadi hitam permanen
-                                    }}/>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang & Spesifikasi"></textarea>
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
                                     <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>
@@ -290,7 +286,7 @@ const DasboardNasabah = ({doLogout}) => {
                                     <textarea
                                         name=""
                                         id=""
-                                        placeholder="waktu"
+                                        placeholder="tanggal"
                                         className=" border border-gray-300 pl-2 pt-2"
                                     ></textarea>
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
@@ -307,8 +303,7 @@ const DasboardNasabah = ({doLogout}) => {
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
 
-                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
-                                            17 Mei 2024/2hari
+                                          Tanggal :  2 - 3 Mei 
                                         </p>
                                     </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
