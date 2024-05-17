@@ -359,7 +359,7 @@ const DasboardNasabah = ({ doLogout }) => {
                                             Nominal : Rp100.000
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            Diangsur 6 kali
+                                           Tenor : Diangsur 6 kali
                                         </p>
                                     </div>
 
