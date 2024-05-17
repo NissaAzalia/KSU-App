@@ -290,7 +290,7 @@ const DasboardNasabah = ({doLogout}) => {
                                     <textarea
                                         name=""
                                         id=""
-                                        placeholder="waktu"
+                                        placeholder="tanggal"
                                         className=" border border-gray-300 pl-2 pt-2"
                                     ></textarea>
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
@@ -307,8 +307,7 @@ const DasboardNasabah = ({doLogout}) => {
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
 
-                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
-                                            17 Mei 2024/2hari
+                                          Tanggal :  2 - 3 Mei 
                                         </p>
                                     </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
