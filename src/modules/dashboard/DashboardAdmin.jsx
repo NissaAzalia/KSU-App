@@ -131,18 +131,6 @@ const DashboardAdmin = () => {
             <div className="mt-[50px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
 
-                <div className="flex pt-[10px] mb-[25px]">
-                    <input
-                        className="rounded-l w-[600px] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
-                        type="text"
-                        placeholder="Cari nama nasabah..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <div className="ml-[-30px] mt-[8px]">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </div>
-                </div>
 
                 {showFormSimpanan && (
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
@@ -233,6 +221,19 @@ const DashboardAdmin = () => {
                 >
                     Tambah Anggota
                 </button>
+
+                <div className="flex pt-[10px] mb-[25px]">
+                    <input
+                        className="rounded-l w-[600px] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
+                        type="text"
+                        placeholder="Cari nama nasabah..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <div className="ml-[-30px] mt-[8px]">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </div>
+                </div>
 
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white">

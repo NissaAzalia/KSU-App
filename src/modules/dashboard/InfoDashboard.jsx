@@ -1,4 +1,4 @@
-import { faPenToSquare, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrash, faXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 
@@ -15,6 +15,7 @@ const InfoDashboard = () => {
     const [nama, setNama] = useState('');
     const [nominal, setNominal] = useState('');
     const [sisaHutang, setSisaHutang] = useState('');
+    const [searchQuery, setSearchQuery] = useState('');
 
     const tambahPinjaman = () => {
         const newData = {
@@ -69,6 +70,10 @@ const InfoDashboard = () => {
         setCurrentId(id);
         setShowFormPinjaman(true);
     };
+
+    const filteredPinjaman = pinjamanAnggota.filter(pinjaman =>
+        pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    );
 
     return (
         <div className="bg-[#F4F4F4] w-screen h-[100vh] p-[50px]">
@@ -149,11 +154,25 @@ const InfoDashboard = () => {
 
                 <div className="mb-[30px]">
                     <button
-                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[20px]"
+                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[5px]"
                         onClick={() => setShowForm(true)}
                     >
                         Input Pinjaman
                     </button>
+                    
+                </div>
+                
+                <div className="flex pt-[10px] mb-[25px]">
+                    <input
+                        className="rounded-l w-[600px] h-[40px] border-solid border-[1px] shadow-lg pl-[30px] mb-[15px] "
+                        type="text"
+                        placeholder="Cari nama nasabah..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <div className="ml-[-30px] mt-[8px]">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </div>
                 </div>
 
                 <div className="overflow-x-auto">
@@ -168,7 +187,7 @@ const InfoDashboard = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {pinjamanAnggota.map((pinjaman, index) => (
+                            {filteredPinjaman.map((pinjaman, index) => (
                                 <tr key={index}>
                                     <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.nama}</td>
                                     <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.nominal}</td>
