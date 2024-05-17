@@ -124,7 +124,7 @@ const DashboardAdmin = () => {
             <div className="rounded-s-xl mb-[50px] rounded-e-xl h-[80px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] py-[5px] mt-[25px]">
                     <h2 className="text-white font-normal text-2xl pt-[5px]">Halo,</h2>
-                    <p className="text-white font-thin">Selamat Datang Di Koperasi Teknika Mandiri</p>
+                    <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
             </div>
 

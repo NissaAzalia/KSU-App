@@ -48,9 +48,9 @@ const DasboardNasabah = ({doLogout}) => {
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
 
             <div className=" flex justify-between md:w-[95%] w-[85%]  ">
-                <div className="logo flex md:ml-[30px] ml-[30px] justify-between md:w-[200px] w-[170px]       ">
+                <div className="logo flex md:ml-[30px] ml-[30px]  md:w-[500px] w-[170px]       ">
                     <img src="src/assets/logoKSU.png" alt="" className=" w-[40px] md:w-[45px] md:pt-[10px] pt-[15px]  md:ml-[20px]   " />
-                    <h1 className="  md:pt-[17px] pt-[22px]  font-bold">Teknika Mandiri</h1>
+                    <h1 className="  md:pt-[17px] pt-[22px] ml-[20px]  font-bold">Koperasi Konsumen "KSU TEKNIKA MANDIRI"</h1>
                 </div>
                 <div className="md:pt-[17px] pt-[22px] font-semibold">
                     <button onClick={doLogout}>Logout</button>
@@ -63,7 +63,7 @@ const DasboardNasabah = ({doLogout}) => {
 
                     <div className="md:mx-[3%] mx-[6%] py-[13px] mt-[25px] md:py-[10px]">
                         <h2 className="text-white font-normal text-xl md:text-2xl">Halo,</h2>
-                        <p className="text-white font-thin text-sm md:text-base">Selamat Datang Di Koperasi Teknika Mandiri</p>
+                        <p className="text-white font-thin text-sm md:text-base">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                     </div>
                 </div>
 
@@ -167,7 +167,7 @@ const DasboardNasabah = ({doLogout}) => {
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[10%] mb-[25px] md:ml-[50px] ml-[30px] ">Informasi</h2>
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
-                        <h2 className="text-white text-xl ">Sisa hutang dari pinjaman</h2>
+                        <h2 className="text-white text-xl ">Sisa Pokok Hutang</h2>
                         <span className="text-white text-xl">
                             {loadingPinjaman ?
                                 <>
@@ -209,20 +209,19 @@ const DasboardNasabah = ({doLogout}) => {
 
                                 <div className="flex flex-col gap-6 ">
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Kerusakan" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="waktu" ></textarea>
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            jenis barang : mesin cuci
+                                            Jenis barang : mesin cuci
+                                        </p>
+                                        <p className="font-light text-gray-600 text mb-1">
+                                            Kerusakan : mesin cuci tidak berputar 
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Alamat : Kab, Kec, Ds, Dk, RT/RW
                                         </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Waktu : 
-                                        </p>
-
                                     </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
@@ -287,12 +286,7 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <textarea
-                                        name=""
-                                        id=""
-                                        placeholder="waktu"
-                                        className=" border border-gray-300 pl-2 pt-2"
-                                    ></textarea>
+                                <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
@@ -342,13 +336,13 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Nominal" />
 
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
+                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="Tenor"></textarea>
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            1 tahun diangsur 6 kali
+                                            Diangsur 6 kali
                                         </p>
                                     </div>
 
