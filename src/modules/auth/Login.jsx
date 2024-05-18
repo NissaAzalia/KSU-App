@@ -14,8 +14,6 @@ const Login = () => {
   const handleClick = async () => {
      await doLoginAdmin (username, password);
      changeAuthority('Admin')
-
-    
   };
 
   const handleTogglePassword = () => {

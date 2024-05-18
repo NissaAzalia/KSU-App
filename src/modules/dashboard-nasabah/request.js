@@ -34,18 +34,23 @@ export const apiFetchPinjaman = async () => {
         })
 }
 
-export const handleServis = async (jenisBarang, alamat, tanggal) => {
-    const apiServis = await axios
-        .post(http + "/pinjam-jasa", {
+export const apiFetchServis = async (jenisBarang, alamat, jenisKerusakan) => {
+    const token = getToken();
+    try {
+        const response = await axios.post(http + "/pinjam-jasa", {
             jenisBarang: jenisBarang,
             alamat: alamat,
-            tanggal: tanggal,
-        })
-        .then((response) => {
-            return response;
-        })
-        .catch((error) => {
-            return error.response;
+            jenisKerusakan: jenisKerusakan,
+        }, {
+            headers: {
+                'Authorization ': ' Bearer ' + token
+            }
         });
-    return apiServis;
-};
+        return response;
+    } catch (error) {
+        return error.response.data;
+    }
+}
+       
+   
+

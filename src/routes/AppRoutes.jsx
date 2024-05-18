@@ -3,6 +3,7 @@ import MainLayout from '../modules/layout/MainLayout'
 import Login from '../modules/auth/Login'
 import DashboardAdmin from '../modules/dashboard/DashboardAdmin'
 import DashboardNasabah from '../modules/dashboard-nasabah/DashboardNasabah'
+import DaftarSimpanan from '../modules/dashboard/DaftarSimpanan'
 import InfoDashboard from '../modules/dashboard/InfoDashboard'
 import LoginNasabah from '../modules/auth/LoginNasabah'
 import { useAuth } from '../modules/auth/Auth'
@@ -38,6 +39,7 @@ const AppRoutes = () => {
                   <Route element={<MainLayout />}>
                     <Route path='daftar-anggota' element={<DashboardAdmin />} />
                     {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
+                    <Route path='/daftar-simpanan' element={<DaftarSimpanan />} />
                     <Route path='info' element={<InfoDashboard />} />
                     {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
                     <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />

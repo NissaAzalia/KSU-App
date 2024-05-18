@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
 import { saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
-
+let timerInterval;
 // nilai default
 const initialAuthState = {
     isLoggedin: false,
@@ -58,11 +58,26 @@ const AuthProvider = ({ children }) => {
         saveToken(data.token)
         // jika berhasil maka setIsLoggedin -> true
         Swal.fire({
-            title:`Login Berhasil \n ${message}`,
-            icon:'success',
-            showConfirmButton:false,
-            timer:2000
-        })
+            title: "Loading...",
+            html: "<b></b>.",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
         setTimeout(() => {
             setIsLoggedin(true)
         },2500)

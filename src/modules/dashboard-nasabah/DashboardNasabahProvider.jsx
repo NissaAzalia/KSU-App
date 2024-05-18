@@ -3,9 +3,10 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchPinjaman, apiFetchSimpanan, handleServis } from "./request"
+import { apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
 import { saveToken } from "../../helpers/LocalStorage"
+let timerInterval
 
 const initDashboardNasabah = {
     simpanan: null,
@@ -57,27 +58,20 @@ const DasboardNasabahProvider = ({children}) => {
         const {data} = apiCall.data
 
         setPinjaman(data.pinjaman)
-
+        console.log(data.pinjaman)
         setLoadingPinjaman(false)
     }
 
-    const doServis = async (jenisBarang, alamat, tanggal) => {
-        if (loadingServis) return
+    const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
+        if (loadingServis == true) return
 
         setLoadingServis(true)
-
-        // memanggil api dengan data email & password
-        // console.log("akan melakukan login dengan: ", user,password)
-
-        // memanggil api menggunakan axios
-        const apiResult = await handleServis(jenisBarang, alamat, tanggal)
+        const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
         setLoadingServis(false)
-        const { status, data, message } = apiResult.data
-        console.log(apiResult.data)
+        const { data, status, message } = apiResult.data
+        console.log(apiResult)
 
         if (status !=  'success') {
-            // jika gagal tampilkan peringatan  
-            // alert(`Login gagal: ${message}`)
             Swal.fire({
                 title:`Gagal mengirim servis \n ${message}`,
                 icon:'error',
@@ -86,20 +80,42 @@ const DasboardNasabahProvider = ({children}) => {
             })
             return;
         }
-
         saveToken(data.token)
-        // jika berhasil maka setIsLoggedin -> true
         Swal.fire({
-            title:`Login Berhasil \n ${message}`,
-            icon:'success',
-            showConfirmButton:false,
-            timer:2000
-        })
+            title: "Loading...",
+            html: "<b></b>.",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
         setTimeout(() => {
-            setServis(true)
+            Swal.fire({
+                title: "Pengajuan",
+                text: "Berhasil dikirim",
+                icon: "success"
+              });
+            doServis(true)
         },2500)
 
+
+
     }
+
+    
 
     useEffect(() => {
         fetchPinjaman()

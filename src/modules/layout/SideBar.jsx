@@ -25,27 +25,31 @@ const SideBar = () => {
 
             {bar && (
                 <div className="flex flex-col text-center bg-[#fafafa] min-w-[274px] h-screen pb-25px]">
-                    <div className="flex pl-[15px] pt-[10px] pr-[15px]">
+                    <div className="flex justify-between pl-[15px] pt-[10px] pr-[15px]">
                         <div className="flex">
-                            <img src="src/assets/logoKSU.png" alt="" className="w-[50px]" />
-                            <h1 className="pl-[15px] pt-[13px] font-bold">Teknika Mandiri</h1>
+                            <img src="src/assets/logoKSU.png" alt="" className="w-[50px] h-[50px]" />
+                            <h1 className="pl-[15px] pt-[13px] font-bold ">Koperasi Konsumen <br /> KSU TEKNIKA MANDIRI</h1>
                         </div>
                         <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="xl" /></button>
                     </div>
                     <div className="flex flex-col justify-between text-center bg-[#fafafa] min-w-[274px] h-screen pb-[50px]">
                         <div className="mt-[40px]">
-                            <NavLink to="/daftar-anggota" className="animate w-[274px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px]">
+                            <NavLink to="/daftar-anggota" className="animate w-[400px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px]">
                                 <FontAwesomeIcon icon={faUserGroup} className="pt-[5px]" />
                                 Daftar Anggota
                             </NavLink>
-                            <NavLink to="/info" className="animate w-[274px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px]">
+                            <NavLink to="/daftar-simpanan" className="animate w-[400px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px]">
+                                <FontAwesomeIcon icon={faUserGroup} className="pt-[5px]" />
+                                Daftar Simpanan
+                            </NavLink>
+                            <NavLink to="/info" className="animate w-[400px] flex hover:bg-[#2C6975] text-[#626262] hover:text-white gap-[10px] h-[50px] pt-[10px] pl-[30px]">
                                 <FontAwesomeIcon icon={faUserGroup} className="pt-[5px]" />
                                 Info Pinjaman
                             </NavLink>
                         </div>
                         <NavLink to="/">
                             <div
-                             className="animate flex hover:bg-[#2C6975] hover:text-white gap-[10px] h-[50px] pt-[10px] px-[100px]"
+                             className="animate flex hover:bg-[#2C6975] hover:text-white gap-[10px] h-[50px] pt-[10px] px-[130px]"
                              onClick={ () => doLogout() }
                              >
                                 <FontAwesomeIcon className="mt-[5px]" icon={faArrowLeft} />
