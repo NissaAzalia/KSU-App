@@ -58,6 +58,7 @@ const DashboardAdmin = () => {
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
+
     const tambahNasabah = () => {
         const newData = {
             id: nasabah.length + 1,
@@ -252,8 +253,8 @@ const DashboardAdmin = () => {
                                     <td className="border px-4 py-2">{nasabah.nama}</td>
                                     <td className="border px-4 py-2">{nasabah.simpananPokok}</td>
                                     <td className="border px-4 py-2">{nasabah.simpananWajib}</td>
-                                    <td className="border px-4 py-2">{nasabah.simpananSukarela}</td>
-                                    <td className="border px-4 py-2">{nasabah.simpananHariRaya}</td>
+                                    <td className="border px-4 py-2">{nasabah.simpananSukarela}<button   className='bg-[#73ffa4] pr-[10px] pl-[10px] rounded-full mr-[5px] ml-[5px]'>+</button ><button  className='bg-[#ff6c6c] pr-[10px] pl-[10px] rounded-full mr-[10px]'>-</button></td>
+                                    <td className="border px-4 py-2">{nasabah.simpananHariRaya}<button  className='bg-[#73ffa4] pr-[10px] pl-[10px] rounded-full mr-[5px] ml-[5px]'>+</button ><button   className='bg-[#ff6c6c] pr-[10px] pl-[10px] rounded-full mr-[10px]'>-</button></td>
                                     <td className="border px-4 py-2 flex justify-around">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"

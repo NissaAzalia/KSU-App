@@ -6,13 +6,16 @@ import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 import { useAuth } from "../auth/Auth"
 
-const DasboardNasabah = ({doLogout}) => {
+
+const DasboardNasabah = ({ doLogout }) => {
     const [showFormServis, setShowFormServis] = useState(false);
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
-
-     const { simpanan, pinjaman, loadingSimpanan, loadingPinjaman } = useDashboardNasabah()
+    const [jenisBarang,setJenisBarang] = useState("");
+    const [alamat, setAlamat] = useState("");
+    const [tanggal, setTanggal] = useState("")
+    const { simpanan, pinjaman, servis, setServis, doServis, loadingSimpanan, loadingPinjaman, loadingServis } = useDashboardNasabah()
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -35,7 +38,7 @@ const DasboardNasabah = ({doLogout}) => {
         setShowFormPinjamUang(false);
     };
 
-    
+
 
     const openPinjamUangForm = () => {
         setShowFormServis(false);
@@ -43,6 +46,11 @@ const DasboardNasabah = ({doLogout}) => {
         setShowFormPinjamMobil(false);
         setShowFormPinjamUang(true);
     };
+
+
+    const handleClickServis = () => {
+        doServis(jenisBarang, alamat, tanggal)
+    }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
@@ -194,7 +202,7 @@ const DasboardNasabah = ({doLogout}) => {
                     <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
 
                         {showFormServis ? (
-                          <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
@@ -208,23 +216,28 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                                 <div className="flex flex-col gap-6 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="waktu" ></textarea>
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            jenis barang : mesin cuci
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Alamat : Kab, Kec, Ds, Dk, RT/RW
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Waktu : 
+                                    <input value = {servis} onChange={(e) => setShowFormServis (e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" type="text" placeholder="Jenis Barang" />
+                                    <input value = {servis} onChange={(e) => setShowFormServis (e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" type="text" placeholder="Alamat" />
+                                    <input value = {servis} onChange={(e) => setShowFormServis (e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px]" type="date" placeholder="waktu" />
+                                    <div className="pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="font-thin text-gray-600 mt-0">
+                                            <span className="text-red-700 text-2xl">*</span>contoh pengisian form :   <br />
+                                            jenis barang : mesin cuci,  Alamat : Kab, Kec, Ds, Dk, RT/RW, pilih tanggal
                                         </p>
 
                                     </div>
-                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                    <button onClick={handleClickServis} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">
+                                    {loadingServis ?
+                                        <>
+                                            Loading
+                                        </>
+                                        :
+                                        <>
+                                            Kirim
+                                        </>
+                                    }
+                                       
+                                        </button>
                                 </div>
                             </div>
                         ) : null}
@@ -239,7 +252,7 @@ const DasboardNasabah = ({doLogout}) => {
 
 
                         {showFormBeliBarang ? (
-                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -256,10 +269,10 @@ const DasboardNasabah = ({doLogout}) => {
                                     <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] text-gray-400" type="date" placeholder="Tanggal"
-                                     onChange={(e) => {
-                                        e.target.style.color = 'black'; // Mengubah warna teks menjadi hitam
-                                        e.target.classList.remove('text-gray-400'); // Menghapus kelas text-gray-400 agar warna teks menjadi hitam permanen
-                                    }}/>
+                                        onChange={(e) => {
+                                            e.target.style.color = 'black'; // Mengubah warna teks menjadi hitam
+                                            e.target.classList.remove('text-gray-400'); // Menghapus kelas text-gray-400 agar warna teks menjadi hitam permanen
+                                        }} />
                                     <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
                                 </div>
                             </div>
@@ -272,8 +285,8 @@ const DasboardNasabah = ({doLogout}) => {
                             </div>
                         </div>
 
-                        {showFormPinjamMobil ?  (
-                          <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                        {showFormPinjamMobil ? (
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -293,7 +306,7 @@ const DasboardNasabah = ({doLogout}) => {
                                         placeholder="waktu"
                                         className=" border border-gray-300 pl-2 pt-2"
                                     ></textarea>
-                                    <div className="flex flex-col gap/[10px] mb-[5px]">
+                                    <div className="flex flex-col gap-[10px] mb-[2px]">
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
                                             <input type="radio" id="sopir_ya" name="sopir" value="Ya" className="mr/[10px]" required />
@@ -303,13 +316,13 @@ const DasboardNasabah = ({doLogout}) => {
                                         </div>
                                     </div>
 
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1">
-
-                                            Tanggal peminjaman/durasi peminjaman mobil<br></br>
+                                    <div className=" pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="font-thin text-gray-600 mt-0">
+                                            <span className="text-red-700 text-2xl">*</span>contoh pengisian form : Tanggal peminjaman/durasi peminjaman mobil <br />
                                             17 Mei 2024/2hari
                                         </p>
+
+
                                     </div>
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
                                 </div>
@@ -327,7 +340,7 @@ const DasboardNasabah = ({doLogout}) => {
                         </div>
 
 
-                        {showFormPinjamUang ?  (
+                        {showFormPinjamUang ? (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
@@ -345,12 +358,16 @@ const DasboardNasabah = ({doLogout}) => {
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="nominal" />
 
                                     <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="waktu"></textarea>
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            1 tahun diangsur 6 kali
+                                    <div className=" pl-[10px] pt-[10px] pb-[10px] ">
+                                        <p className="font-thin text-gray-600 mt-0">
+                                            <span className="text-red-700 text-2xl">*</span>contoh pengisian form : 1 tahun diangsur 6 kali
                                         </p>
                                     </div>
+
+
+                                    {/* <div className="font-light text-gray-600">
+                                        contoh pengisian form : 1 tahun diangsur 6 kali
+                                    </div> */}
 
 
                                     <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
