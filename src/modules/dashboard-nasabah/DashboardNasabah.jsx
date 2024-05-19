@@ -136,7 +136,7 @@ const DasboardNasabah = ({ doLogout }) => {
                                         </>
                                         :
                                         <>
-                                            Rp {simpanan ? simpanan.simpanan_wajib : 0}
+                                            Rp {simpanan ? simpanan.simpanan_wajib.toLocaleString() : 0}
                                         </>
                                     }
                                 </span>

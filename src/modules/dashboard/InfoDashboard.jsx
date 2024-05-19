@@ -242,8 +242,8 @@ const InfoDashboard = () => {
                             {currentItems.map((pinjaman, index) => (
                                 <tr key={pinjaman.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.nominal}</td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.sisaHutang}</td>
+                                    <td className="border text-center px-4 py-2">{pinjaman.nominal.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">{pinjaman.sisaHutang.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">   {pinjaman.sisaHutang === 0 ? (
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
                                             Lunas

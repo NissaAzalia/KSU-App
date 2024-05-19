@@ -358,12 +358,12 @@ const DaftarSimpanan = () => {
                             {currentItems.map((nasabah, index) => (
                                 <tr key={nasabah.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{nasabah.nama}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpananPokok}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpananWajib}</td>
-                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananSukarela}
+                                    <td className="border text-center px-4 py-2">{nasabah.simpananPokok.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">{nasabah.simpananWajib.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananSukarela.toLocaleString()}
                                         <button onClick={() => handleKurangClickSkr(nasabah.id)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
-                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananHariRaya}
+                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananHariRaya.toLocaleString()}
                                         <button onClick={() => handleKurangClickHr(nasabah.id)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
