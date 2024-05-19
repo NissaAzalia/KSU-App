@@ -418,7 +418,7 @@ const DaftarSimpanan = () => {
                 <div className="max-h-96 overflow-y-auto overflow-x-auto">
                     <table className="min-w-full bg-white">
                         <thead>
-                            <tr className='fixed'>
+                            <tr>
                                 <th className="w-20 px-4 py-2">Nama</th>
                                 <th className="w-20 px-4 py-2">Simpanan Pokok</th>
                                 <th className="w-20 px-4 py-2">Simpanan Wajib</th>
