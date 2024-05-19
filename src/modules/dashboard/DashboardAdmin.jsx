@@ -32,7 +32,7 @@ const DashboardAdmin = () => {
     const [searchQuery, setSearchQuery] = useState('');  // State untuk pencarian
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
-    
+
 
     // Menggabungkan data users dan nomor
     const initialNasabah = users.map(user => {
@@ -51,7 +51,6 @@ const DashboardAdmin = () => {
     const [nama, setNama] = useState('');
     const [password, setPassword] = useState('');
     const [nomorHp, setnomorHp] = useState('');
-
 
     const tambahNasabah = () => {
         const newData = {
@@ -125,10 +124,10 @@ const DashboardAdmin = () => {
         </li>
     ));
 
-    
+
 
     return (
-        <div className="flex flex-col justify-between bg-[#F4F4F4] w-[100%] h-screen p-[50px]">
+        <div className="flex flex-col bg-[#F4F4F4] w-[100%] h-screen pt-[80px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] py-[20px]">
                     <h2 className="text-white font-normal text-2xl">Halo,</h2>
@@ -140,89 +139,98 @@ const DashboardAdmin = () => {
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
 
                 {showNomorHp && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px]">
-                            <button
-                                className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={handleClose}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleClose}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                            <p>Nomor Hp</p>
-                            <input
-                                type="number" placeholder="Masukkan Nomor Hp"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                value={nomorHp}
-                                onChange={(e) => setnomorHp(e.target.value)}
-                            />
-                            <button onClick={editSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
-                                Kirim
-                            </button>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <p>Nomor Hp</p>
+                                <input
+                                    type="number" placeholder="Masukkan Nomor Hp"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={nomorHp}
+                                    onChange={(e) => setnomorHp(e.target.value)}
+                                />
+                                <button onClick={editSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
 
                 {showFormTambah && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px]">
-                            <button
-                                className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={handleClose}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
-
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota</h1>
-                        <div className="flex flex-col gap-2">
-                            <div className="flex flex-col gap-2">
-                                <input
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                    type="text" placeholder="Nama"
-                                    value={nama}
-                                    onChange={(e) => setNama(e.target.value)}
-                                />
-                                <input
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                    type="password" placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className=" absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleClose}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
                             </div>
-                            <button onClick={tambahNasabah} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
-                                Kirim
-                            </button>
+
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota</h1>
+                            <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-2">
+                                    <input
+                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        type="text" placeholder="Nama"
+                                        value={nama}
+                                        onChange={(e) => setNama(e.target.value)}
+                                    />
+                                    <input
+                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        type="password" placeholder="Password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+                                <button onClick={tambahNasabah} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
+                                    Kirim
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
 
-                <button
-                    className="mb-[20px] rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px]"
-                    onClick={() => setShowFormTambah(true)}
-                >
-                    Tambah Anggota
-                </button>
 
-                <div className="flex pt-[10px] mb-[25px]">
+
+                <div className="flex pt-[10px] gap-3">
+                    <div className="mb-[30px]">
+                        <button
+                            className="mb-[20px] rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px]"
+                            onClick={() => setShowFormTambah(true)}
+                        >
+                            Tambah Anggota
+                        </button>
+                    </div>
                     <input
-                      className="rounded-full w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
+                        className="rounded-full w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
                         type="text"
                         placeholder="Cari nama nasabah..."
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
                     <div className="ml-[-30px] mt-[8px]">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </div>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                        </div>
+
                 </div>
 
-                <div className="overflow-x-auto">
-                    <table className="min-w-full  bg-white" cellPadding={10}>
+
+                <div className="max-h-60 overflow-y-auto overflow-x-auto shadow-lg">
+                    <table className="min-w-full bg-white">
                         <thead>
                             <tr>
                                 <th className="w-1/1 px-2 py-2">Nama</th>
@@ -266,5 +274,6 @@ const DashboardAdmin = () => {
         </div>
     );
 };
+
 
 export default DashboardAdmin;

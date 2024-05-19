@@ -4,15 +4,15 @@ import { useState } from 'react';
 
 // Data users dan simpanans
 const users = [
-    { "id_user": 1 , "user": "alfian", "password": "12345" },
-    { "id_user": 2 , "user": "Rasya", "password": "admin" },
-    { "id_user": 3 , "user": "Rasya", "password": "admin" },
-    { "id_user": 4 , "user": "ARA", "password": "UWU" },
-    { "id_user": 5 , "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 6 , "user": "anas", "password": "user" },
-    { "id_user": 7 , "user": "akaka", "password": "user" },
-    { "id_user": 8 , "user": "UWU", "password": "amao" },
-    { "id_user": 9 , "user": "alfian", "password": "12345" },
+    { "id_user": 1, "user": "alfian", "password": "12345" },
+    { "id_user": 2, "user": "Rasya", "password": "admin" },
+    { "id_user": 3, "user": "Rasya", "password": "admin" },
+    { "id_user": 4, "user": "ARA", "password": "UWU" },
+    { "id_user": 5, "user": "AMAK", "password": "FAAFAF" },
+    { "id_user": 6, "user": "anas", "password": "user" },
+    { "id_user": 7, "user": "akaka", "password": "user" },
+    { "id_user": 8, "user": "UWU", "password": "amao" },
+    { "id_user": 9, "user": "alfian", "password": "12345" },
     { "id_user": 10, "user": "Rasya", "password": "admin" },
     { "id_user": 11, "user": "Rasya", "password": "admin" },
     { "id_user": 12, "user": "ARA", "password": "UWU" },
@@ -51,15 +51,15 @@ const users = [
 ];
 
 const simpanans = [
-    { "id_simpanan": 1,  "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 1 },
-    { "id_simpanan": 2,  "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 2 },
-    { "id_simpanan": 3,  "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 3 },
-    { "id_simpanan": 4,  "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 4 },
-    { "id_simpanan": 5,  "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 5 },
-    { "id_simpanan": 6,  "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 6 },
-    { "id_simpanan": 7,  "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 7 },
-    { "id_simpanan": 8,  "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 8 },
-    { "id_simpanan": 9,  "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 9 },
+    { "id_simpanan": 1, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 1 },
+    { "id_simpanan": 2, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 2 },
+    { "id_simpanan": 3, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 3 },
+    { "id_simpanan": 4, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 4 },
+    { "id_simpanan": 5, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 5 },
+    { "id_simpanan": 6, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 6 },
+    { "id_simpanan": 7, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 7 },
+    { "id_simpanan": 8, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 8 },
+    { "id_simpanan": 9, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 9 },
     { "id_simpanan": 10, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 10 },
     { "id_simpanan": 11, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 11 },
     { "id_simpanan": 12, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 12 },
@@ -93,7 +93,7 @@ const simpanans = [
     { "id_simpanan": 40, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 40 },
     { "id_simpanan": 41, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 41 },
     { "id_simpanan": 42, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 42 },
-    { "id_simpanan": 43, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 43},
+    { "id_simpanan": 43, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 43 },
     { "id_simpanan": 44, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 44 },
     { "id_simpanan": 45, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 45 },
 ];
@@ -175,7 +175,7 @@ const DaftarSimpanan = () => {
         setSimpananSukarela(''); // Set input menjadi kosong saat membuka form
         setShowFormSimpananSkr(true);
     };
-    
+
     const handleKurangClickHr = id => {
         const selectedNasabah = nasabah.find(n => n.id === id);
         setCurrentNasabah(selectedNasabah);
@@ -213,14 +213,14 @@ const DaftarSimpanan = () => {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
         }
-    
+
         const jumlahKurang = parseInt(simpananSukarela, 10);
-    
+
         if (jumlahKurang > currentNasabah.simpananSukarela) {
             setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
             return;
         }
-    
+
         const updatedNasabah = nasabah.map(n => {
             if (n.id === currentNasabah.id) {
                 return {
@@ -230,24 +230,24 @@ const DaftarSimpanan = () => {
             }
             return n;
         });
-    
+
         setNasabah(updatedNasabah);
         handleCloseSkr();
     };
-    
+
     const handleKurangSimpananHr = () => {
         if (!simpananHariRaya) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
         }
-    
+
         const jumlahKurang = parseInt(simpananHariRaya, 10);
-    
+
         if (jumlahKurang > currentNasabah.simpananHariRaya) {
             setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
             return;
         }
-    
+
         const updatedNasabah = nasabah.map(n => {
             if (n.id === currentNasabah.id) {
                 return {
@@ -257,7 +257,7 @@ const DaftarSimpanan = () => {
             }
             return n;
         });
-    
+
         setNasabah(updatedNasabah);
         handleCloseHr();
     };
@@ -285,7 +285,7 @@ const DaftarSimpanan = () => {
     ));
 
     return (
-        <div className="flex flex-col justify-between bg-[#F4F4F4] w-[100%] h-screen p-[50px]">
+        <div className="flex flex-col bg-[#F4F4F4] w-[100%] h-screen pt-[80px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] py-[20px]">
                     <h2 className="text-white font-normal text-2xl">Halo,</h2>
@@ -297,107 +297,113 @@ const DaftarSimpanan = () => {
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
 
                 {showFormTambahAllSimpanan && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px]">
-                            <button
-                                className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={handleCloseFormTambah}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleCloseFormTambah}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                            <p>simpanan Pokok sebelumnya : {currentNasabah?.simpananPokok}</p>
-                            <input
-                                type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                value={simpananPokok}
-                                onChange={e => setSimpananPokok(e.target.value)}
-                            />
-                            <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
-                            <input
-                                type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                value={simpananWajib}
-                                onChange={e => setSimpananWajib(e.target.value)}
-                            />
-                            <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
-                            <input
-                                type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                value={simpananSukarela}
-                                onChange={e => setSimpananSukarela(e.target.value)}
-                            />
-                            <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
-                            <input
-                                type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                value={simpananHariRaya}
-                                onChange={e => setSimpananHariRaya(e.target.value)}
-                            />
-                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                            <button onClick={handleTambahAllSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
-                                Kirim
-                            </button>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
+                                <p>simpanan Pokok sebelumnya : {currentNasabah?.simpananPokok}</p>
+                                <input
+                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={simpananPokok}
+                                    onChange={e => setSimpananPokok(e.target.value)}
+                                />
+                                <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
+                                <input
+                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={simpananWajib}
+                                    onChange={e => setSimpananWajib(e.target.value)}
+                                />
+                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
+                                <input
+                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={simpananSukarela}
+                                    onChange={e => setSimpananSukarela(e.target.value)}
+                                />
+                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
+                                <input
+                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={simpananHariRaya}
+                                    onChange={e => setSimpananHariRaya(e.target.value)}
+                                />
+                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                                <button onClick={handleTambahAllSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
 
                 {showFormSimpananSkr && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px]">
-                            <button
-                                className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={handleCloseSkr}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleCloseSkr}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                            <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
-                            <input
-                                type="number" placeholder="Masukkan Nominal Penarikan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                onChange={e => setSimpananSukarela(e.target.value)}
-                            />
-                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                            <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
-                                Kirim
-                            </button>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
+                                <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
+                                <input
+                                    type="number" placeholder="Masukkan Nominal Penarikan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    onChange={e => setSimpananSukarela(e.target.value)}
+                                />
+                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                                <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
 
                 {showFormSimpananHr && (
-                    <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                        <div className="w-[600px]">
-                            <button
-                                className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                onClick={handleCloseHr}
-                            >
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                        </div>
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleCloseHr}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
 
-                        <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                        <div className="flex flex-col gap-2">
-                            <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                            <p >simpanan hari raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
-                            <input
-                                type="number" placeholder="Masukkan Nominal Penarikan"
-                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                onChange={e => setSimpananHariRaya(e.target.value)}
-                            />
-                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                            <button onClick={handleKurangSimpananHr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
-                                Kirim
-                            </button>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
+                                <p >simpanan hari raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
+                                <input
+                                    type="number" placeholder="Masukkan Nominal Penarikan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    onChange={e => setSimpananHariRaya(e.target.value)}
+                                />
+                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                                <button onClick={handleKurangSimpananHr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -415,7 +421,7 @@ const DaftarSimpanan = () => {
                     </div>
                 </div>
 
-                <div className="max-h-96 overflow-y-auto overflow-x-auto">
+                <div className="max-h-60 overflow-y-auto overflow-x-auto shadow-lg">
                     <table className="min-w-full bg-white">
                         <thead>
                             <tr>
