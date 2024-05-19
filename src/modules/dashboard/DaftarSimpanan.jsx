@@ -33,6 +33,7 @@ const DaftarSimpanan = () => {
     const [searchQuery, setSearchQuery] = useState('');  // State untuk pencarian
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const initialNasabah = users.map(user => {
         const simpanan = simpanans.find(s => s.user_id === user.id_user) || {
@@ -87,72 +88,106 @@ const DaftarSimpanan = () => {
     const handleClickTambahAllSimpanan = id => {
         const selectedNasabah = nasabah.find(n => n.id === id);
         setCurrentNasabah(selectedNasabah);
-        setSimpananPokok(selectedNasabah.simpananPokok);
-        setSimpananWajib(selectedNasabah.simpananWajib);
-        setSimpananSukarela(selectedNasabah.simpananSukarela);
-        setSimpananHariRaya(selectedNasabah.simpananHariRaya);
+        setSimpananPokok('');
+        setSimpananWajib('');
+        setSimpananSukarela('');
+        setSimpananHariRaya('');
+        setErrorMessage(''); // Reset error message when opening the form
         setShowFormTambahAllSimpanan(true);
     };
-
     const handleKurangClickSkr = id => {
         const selectedNasabah = nasabah.find(n => n.id === id);
         setCurrentNasabah(selectedNasabah);
-        setSimpananSukarela(selectedNasabah.simpananSukarela);
+        setErrorMessage('');
+        setSimpananSukarela(''); // Set input menjadi kosong saat membuka form
         setShowFormSimpananSkr(true);
     };
-
+    
     const handleKurangClickHr = id => {
         const selectedNasabah = nasabah.find(n => n.id === id);
         setCurrentNasabah(selectedNasabah);
-        setSimpananHariRaya(selectedNasabah.simpananHariRaya);
+        setErrorMessage('');
+        setSimpananHariRaya(''); // Set input menjadi kosong saat membuka form
         setShowFormSimpananHr(true);
     };
 
     const handleTambahAllSimpanan = () => {
+        if (!simpananPokok && !simpananWajib && !simpananSukarela && !simpananHariRaya) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong semua.');
+            return;
+        }
+
         const updatedNasabah = nasabah.map(n => {
             if (n.id === currentNasabah.id) {
                 return {
                     ...n,
-                    simpananPokok: n.simpananPokok + parseInt(simpananSukarela, 10),
-                    simpananWajib: n.simpananWajib + parseInt(simpananSukarela, 10),
-                    simpananSukarela: n.simpananSukarela + parseInt(simpananSukarela, 10),
-                    simpananHariRaya: n.simpananHariRaya + parseInt(simpananSukarela, 10),
+                    simpananPokok: simpananPokok ? n.simpananPokok + parseInt(simpananPokok) : n.simpananPokok,
+                    simpananWajib: simpananWajib ? n.simpananWajib + parseInt(simpananWajib) : n.simpananWajib,
+                    simpananSukarela: simpananSukarela ? n.simpananSukarela + parseInt(simpananSukarela) : n.simpananSukarela,
+                    simpananHariRaya: simpananHariRaya ? n.simpananHariRaya + parseInt(simpananHariRaya) : n.simpananHariRaya,
                 };
             }
             return n;
         });
         setNasabah(updatedNasabah);
+        console.log(updatedNasabah);
         handleCloseFormTambah();
     };
 
+
     const handleKurangSimpananSkr = () => {
+        if (!simpananSukarela) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+    
+        const jumlahKurang = parseInt(simpananSukarela, 10);
+    
+        if (jumlahKurang > currentNasabah.simpananSukarela) {
+            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
+            return;
+        }
+    
         const updatedNasabah = nasabah.map(n => {
             if (n.id === currentNasabah.id) {
                 return {
                     ...n,
-                    simpananSukarela: n.simpananSukarela - parseInt(simpananSukarela, 10),
+                    simpananSukarela: n.simpananSukarela - jumlahKurang
                 };
             }
             return n;
         });
+    
         setNasabah(updatedNasabah);
         handleCloseSkr();
     };
-
+    
     const handleKurangSimpananHr = () => {
+        if (!simpananHariRaya) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+    
+        const jumlahKurang = parseInt(simpananHariRaya, 10);
+    
+        if (jumlahKurang > currentNasabah.simpananHariRaya) {
+            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
+            return;
+        }
+    
         const updatedNasabah = nasabah.map(n => {
             if (n.id === currentNasabah.id) {
                 return {
                     ...n,
-                    simpananHariRaya: n.simpananHariRaya - parseInt(simpananHariRaya, 10)
+                    simpananHariRaya: n.simpananHariRaya - jumlahKurang
                 };
             }
             return n;
         });
+    
         setNasabah(updatedNasabah);
         handleCloseHr();
     };
-
     const filteredNasabah = nasabah.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
 
@@ -205,27 +240,32 @@ const DaftarSimpanan = () => {
                             <p>simpanan Pokok sebelumnya : {currentNasabah?.simpananPokok}</p>
                             <input
                                 type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                className=" border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                onChange={e => simpananPokok(e.target.value)}
+                                className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                value={simpananPokok}
+                                onChange={e => setSimpananPokok(e.target.value)}
                             />
                             <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
                             <input
                                 type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                onChange={e => simpananWajib(e.target.value)}
+                                value={simpananWajib}
+                                onChange={e => setSimpananWajib(e.target.value)}
                             />
                             <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
                             <input
                                 type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                value={simpananSukarela}
                                 onChange={e => setSimpananSukarela(e.target.value)}
                             />
-                            <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananWajib}</p>
+                            <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
                             <input
                                 type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                onChange={e => simpananHariRaya(e.target.value)}
+                                value={simpananHariRaya}
+                                onChange={e => setSimpananHariRaya(e.target.value)}
                             />
+                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                             <button onClick={handleTambahAllSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
                                 Kirim
                             </button>
@@ -253,6 +293,7 @@ const DaftarSimpanan = () => {
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                 onChange={e => setSimpananSukarela(e.target.value)}
                             />
+                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                             <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
                                 Kirim
                             </button>
@@ -280,6 +321,7 @@ const DaftarSimpanan = () => {
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                 onChange={e => setSimpananHariRaya(e.target.value)}
                             />
+                            {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                             <button onClick={handleKurangSimpananHr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
                                 Kirim
                             </button>

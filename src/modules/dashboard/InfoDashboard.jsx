@@ -8,8 +8,8 @@ const InfoDashboard = () => {
     const [currentId, setCurrentId] = useState(null);
 
     const [pinjamanAnggota, setPinjamanAnggota] = useState([
-        { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 20000 },
-        { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 6000 },
+        { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
+        { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
     ]);
 
     const [nama, setNama] = useState('');
@@ -18,8 +18,14 @@ const InfoDashboard = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const tambahPinjaman = () => {
+        if (!nama || !nominal) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+
         const newData = {
             id: pinjamanAnggota.length + 1,
             nama: nama,
@@ -30,12 +36,26 @@ const InfoDashboard = () => {
         setNama('');
         setNominal('');
         setShowForm(false);
+        setErrorMessage('');
     };
 
     const editPinjaman = () => {
+        if (!sisaHutang) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+
+        const anggota = pinjamanAnggota.find(anggota => anggota.id === currentId);
+        const jumlahKurang = parseFloat(sisaHutang);
+
+        if (jumlahKurang > anggota.sisaHutang) {
+            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
+            return;
+        }
+
         const updatedAnggota = pinjamanAnggota.map(anggota => {
             if (anggota.id === currentId) {
-                const sisa = anggota.sisaHutang - parseFloat(sisaHutang);
+                const sisa = anggota.sisaHutang - jumlahKurang;
                 return {
                     ...anggota,
                     sisaHutang: sisa,
@@ -49,6 +69,7 @@ const InfoDashboard = () => {
         setNominal('');
         setSisaHutang('');
         setShowFormPinjaman(false);
+        setErrorMessage('');
     };
 
     const hapusPinjaman = id => {
@@ -62,6 +83,7 @@ const InfoDashboard = () => {
         setNama('');
         setNominal('');
         setSisaHutang('');
+        setErrorMessage('');
     };
 
     const handleEditClick = id => {
@@ -71,6 +93,7 @@ const InfoDashboard = () => {
         setSisaHutang('');
         setCurrentId(id);
         setShowFormPinjaman(true);
+        setErrorMessage('');
     };
 
     const filteredPinjaman = pinjamanAnggota.filter(pinjaman =>
@@ -109,6 +132,7 @@ const InfoDashboard = () => {
             <div className="mt-[25px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Info Pinjaman Anggota</h2>
 
+
                 {showForm && (
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px]">
@@ -118,7 +142,7 @@ const InfoDashboard = () => {
                         </div>
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjaman Anggota</h1>
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2">
                             <input
                                 type="text"
                                 placeholder="Nama"
@@ -145,6 +169,7 @@ const InfoDashboard = () => {
                 )}
 
                 {showFormPinjaman && (
+
                     <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
                         <div className="w-[600px]">
                             <button className="top-1 left-1 text-gray-500 hover:text-gray-700" onClick={handleClose}>
@@ -153,9 +178,9 @@ const InfoDashboard = () => {
                         </div>
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Bayar hutang Anggota</h1>
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2">
                             <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-
+                            <p></p>
                             <input
                                 type="number"
                                 placeholder="Masukkan Nominal Pembayaran"
@@ -163,6 +188,11 @@ const InfoDashboard = () => {
                                 className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                 onChange={e => setSisaHutang(e.target.value)}
                             />
+                            {errorMessage && (
+                                <div className=" text-red-500 " role="alert">
+                                    <span className="block sm:inline">{errorMessage}</span>
+                                </div>
+                            )}
 
                             <button
                                 onClick={editPinjaman}
@@ -186,7 +216,7 @@ const InfoDashboard = () => {
 
                 <div className="flex pt-[10px] mb-[25px]">
                     <input
-                   className="rounded-[10px] w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
+                        className="rounded-[10px] w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
                         type="text"
                         placeholder="Cari nama nasabah..."
                         value={searchQuery}
@@ -196,55 +226,6 @@ const InfoDashboard = () => {
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </div>
                 </div>
-
-
-
-
-
-                {/* <div className="overflow-x-auto">
-                    <table className="w-full" cellPadding={10}>
-                        <thead>
-                            <tr>
-                                <th className="border px-[50px] border-[#7D7D7D]">Nama</th>
-                                <th className="border px-[50px] border-[#7D7D7D]">Pinjaman</th>
-                                <th className="border px-[50px] border-[#7D7D7D]">Sisa Hutang</th>
-                                <th className="border px-[50px] border-[#7D7D7D]">Status</th>
-                                <th className="border px-[50px] border-[#7D7D7D]">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredPinjaman.map((pinjaman, index) => (
-                                <tr key={index}>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.nama}</td>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.nominal}</td>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">{pinjaman.sisaHutang}</td>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">
-                                        {pinjaman.sisaHutang === 0 ? "Lunas" : ""}
-                                    </td>
-                                    <td className="py-[10px] border border-[#7D7D7D] bg-white">
-                                        <div className='flex justify-center space-x-2'>
-                                            <div className="bg-[#D9D9D9] w-[40px] h-[40px] rounded-lg flex items-center justify-center"
-                                                onClick={() => handleEditClick(pinjaman.id)}
-                                            >
-                                                <FontAwesomeIcon icon={faPenToSquare} size="xl" style={{ color: "#626262" }} />
-                                            </div>
-
-                                            <div className="bg-[#D9D9D9] w-[40px] h-[40px] rounded-lg flex items-center justify-center"
-                                                onClick={() => hapusPinjaman(pinjaman.id)}
-                                            >
-                                                <FontAwesomeIcon icon={faTrash} size="xl" style={{ color: "#626262" }} />
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div> 
-
-            </div> */}
-
-
 
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white">
@@ -267,9 +248,9 @@ const InfoDashboard = () => {
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
                                             Lunas
                                         </div>
-                                    ) :  <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
-                                    hutang
-                                </div>}</td>
+                                    ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
+                                        hutang
+                                    </div>}</td>
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"

@@ -151,7 +151,7 @@ const DashboardAdmin = () => {
                         </div>
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2">
                             <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                             <p>Nomor Hp</p>
                             <input
@@ -179,8 +179,8 @@ const DashboardAdmin = () => {
                         </div>
 
                         <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Anggota</h1>
-                        <div className="flex flex-col gap-6">
-                            <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-2">
+                            <div className="flex flex-col gap-2">
                                 <input
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     type="text" placeholder="Nama"
