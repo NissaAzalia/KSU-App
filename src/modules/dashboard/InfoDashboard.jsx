@@ -17,7 +17,7 @@ const InfoDashboard = () => {
     const [sisaHutang, setSisaHutang] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(5);
+    const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
     const tambahPinjaman = () => {

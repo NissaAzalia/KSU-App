@@ -31,7 +31,7 @@ const DashboardAdmin = () => {
     const [currentId, setCurrentId] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');  // State untuk pencarian
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(5);
+    const [itemsPerPage] = useState(20);
     
 
     // Menggabungkan data users dan nomor
