@@ -63,6 +63,48 @@ const DasboardNasabahProvider = ({children}) => {
     }
 
     const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
+      // cek loading
+      if (loadingServis) return
+
+      // set loading true
+      setLoadingServis(true)
+
+      // tampilkan loading pake swal
+      Swal.fire({
+        title: "Loading",
+        text: "Mengirim data.."
+      })
+      Swal.showLoading()
+
+      // fetch api
+      const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
+      const {data, status, message} = apiResult.data
+
+      // cek sukses / error
+      if (status != 'success') {
+        Swal.hideLoading()
+        Swal.fire({
+          title: `Gagal mengirim service`,
+          text: message,
+          showConfirmButton: true
+        })
+      }
+
+      // set loading false
+      setLoadingServis(false)
+
+      // hilangkan tampilan loading
+      Swal.hideLoading()
+      Swal.fire({
+        title: 'Sukses',
+        text: 'Berhasil mengirim data servis'
+      })
+
+      // selesai
+
+    }
+
+    const doService = async (jenisBarang, alamat, jenisKerusakan) => {
         if (loadingServis == true) return
 
         setLoadingServis(true)
@@ -80,7 +122,7 @@ const DasboardNasabahProvider = ({children}) => {
             })
             return;
         }
-        saveToken(data.token)
+        
         Swal.fire({
             title: "Loading...",
             html: "<b></b>.",
@@ -102,25 +144,25 @@ const DasboardNasabahProvider = ({children}) => {
               console.log("I was closed by the timer");
             }
           });
+
         setTimeout(() => {
-            Swal.fire({
-                title: "Pengajuan",
-                text: "Berhasil dikirim",
-                icon: "success"
-              });
-            doServis(true)
-        },2500)
+          Swal.fire({
+              title: "Pengajuan",
+              text: "Berhasil dikirim",
+              icon: "success"
+            });
+
+          doServis(true)
+      },2500)
 
 
 
     }
 
-    
-
+  
     useEffect(() => {
         fetchPinjaman()
         fetchSimpanan()
-        doServis()
     }, [])
     
 
