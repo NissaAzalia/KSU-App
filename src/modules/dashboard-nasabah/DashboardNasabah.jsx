@@ -17,6 +17,8 @@ const DasboardNasabah = ({ doLogout }) => {
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
     const [jenisKerusakan, setjenisKerusakan] = useState("")
+    const [tanggal, setTanggal] = useState("");
+    const [gunakanSopir, setGunakanSopir] = useState("");
     const { simpanan, pinjaman, servis, setServis, doServis, doPinjamMobil, loadingSimpanan, loadingPinjaman, loadingServis, loadingPinjamMobil } = useDashboardNasabah()
 
 
@@ -370,22 +372,14 @@ const DasboardNasabah = ({ doLogout }) => {
 
 
                                 <div className="flex flex-col gap-2 ">
-                                    {/* <<<<<<< HEAD
-                                    <textarea
-                                        name=""
-                                        id=""
-                                        placeholder="waktu"
-                                        className=" border border-gray-300 pl-2 pt-2"
-                                    ></textarea>
-                                    <div className="flex flex-col gap-[10px] mb-[2px]">======= */}
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
+                                    <input value={tanggal} onChange={(e) => setTanggal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
 
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
-                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={handleSopirChange} value="Ya" className="mr/[10px]" required />
+                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={(e) => setGunakanSopir(e.target.value)} value="Ya" className="mr/[10px]" required />
                                             <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={handleSopirChange} value="Tidak" className="mr/[10px]" required />
+                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={(e) => setGunakanSopir(e.target.value)} value="Tidak" className="mr/[10px]" required />
                                             <label htmlFor="sopir_tidak">Tidak</label>
                                         </div>
                                     </div>
@@ -393,14 +387,26 @@ const DasboardNasabah = ({ doLogout }) => {
 
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
+                                       <p className="font-light text-gray-600 text mb-1"> Tanggal :  2 - 3 Mei
+                                        </p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Menggunakan Sopir : Ya </p>
-                                        <p className="font-light text-gray-600 text mb-1"> Tanggal :  2 - 3 Mei
-                                        </p>
 
 
                                     </div>
-                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+                                    <button 
+                                    onClick={handleClickPinjamMobil}
+                                    className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] "
+                                    disabled={loadingPinjamMobil}
+                                    >
+                                        {loadingPinjamMobil ? (
+                                            <div>
+                                                <p>Pengajuan sedang diproses</p>
+                                            </div>
+                                        ) : (
+                                            "kirim"
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         ) : null}
