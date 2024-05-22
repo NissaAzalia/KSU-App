@@ -49,22 +49,25 @@ const DashboardAdmin = () => {
 
     const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('');
-    const [password, setPassword] = useState('');
     const [nomorHp, setnomorHp] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const tambahNasabah = () => {
         const newData = {
             id: nasabah.length + 1,
             nama: nama,
-            password: password,
             nomorHp: nomorHp,
+            username: username,
+            password: password,
         };
 
         setNasabah([...nasabah, newData]);
         setShowFormTambah(false);
         setNama('');
-        setPassword('');
         setnomorHp('')
+        setUsername('');
+        setPassword('');
     };
 
     const editSimpanan = () => {
@@ -86,8 +89,9 @@ const DashboardAdmin = () => {
         setShowFormTambah(false);
         setShowNomorHp(false);
         setNama('');
-        setPassword('');
         setnomorHp('')
+        setUsername('');
+        setPassword('');
     };
 
     const hapusNasabah = id => {
@@ -196,6 +200,12 @@ const DashboardAdmin = () => {
                                         type="tel" placeholder="No Hp"
                                         value={nomorHp}
                                         onChange={(e) => setnomorHp(e.target.value)}
+                                    />
+                                    <input
+                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        type="text" placeholder="Username"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                     <input
                                         className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"

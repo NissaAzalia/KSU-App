@@ -5,8 +5,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
-import { saveToken } from "../../helpers/LocalStorage"
-let timerInterval
+
 
 const initDashboardNasabah = {
     simpanan: null,
@@ -78,7 +77,7 @@ const DasboardNasabahProvider = ({children}) => {
 
       // fetch api
       const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
-      const {data, status, message} = apiResult.data
+      const { status, data, message} = apiResult.data
 
       // cek sukses / error
       if (status != 'success') {
@@ -103,7 +102,7 @@ const DasboardNasabahProvider = ({children}) => {
       // selesai
 
     }
-
+  
     useEffect(() => {
         fetchPinjaman()
         fetchSimpanan()

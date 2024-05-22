@@ -237,15 +237,15 @@ const DasboardNasabah = ({ doLogout }) => {
                                 <div className="flex flex-col gap-2 ">
 
                                     <input value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+
+                                    <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
                                     <textarea
                                         className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] px-[15px] pt-[5px]"
-                                        placeholder="Alamat"
+                                        placeholder="Jenis Kerusakan"
                                         value={jenisKerusakan}
                                         onChange={(e) => setjenisKerusakan(e.target.value)}
                                         rows="2"
                                     ></textarea>
-                                    <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Kerusakan" />
-
 
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
@@ -261,6 +261,7 @@ const DasboardNasabah = ({ doLogout }) => {
 
 
                                     </div>
+
                                     <button
                                         onClick={handleClickServis}
                                         className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
