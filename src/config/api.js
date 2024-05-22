@@ -32,34 +32,4 @@ export const handleLogin = async (user, password) => {
     return apiLogin;
   };
 
-  export const daftarAnggota = async () => {
-    const token = getToken();
-    const anggota = await axios
-    .get(http + "/nasabah", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      return response;
-    })
-    .catch((error)=>{
-      return error.response;
-    });
-    return anggota;
-  };
-  
-
-export const setTokens = (token) => {
-    localStorage.setItem('token', token)
-}
-
-export const getToken = () => {
-    return localStorage.getItem('token') ?? null;
-}
-
-
- export const removeToken = () => {
-  localStorage.removeItem('token')
- }
 

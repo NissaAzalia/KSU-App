@@ -18,8 +18,6 @@ const Servis = () => {
                             <FontAwesomeIcon onClick={handleClick} icon={faX} style={{ color: "#2C6975", }} />
                         </div>
                         <h1 className=" text-center text-xl font-bold  text-[#2C6975] mb-[20px] ">Servis</h1>
-
-
                         <div className="flex flex-col gap-4 mt-[17px] ">
                             <input className="border-solid border-[1px] border-[#2C6975] rounded-[12px]  md:w-[450px] w-[300px] h-[50px] px-[15px]" type="text" placeholder="Jenis Barang" />
                             <input className="border-solid border-[1px] border-[#2C6975] rounded-[12px]  md:w-[450px] w-[300px] h-[50px] px-[15px]" type="text" placeholder="Alamat" />

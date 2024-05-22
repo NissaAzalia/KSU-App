@@ -1,9 +1,10 @@
 import axios from "axios"
-import { getToken } from "../../config/api"
+
 import { http } from "../../config/url"
+import { getToken } from "../../helpers/LocalStorage"
 
 export const apiFetchSimpanan = async () => {
-    const token = getToken()
+    const token = getToken();
 
     return axios.get('https://apiksu.ndamelweb.com/simpananUser', {
         headers: {
