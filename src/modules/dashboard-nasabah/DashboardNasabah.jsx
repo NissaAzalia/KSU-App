@@ -17,9 +17,11 @@ const DasboardNasabah = ({ doLogout }) => {
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
     const [jenisKerusakan, setjenisKerusakan] = useState("")
-    const [nama_barang, setNama_barang] = useState("")
+    const [jumlah, setJumlah] = useState("");
+    const [tenor, setTenor] = useState("");
+    const [nama_barang, setNama_barang] = useState("");
     const [jumlah_barang, setJumlah_barang] = useState("");
-    const { simpanan, pinjaman, servis, setServis, doServis, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang } = useDashboardNasabah()
+    const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang,loadingUang} = useDashboardNasabah()
 
 
 
@@ -71,6 +73,24 @@ const DasboardNasabah = ({ doLogout }) => {
         }
     }
 
+    const handleClickPinjamUang = async () => {
+        try {
+            await doPinjamUang(jumlah, tenor);
+            setJumlah('');
+            setTenor('');
+            setShowFormPinjamUang(false);
+
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+
     const handleClickBeliBarang = async () => {
         try {
             await doBeliBarang(nama_barang, alamat, jumlah_barang);
@@ -78,6 +98,7 @@ const DasboardNasabah = ({ doLogout }) => {
             setAlamat('');
             setJumlah_barang('');
             setShowFormBeliBarang(false);
+
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
@@ -431,22 +452,33 @@ const DasboardNasabah = ({ doLogout }) => {
                             </div>
                         </div>
 
-
                         {showFormPinjamUang ? (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
-                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                        className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamUang(false)}
                                     >
                                         <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
-                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Uang </h1>
+
+                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Uang</h1>
+
+
                                 <div className="flex flex-col gap-2 ">
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Nominal" />
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-2" placeholder="Tenor"></textarea>
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+
+                                    <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
+
+                                    <textarea
+                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] px-[15px] pt-[5px]"
+                                        placeholder="Tenor"
+                                        value={tenor}
+                                        onChange={(e) => setTenor(e.target.value)}
+                                        rows="2"
+                                    ></textarea>
+
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Nominal : Rp100.000
@@ -454,18 +486,36 @@ const DasboardNasabah = ({ doLogout }) => {
                                         <p className="font-light text-gray-600 text mb-1">
                                             Tenor : Diangsur 6 kali
                                         </p>
+
                                     </div>
-                                    <button className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] ">Kirim</button>
+
+                                    <button
+                                        onClick={handleClickPinjamUang}
+                                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
+                                        disabled={loadingUang} // Tambahkan atribut disabled saat sedang loading
+                                    >
+                                        {loadingUang ? (
+
+                                            <div>
+                                                <p>Pengajuan sedang diproses</p>
+
+                                            </div>
+                                        ) : (
+
+                                            "Kirim"
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         ) : null}
 
-                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
-                            <div className="flex gap-[25px] text-left">
-                                <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
-                                <span onClick={openPinjamUangForm} className="text-white flex items-center md:text-2xl text-2xl cursor-pointer hover:text-[#7D7D7D]">Pinjaman Uang</span>
+                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
+                            <div className="flex gap-[25px] ">
+                                <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
+                                <span onClick={openPinjamUangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pinjam Uang</span>
                             </div>
                         </div>
+
                     </div>
                 </div>
 

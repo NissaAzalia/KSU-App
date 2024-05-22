@@ -52,6 +52,24 @@ export const apiFetchServis = async (jenisBarang, alamat, jenisKerusakan) => {
         return error.response.data;
     }
 }
+       
+export const apiFetchPinjamUang = async (jumlah, tenor) => {
+    const token = getToken();
+    try {
+        const response = await axios.post(http + "/pinjam-uang", {
+            jumlah: jumlah,
+            tenor: tenor,
+        }, {
+            headers: {
+                'Authorization ': ' Bearer ' + token
+            }
+        });
+        return response;
+    } catch (error) {
+        return error.response.data;
+    }
+}
+
       
 export const apiFetchBeliBarang = async (nama_barang, alamat, jumlah_barang) =>{
     const token = getToken();
@@ -70,5 +88,7 @@ export const apiFetchBeliBarang = async (nama_barang, alamat, jumlah_barang) =>{
         return error.response.data;
     }
 }
+
+
    
 
