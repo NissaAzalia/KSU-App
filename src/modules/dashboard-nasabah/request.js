@@ -1,9 +1,10 @@
 import axios from "axios"
-import { getToken } from "../../config/api"
+
 import { http } from "../../config/url"
+import { getToken } from "../../helpers/LocalStorage"
 
 export const apiFetchSimpanan = async () => {
-    const token = getToken()
+    const token = getToken();
 
     return axios.get('https://apiksu.ndamelweb.com/simpananUser', {
         headers: {
@@ -70,5 +71,42 @@ export const apiFetchPinjamMobil = async (waktu_pinjam, supir) => {
     }
 }
        
+export const apiFetchPinjamUang = async (jumlah, tenor) => {
+    const token = getToken();
+    try {
+        const response = await axios.post(http + "/pinjam-uang", {
+            jumlah: jumlah,
+            tenor: tenor,
+        }, {
+            headers: {
+                'Authorization ': ' Bearer ' + token
+            }
+        });
+        return response;
+    } catch (error) {
+        return error.response.data;
+    }
+}
+
+      
+export const apiFetchBeliBarang = async (nama_barang, alamat, jumlah_barang) =>{
+    const token = getToken();
+    try {
+        const response = await axios.post(http + "/beli-barang", {
+            nama_barang: nama_barang,
+            alamat: alamat,
+            jumlah_barang: jumlah_barang
+        }, {
+            headers: {
+                'Authorization ': ' Bearer ' + token
+            }
+        });
+        return response;
+    } catch (error) {
+        return error.response.data;
+    }
+}
+
+
    
 

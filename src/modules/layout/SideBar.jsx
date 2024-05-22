@@ -60,7 +60,7 @@ const SideBar = () => {
                             <NavLink
                                 to="/info"
                                 className={({ isActive }) =>
-                                    `animate w-[250px] flex rounded-md ${isActive ? 'bg-[#2C6975] text-white' : 'hover:bg-[#47a4b682] text-[#626262] hover:text-white'} gap-[10px] h-[45px] pt-[10px] pl-[10px]`
+                                    `animate w-[250px] flex rounded-md ${isActive ? 'bg-[#47a3b6] text-white' : 'hover:bg-[#47a4b682] text-[#626262] hover:text-white'} gap-[10px] h-[45px] pt-[10px] pl-[10px]`
                                 }
                             >
                                 <FontAwesomeIcon icon={faUserGroup} className="pt-[5px]" />

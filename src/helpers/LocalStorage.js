@@ -3,5 +3,10 @@ export const saveToken = (token) => {
 }
 
 export const getToken = () => {
-    return localStorage.getItem('token')
+    return localStorage.getItem('token') ?? null;
 }
+
+
+export const removeToken = () => {
+    localStorage.removeItem('token')
+   }
