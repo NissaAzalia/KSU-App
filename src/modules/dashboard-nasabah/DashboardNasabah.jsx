@@ -17,7 +17,7 @@ const DasboardNasabah = ({ doLogout }) => {
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
     const [jenisKerusakan, setjenisKerusakan] = useState("")
-    const { simpanan, pinjaman, servis, setServis, doServis, loadingSimpanan, loadingPinjaman, loadingServis } = useDashboardNasabah()
+    const { simpanan, pinjaman, servis, setServis, doServis, doPinjamMobil, loadingSimpanan, loadingPinjaman, loadingServis, loadingPinjamMobil } = useDashboardNasabah()
 
 
 
@@ -58,6 +58,24 @@ const DasboardNasabah = ({ doLogout }) => {
             setAlamat('');
             setjenisKerusakan('');
             setShowFormServis(false);
+            
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+    
+    const handleClickPinjamMobil = async () => {
+        try {
+            await doPinjamMobil(tanggal, gunakanSopir);
+            setTanggal('');
+            setGunakanSopir(false);
+            setShowFormPinjamMobil(false);
             
         } catch (error) {
             Swal.fire({
@@ -359,14 +377,14 @@ const DasboardNasabah = ({ doLogout }) => {
                                     ></textarea>
                                     <div className="flex flex-col gap-[10px] mb-[2px]">
 ======= */}
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
+                                    <input value={tanggal} onChange={handleTanggalChange} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
 
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
-                                            <input type="radio" id="sopir_ya" name="sopir" value="Ya" className="mr/[10px]" required />
+                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={handleSopirChange} value="Ya" className="mr/[10px]" required />
                                             <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                            <input type="radio" id="sopir_tidak" name="sopir" value="Tidak" className="mr/[10px]" required />
+                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={handleSopirChange} value="Tidak" className="mr/[10px]" required />
                                             <label htmlFor="sopir_tidak">Tidak</label>
                                         </div>
                                     </div>
