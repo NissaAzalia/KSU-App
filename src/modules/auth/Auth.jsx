@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
-import { saveToken } from "../../helpers/LocalStorage"
+import { removeToken, saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
 let timerInterval;
 // nilai default
@@ -141,6 +141,7 @@ const AuthProvider = ({ children }) => {
 
     const doLogout = () => {
         setIsLoggedin(false)
+        removeToken();
         
         
     }
