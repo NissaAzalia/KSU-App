@@ -5,8 +5,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
-import { saveToken } from "../../helpers/LocalStorage"
-let timerInterval
+
 
 const initDashboardNasabah = {
     simpanan: null,
@@ -78,7 +77,7 @@ const DasboardNasabahProvider = ({children}) => {
 
       // fetch api
       const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
-      const {data, status, message} = apiResult.data
+      const { status, data, message} = apiResult.data
 
       // cek sukses / error
       if (status != 'success') {
@@ -103,62 +102,6 @@ const DasboardNasabahProvider = ({children}) => {
       // selesai
 
     }
-
-    const doService = async (jenisBarang, alamat, jenisKerusakan) => {
-        if (loadingServis == true) return
-
-        setLoadingServis(true)
-        const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
-        setLoadingServis(false)
-        const { data, status, message } = apiResult.data
-        console.log(apiResult)
-
-        if (status !=  'success') {
-            Swal.fire({
-                title:`Gagal mengirim servis \n ${message}`,
-                icon:'error',
-                showConfirmButton:false,
-                timer:2500
-            })
-            return;
-        }
-        
-        Swal.fire({
-            title: "Loading...",
-            html: "<b></b>.",
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              const timer = Swal.getPopup().querySelector("b");
-              timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-              }, 100);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
-            }
-          });
-
-        setTimeout(() => {
-          Swal.fire({
-              title: "Pengajuan",
-              text: "Berhasil dikirim",
-              icon: "success"
-            });
-
-          doServis(true)
-      },2500)
-
-
-
-    }
-
   
     useEffect(() => {
         fetchPinjaman()
