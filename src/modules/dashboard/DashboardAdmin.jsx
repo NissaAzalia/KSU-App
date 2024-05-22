@@ -64,6 +64,7 @@ const DashboardAdmin = () => {
         setShowFormTambah(false);
         setNama('');
         setPassword('');
+        setnomorHp('')
     };
 
     const editSimpanan = () => {
@@ -86,6 +87,7 @@ const DashboardAdmin = () => {
         setShowNomorHp(false);
         setNama('');
         setPassword('');
+        setnomorHp('')
     };
 
     const hapusNasabah = id => {
@@ -191,6 +193,12 @@ const DashboardAdmin = () => {
                                     />
                                     <input
                                         className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        type="tel" placeholder="No Hp"
+                                        value={nomorHp}
+                                        onChange={(e) => setnomorHp(e.target.value)}
+                                    />
+                                    <input
+                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                         type="password" placeholder="Password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
@@ -222,9 +230,9 @@ const DashboardAdmin = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <div className="ml-[-30px] mt-[8px]">
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </div>
+                    <div className="ml-[-50px] mt-[8px]">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </div>
 
                 </div>
 

@@ -58,7 +58,7 @@ const DasboardNasabah = ({ doLogout }) => {
             setAlamat('');
             setjenisKerusakan('');
             setShowFormServis(false);
-            
+
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
@@ -90,12 +90,13 @@ const DasboardNasabah = ({ doLogout }) => {
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
 
-            <div className=" flex justify-between md:w-[95%] w-[85%]  ">
-                <div className="logo flex md:ml-[30px] ml-[30px]  md:w-[500px] w-[170px]       ">
-                    <img src="src/assets/logoKSU.png" alt="" className=" w-[40px] md:w-[45px] md:pt-[10px] pt-[15px]  md:ml-[20px]   " />
-                    <h1 className="  md:pt-[17px] pt-[22px] ml-[20px]  font-bold">Koperasi Konsumen KSU TEKNIKA MANDIRI</h1>
+            <div className=" flex justify-between     md:w-[95%]   ">
+
+                <div className="logo flex md:ml-[30px] ml-[30px]  md:w-[430px] w-[260px]        ">
+                    <img src="src/assets/logoKSU.png" alt="" className=" w-[65px] md:w-[50px] h-[65px] md:h-[100%]  md:pt-[10px] pt-[15px]  md:ml-[20px]   " />
+                    <h1 className="md:mt-[1px] pt-[22px] ml-[20px] md:text-1xl font-bold   "> Koperasi Konsumen KSU TEKNIKA MANDIRI</h1>
                 </div>
-                <div className="md:pt-[17px] pt-[22px] font-semibold">
+                <div className=" hidden md:block md:mt-[20px] mt-[22px] font-semibold ">
                     <button onClick={doLogout}>Logout</button>
                 </div>
             </div>
@@ -104,8 +105,8 @@ const DasboardNasabah = ({ doLogout }) => {
 
                 <div className="rounded-xl  h-[80px] md:w-[95%] w-[85%] md:mx-[30px] mx-[30px]    bg-gradient-to-r from-[#2C6975] to-[#52C5DB]" >
 
-                    <div className="md:mx-[3%] mx-[6%] py-[13px] mt-[25px] md:py-[10px]">
-                        <h2 className="text-white font-normal text-xl md:text-2xl">Halo,</h2>
+                    <div className="md:mx-[3%] mx-[6%] py-[6px] mt-[25px] md:py-[10px]">
+                        <h2 className="text-white font-normal text-1xl md:text-2xl">Halo,</h2>
                         <p className="text-white font-thin text-sm md:text-base">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                     </div>
                 </div>
@@ -150,7 +151,7 @@ const DasboardNasabah = ({ doLogout }) => {
                                     {loadingSimpanan ?
                                         <>
                                             Loading
-  
+
                                         </>
                                         :
                                         <>
@@ -264,7 +265,7 @@ const DasboardNasabah = ({ doLogout }) => {
                                     <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Kerusakan" />
 
 
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Jenis barang : mesin cuci
@@ -284,13 +285,13 @@ const DasboardNasabah = ({ doLogout }) => {
                                         disabled={loadingServis} // Tambahkan atribut disabled saat sedang loading
                                     >
                                         {loadingServis ? (
-                                         
+
                                             <div>
                                                 <p>Pengajuan sedang diproses</p>
-                                      
+
                                             </div>
                                         ) : (
-                                    
+
                                             "Kirim"
                                         )}
                                     </button>
@@ -326,8 +327,9 @@ const DasboardNasabah = ({ doLogout }) => {
                                     <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang & Spesifikasi"></textarea>
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
                                     <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
+                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
+
                                         <p className="font-light text-gray-600 text mb-1">
                                             Jenis Barang & Spesifikasi : TV (Polytron)
                                         </p>
@@ -375,9 +377,8 @@ const DasboardNasabah = ({ doLogout }) => {
                                         placeholder="waktu"
                                         className=" border border-gray-300 pl-2 pt-2"
                                     ></textarea>
-                                    <div className="flex flex-col gap-[10px] mb-[2px]">
-======= */}
-                                    <input value={tanggal} onChange={handleTanggalChange} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
+                                    <div className="flex flex-col gap-[10px] mb-[2px]">======= */}
+                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                     <div className="flex flex-col gap/[10px] mb-[5px]">
 
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
@@ -451,7 +452,14 @@ const DasboardNasabah = ({ doLogout }) => {
                         </div>
                     </div>
                 </div>
+
             </div>
+            <div className="block md:hidden h-[50px] pt-[12px]   font-semibold text-white   bg-[#2D5275]  text-center">
+                <button onClick={doLogout}>Logout</button>
+            </div>
+
+
+
         </div>
     )
 }
