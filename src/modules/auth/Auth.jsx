@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
 import { saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
-
+let timerInterval;
 // nilai default
 const initialAuthState = {
     isLoggedin: false,
@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
     const [isLoggedin, setIsLoggedin] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [authority, setAuthority] = useState("")
+
 
     const doLogin = async (user,password) => {
         if (isLoading) return
@@ -58,11 +59,26 @@ const AuthProvider = ({ children }) => {
         saveToken(data.token)
         // jika berhasil maka setIsLoggedin -> true
         Swal.fire({
-            title:`Login Berhasil \n ${message}`,
-            icon:'success',
-            showConfirmButton:false,
-            timer:2000
-        })
+            title: "Loading...",
+            html: "<b></b>.",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
         setTimeout(() => {
             setIsLoggedin(true)
         },2500)
@@ -83,14 +99,43 @@ const AuthProvider = ({ children }) => {
         const { status, data, message } = apiResult.data
 
         if (status !=  'success') {
-            // jika gagal tampilkan peringatan  
-            alert(`Login gagal: ${message}`)
-            return
+           // jika gagal tampilkan peringatan  
+            // alert(`Login gagal: ${message}`)
+            Swal.fire({
+                title:`Login Gagal \n ${message}`,
+                icon:'error',
+                showConfirmButton:false,
+                timer:2500
+            })
+            return;
         }
 
         saveToken(data.token)
         // jika berhasil maka setIsLoggedin -> true
-        setIsLoggedin(true)
+        Swal.fire({
+            title: "Loading...",
+            html: "<b></b>.",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              const timer = Swal.getPopup().querySelector("b");
+              timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+              }, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              console.log("I was closed by the timer");
+            }
+          });
+        setTimeout(() => {
+            setIsLoggedin(true)
+        },2500)
 
     }
 

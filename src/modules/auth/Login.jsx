@@ -7,15 +7,13 @@ const Login = () => {
   const { doLoginAdmin, changeAuthority } = useAuth()
 
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("amao");
+  const [password, setPassword] = useState("amao");
   
 
   const handleClick = async () => {
      await doLoginAdmin (username, password);
      changeAuthority('Admin')
-
-    
   };
 
   const handleTogglePassword = () => {
