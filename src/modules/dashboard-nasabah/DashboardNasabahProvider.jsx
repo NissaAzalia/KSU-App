@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
+import { apiFetchPinjaman, apiFetchServis,apiFetchPinjamUang, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
 
 
@@ -11,9 +11,11 @@ const initDashboardNasabah = {
     simpanan: null,
     pinjaman: null,
     servis:false,
+    pinjamUang:false,
     loadingSimpanan: false,
     loadingPinjaman: false,
     loadingServis:false,
+    loadingPinjamUang:false,
     fetchSimpanan: () => {},
     fetchPinjaman: () => {},
     fetchServis:() => {},
@@ -31,9 +33,11 @@ const DasboardNasabahProvider = ({children}) => {
     const [simpanan, setSimpanan] = useState(null)
     const [pinjaman, setPinjaman] = useState(null)
     const [servis, setServis] = useState(false)
+    const [pinjamUang, setPinjamUang] = useState(false)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
     const [loadingPinjaman, setLoadingPinjaman] = useState(false)
     const [loadingServis, setLoadingServis] = useState(false)
+    const [loadingUang, setLoadingUang] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -102,6 +106,49 @@ const DasboardNasabahProvider = ({children}) => {
       // selesai
 
     }
+
+
+    const doPinjamUang = async (jumlah, tenor) => {
+      // cek loading
+      if (loadingUang) return
+
+      // set loading true
+      setLoadingUang(true)
+
+      // tampilkan loading pake swal
+      Swal.fire({
+        title: "Loading",
+        text: "Mengirim data.."
+      })
+      Swal.showLoading()
+
+      // fetch api
+      const apiResult = await apiFetchPinjamUang(jumlah, tenor)
+      const {data, status, message} = apiResult.data
+
+      // cek sukses / error
+      if (status != 'success') {
+        Swal.hideLoading()
+        Swal.fire({
+          title: `Gagal mengirim service`,
+          text: message,
+          showConfirmButton: true
+        })
+      }
+
+      // set loading false
+      setLoadingUang(false)
+
+      // hilangkan tampilan loading
+      Swal.hideLoading()
+      Swal.fire({
+        title: 'Sukses',
+        text: 'Berhasil mengirim data pinjam uang'
+      })
+
+      // selesai
+
+    }
   
     useEffect(() => {
         fetchPinjaman()
@@ -110,7 +157,7 @@ const DasboardNasabahProvider = ({children}) => {
     
 
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, setServis, doServis, loadingSimpanan, loadingPinjaman, loadingServis}}>
+        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, setServis, doServis,setPinjamUang, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingUang}}>
             {children}
         </DashboardNasabahContext.Provider>
     )
