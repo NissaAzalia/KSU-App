@@ -19,7 +19,9 @@ const DasboardNasabah = ({ doLogout }) => {
     const [jenisKerusakan, setjenisKerusakan] = useState("")
     const [jumlah, setJumlah] = useState("");
     const [tenor, setTenor] = useState("");
-    const { simpanan, pinjaman, servis, setServis, doServis,doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingPinjamUang } = useDashboardNasabah()
+    const [nama_barang, setNama_barang] = useState("");
+    const [jumlah_barang, setJumlah_barang] = useState("");
+    const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang,loadingUang} = useDashboardNasabah()
 
 
 
@@ -77,6 +79,25 @@ const DasboardNasabah = ({ doLogout }) => {
             setJumlah('');
             setTenor('');
             setShowFormPinjamUang(false);
+
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+
+    const handleClickBeliBarang = async () => {
+        try {
+            await doBeliBarang(nama_barang, alamat, jumlah_barang);
+            setNama_barang('');
+            setAlamat('');
+            setJumlah_barang('');
+            setShowFormBeliBarang(false);
 
         } catch (error) {
             Swal.fire({
@@ -326,9 +347,9 @@ const DasboardNasabah = ({ doLogout }) => {
 
                                 <div className="flex flex-col gap-2 ">
 
-                                    <textarea className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " placeholder="Jenis Barang & Spesifikasi"></textarea>
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
-                                    <input className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
+                                    <textarea value={nama_barang} onChange={(e) => setNama_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " type="string" placeholder="Jenis Barang & Spesifikasi"></textarea>
+                                    <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
+                                    <input value={jumlah_barang} onChange={(e) => setJumlah_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
 
@@ -336,15 +357,29 @@ const DasboardNasabah = ({ doLogout }) => {
                                             Jenis Barang & Spesifikasi : TV (Polytron)
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
-                                            Alamat : Kab, Kec, Ds, Dk, RT/RW
+                                            Alamat Kirim: Kab, Kec, Ds, Dk, RT/RW
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Jumlah Barang : 1
                                         </p>
 
                                     </div>
+                                    <button
+                                        onClick={handleClickBeliBarang}
+                                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
+                                        disabled={loadingBeliBarang} // Tambahkan atribut disabled saat sedang loading
+                                    >
+                                        {loadingServis ? (
 
-                                    <button className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">Kirim</button>
+                                            <div>
+                                                <p>Pengajuan sedang diproses</p>
+
+                                            </div>
+                                        ) : (
+
+                                            "Kirim"
+                                        )}
+                                    </button>
                                 </div>
 
                             </div>
@@ -353,7 +388,7 @@ const DasboardNasabah = ({ doLogout }) => {
                         <div onClick={openBeliBarangForm} className="1 flex rounded-[8px] md:w-[30%] w-[100%] h-[100px] text-center items-center p-[12px]  shadow-2xl bg-[#307280] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className="h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
-                                <span className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
+                                <span onClick={openBeliBarangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
                             </div>
                         </div>
 
@@ -433,7 +468,7 @@ const DasboardNasabah = ({ doLogout }) => {
 
                                 <div className="flex flex-col gap-2 ">
 
-                                    <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Nominal" />
+                                    <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
 
                                     <textarea
                                         className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] px-[15px] pt-[5px]"
@@ -457,9 +492,9 @@ const DasboardNasabah = ({ doLogout }) => {
                                     <button
                                         onClick={handleClickPinjamUang}
                                         className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
-                                        disabled={loadingServis} // Tambahkan atribut disabled saat sedang loading
+                                        disabled={loadingUang} // Tambahkan atribut disabled saat sedang loading
                                     >
-                                        {loadingServis ? (
+                                        {loadingUang ? (
 
                                             <div>
                                                 <p>Pengajuan sedang diproses</p>

@@ -18,8 +18,6 @@ const LoginNasabah = () => {
   const handleClick = async () => {
     doLogin(username,password)
     changeAuthority('nasabah')
-    // login(true);
-    // Oty("Nasabah");
   }
 
   return (
