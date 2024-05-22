@@ -4,7 +4,6 @@ import { createContext, useContext, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
 import { saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
-let timerInterval;
 // nilai default
 const initialAuthState = {
     isLoggedin: false,
@@ -35,54 +34,35 @@ const AuthProvider = ({ children }) => {
         if (isLoading) return
 
         setIsLoading(true)
-
-        // memanggil api dengan data email & password
-        // console.log("akan melakukan login dengan: ", user,password)
+        Swal.fire({
+          title: "Loading",
+          text: "Mengirim data.."
+        })
+        Swal.showLoading()
 
         // memanggil api menggunakan axios
         const apiResult = await handleLogin(user,password)
-        setIsLoading(false)
         const { status, data, message } = apiResult.data
 
         if (status !=  'success') {
             // jika gagal tampilkan peringatan  
-            // alert(`Login gagal: ${message}`)
+            Swal.hideLoading()
             Swal.fire({
-                title:`Login Gagal \n ${message}`,
+                title:`Login Gagal`,
+                text: message,
                 icon:'error',
                 showConfirmButton:false,
-                timer:2500
             })
             return;
         }
-
         saveToken(data.token)
-        // jika berhasil maka setIsLoggedin -> true
+        setIsLoading(false)
+        Swal.hideLoading()
         Swal.fire({
-            title: "Loading...",
-            html: "<b></b>.",
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              const timer = Swal.getPopup().querySelector("b");
-              timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-              }, 100);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
-            }
-          });
-        setTimeout(() => {
-            setIsLoggedin(true)
-        },2500)
-
+          title: 'Sukses',
+          text: 'Berhasil Login'
+        })
+          setIsLoggedin(true)
     }
 
     const doLoginAdmin = async (user,password) => {
@@ -93,49 +73,37 @@ const AuthProvider = ({ children }) => {
         // memanggil api dengan data email & password
         // console.log("akan melakukan login dengan: ", user,password)
 
+        Swal.fire({
+          title: "Loading",
+          text: "Mengirim data.."
+        })
+        Swal.showLoading()
         // memanggil api menggunakan axios
         const apiResult = await handleLoginAdmin(user,password)
-        setIsLoading(false)
         const { status, data, message } = apiResult.data
 
         if (status !=  'success') {
            // jika gagal tampilkan peringatan  
             // alert(`Login gagal: ${message}`)
+            Swal.hideLoading()
             Swal.fire({
-                title:`Login Gagal \n ${message}`,
-                icon:'error',
-                showConfirmButton:false,
-                timer:2500
+              title:`Login Gagal`,
+              text: message,
+              icon:'error',
+              showConfirmButton:false,
             })
             return;
         }
 
         saveToken(data.token)
+        setIsLoading(false)
+        Swal.hideLoading()
         // jika berhasil maka setIsLoggedin -> true
         Swal.fire({
-            title: "Loading...",
-            html: "<b></b>.",
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading();
-              const timer = Swal.getPopup().querySelector("b");
-              timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-              }, 100);
-            },
-            willClose: () => {
-              clearInterval(timerInterval);
-            }
-          }).then((result) => {
-            /* Read more about handling dismissals below */
-            if (result.dismiss === Swal.DismissReason.timer) {
-              console.log("I was closed by the timer");
-            }
-          });
-        setTimeout(() => {
-            setIsLoggedin(true)
-        },2500)
+          title: 'Sukses',
+          text: 'Berhasil Login'
+        })
+          setIsLoggedin(true)
 
     }
 
