@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
+import { apiFetchBeliBarang, apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
 import { saveToken } from "../../helpers/LocalStorage"
 let timerInterval
@@ -12,12 +12,15 @@ const initDashboardNasabah = {
     simpanan: null,
     pinjaman: null,
     servis:false,
+    beliBarang:false,
     loadingSimpanan: false,
     loadingPinjaman: false,
     loadingServis:false,
+    loadingBeliBarang:false,
     fetchSimpanan: () => {},
     fetchPinjaman: () => {},
     fetchServis:() => {},
+    fetchBeliBarang:() => {},
 
 }
 
@@ -32,9 +35,11 @@ const DasboardNasabahProvider = ({children}) => {
     const [simpanan, setSimpanan] = useState(null)
     const [pinjaman, setPinjaman] = useState(null)
     const [servis, setServis] = useState(false)
+    const [beliBarang, setBeliBarang] = useState(false)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
     const [loadingPinjaman, setLoadingPinjaman] = useState(false)
     const [loadingServis, setLoadingServis] = useState(false)
+    const [loadingBeliBarang, setLoadingBeliBarang] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -104,6 +109,39 @@ const DasboardNasabahProvider = ({children}) => {
 
     }
 
+    const doBeliBarang = async (nama_barang, alamat, jumlah_barang) => {
+      if (loadingBeliBarang) return
+      setLoadingBeliBarang(true)
+
+      Swal.fire({
+        title: "Loading",
+        text: "Mengirim data.."
+      })
+      Swal.showLoading()
+
+      const apiResult = await apiFetchBeliBarang(nama_barang, alamat, jumlah_barang)
+      const {data, status, message} = apiResult.data
+
+      if (status != 'success') {
+        Swal.hideLoading()
+        Swal.fire({
+          title: `Gagal mengirim service`,
+          text: message,
+          showConfirmButton: true
+        })
+      }
+
+      setLoadingBeliBarang(false)
+
+      Swal.hideLoading()
+      Swal.fire({
+        title: 'Sukses',
+        text: 'Berhasil mengirim data Beli Barang'
+      })
+    }
+
+
+
     const doService = async (jenisBarang, alamat, jenisKerusakan) => {
         if (loadingServis == true) return
 
@@ -167,7 +205,7 @@ const DasboardNasabahProvider = ({children}) => {
     
 
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, setServis, doServis, loadingSimpanan, loadingPinjaman, loadingServis}}>
+        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, beliBarang, setServis, doServis, setLoadingBeliBarang, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang}}>
             {children}
         </DashboardNasabahContext.Provider>
     )

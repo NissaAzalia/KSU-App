@@ -51,6 +51,23 @@ export const apiFetchServis = async (jenisBarang, alamat, jenisKerusakan) => {
         return error.response.data;
     }
 }
-       
+      
+export const apiFetchBeliBarang = async (nama_barang, alamat, jumlah_barang) =>{
+    const token = getToken();
+    try {
+        const response = await axios.post(http + "/beli-barang", {
+            nama_barang: nama_barang,
+            alamat: alamat,
+            jumlah_barang: jumlah_barang
+        }, {
+            headers: {
+                'Authorization ': ' Bearer ' + token
+            }
+        });
+        return response;
+    } catch (error) {
+        return error.response.data;
+    }
+}
    
 
