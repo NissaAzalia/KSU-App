@@ -4,7 +4,7 @@
 /* eslint-disable react/prop-types */
 
 import { createContext, useContext, useEffect, useState } from "react"
-import { apiFetchBeliBarang, apiFetchPinjaman, apiFetchServis, apiFetchSimpanan } from "./request"
+import { apiFetchBeliBarang, apiFetchPinjaman, apiFetchServis,apiFetchPinjamUang, apiFetchSimpanan } from "./request"
 import Swal from "sweetalert2"
 
 
@@ -13,13 +13,16 @@ const initDashboardNasabah = {
     pinjaman: null,
     servis:false,
     beliBarang:false,
+    pinjamUang:false,
     loadingSimpanan: false,
     loadingPinjaman: false,
     loadingServis:false,
+    loadingPinjamUang:false,
     loadingBeliBarang:false,
     fetchSimpanan: () => {},
     fetchPinjaman: () => {},
     fetchServis:() => {},
+    fetchBeliBarang:() => {},
     fetchBeliBarang:() => {},
 
 }
@@ -36,10 +39,12 @@ const DasboardNasabahProvider = ({children}) => {
     const [pinjaman, setPinjaman] = useState(null)
     const [servis, setServis] = useState(false)
     const [beliBarang, setBeliBarang] = useState(false)
+    const [pinjamUang, setPinjamUang] = useState(false)
     const [loadingSimpanan, setLoadingSimpanan] = useState(false)
     const [loadingPinjaman, setLoadingPinjaman] = useState(false)
     const [loadingServis, setLoadingServis] = useState(false)
     const [loadingBeliBarang, setLoadingBeliBarang] = useState(false)
+    const [loadingPinjamUang, setLoadingPinjamUang] = useState(false)
 
     const fetchSimpanan = async () => {
         if (loadingSimpanan == true) return
@@ -139,6 +144,48 @@ const DasboardNasabahProvider = ({children}) => {
         text: 'Berhasil mengirim data Beli Barang'
 })
 }
+
+const doPinjamUang = async (jumlah, tenor) => {
+  // cek loading
+  if (loadingPinjamUang) return
+
+  // set loading true
+  setLoadingPinjamUang(true)
+
+  // tampilkan loading pake swal
+  Swal.fire({
+    title: "Loading",
+    text: "Mengirim data.."
+  })
+  Swal.showLoading()
+
+  // fetch api
+  const apiResult = await apiFetchPinjamUang(jumlah, tenor)
+  const { status, message} = apiResult.data
+
+  // cek sukses / error
+  if (status != 'success') {
+    Swal.hideLoading()
+    Swal.fire({
+      title: `Gagal mengirim data`,
+      text: message,
+      showConfirmButton: true
+    })
+  }
+
+  // set loading false
+  setLoadingPinjamUang(false)
+
+  // hilangkan tampilan loading
+  Swal.hideLoading()
+  Swal.fire({
+    title: 'Sukses',
+    text: 'Berhasil mengirim data pinjam uang'
+  })
+
+  // selesai
+
+}
   
     useEffect(() => {
         fetchPinjaman()
@@ -147,7 +194,7 @@ const DasboardNasabahProvider = ({children}) => {
     
 
     return (
-        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, beliBarang, setServis, doServis, setLoadingBeliBarang, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang}}>
+        <DashboardNasabahContext.Provider value={{simpanan, pinjaman, servis, beliBarang,pinjamUang, setServis, doServis,doPinjamUang, setBeliBarang,setPinjamUang, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamUang}}>
             {children}
         </DashboardNasabahContext.Provider>
     )
