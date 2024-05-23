@@ -2,23 +2,24 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota } from './apiAdmin';
+import { addAnggota, daftarAnggota, fetchInfoPinjaman } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 const initialMembersState = {
   members: [],
   users: [],
   curentMembers: null,
-  loadingAdd:false,
+  loadingAdd: false,
   loadingAnggota: false,
   // handleFetchId: () => {},
-  addMember: () => {},
+  addMember: () => { },
   // editMember: () => {},
   // deleteMember: () => {},
   // handleEditClick: () => {},
-  fetchAnggota: () => {},
-  tambahAnggota: () => {}
-  
+  fetchAnggota: () => { },
+  tambahAnggota: () => { },
+  tampilkanPinjaman: () => {},
+
 }
 
 // Buat konteks untuk data anggota koperasi
@@ -34,9 +35,11 @@ const MemberProvider = ({ children }) => {
   // State untuk menyimpan data anggota koperasi
 
   const [members, setMembers] = useState([]);
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
-  const [loadingAnggota, setLoadingAnggota] = useState(false)
+  const [loadingAnggota, setLoadingAnggota] = useState(false);
+  const [loadingPinjaman, setLoadingPinjaman] = useState(false);
+  const [infoPinjaman, setInfoPinjaman] = useState([]);
   // const [curentMembers, setcurentMembers] = useState(null)
 
 
@@ -47,45 +50,55 @@ const MemberProvider = ({ children }) => {
 
   const tambahAnggota = async (nama, nomorHp, username, password) => {
     // cek loading
-    if (loadingAdd) return
+    if (loadingAdd) return;
 
     // set loading true
-    setLoadingAdd(true)
+    setLoadingAdd(true);
 
     // tampilkan loading pake swal
     Swal.fire({
       title: "Loading",
       text: "Mengirim data.."
-    })
-    Swal.showLoading()
+    });
+    Swal.showLoading();
 
-    // fetch api
-    const apiResult = await addAnggota(nama,nomorHp,username,password)
-    const { status, data, message} = apiResult.data
+    try {
+      // fetch api
+      const apiResult = await addAnggota(nama, nomorHp, username, password);
+      const { status, message } = apiResult.data;
 
-    // cek sukses / error
-    if (status != 'success'){
-      Swal.hideLoading()
+      if (status === 'success') {
+        Swal.fire({
+          title: 'Sukses',
+          text: 'Berhasil mengirim data servis',
+          icon: 'success'
+        });
+      } else {
+        Swal.fire({
+          title: 'Gagal',
+          text: message || 'Gagal mengirim service',
+          icon: 'error'
+        });
+      }
+    } catch (error) {
+      console.error('Error adding member:', error);
       Swal.fire({
-        title: `Gagal mengirim service`,
-          text: message,
-          showConfirmButton: true
-      })
+        title: 'Gagal',
+        text: 'Terjadi kesalahan saat menambahkan anggota',
+        icon: 'error'
+      });
+    } finally {
+      // hilangkan tampilan loading
+      Swal.hideLoading();
+      // set loading false
+      setLoadingAdd(false);
     }
-    setLoadingAdd(false)
-     // hilangkan tampilan loading
-     Swal.hideLoading()
-     Swal.fire({
-       title: 'Sukses',
-       text: 'Berhasil mengirim data servis'
-     })
+};
 
-
-  }
 
   // Fungsi edit nasabah
   const editMember = (id, updateData) => {
-    const updatedMember = members.map((member) => member.id === id ? {...member, ...updateData }: member);
+    const updatedMember = members.map((member) => member.id === id ? { ...member, ...updateData } : member);
     setMembers(updatedMember)
   }
 
@@ -101,36 +114,56 @@ const MemberProvider = ({ children }) => {
 
   // const filteredNasabah = members.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
+  const tampilkanPinjaman = async () => {
+    if (loadingPinjaman) return
+    setLoadingPinjaman(true)
+    const apiCall = await fetchInfoPinjaman();
+
+    const {data} = apiCall.data;
+
+    setInfoPinjaman(data.pinjamans)
+    
+
+    setLoadingPinjaman(false)
+  }
+
+
   // fungsi menampilkan anggota 
   const fetchAnggota = async () => {
     if (loadingAnggota) return
 
     setLoadingAnggota(true)
+    const apiCall = await daftarAnggota()
+    const { data } = apiCall.data
 
+    setMembers(data.users)
+    // console.log (members)
+    
 
-  const apiCall = await daftarAnggota()
-  const { data } = apiCall.data
+    setLoadingAnggota(false)
 
-  setMembers(data.users)
-  // console.log (data.users)
-  console.log(members)
-
-  setLoadingAnggota(false)
+    
   };
 
 
   useEffect(() => {
-    fetchAnggota()
+    fetchAnggota();
+    tampilkanPinjaman();
   }, []);
 
-   //Nilai konteks yang disediakan oleh provider
-   const value = {
+  console.log(`Nilai dari "members":`, ...members);
+  console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
+
+  //Nilai konteks yang disediakan oleh provider
+  const value = {
     members,
     // addMember,
     // editMember,
     // deleteMember,
     fetchAnggota,
     tambahAnggota,
+    tampilkanPinjaman,
+    infoPinjaman,
   };
 
 
