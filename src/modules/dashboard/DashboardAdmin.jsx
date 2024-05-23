@@ -1,28 +1,13 @@
 import { faMagnifyingGlass, faTrashCan, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useMembers } from './AdminContext';
+import Swal from 'sweetalert2';
 
 // Data users dan nomor
-const users = [
-    { "id_user": 1, "user": "alfian", "password": "12345" },
-    { "id_user": 2, "user": "Rasya", "password": "admin" },
-    { "id_user": 3, "user": "Rasya", "password": "admin" },
-    { "id_user": 4, "user": "ARA", "password": "UWU" },
-    { "id_user": 5, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 6, "user": "anas", "password": "user" },
-    { "id_user": 7, "user": "akaka", "password": "user" },
-    { "id_user": 8, "user": "UWU", "password": "amao" }
-];
+const users = [ ];
 
 const nomor = [
-    { "id_nomorHp": 1, "nomorhp": '062824245500', "user_id": 1 },
-    { "id_nomorHp": 2, "nomorhp": '062834522000', "user_id": 2 },
-    { "id_nomorHp": 3, "nomorhp": '062802245000', "user_id": 3 },
-    { "id_nomorHp": 5, "nomorhp": '062800255250', "user_id": 5 },
-    { "id_nomorHp": 4, "nomorhp": '062800255200', "user_id": 4 },
-    { "id_nomorHp": 6, "nomorhp": '062800456400', "user_id": 6 },
-    { "id_nomorHp": 8, "nomorhp": '062800464300', "user_id": 8 },
-    { "id_nomorHp": 7, "nomorhp": '062800503460', "user_id": 7 },
 ];
 
 const DashboardAdmin = () => {
@@ -32,6 +17,9 @@ const DashboardAdmin = () => {
     const [searchQuery, setSearchQuery] = useState('');  // State untuk pencarian
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
+    
+
+    const { members, addMember, deleteMember, editMember, fetchAnggota, tambahAnggota    } = useMembers();
 
 
     // Menggabungkan data users dan nomor
@@ -53,22 +41,41 @@ const DashboardAdmin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const tambahNasabah = () => {
-        const newData = {
-            id: nasabah.length + 1,
-            nama: nama,
-            nomorHp: nomorHp,
-            username: username,
-            password: password,
-        };
+    // const tambahNasabah = () => {
+    //     const newData = {
+    //         id: nasabah.length + 1,
+    //         nama: nama,
+    //         nomorHp: nomorHp,
+    //         username: username,
+    //         password: password,
+    //     };
 
-        setNasabah([...nasabah, newData]);
-        setShowFormTambah(false);
-        setNama('');
-        setnomorHp('')
-        setUsername('');
-        setPassword('');
-    };
+    //     setNasabah([...nasabah, newData]);
+    //     setShowFormTambah(false);
+    //     setNama('');
+    //     setnomorHp('')
+    //     setUsername('');
+    //     setPassword('');
+    // };
+
+    const handleTambahAnggota = async () => {
+        try {
+            await tambahAnggota (nama, nomorHp, username, password);
+            setNama('');
+            setnomorHp('');
+            setUsername('');
+            setPassword('');
+            setShowFormTambah(false);
+
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
 
     const editSimpanan = () => {
         const updatedNasabah = nasabah.map(nasabah => {
@@ -214,7 +221,7 @@ const DashboardAdmin = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <button onClick={tambahNasabah} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
+                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
                                     Kirim
                                 </button>
                             </div>
@@ -257,20 +264,20 @@ const DashboardAdmin = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((nasabah, index) => (
-                                <tr key={nasabah.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-2 py-2">{nasabah.nama}</td>
-                                    <td className="border text-center px-2 py-2">{nasabah.nomorHp}</td>
+                            {currentItems.map((members, index) => (
+                                <tr key={members.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                                    <td className="border text-center px-2 py-2">{members.nama}</td>
+                                    <td className="border text-center px-2 py-2">{members.no_telp}</td>
                                     <td className="border text-center px-2 py-2 flex justify-around  w-[50px]">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleEditClick(nasabah.id)}
+                                            onClick={() => handleEditClick(members.id)}
                                         >
                                             <FontAwesomeIcon icon={faPenToSquare} />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusNasabah(nasabah.id)}
+                                            onClick={() => hapusNasabah(members.id)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
