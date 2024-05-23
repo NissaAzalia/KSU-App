@@ -1,15 +1,17 @@
 import { faTrashCan, faPlusCircle, faXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useMembers } from './AdminContext';
 
 const InfoDashboard = () => {
     const [showForm, setShowForm] = useState(false);
     const [showFormPinjaman, setShowFormPinjaman] = useState(false);
     const [currentId, setCurrentId] = useState(null);
+    const { infoPinjaman, tampilkanPinjaman } = useMembers();
 
     const [pinjamanAnggota, setPinjamanAnggota] = useState([
-        { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
-        { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
+        // { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
+        // { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
     ]);
 
     const [nama, setNama] = useState('');
