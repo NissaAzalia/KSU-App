@@ -155,12 +155,17 @@ const DasboardNasabahProvider = ({ children }) => {
 
     setLoadingBeliBarang(false)
 
+<<<<<<< HEAD
     Swal.hideLoading()
     Swal.fire({
       title: 'Sukses',
       text: 'Berhasil mengirim data Beli Barang'
     })
   }
+=======
+  // set loading truee
+  setLoadingPinjamUang(true)
+>>>>>>> 6a3aa8542bbd1dfa101605600b11f793735443c3
 
   
   const doPinjamMobil = async (tanggal, gunakanSopir) => {
