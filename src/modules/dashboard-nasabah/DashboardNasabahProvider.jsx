@@ -17,6 +17,7 @@ const initDashboardNasabah = {
     fetchSimpanan: () => {},
     fetchPinjaman: () => {},
     fetchServis:() => {},
+    doServis:() => {}
 
 }
 

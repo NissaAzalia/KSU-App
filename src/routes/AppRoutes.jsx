@@ -8,6 +8,7 @@ import InfoDashboard from '../modules/dashboard/InfoDashboard'
 import LoginNasabah from '../modules/auth/LoginNasabah'
 import { useAuth } from '../modules/auth/Auth'
 import { DasboardNasabahProvider } from '../modules/dashboard-nasabah/DashboardNasabahProvider'
+import { MemberProvider } from '../modules/dashboard/AdminContext'
 
 const AppRoutes = () => {
 
@@ -37,10 +38,10 @@ const AppRoutes = () => {
                 authority === 'Admin' ?
                   // jika yang login adalah admin
                   <Route element={<MainLayout />}>
-                    <Route path='daftar-anggota' element={<DashboardAdmin />} />
+                    <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin /></MemberProvider>  } />
                     {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
                     <Route path='/daftar-simpanan' element={<DaftarSimpanan />} />
-                    <Route path='info' element={<InfoDashboard />} />
+                    <Route path='info' element={<MemberProvider><InfoDashboard /></MemberProvider>  } />
                     {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
                     <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
                   </Route>
