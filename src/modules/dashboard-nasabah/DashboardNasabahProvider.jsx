@@ -149,7 +149,7 @@ const doPinjamUang = async (jumlah, tenor) => {
   // cek loading
   if (loadingPinjamUang) return
 
-  // set loading true
+  // set loading truee
   setLoadingPinjamUang(true)
 
   // tampilkan loading pake swal
