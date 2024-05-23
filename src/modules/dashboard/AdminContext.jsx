@@ -1,21 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState, useEffect } from 'react';
-import { fetchInfoPinjaman,addAnggota, daftarAnggota } from './apiAdmin';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { addAnggota, daftarAnggota } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 const initialMembersState = {
   members: [],
   users: [],
   curentMembers: null,
-  infoPinjaman: [],
-  loadingPinjaman:false,
-  addMember: () => {},
-  tampilkanPinjaman: () => {},
   loadingAdd:false,
   loadingAnggota: false,
   // handleFetchId: () => {},
+  addMember: () => {},
   // editMember: () => {},
   // deleteMember: () => {},
   // handleEditClick: () => {},
@@ -28,7 +25,7 @@ const initialMembersState = {
 const MemberContext = createContext(initialMembersState);
 
 // Custom hook untuk menggunakan konteks data anggota koperasi
-const useMembers = () => {return useContext(MemberContext)};
+const useMembers = () => useContext(MemberContext);
 
 
 
@@ -37,8 +34,6 @@ const MemberProvider = ({ children }) => {
   // State untuk menyimpan data anggota koperasi
 
   const [members, setMembers] = useState([]);
-  const [infoPinjaman, setInfoPinjaman] = useState(null)
-  const [loadingPinjaman, setLoadingPinjaman] = useState(false)
   const [users, setUsers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingAnggota, setLoadingAnggota] = useState(false)
@@ -67,7 +62,6 @@ const MemberProvider = ({ children }) => {
     // fetch api
     const apiResult = await addAnggota(nama,nomorHp,username,password)
     const { status, data, message} = apiResult.data
-    
 
     // cek sukses / error
     if (status != 'success'){
@@ -118,40 +112,26 @@ const MemberProvider = ({ children }) => {
   const { data } = apiCall.data
 
   setMembers(data.users)
-  console.log (data.users)
-  // console.log(members)
+  // console.log (data.users)
+  console.log(members)
 
   setLoadingAnggota(false)
   };
 
-  const tampilkanPinjaman = async () => {
-    if (loadingPinjaman) return
-    setLoadingPinjaman(true)
-    const apiCall = await fetchInfoPinjaman();
 
-    const {data} = apiCall.data;
+  useEffect(() => {
+    fetchAnggota()
+  }, []);
 
-    setInfoPinjaman(data.pinjamans)
-    // console.log(data.pinjamans)
-    setLoadingPinjaman(false)
-  }
-
-  // Nilai konteks yang disediakan oleh provider
-  const value = {
+   //Nilai konteks yang disediakan oleh provider
+   const value = {
     members,
-    infoPinjaman,
-    tampilkanPinjaman,
     // addMember,
     // editMember,
     // deleteMember,
     fetchAnggota,
     tambahAnggota,
   };
-
-  useEffect(() => {
-    tampilkanPinjaman()
-    fetchAnggota()
-   }, [])
 
 
   return (

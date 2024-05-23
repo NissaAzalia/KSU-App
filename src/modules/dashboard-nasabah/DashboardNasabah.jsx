@@ -22,7 +22,7 @@ const DasboardNasabah = ({ doLogout }) => {
     const [nama_barang, setNama_barang] = useState("");
     const [jumlah_barang, setJumlah_barang] = useState("");
     const [tanggal, setTanggal] = useState("");
-    const [gunakanSopir, setGunakanSopir] = useState("");
+    const [gunakanSopir, setGunakanSopir] = useState(false);
     const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamMobil, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamMobil, loadingUang } = useDashboardNasabah()
 
 
@@ -281,7 +281,7 @@ const DasboardNasabah = ({ doLogout }) => {
                     <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
 
                         {showFormServis ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
@@ -352,7 +352,7 @@ const DasboardNasabah = ({ doLogout }) => {
 
 
                         {showFormBeliBarang ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -413,7 +413,7 @@ const DasboardNasabah = ({ doLogout }) => {
                         </div>
 
                         {showFormPinjamMobil ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -432,10 +432,8 @@ const DasboardNasabah = ({ doLogout }) => {
 
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
-                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={(e) => setGunakanSopir(e.target.value)} value="Ya" className="mr/[10px]" required />
-                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={(e) => setGunakanSopir(e.target.value)} value="Tidak" className="mr/[10px]" required />
-                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={() => setGunakanSopir(true)}  className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
                                         </div>
                                     </div>
 
@@ -477,9 +475,9 @@ const DasboardNasabah = ({ doLogout }) => {
                         </div>
 
                         {showFormPinjamUang ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
-                                <button
+                                    <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamUang(false)}
                                     >

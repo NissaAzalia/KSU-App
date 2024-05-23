@@ -26,7 +26,7 @@ const SideBar = () => {
             )}
 
             {bar && (
-                <div className="flex fixed flex-col bg-[#fafafa] w-[300px] overflow-hidden h-screen pb-[25px] border-r-[3px] border-gray-200 " x>
+                <div className="flex fixed flex-col bg-[#fafafa] w-[300px] overflow-hidden h-screen pb-[25px] border-r-[3px] border-gray-200 " >
                     <div className="flex justify-between pl-[15px] pt-[10px] pr-[15px]">
                         <div className="flex">
                             <img src="src/assets/logoKSU.png" alt="" className="w-[50px] h-[50px]" />

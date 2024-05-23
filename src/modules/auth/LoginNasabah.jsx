@@ -7,8 +7,8 @@ const LoginNasabah = () => {
 
   const { doLogin, changeAuthority } = useAuth()
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUsername] = useState("Rasya");
-  const [password, setPassword] = useState("admin");
+  const [username, setUsername] = useState("fitri");
+  const [password, setPassword] = useState("12345");
 
 
   const handleTogglePassword = () => {
