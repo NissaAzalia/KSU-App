@@ -21,7 +21,7 @@ const DasboardNasabah = ({ doLogout }) => {
     const [tenor, setTenor] = useState("");
     const [nama_barang, setNama_barang] = useState("");
     const [jumlah_barang, setJumlah_barang] = useState("");
-    const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang,loadingUang} = useDashboardNasabah()
+    const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingUang } = useDashboardNasabah()
 
 
 
@@ -459,7 +459,7 @@ const DasboardNasabah = ({ doLogout }) => {
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamUang(false)}
                                     >
-                                        <FontAwesomeIcon icon={faXmark} size="lg" />
+                                        <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
                                     </button>
                                 </div>
 
@@ -509,9 +509,9 @@ const DasboardNasabah = ({ doLogout }) => {
                             </div>
                         ) : null}
 
-                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
+                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
                             <div className="flex gap-[25px] ">
-                                <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
+                                <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
                                 <span onClick={openPinjamUangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pinjam Uang</span>
                             </div>
                         </div>
