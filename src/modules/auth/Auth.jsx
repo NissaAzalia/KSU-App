@@ -1,8 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { handleLogin, handleLoginAdmin } from "../../config/api"
-import { removeToken, saveToken } from "../../helpers/LocalStorage"
+import { getToken, removeToken, saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
 // nilai default
 const initialAuthState = {
@@ -110,13 +110,18 @@ const AuthProvider = ({ children }) => {
     const doLogout = () => {
         setIsLoggedin(false)
         removeToken();
-        
-        
     }
 
     const changeAuthority = (auth) => {
         setAuthority(auth)
     }
+
+    useEffect(() => {
+      const token = getToken();
+      if(token !== null){
+        setIsLoggedin(true);
+      }
+    },[]);
 
     // return provider
     return(

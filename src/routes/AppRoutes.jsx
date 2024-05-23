@@ -38,12 +38,12 @@ const AppRoutes = () => {
                 authority === 'Admin' ?
                   // jika yang login adalah admin
                   <Route element={<MainLayout />}>
-                    <Route path='daftar-anggota' element={<DashboardAdmin />} />
+                    <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin /></MemberProvider>  } />
                     {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
                     <Route path='/daftar-simpanan' element={<DaftarSimpanan />} />
-                    <Route path='info' element={<MemberProvider> <InfoDashboard /> </MemberProvider>} />
+                    <Route path='info' element={<MemberProvider><InfoDashboard /></MemberProvider>  } />
                     {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
-                    <Route path='*' element={<Navigate to={"/info"} />} />
+                    <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
                   </Route>
 
                   :
