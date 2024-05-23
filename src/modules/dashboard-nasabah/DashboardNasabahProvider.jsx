@@ -86,19 +86,20 @@ const DasboardNasabahProvider = ({ children }) => {
 
 
 
-  const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
-    // cek loading
-    if (loadingServis) return
+   const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
+      // cek loading
+      if (loadingServis) return
 
-    // set loading true
-    setLoadingServis(true)
+      // set loading true
+      setLoadingServis(true)
 
-    // tampilkan loading pake swal
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    })
-    Swal.showLoading()
+      // tampilkan loading pake swal
+      Swal.fire({
+        title: "Loading",
+        text: "Mengirim data.."
+      })
+      Swal.showLoading()
+
 
     // fetch api
     const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
@@ -178,7 +179,7 @@ const DasboardNasabahProvider = ({ children }) => {
 
     // fetch api
     const apiResult = await apiFetchPinjamMobil(tanggal, gunakanSopir)
-    const { data, status, message } = apiResult.data
+    const { status, message } = apiResult.data
 
     // cek sukses / error
     if (status != 'success') {
@@ -204,60 +205,7 @@ const DasboardNasabahProvider = ({ children }) => {
 
   }
 
-  const doPinjamMobill = async (tanggal, gunakanSopir) => {
-    if (loadingPinjamMobil == true) return
 
-    setLoadingPinjamMobil(true)
-    const apiResult = await apiFetchPinjamMobil(tanggal, gunakanSopir)
-    setLoadingPinjamMobil(false)
-    const { data, status, message } = apiResult.data
-    console.log(apiResult)
-
-    if (status != 'success') {
-      Swal.fire({
-        title: `Gagal mengirim pinjam mobil \n ${message}`,
-        icon: 'error',
-        showConfirmButton: false,
-        timer: 2500
-      })
-      return;
-    }
-
-    Swal.fire({
-      title: "Loading...",
-      html: "<b></b>.",
-      timer: 2000,
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-        const timer = Swal.getPopup().querySelector("b");
-        timerInterval = setInterval(() => {
-          timer.textContent = `${Swal.getTimerLeft()}`;
-        }, 100);
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      }
-    }).then((result) => {
-      /* Read more about handling dismissals below */
-      if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
-      }
-    });
-
-    setTimeout(() => {
-      Swal.fire({
-        title: "Pengajuan",
-        text: "Berhasil dikirim",
-        icon: "success"
-      });
-
-      doPinjamMobil(true)
-    }, 2500)
-
-
-
-  }
 
 
   const doPinjamUang = async (jumlah, tenor) => {

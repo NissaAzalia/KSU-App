@@ -16,7 +16,7 @@ const DasboardNasabah = ({ doLogout }) => {
 
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
-    const [jenisKerusakan, setjenisKerusakan] = useState("")
+    const [jenisKerusakan, setjenisKerusakan] = useState("");
     const [jumlah, setJumlah] = useState("");
     const [tenor, setTenor] = useState("");
     const [nama_barang, setNama_barang] = useState("");
@@ -75,12 +75,30 @@ const DasboardNasabah = ({ doLogout }) => {
         }
     }
 
-    
+    const handleClickBeliBarang = async () => {
+        try {
+            await doBeliBarang(nama_barang, alamat, jumlah_barang);
+            setNama_barang('');
+            setAlamat('');
+            setJumlah_barang('');
+            setShowFormBeliBarang(false);
+
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+
     const handleClickPinjamMobil = async () => {
         try {
             await doPinjamMobil(tanggal, gunakanSopir);
             setTanggal('');
-            setGunakanSopir(false);
+            setGunakanSopir('');
             setShowFormPinjamMobil(false);
         } catch (error) {
             Swal.fire({
@@ -91,7 +109,7 @@ const DasboardNasabah = ({ doLogout }) => {
             });
         }
     }
-            
+
     const handleClickPinjamUang = async () => {
         try {
             await doPinjamUang(jumlah, tenor);
@@ -110,23 +128,6 @@ const DasboardNasabah = ({ doLogout }) => {
     }
 
 
-    const handleClickBeliBarang = async () => {
-        try {
-            await doBeliBarang(nama_barang, alamat, jumlah_barang);
-            setNama_barang('');
-            setAlamat('');
-            setJumlah_barang('');
-            setShowFormBeliBarang(false);
-
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
@@ -441,17 +442,17 @@ const DasboardNasabah = ({ doLogout }) => {
 
                                     <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
                                         <p className="text-gray-600">contoh pengisian form :</p>
-                                       <p className="font-light text-gray-600 text mb-1"> Tanggal :  2 - 3 Mei
+                                        <p className="font-light text-gray-600 text mb-1"> Tanggal :  2 - 3 Mei
                                         </p>
                                         <p className="font-light text-gray-600 text mb-1">
                                             Menggunakan Sopir : Ya </p>
 
 
                                     </div>
-                                    <button 
-                                    onClick={handleClickPinjamMobil}
-                                    className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] "
-                                    disabled={loadingPinjamMobil}
+                                    <button
+                                        onClick={handleClickPinjamMobil}
+                                        className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] "
+                                        disabled={loadingPinjamMobil}
                                     >
                                         {loadingPinjamMobil ? (
                                             <div>
@@ -478,11 +479,11 @@ const DasboardNasabah = ({ doLogout }) => {
                         {showFormPinjamUang ? (
                             <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[400px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
-                                    <button
-                                        className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
+                                <button
+                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                         onClick={() => setShowFormPinjamUang(false)}
                                     >
-                                        <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
+                                        <FontAwesomeIcon icon={faXmark} size="lg" />
                                     </button>
                                 </div>
 
