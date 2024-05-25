@@ -5,10 +5,10 @@ import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
 
 // Data users dan nomor
-const users = [ ];
+// const users = [ ];
 
-const nomor = [
-];
+// const nomor = [
+// ];
 
 const DashboardAdmin = () => {
     const [showNomorHp, setShowNomorHp] = useState(false);
@@ -19,25 +19,28 @@ const DashboardAdmin = () => {
     const [itemsPerPage] = useState(20);
     
 
-    const { members, addMember, deleteMember, editMember, fetchAnggota, tambahAnggota    } = useMembers();
+    // const { members, addMember, deleteMember, editMember, fetchAnggota, tambahAnggota, loadingAdd    } = useMembers();
+    const { members, fetchAnggota, tambahAnggota, loadingAdd, handleDelete
+     } = useMembers();
+    //  console.log('tambah Anggota',members)
 
 
     // Menggabungkan data users dan nomor
-    const initialNasabah = users.map(user => {
-        const simpanan = nomor.find(s => s.user_id === user.id_user) || {
-            nomorhp: 0
-        };
-        return {
-            id: user.id_user,
-            nama: user.user,
-            password: user.password,
-            nomorHp: simpanan.nomorhp
-        };
-    });
+    // const initialNasabah = users.map(user => {
+    //     const simpanan = nomor.find(s => s.user_id === user.id_user) || {
+    //         nomorhp: 0
+    //     };
+    //     return {
+    //         id: user.id_user,
+    //         nama: user.user,
+    //         password: user.password,
+    //         nomorHp: simpanan.nomorhp
+    //     };
+    // });
 
-    const [nasabah, setNasabah] = useState(initialNasabah);
+    // const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('');
-    const [nomorHp, setnomorHp] = useState('');
+    const [nomorHp, setNomorHp] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -58,27 +61,37 @@ const DashboardAdmin = () => {
     //     setPassword('');
     // };
 
+    
+
     const handleTambahAnggota = async () => {
         try {
-            await tambahAnggota (nama, nomorHp, username, password);
+            await tambahAnggota(nama, nomorHp, username, password);
             setNama('');
-            setnomorHp('');
+            setNomorHp('');
             setUsername('');
             setPassword('');
             setShowFormTambah(false);
-
+            
         } catch (error) {
+            console.log('error', error)
             Swal.fire({
                 title: 'Error!',
                 text: error.message,
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
+            
         }
+    } 
+
+    const deleteMember = async ( id ) => {
+        await handleDelete(id)
+        alert("berhasil menghapus")
     }
 
+
     const editSimpanan = () => {
-        const updatedNasabah = nasabah.map(nasabah => {
+        const updatedNasabah = members.map(nasabah => {
             if (nasabah.id === currentId) {
                 return {
                     ...nasabah,
@@ -101,13 +114,13 @@ const DashboardAdmin = () => {
         setPassword('');
     };
 
-    const hapusNasabah = id => {
-        const updatedNasabah = nasabah.filter(nasabah => nasabah.id !== id);
-        setNasabah(updatedNasabah);
-    };
+    // const hapusNasabah = id => {
+    //     const updatedNasabah = members.filter(nasabah => nasabah.id !== id);
+    //     setNasabah(updatedNasabah);
+    // };
 
     const handleEditClick = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
+        const selectedNasabah = members.find(n => n.id === id);
         setNama(selectedNasabah.nama);
         setnomorHp(selectedNasabah.nomorHp);
         setCurrentId(id);
@@ -115,7 +128,7 @@ const DashboardAdmin = () => {
     };
 
     // Fungsi untuk memfilter nasabah berdasarkan kata kunci pencarian
-    const filteredNasabah = nasabah.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredNasabah = members.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
     // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -171,7 +184,7 @@ const DashboardAdmin = () => {
                                     type="number" placeholder="Masukkan Nomor Hp"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={nomorHp}
-                                    onChange={(e) => setnomorHp(e.target.value)}
+                                    onChange={(e) => setNomorHp(e.target.value)}
                                 />
                                 <button onClick={editSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
                                     Kirim
@@ -206,7 +219,7 @@ const DashboardAdmin = () => {
                                         className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                         type="tel" placeholder="No Hp"
                                         value={nomorHp}
-                                        onChange={(e) => setnomorHp(e.target.value)}
+                                        onChange={(e) => setNomorHp(e.target.value)}
                                     />
                                     <input
                                         className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
@@ -221,8 +234,16 @@ const DashboardAdmin = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]">
-                                    Kirim
+                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]" 
+                                disabled={loadingAdd}>
+                                    {loadingAdd ? (
+                                        <div>
+                                            <p>Pengajuan sedang diproses</p>
+                                        </div>
+                                    ) : (
+                                        "Kirim"
+
+                                    )}
                                 </button>
                             </div>
                         </div>
@@ -264,20 +285,20 @@ const DashboardAdmin = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((members, index) => (
-                                <tr key={members.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-2 py-2">{members.nama}</td>
-                                    <td className="border text-center px-2 py-2">{members.no_telp}</td>
+                            {currentItems.map((anggota, index) => (
+                                <tr key={anggota.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                                    <td className="border text-center px-2 py-2">{anggota.nama}</td>
+                                    <td className="border text-center px-2 py-2">{anggota.no_telp}</td>
                                     <td className="border text-center px-2 py-2 flex justify-around  w-[50px]">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleEditClick(members.id)}
+                                            onClick={() => handleEditClick(anggota.id)}
                                         >
                                             <FontAwesomeIcon icon={faPenToSquare} />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusNasabah(members.id)}
+                                            onClick={() => deleteMember(anggota.id) }
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>

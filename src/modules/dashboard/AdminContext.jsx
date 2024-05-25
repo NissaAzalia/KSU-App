@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, fetchInfoPinjaman } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, fetchInfoPinjaman } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 const initialMembersState = {
@@ -14,11 +14,11 @@ const initialMembersState = {
   // handleFetchId: () => {},
   addMember: () => { },
   // editMember: () => {},
-  // deleteMember: () => {},
+  handleDelete: () => {},
   // handleEditClick: () => {},
   fetchAnggota: () => { },
-  tambahAnggota: () => { },
-  tampilkanPinjaman: () => {},
+  // tambahAnggota: () => { },
+  // tampilkanPinjaman: () => {},
 
 }
 
@@ -62,37 +62,31 @@ const MemberProvider = ({ children }) => {
     });
     Swal.showLoading();
 
-    try {
-      // fetch api
-      const apiResult = await addAnggota(nama, nomorHp, username, password);
-      const { status, message } = apiResult.data;
+    // fetch api 
+    const apiResult = await addAnggota(nama, nomorHp, username, password)
 
-      if (status === 'success') {
-        Swal.fire({
-          title: 'Sukses',
-          text: 'Berhasil mengirim data servis',
-          icon: 'success'
-        });
-      } else {
-        Swal.fire({
-          title: 'Gagal',
-          text: message || 'Gagal mengirim service',
-          icon: 'error'
-        });
-      }
-    } catch (error) {
-      console.error('Error adding member:', error);
+    console.log('apiresult' ,apiResult)
+    const { status, message } = apiResult.data 
+
+    // cek sukses / error 
+    if (status != 'Success') {
+      Swal.hideLoading()
       Swal.fire({
-        title: 'Gagal',
-        text: 'Terjadi kesalahan saat menambahkan anggota',
-        icon: 'error'
-      });
-    } finally {
-      // hilangkan tampilan loading
-      Swal.hideLoading();
-      // set loading false
-      setLoadingAdd(false);
+        title: `Gagal mengirim service`,
+        text: message,
+        showConfirmButton: true
+      })
     }
+
+    // set loading false 
+    setLoadingAdd(false)
+  
+    // hilangkan tampilan loading
+    Swal.hideLoading()
+    Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil mengirim data servis'
+    }) 
 };
 
 
@@ -103,9 +97,10 @@ const MemberProvider = ({ children }) => {
   }
 
   // Fungsi untuk menghapus anggota koperasi
-  // const deleteMember = (id) => {
-  //   setMembers(members.filter(member => member.id !== id));
-  // };
+  const handleDelete = async (id) => {
+    await deleteMember(id);
+
+  };
 
   // const editClick = (id) => {
   //   const selectedMembers = members.find(n => n.id === id);
@@ -151,24 +146,25 @@ const MemberProvider = ({ children }) => {
     tampilkanPinjaman();
   }, []);
 
-  console.log(`Nilai dari "members":`, ...members);
-  console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
+  // console.log(`Nilai dari "members":`, ...members);
+  // console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
 
   //Nilai konteks yang disediakan oleh provider
-  const value = {
-    members,
-    // addMember,
-    // editMember,
-    // deleteMember,
-    fetchAnggota,
-    tambahAnggota,
-    tampilkanPinjaman,
-    infoPinjaman,
-  };
+  // const value = {
+  //   members,
+  //   infoPinjaman,
+  //   loadingAdd,
+  //   // addMember,
+  //   // editMember,
+  //   // deleteMember,
+  //   fetchAnggota,
+  //   tambahAnggota,
+  //   tampilkanPinjaman,
+  // };
 
 
   return (
-    <MemberContext.Provider value={{ value }}>
+    <MemberContext.Provider value={{ members, infoPinjaman, loadingAdd, fetchAnggota, tambahAnggota, tampilkanPinjaman, handleDelete  }}>
       {children}
     </MemberContext.Provider>
   );

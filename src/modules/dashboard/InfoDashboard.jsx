@@ -7,16 +7,17 @@ const InfoDashboard = () => {
     const [showForm, setShowForm] = useState(false);
     const [showFormPinjaman, setShowFormPinjaman] = useState(false);
     const [currentId, setCurrentId] = useState(null);
-    const { infoPinjaman, tampilkanPinjaman } = useMembers();
+    const { infoPinjaman } = useMembers();
 
-    const [pinjamanAnggota, setPinjamanAnggota] = useState([
-        // { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
-        // { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
-    ]);
+    // const [pinjamanAnggota, setPinjamanAnggota] = useState([
+    //     // { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
+    //     // { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
+    // ]);
 
     const [nama, setNama] = useState('');
     const [nominal, setNominal] = useState('');
     const [sisaHutang, setSisaHutang] = useState('');
+    
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
@@ -29,12 +30,12 @@ const InfoDashboard = () => {
         }
 
         const newData = {
-            id: pinjamanAnggota.length + 1,
+            id: infoPinjaman.length + 1,
             nama: nama,
             nominal: parseFloat(nominal),
             sisaHutang: parseFloat(nominal),
         };
-        setPinjamanAnggota([...pinjamanAnggota, newData]);
+        setPinjamanAnggota([...infoPinjaman, newData]);
         setNama('');
         setNominal('');
         setShowForm(false);
@@ -47,7 +48,7 @@ const InfoDashboard = () => {
             return;
         }
 
-        const anggota = pinjamanAnggota.find(anggota => anggota.id === currentId);
+        const anggota = infoPinjaman.find(anggota => anggota.id === currentId);
         const jumlahKurang = parseFloat(sisaHutang);
 
         if (jumlahKurang > anggota.sisaHutang) {
@@ -55,7 +56,7 @@ const InfoDashboard = () => {
             return;
         }
 
-        const updatedAnggota = pinjamanAnggota.map(anggota => {
+        const updatedAnggota = infoPinjaman.map(anggota => {
             if (anggota.id === currentId) {
                 const sisa = anggota.sisaHutang - jumlahKurang;
                 return {
@@ -75,7 +76,7 @@ const InfoDashboard = () => {
     };
 
     const hapusPinjaman = id => {
-        const updatedAnggota = pinjamanAnggota.filter(anggota => anggota.id !== id);
+        const updatedAnggota = infoPinjaman.filter(anggota => anggota.id !== id);
         setPinjamanAnggota(updatedAnggota);
     };
 
@@ -89,7 +90,7 @@ const InfoDashboard = () => {
     };
 
     const handleEditClick = id => {
-        const anggota = pinjamanAnggota.find(anggota => anggota.id === id);
+        const anggota = infoPinjaman.find(anggota => anggota.id === id);
         setNama(anggota.nama);
         setNominal(anggota.nominal);
         setSisaHutang('');
@@ -98,9 +99,10 @@ const InfoDashboard = () => {
         setErrorMessage('');
     };
 
-    const filteredPinjaman = pinjamanAnggota.filter(pinjaman =>
-        pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredPinjaman = infoPinjaman.filter(pinjaman =>
+        pinjaman.nama && pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    
 
     // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -247,10 +249,10 @@ const InfoDashboard = () => {
                         <tbody>
                             {currentItems.map((pinjaman, index) => (
                                 <tr key={pinjaman.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.nominal.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.sisaHutang.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">   {pinjaman.sisaHutang === 0 ? (
+                                    <td className="border text-center px-4 py-2">{pinjaman.user_id}</td>
+                                    <td className="border text-center px-4 py-2">{pinjaman.jumlah_pinjaman.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
                                             Lunas
                                         </div>
