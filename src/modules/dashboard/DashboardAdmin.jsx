@@ -59,6 +59,8 @@ const DashboardAdmin = () => {
     const deleteMember = async (id) => {
         await handleDelete(id)
         alert("berhasil menghapus")
+        fetchAnggota()
+        // console.log(id)
     }
 
     const editSimpanan = () => {
@@ -99,7 +101,8 @@ const DashboardAdmin = () => {
     };
 
     // Fungsi untuk memfilter nasabah berdasarkan kata kunci pencarian
-    const filteredNasabah = members.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredNasabah = members.filter(n => 
+        n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
     // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -269,7 +272,7 @@ const DashboardAdmin = () => {
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => deleteMember(anggota.id)}
+                                            onClick={() => deleteMember(anggota.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>

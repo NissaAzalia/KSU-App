@@ -11,6 +11,7 @@ const initialMembersState = {
   curentMembers: null,
   loadingAdd: false,
   loadingAnggota: false,
+  infoPinjaman: [],
   // handleFetchId: () => {},
   addMember: () => { },
   // editMember: () => {},
@@ -99,6 +100,7 @@ const MemberProvider = ({ children }) => {
   // Fungsi untuk menghapus anggota koperasi
   const handleDelete = async (id) => {
     await deleteMember(id);
+    console.log(id)
 
   };
 
@@ -109,11 +111,14 @@ const MemberProvider = ({ children }) => {
 
   const tampilkanPinjaman = async () => {
     if (loadingPinjaman) return
-    setLoadingPinjaman(true)
-    const apiCall = await fetchInfoPinjaman();
 
-    const {data} = apiCall.data;
+    setLoadingPinjaman(true)
+
+    const apiCall = await fetchInfoPinjaman();
+    const { data } = apiCall.data;
+
     setInfoPinjaman(data.pinjamans)
+    console.log(data.pinjamans)
     setLoadingPinjaman(false)
   }
 
