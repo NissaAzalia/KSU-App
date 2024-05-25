@@ -38,26 +38,44 @@ export const daftarAnggota = async () => {
     })
 }
 
-export const deleteMember = async () => {
+export const deleteMember = async (id) => {
   const token = getToken();
 
-  return axios.get('https://apiksu.ndamelweb.com/nasabah/' + id, {
+  return axios.delete(`https://apiksu.ndamelweb.com/nasabah/${id}`, {
     headers: {
-      'Authorization': 'Bearer ' + token
+      'Authorization': `Bearer ${token}`
     }
   })
-    .then(response => {
-      return response
-    })
-    .catch(err => {
-      return err.response.data
-    })
+  .then(response => {
+    return response;
+  })
+  .catch(err => {
+    return err.response.data;
+  });
 }
 
-export const updateMember = async () => {
+
+// export const deleteMember = async (id) => {
+//   const token = getToken();
+//   const deletes = await axios
+//     .delete(http + "/nasabah/" + id, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     })
+//     .then((response) => {
+//       return response;
+//     })
+//     .catch((eror) => {
+//       return eror.response;
+//     });
+//   return deletes;
+// };
+
+export const updateMember = async (id, notelp) => {
   const token = getToken();
 
-  return axios.put('https://apiksu.ndamelweb.com/nasabah/' + id, {}, {
+  return axios.put('https://apiksu.ndamelweb.com/nasabah/' + id, {notelp}, {
     headers: {
       'Authorization': 'Bearer ' + token
     }

@@ -14,7 +14,7 @@ const initialMembersState = {
   // handleFetchId: () => {},
   addMember: () => { },
   // editMember: () => {},
-  handleDelete: () => {},
+  // handleDelete: () => {},
   // handleEditClick: () => {},
   fetchAnggota: () => { },
   // tambahAnggota: () => { },
@@ -40,7 +40,7 @@ const MemberProvider = ({ children }) => {
   const [loadingAnggota, setLoadingAnggota] = useState(false);
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
   const [infoPinjaman, setInfoPinjaman] = useState([]);
-  // const [curentMembers, setcurentMembers] = useState(null)
+  const [curentMembers, setcurentMembers] = useState(null)
 
 
   // Fungsi untuk menambah anggota koperasi
@@ -91,10 +91,10 @@ const MemberProvider = ({ children }) => {
 
 
   // Fungsi edit nasabah
-  const editMember = (id, updateData) => {
-    const updatedMember = members.map((member) => member.id === id ? { ...member, ...updateData } : member);
-    setMembers(updatedMember)
-  }
+  // const editMember = (id, updateData) => {
+  //   const updatedMember = members.map((member) => member.id === id ? { ...member, ...updateData } : member);
+  //   setMembers(updatedMember)
+  // }
 
   // Fungsi untuk menghapus anggota koperasi
   const handleDelete = async (id) => {
@@ -107,18 +107,13 @@ const MemberProvider = ({ children }) => {
   //   setMembers(selectedMembers)
   // }
 
-  // const filteredNasabah = members.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
-
   const tampilkanPinjaman = async () => {
     if (loadingPinjaman) return
     setLoadingPinjaman(true)
     const apiCall = await fetchInfoPinjaman();
 
     const {data} = apiCall.data;
-
     setInfoPinjaman(data.pinjamans)
-    
-
     setLoadingPinjaman(false)
   }
 
@@ -134,12 +129,8 @@ const MemberProvider = ({ children }) => {
     setMembers(data.users)
     // console.log (members)
     
-
     setLoadingAnggota(false)
-
-    
   };
-
 
   useEffect(() => {
     fetchAnggota();
@@ -149,18 +140,6 @@ const MemberProvider = ({ children }) => {
   // console.log(`Nilai dari "members":`, ...members);
   // console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
 
-  //Nilai konteks yang disediakan oleh provider
-  // const value = {
-  //   members,
-  //   infoPinjaman,
-  //   loadingAdd,
-  //   // addMember,
-  //   // editMember,
-  //   // deleteMember,
-  //   fetchAnggota,
-  //   tambahAnggota,
-  //   tampilkanPinjaman,
-  // };
 
 
   return (

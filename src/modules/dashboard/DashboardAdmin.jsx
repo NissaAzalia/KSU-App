@@ -4,12 +4,6 @@ import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
 
-// Data users dan nomor
-// const users = [ ];
-
-// const nomor = [
-// ];
-
 const DashboardAdmin = () => {
     const [showNomorHp, setShowNomorHp] = useState(false);
     const [showFormTambah, setShowFormTambah] = useState(false);
@@ -17,12 +11,9 @@ const DashboardAdmin = () => {
     const [searchQuery, setSearchQuery] = useState('');  // State untuk pencarian
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
-    
 
-    // const { members, addMember, deleteMember, editMember, fetchAnggota, tambahAnggota, loadingAdd    } = useMembers();
-    const { members, fetchAnggota, tambahAnggota, loadingAdd, handleDelete
-     } = useMembers();
-    //  console.log('tambah Anggota',members)
+
+    const { members, fetchAnggota,tambahAnggota, loadingAdd, handleDelete } = useMembers();
 
 
     // Menggabungkan data users dan nomor
@@ -44,25 +35,6 @@ const DashboardAdmin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // const tambahNasabah = () => {
-    //     const newData = {
-    //         id: nasabah.length + 1,
-    //         nama: nama,
-    //         nomorHp: nomorHp,
-    //         username: username,
-    //         password: password,
-    //     };
-
-    //     setNasabah([...nasabah, newData]);
-    //     setShowFormTambah(false);
-    //     setNama('');
-    //     setnomorHp('')
-    //     setUsername('');
-    //     setPassword('');
-    // };
-
-    
-
     const handleTambahAnggota = async () => {
         try {
             await tambahAnggota(nama, nomorHp, username, password);
@@ -71,7 +43,8 @@ const DashboardAdmin = () => {
             setUsername('');
             setPassword('');
             setShowFormTambah(false);
-            
+            fetchAnggota()
+
         } catch (error) {
             console.log('error', error)
             Swal.fire({
@@ -80,15 +53,13 @@ const DashboardAdmin = () => {
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
-            
         }
-    } 
+    }
 
-    const deleteMember = async ( id ) => {
+    const deleteMember = async (id) => {
         await handleDelete(id)
         alert("berhasil menghapus")
     }
-
 
     const editSimpanan = () => {
         const updatedNasabah = members.map(nasabah => {
@@ -109,7 +80,7 @@ const DashboardAdmin = () => {
         setShowFormTambah(false);
         setShowNomorHp(false);
         setNama('');
-        setnomorHp('')
+        setNomorHp('')
         setUsername('');
         setPassword('');
     };
@@ -122,7 +93,7 @@ const DashboardAdmin = () => {
     const handleEditClick = id => {
         const selectedNasabah = members.find(n => n.id === id);
         setNama(selectedNasabah.nama);
-        setnomorHp(selectedNasabah.nomorHp);
+        setNomorHp(selectedNasabah.nomorHp);
         setCurrentId(id);
         setShowNomorHp(true);
     };
@@ -234,8 +205,8 @@ const DashboardAdmin = () => {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]" 
-                                disabled={loadingAdd}>
+                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]"
+                                    disabled={loadingAdd}>
                                     {loadingAdd ? (
                                         <div>
                                             <p>Pengajuan sedang diproses</p>
@@ -298,7 +269,7 @@ const DashboardAdmin = () => {
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => deleteMember(anggota.id) }
+                                            onClick={() => deleteMember(anggota.id)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
