@@ -61,8 +61,8 @@ const InfoDashboard = () => {
             await handleTambahPinjaman(nama, jumlah_pinjaman);
             setNama('');
             setJumlah_pinjaman('');
-            tampilkanPinjaman();
             setShowForm(false);
+            tampilkanPinjaman();
         } catch (error) {
             console.log('error', error)
             Swal.fire({
@@ -94,6 +94,7 @@ const InfoDashboard = () => {
     const editPinjaman = async () => {
         if (!bayar_hutang) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            tampilkanTambahPinjamLagi()
             return;
         }
     
@@ -123,6 +124,7 @@ const InfoDashboard = () => {
     const handleEditTambahPinjaman = async () => {
         if (!hutang) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            tampilkanPinjaman()
             return;
         }
 
