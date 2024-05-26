@@ -66,12 +66,12 @@ export const apiUpdateMember = async (id, noBaru) => {
       'Authorization': 'Bearer ' + token
     }
   })
-  .then(response => {
-    return response.data; // Mengembalikan data yang diterima dari backend
-  })
-  .catch(err => {
-    throw err.response.data; // Melemparkan pesan error dari backend
-  });
+    .then(response => {
+      return response.data; // Mengembalikan data yang diterima dari backend
+    })
+    .catch(err => {
+      throw err.response.data; // Melemparkan pesan error dari backend
+    });
 }
 
 
@@ -115,7 +115,7 @@ export const fetchTambahPinjamanLagi = async (id, hutang) => {
   const token = getToken();
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/tambahhutang/` + id, {
-    hutang : hutang
+    hutang: hutang
   },
     {
       headers: {
@@ -180,3 +180,45 @@ export const fetchSimpanans = async () => {
     })
 };
 
+
+export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya) => {
+  const token = getToken();
+
+  return axios.put(`https://apiksu.ndamelweb.com/nasabah/updatesimpanan/` + id, {
+    simpanan_pokok: simpanan_pokok,
+    simpanan_wajib: simpanan_wajib,
+    simpanan_sukarela: simpanan_sukarela,
+    simpanan_hariraya: simpanan_hariraya
+  },
+    {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(response => {
+      return response
+    })
+    .catch(err => {
+      return err.response
+    })
+}
+
+export const kurangiSukarela = async (id, simpananSukarela,simpananHariraya) => {
+  const token = getToken();
+
+  return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
+    simpanan_sukarela: simpananSukarela,
+    simpanan_hariraya: simpananHariraya
+  },
+    {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(response => {
+      return response
+    })
+    .catch(err => {
+      return err.response
+  })
+}

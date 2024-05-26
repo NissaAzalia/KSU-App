@@ -2,6 +2,7 @@ import { faMagnifyingGlass, faPlusCircle, faTrashCan, faXmark } from '@fortaweso
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
+import Swal from 'sweetalert2';
 
 // Data users dan simpanans
 const users = [
@@ -109,7 +110,7 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {simpanans } = useMembers();
+    const {simpanans, handleTambahSimpanan,tampilkanSimpanans, kurangSukarela } = useMembers();
 
     console.log(simpanans)
 
@@ -132,6 +133,7 @@ const DaftarSimpanan = () => {
     // });
 
     // const [nasabah, setNasabah] = useState(initialNasabah);
+    const [nama, setNama] = useState('')
     const [simpananPokok, setSimpananPokok] = useState('');
     const [simpananWajib, setSimpananWajib] = useState('');
     const [simpananSukarela, setSimpananSukarela] = useState('');
@@ -163,9 +165,39 @@ const DaftarSimpanan = () => {
         setSimpananHariRaya('');
     };
 
-    const handleClickTambahAllSimpanan = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
-        setCurrentNasabah(selectedNasabah);
+    const handleTambahAllSimpanan = async () => {
+        if (!simpananPokok && !simpananWajib && !simpananSukarela && !simpananHariRaya) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong semua.');
+            return;
+        }
+
+
+        try {
+            await handleTambahSimpanan(currentNasabah,simpananPokok, simpananWajib, simpananSukarela, simpananHariRaya);  
+            setSimpananPokok('');
+            setSimpananWajib('');
+            setSimpananSukarela('');
+            setSimpananHariRaya('');
+            await tampilkanSimpanans();  
+            setShowFormTambahAllSimpanan(false);  
+            await tampilkanSimpanans();  
+        } catch (error) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+        
+        handleCloseFormTambah();
+    };
+
+
+    const handleClickTambahAllSimpanan = (id,nama) => {
+        setNama(nama)
+        setCurrentNasabah(id);
         setSimpananPokok('');
         setSimpananWajib('');
         setSimpananSukarela('');
@@ -173,12 +205,12 @@ const DaftarSimpanan = () => {
         setErrorMessage(''); // Reset error message when opening the form
         setShowFormTambahAllSimpanan(true);
     };
-    const handleKurangClickSkr = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
-        setCurrentNasabah(selectedNasabah);
-        setErrorMessage('');
-        setSimpananSukarela(''); // Set input menjadi kosong saat membuka form
-        setShowFormSimpananSkr(true);
+
+    const handleKurangClickSkr = (id) => {
+        setCurrentNasabah(id)
+        setNama(nama)
+        setSimpananSukarela(simpananSukarela)
+        setShowFormSimpananSkr(true)
     };
 
     const handleKurangClickHr = id => {
@@ -189,56 +221,30 @@ const DaftarSimpanan = () => {
         setShowFormSimpananHr(true);
     };
 
-    const handleTambahAllSimpanan = () => {
-        if (!simpananPokok && !simpananWajib && !simpananSukarela && !simpananHariRaya) {
-            setErrorMessage('*Tidak bisa mengirim jika inputan kosong semua.');
-            return;
-        }
+   
 
-        const updatedNasabah = nasabah.map(n => {
-            if (n.id === currentNasabah.id) {
-                return {
-                    ...n,
-                    simpananPokok: simpananPokok ? n.simpananPokok + parseInt(simpananPokok) : n.simpananPokok,
-                    simpananWajib: simpananWajib ? n.simpananWajib + parseInt(simpananWajib) : n.simpananWajib,
-                    simpananSukarela: simpananSukarela ? n.simpananSukarela + parseInt(simpananSukarela) : n.simpananSukarela,
-                    simpananHariRaya: simpananHariRaya ? n.simpananHariRaya + parseInt(simpananHariRaya) : n.simpananHariRaya,
-                };
-            }
-            return n;
-        });
-        setNasabah(updatedNasabah);
-        console.log(updatedNasabah);
-        handleCloseFormTambah();
-    };
-
-
-    const handleKurangSimpananSkr = () => {
+    const handleKurangSimpananSkr = async () => {
         if (!simpananSukarela) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
         }
 
-        const jumlahKurang = parseInt(simpananSukarela, 10);
-
-        if (jumlahKurang > currentNasabah.simpananSukarela) {
-            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
-            return;
+        try{
+            await kurangSukarela(currentNasabah, simpananSukarela, simpananHariRaya);
+            setSimpananSukarela()
+            await tampilkanSimpanans()
+            setShowFormSimpananSkr(false)
+            await tampilkanSimpanans()
+        }catch (error) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
-
-        const updatedNasabah = nasabah.map(n => {
-            if (n.id === currentNasabah.id) {
-                return {
-                    ...n,
-                    simpananSukarela: n.simpananSukarela - jumlahKurang
-                };
-            }
-            return n;
-        });
-
-        setNasabah(updatedNasabah);
-        handleCloseSkr();
-    };
+    }
 
     const handleKurangSimpananHr = () => {
         if (!simpananHariRaya) {
@@ -315,29 +321,29 @@ const DaftarSimpanan = () => {
 
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                                <p>simpanan Pokok sebelumnya : {currentNasabah?.simpananPokok}</p>
+                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <p>simpanan Pokok sebelumnya : {simpananPokok}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananPokok}
                                     onChange={e => setSimpananPokok(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
+                                <p className='mt-[10px]'>simpanan Wajib sebelumnya : {simpananWajib}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananWajib}
                                     onChange={e => setSimpananWajib(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
+                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {simpananSukarela}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananSukarela}
                                     onChange={e => setSimpananSukarela(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
+                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {simpananHariRaya}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
@@ -367,6 +373,37 @@ const DaftarSimpanan = () => {
 
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <p>simpanan sukarela sebelumnya : {simpananSukarela}</p>
+                                <input
+                                    type="number" placeholder="Masukkan Nominal Penarikan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={simpananSukarela}
+                                    onChange={e => setSimpananSukarela(e.target.value)}
+                                />
+                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                                <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* {showFormSimpananSkr && (
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleCloseSkr}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
+
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
                                 <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
                                 <input
@@ -381,7 +418,7 @@ const DaftarSimpanan = () => {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
 
                 {showFormSimpananHr && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
@@ -445,7 +482,7 @@ const DaftarSimpanan = () => {
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_sukarela.toLocaleString()}
-                                        <button onClick={() => handleKurangClickSkr(nasabah.id)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
+                                        <button onClick={() => handleKurangClickSkr(nasabah.id_simpanan)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_hariraya.toLocaleString()}
                                         <button onClick={() => handleKurangClickHr(nasabah.id)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
@@ -453,7 +490,7 @@ const DaftarSimpanan = () => {
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleClickTambahAllSimpanan(nasabah.id)}
+                                            onClick={() => handleClickTambahAllSimpanan(nasabah.id_simpanan, nasabah.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} />
                                         </button>
