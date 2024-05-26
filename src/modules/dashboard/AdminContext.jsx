@@ -2,9 +2,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman } from './apiAdmin';
 import Swal from 'sweetalert2';
 
+// Initial state for member data
 const initialMembersState = {
   members: [],
   simpanans: [],
@@ -17,210 +18,186 @@ const initialMembersState = {
   loadingAdd: false,
   loadingAddPinjaman: false,
   loadingAnggota: false,
-  // handleFetchId: () => {},
   addMember: () => { },
   // editMember: () => {},
   // handleDelete: () => {},
   // handleEditClick: () => {},
   fetchAnggota: () => { },
   // tambahAnggota: () => { },
-
   tampilkanSimpanans: () => {},
+};
 
-}
-
-// Buat konteks untuk data anggota koperasi
+// Create context for cooperative members data
 const MemberContext = createContext(initialMembersState);
 
-// Custom hook untuk menggunakan konteks data anggota koperasi
+// Custom hook to use cooperative members data context
 const useMembers = () => useContext(MemberContext);
 
-
-
-// Komponen provider untuk menyediakan data anggota koperasi
+// Provider component to provide cooperative members data
 const MemberProvider = ({ children }) => {
-  // State untuk menyimpan data anggota koperasi
-
+  // State to store cooperative members data
   const [members, setMembers] = useState([]);
-  // const [users, setUsers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingAnggota, setLoadingAnggota] = useState(false);
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
   const [infoPinjaman, setInfoPinjaman] = useState([]);
-  const [simpanans, setSimpanans] = useState([])
-  const [curentMembers, setcurentMembers] = useState(null)
+  const [simpanans, setSimpanans] = useState([]);
+  const [curentMembers, setcurentMembers] = useState(null);
 
-
-  // Fungsi untuk menambah anggota koperasi
-  // const addMember = (member) => {
-  //   setMembers([...members, member]);
-  // };
-
+  // Function to add a member
   const tambahAnggota = async (nama, nomorHp, username, password) => {
-    // cek loading
+    // Check loading state
     if (loadingAdd) return;
 
-    // set loading true
+    // Set loading to true
     setLoadingAdd(true);
 
-    // tampilkan loading pake swal
+    // Show loading using Swal
     Swal.fire({
       title: "Loading",
       text: "Mengirim data.."
     });
     Swal.showLoading();
 
-    // fetch api 
-    const apiResult = await addAnggota(nama, nomorHp, username, password)
+    // Fetch API
+    const apiResult = await addAnggota(nama, nomorHp, username, password);
 
-    console.log('apiresult' ,apiResult)
-    const { status, message } = apiResult.data 
-
-    // cek sukses / error 
-    if (status != 'Success') {
-      Swal.hideLoading()
+    // Handle success or error
+    const { status, message } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.hideLoading();
       Swal.fire({
         title: `Gagal`,
         text: message,
         showConfirmButton: true
-      })
+      });
     }
 
-    // set loading false 
-    setLoadingAdd(false)
-  
-    // hilangkan tampilan loading
-    Swal.hideLoading()
+    // Set loading to false
+    setLoadingAdd(false);
+
+    // Hide loading
+    Swal.hideLoading();
     Swal.fire({
       title: 'Sukses',
       text: 'Berhasil'
-    }) 
-};
+    });
+  };
 
+  // Function to handle adding a loan
+  const handleTambahPinjaman = async (nama, jumlah_pinjaman) => {
+    if (loadingPinjaman) return;
 
-const handleTambahPinjaman = async (nama, jumlah_pinjaman) => {
-  if (loadingPinjaman) return;
-
-    // set loading true
+    // Set loading to true
     setLoadingPinjaman(true);
 
-    // tampilkan loading pake swal
+    // Show loading using Swal
     Swal.fire({
       title: "Loading",
       text: "Mengirim data.."
     });
     Swal.showLoading();
 
-  const apiResult = await tambahPinjaman(nama, jumlah_pinjaman)
+    // Fetch API
+    const apiResult = await tambahPinjaman(nama, jumlah_pinjaman);
 
-  console.log('apiresult' ,apiResult)
+    // Handle success or error
+    const { status, message } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.hideLoading();
+      Swal.fire({
+        title: `Gagal`,
+        text: message,
+        showConfirmButton: true
+      });
+    }
 
-  const { status, message } = apiResult.data 
-   // cek sukses / error 
-   if (status != 'Success') {
-    Swal.hideLoading()
+    // Set loading to false
+    setLoadingAdd(false);
+
+    // Hide loading
+    Swal.hideLoading();
     Swal.fire({
-      title: `Gagal`,
-      text: message,
-      showConfirmButton: true
-    })
-  }
-
-  // set loading false 
-  setLoadingAdd(false)
-
-  // hilangkan tampilan loading
-  Swal.hideLoading()
-  Swal.fire({
-    title: 'Sukses',
-    text: 'Berhasil'
-  }) 
-}
-
-
-
-  // Fungsi edit nasabah
-  // const editMember = (id, updateData) => {
-  //   const updatedMember = members.map((member) => member.id === id ? { ...member, ...updateData } : member);
-  //   setMembers(updatedMember)
-  // }
-
-  // Fungsi untuk menghapus anggota koperasi
-  const handleDelete = async (id) => {
-    await deleteMember(id);
-
+      title: 'Sukses',
+      text: 'Berhasil'
+    });
   };
 
-  // const editClick = (id) => {
-  //   const selectedMembers = members.find(n => n.id === id);
-  //   setMembers(selectedMembers)
-  // }
+  // Function to delete a member
+  const handleDelete = async (id) => {
+    await deleteMember(id);
+    console.log(id);
+  };
 
+  // Function to display loans
   const tampilkanPinjaman = async () => {
-    if (loadingPinjaman) return
-    setLoadingPinjaman(true)
+    if (loadingPinjaman) return;
+
+    setLoadingPinjaman(true);
+
     const apiCall = await fetchInfoPinjaman();
+    const { data } = apiCall.data;
 
-    const {data} = apiCall.data;
-    setInfoPinjaman(data.pinjamans)
-    setLoadingPinjaman(false)
-  }
+    setInfoPinjaman(data.pinjamans);
+    setLoadingPinjaman(false);
+  };
 
+  // Function to display savings
+  const tampilkanSimpanans = async () => {
+    if (loadingAnggota) return;
 
+    setLoadingAnggota(true);
+    const apiCall = await fetchSimpanans();
+    const { data } = apiCall.data;
+    setSimpanans(data.simpanans);
+    setLoadingAnggota(false);
+  };
+
+  // Function to pay debts
   const tampilkanBayarHutang = async (id, bayar_hutang) => {
     fetchBayarHutang(id, bayar_hutang);
   };
 
+  // Function to add another loan
   const tampilkanTambahPinjamLagi = async (id, hutang) => {
     fetchTambahPinjamanLagi(id, hutang);
   };
 
+  // Function to delete a loan
   const handleDeletePinjaman = async(id) => {
-    fetchHapusPinjaman(id)
-  }
-
-
-  const tampilkanSimpanans = async () => {
-    if (loadingAnggota) return
-
-    setLoadingAnggota(true)
-    const apiCall = await fetchSimpanans()
-    const { data } = apiCall.data
-    setSimpanans(data.simpanans)
-    // console.log (members)
-    setLoadingAnggota(false)
+    fetchHapusPinjaman(id);
   };
 
-  // fungsi menampilkan anggota 
+  // Function to fetch members
   const fetchAnggota = async () => {
-    if (loadingAnggota) return
+    if (loadingAnggota) return;
 
-    setLoadingAnggota(true)
-    const apiCall = await daftarAnggota()
-    const { data } = apiCall.data
+    setLoadingAnggota(true);
+    const apiCall = await daftarAnggota();
+    const { data } = apiCall.data;
 
-    setMembers(data.users)
-    // console.log (members)
-    
-    setLoadingAnggota(false)
+    setMembers(data.users);
+
+    setLoadingAnggota(false);
   };
 
+  // Function to update member information
+  const updateMember = async (id, noBaru) =>{
+    await apiUpdateMember(id, noBaru);
+  };
 
-console.log(simpanans)
   useEffect(() => {
     tampilkanSimpanans();
     fetchAnggota();
     tampilkanPinjaman();
+    tampilkanSimpanans();
   }, []);
 
-console.log(simpanans)
-  // console.log(`Nilai dari "members":`, ...members);
-  // console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
-
-
+  // Log simpanans
+  console.log(simpanans);
 
   return (
-    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, handleTambahPinjaman,fetchAnggota,handleDelete, handleDeletePinjaman, tambahAnggota,tampilkanBayarHutang,tampilkanTambahPinjamLagi, tampilkanPinjaman,tampilkanSimpanans  }}>
+    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
       {children}
     </MemberContext.Provider>
   );

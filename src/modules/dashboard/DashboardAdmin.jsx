@@ -12,26 +12,11 @@ const DashboardAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
 
+    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember, } = useMembers();
 
-    const { members, fetchAnggota,tambahAnggota, loadingAdd, handleDelete } = useMembers();
-
-
-    // Menggabungkan data users dan nomor
-    // const initialNasabah = users.map(user => {
-    //     const simpanan = nomor.find(s => s.user_id === user.id_user) || {
-    //         nomorhp: 0
-    //     };
-    //     return {
-    //         id: user.id_user,
-    //         nama: user.user,
-    //         password: user.password,
-    //         nomorHp: simpanan.nomorhp
-    //     };
-    // });
-
-    // const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('');
     const [nomorHp, setNomorHp] = useState('');
+    const [noBaru, setNoBaru] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -57,23 +42,38 @@ const DashboardAdmin = () => {
     }
 
     const deleteMember = async (id) => {
-        await handleDelete(id)
-        alert("berhasil menghapus")
+        const konfirm = confirm ("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
+        if(konfirm){
+            try {
+                await handleDelete(id)
+                alert("berhasil menghapus")
+                fetchAnggota()
+            }catch (error){
+                alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
+
+            }
+        } else{
+            alert ("Penghapusan Dibatalkan")
+        }
     }
 
-    const editSimpanan = () => {
-        const updatedNasabah = members.map(nasabah => {
-            if (nasabah.id === currentId) {
-                return {
-                    ...nasabah,
-                    nomorHp: nomorHp
-                };
-            }
-            return nasabah;
-        });
-
-        setNasabah(updatedNasabah);
-        setShowNomorHp(false);
+    const handleUpdateNomorHp = async () => {
+        try {
+            await updateMember(currentId, noBaru);
+            alert("berhasil mengubah")
+            setNoBaru('');
+            await fetchAnggota();
+            setShowNomorHp(false);
+            await fetchAnggota();
+        } catch (error) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
     };
 
     const handleClose = () => {
@@ -85,21 +85,15 @@ const DashboardAdmin = () => {
         setPassword('');
     };
 
-    // const hapusNasabah = id => {
-    //     const updatedNasabah = members.filter(nasabah => nasabah.id !== id);
-    //     setNasabah(updatedNasabah);
-    // };
-
-    const handleEditClick = id => {
-        const selectedNasabah = members.find(n => n.id === id);
-        setNama(selectedNasabah.nama);
-        setNomorHp(selectedNasabah.nomorHp);
-        setCurrentId(id);
+    const handleEditClick = (id, no_telp) => {
+        setCurrentId(id)
+        setNoBaru(no_telp)
         setShowNomorHp(true);
     };
 
     // Fungsi untuk memfilter nasabah berdasarkan kata kunci pencarian
-    const filteredNasabah = members.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredNasabah = members.filter(n =>
+        n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
     // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -154,10 +148,10 @@ const DashboardAdmin = () => {
                                 <input
                                     type="number" placeholder="Masukkan Nomor Hp"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                    value={nomorHp}
-                                    onChange={(e) => setNomorHp(e.target.value)}
+                                    value={noBaru}
+                                    onChange={(e) => setNoBaru(e.target.value)}
                                 />
-                                <button onClick={editSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                <button onClick={handleUpdateNomorHp} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
                                     Kirim
                                 </button>
                             </div>
@@ -263,13 +257,13 @@ const DashboardAdmin = () => {
                                     <td className="border text-center px-2 py-2 flex justify-around  w-[50px]">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleEditClick(anggota.id)}
+                                            onClick={() => handleEditClick(anggota.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faPenToSquare} />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => deleteMember(anggota.id)}
+                                            onClick={() => deleteMember(anggota.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
