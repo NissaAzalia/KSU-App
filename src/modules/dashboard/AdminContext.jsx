@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, fetchInfoPinjaman } from './apiAdmin';
+import { addAnggota, apiUpdateMember, daftarAnggota, deleteMember, fetchInfoPinjaman } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 const initialMembersState = {
@@ -12,23 +12,16 @@ const initialMembersState = {
   loadingAdd: false,
   loadingAnggota: false,
   infoPinjaman: [],
-  // handleFetchId: () => {},
+  simpanans: [],
   addMember: () => { },
-  // editMember: () => {},
-  // handleDelete: () => {},
-  // handleEditClick: () => {},
-  fetchAnggota: () => { },
-  // tambahAnggota: () => { },
-  // tampilkanPinjaman: () => {},
-
 }
 
 // Buat konteks untuk data anggota koperasi
 const MemberContext = createContext(initialMembersState);
 
+
 // Custom hook untuk menggunakan konteks data anggota koperasi
 const useMembers = () => useContext(MemberContext);
-
 
 
 // Komponen provider untuk menyediakan data anggota koperasi
@@ -36,18 +29,16 @@ const MemberProvider = ({ children }) => {
   // State untuk menyimpan data anggota koperasi
 
   const [members, setMembers] = useState([]);
-  // const [users, setUsers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingAnggota, setLoadingAnggota] = useState(false);
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
+
+
   const [infoPinjaman, setInfoPinjaman] = useState([]);
+  const [simpanans, setSimpanans] = useState([])
+
   const [curentMembers, setcurentMembers] = useState(null)
 
-
-  // Fungsi untuk menambah anggota koperasi
-  // const addMember = (member) => {
-  //   setMembers([...members, member]);
-  // };
 
   const tambahAnggota = async (nama, nomorHp, username, password) => {
     // cek loading
@@ -86,28 +77,16 @@ const MemberProvider = ({ children }) => {
     Swal.hideLoading()
     Swal.fire({
       title: 'Sukses',
-      text: 'Berhasil mengirim data servis'
+      text: 'Berhasil mengirim data anggota'
     }) 
 };
-
-
-  // Fungsi edit nasabah
-  // const editMember = (id, updateData) => {
-  //   const updatedMember = members.map((member) => member.id === id ? { ...member, ...updateData } : member);
-  //   setMembers(updatedMember)
-  // }
 
   // Fungsi untuk menghapus anggota koperasi
   const handleDelete = async (id) => {
     await deleteMember(id);
     console.log(id)
-
   };
 
-  // const editClick = (id) => {
-  //   const selectedMembers = members.find(n => n.id === id);
-  //   setMembers(selectedMembers)
-  // }
 
   const tampilkanPinjaman = async () => {
     if (loadingPinjaman) return
@@ -118,9 +97,20 @@ const MemberProvider = ({ children }) => {
     const { data } = apiCall.data;
 
     setInfoPinjaman(data.pinjamans)
-    console.log(data.pinjamans)
+    // console.log(data.pinjamans)
     setLoadingPinjaman(false)
   }
+
+  const tampilkanSimpanans = async () => {
+    if (loadingAnggota) return
+
+    setLoadingAnggota(true)
+    const apiCall = await fetchSimpanans();
+    const { data } = apiCall.data
+    setSimpanans(data.simpanans)
+    // console.log (members)
+    setLoadingAnggota(false)
+  };
 
 
   // fungsi menampilkan anggota 
@@ -132,23 +122,27 @@ const MemberProvider = ({ children }) => {
     const { data } = apiCall.data
 
     setMembers(data.users)
-    // console.log (members)
     
     setLoadingAnggota(false)
   };
 
+  const updateMember = async (id,noBaru) =>{
+    await apiUpdateMember(id,noBaru)
+  }
+
   useEffect(() => {
     fetchAnggota();
     tampilkanPinjaman();
+    tampilkanSimpanans();
   }, []);
 
   // console.log(`Nilai dari "members":`, ...members);
-  // console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
+  // console.log(`Nilai dari info pinjaman`, ...simpanans);
 
 
 
   return (
-    <MemberContext.Provider value={{ members, infoPinjaman, loadingAdd, fetchAnggota, tambahAnggota, tampilkanPinjaman, handleDelete  }}>
+    <MemberContext.Provider value={{ members, infoPinjaman, loadingAdd,simpanans, fetchAnggota,updateMember, tambahAnggota, tampilkanPinjaman, tampilkanSimpanans, handleDelete  }}>
       {children}
     </MemberContext.Provider>
   );

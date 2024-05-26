@@ -2,6 +2,23 @@ import axios from "axios";
 import { getToken } from "../../helpers/LocalStorage";
 import { http } from "../../config/url";
 
+export const daftarAnggota = async () => {
+  const token = getToken();
+
+  return axios.get('https://apiksu.ndamelweb.com/nasabah', {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  })
+    .then(response => {
+      return response
+
+    })
+    .catch(err => {
+      return err.response.data
+    })
+}
+
 export const addAnggota = async (nama, notelp, username, password) => {
   const token = getToken();
   try {
@@ -21,22 +38,6 @@ export const addAnggota = async (nama, notelp, username, password) => {
   }
 }
 
-export const daftarAnggota = async () => {
-  const token = getToken();
-
-  return axios.get('https://apiksu.ndamelweb.com/nasabah', {
-    headers: {
-      'Authorization': 'Bearer ' + token
-    }
-  })
-    .then(response => {
-      return response
-
-    })
-    .catch(err => {
-      return err.response.data
-    })
-}
 
 export const deleteMember = async (id) => {
   const token = getToken();
@@ -54,40 +55,21 @@ export const deleteMember = async (id) => {
   });
 }
 
-
-// export const deleteMember = async (id) => {
-//   const token = getToken();
-//   const deletes = await axios
-//     .delete(http + "/nasabah/" + id, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//     .then((response) => {
-//       return response;
-//     })
-//     .catch((eror) => {
-//       return eror.response;
-//     });
-//   return deletes;
-// };
-
-export const updateMember = async (id, notelp) => {
+export const apiUpdateMember = async (id, noBaru) => {
   const token = getToken();
 
-  return axios.put('https://apiksu.ndamelweb.com/nasabah/' + id, {notelp}, {
+  return axios.put(`https://apiksu.ndamelweb.com/nasabah/${id}`, { nomor_baru: noBaru }, {
     headers: {
       'Authorization': 'Bearer ' + token
     }
   })
-    .then(response => {
-      return response
-    })
-    .catch(err => {
-      return err.response.data
-    })
+  .then(response => {
+    return response.data; // Mengembalikan data yang diterima dari backend
+  })
+  .catch(err => {
+    throw err.response.data; // Melemparkan pesan error dari backend
+  });
 }
-
 
 
 export const fetchInfoPinjaman = async () => {
