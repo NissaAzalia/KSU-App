@@ -40,7 +40,7 @@ const AppRoutes = () => {
                   <Route element={<MainLayout />}>
                     <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin /></MemberProvider>  } />
                     {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
-                    <Route path='/daftar-simpanan' element={<DaftarSimpanan />} />
+                    <Route path='/daftar-simpanan' element={<MemberProvider><DaftarSimpanan /></MemberProvider> } />
                     <Route path='info' element={<MemberProvider><InfoDashboard /></MemberProvider>  } />
                     {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
                     <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
