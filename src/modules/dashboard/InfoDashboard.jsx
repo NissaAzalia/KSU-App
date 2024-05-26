@@ -2,107 +2,158 @@ import { faTrashCan, faPlusCircle, faXmark, faMagnifyingGlass } from '@fortaweso
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
+import Swal from 'sweetalert2';
+
 
 const InfoDashboard = () => {
     const [showForm, setShowForm] = useState(false);
     const [showFormPinjaman, setShowFormPinjaman] = useState(false);
+    const [showFormTambahPinjamanLagi, setShowFormTambahPinjamanLagi] = useState(false)
     const [currentId, setCurrentId] = useState(null);
-    const { infoPinjaman } = useMembers();
+    const { infoPinjaman, handleDeletePinjaman, handleTambahPinjaman, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanBayarHutang } = useMembers();
 
     // const [pinjamanAnggota, setPinjamanAnggota] = useState([
     //     // { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
     //     // { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
     // ]);
 
+
+    // const [nama, setNama] = useState('');
+    // const [nominal, setNominal] = useState('');
+    const [hutang, sethutang] = useState('')
+    const [bayar_hutang, setBayar_hutang] = useState('')
     const [nama, setNama] = useState('');
-    const [nominal, setNominal] = useState('');
-    const [sisaHutang, setSisaHutang] = useState('');
-    
+    const [jumlah_pinjaman, setJumlah_pinjaman] = useState('')
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const tambahPinjaman = () => {
-        if (!nama || !nominal) {
-            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-            return;
+    // const tambahPinjaman = () => {
+    //     if (!nama || !nominal) {
+    //         setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+    //         return;
+    //     }
+
+    //     const newData = {
+    //         id: infoPinjaman.length + 1,
+    //         nama: nama,
+    //         nominal: parseFloat(nominal),
+    //         sisaHutang: parseFloat(nominal),
+    //     };
+    //     setPinjamanAnggota([...infoPinjaman, newData]);
+    //     setNama('');
+    //     setNominal('');
+    //     setShowForm(false);
+    //     setErrorMessage('');
+    // };
+
+
+    const tambahPinjaman = async () => {
+        try {
+            // Cek apakah nama sudah ada di tabel
+            const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
+            if (existingMember) {
+                throw new Error('Nama sudah ada di tabel. Tidak dapat menambahkan pinjaman.');
+            } 
+    
+            // Jika nama belum ada, tambahkan pinjaman
+            await handleTambahPinjaman(nama, jumlah_pinjaman);
+            setNama('');
+            setJumlah_pinjaman('');
+            tampilkanPinjaman();
+            setShowForm(false);
+        } catch (error) {
+            console.log('error', error)
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
+    }
 
-        const newData = {
-            id: infoPinjaman.length + 1,
-            nama: nama,
-            nominal: parseFloat(nominal),
-            sisaHutang: parseFloat(nominal),
-        };
-        setPinjamanAnggota([...infoPinjaman, newData]);
-        setNama('');
-        setNominal('');
-        setShowForm(false);
-        setErrorMessage('');
-    };
-
-    const editPinjaman = () => {
-        if (!sisaHutang) {
-            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-            return;
+    const hapusPinjaman = async (id) => {
+        const confirm = window.confirm("Yakin untuk menghapus?");
+        if (confirm) {
+            await handleDeletePinjaman(id);
+            tampilkanPinjaman();
         }
-
-        const anggota = infoPinjaman.find(anggota => anggota.id === currentId);
-        const jumlahKurang = parseFloat(sisaHutang);
-
-        if (jumlahKurang > anggota.sisaHutang) {
-            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
-            return;
-        }
-
-        const updatedAnggota = infoPinjaman.map(anggota => {
-            if (anggota.id === currentId) {
-                const sisa = anggota.sisaHutang - jumlahKurang;
-                return {
-                    ...anggota,
-                    sisaHutang: sisa,
-                };
-            }
-            return anggota;
-        });
-
-        setPinjamanAnggota(updatedAnggota);
-        setNama('');
-        setNominal('');
-        setSisaHutang('');
-        setShowFormPinjaman(false);
-        setErrorMessage('');
-    };
-
-    const hapusPinjaman = id => {
-        const updatedAnggota = infoPinjaman.filter(anggota => anggota.id !== id);
-        setPinjamanAnggota(updatedAnggota);
     };
 
     const handleClose = () => {
         setShowForm(false);
         setShowFormPinjaman(false);
+        setShowFormTambahPinjamanLagi(false)
         setNama('');
-        setNominal('');
-        setSisaHutang('');
+        setJumlah_pinjaman('');
         setErrorMessage('');
     };
 
-    const handleEditClick = id => {
-        const anggota = infoPinjaman.find(anggota => anggota.id === id);
-        setNama(anggota.nama);
-        setNominal(anggota.nominal);
-        setSisaHutang('');
-        setCurrentId(id);
-        setShowFormPinjaman(true);
-        setErrorMessage('');
+    const editPinjaman = async () => {
+        if (!bayar_hutang) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+    
+        try {
+            await tampilkanBayarHutang(currentId, bayar_hutang);  
+            setBayar_hutang('');  
+            await tampilkanPinjaman();  
+            setShowFormPinjaman(false);  
+            await tampilkanPinjaman();  
+        } catch (error) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
     };
+
+    const handleEditClick = (id, nama) => {
+        setCurrentId(id)
+        setNama(nama)
+        setShowFormPinjaman(true);
+    };
+
+    const handleEditTambahPinjaman = async () => {
+        if (!hutang) {
+            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
+            return;
+        }
+
+        try{
+            await tampilkanTambahPinjamLagi(currentId, hutang);
+            sethutang('')
+            await tampilkanPinjaman()
+            setShowFormTambahPinjamanLagi(false)
+            await tampilkanPinjaman()
+            
+        } catch ( error ) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+
+    const handleEditClickTambahPinjaman = (id, nama) => {
+        setCurrentId(id)
+        setNama(nama)
+        setShowFormTambahPinjamanLagi(true)
+    }
 
     const filteredPinjaman = infoPinjaman.filter(pinjaman =>
         pinjaman.nama && pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    
+
 
     // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -158,8 +209,8 @@ const InfoDashboard = () => {
                                 <input
                                     type="number"
                                     placeholder="Masukkan Nominal Pinjaman"
-                                    value={nominal}
-                                    onChange={(e) => setNominal(e.target.value)}
+                                    value={jumlah_pinjaman}
+                                    onChange={(e) => setJumlah_pinjaman(e.target.value)}
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                 />
 
@@ -173,6 +224,37 @@ const InfoDashboard = () => {
                         </div>
                     </div>
                 )}
+
+                 {showFormTambahPinjamanLagi && (
+                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="w-[600px]">
+                                <button
+                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    onClick={handleClose}
+                                >
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                            </div>
+
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <div className="flex flex-col gap-2">
+                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <input
+                                    type="number" placeholder="Masukkan Nominal Penarikan"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    value={hutang}
+                                    onChange={e => sethutang(e.target.value)}
+                                />
+                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+                                <button onClick={handleEditTambahPinjaman} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                    Kirim
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
 
                 {showFormPinjaman && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
@@ -190,9 +272,10 @@ const InfoDashboard = () => {
                                 <input
                                     type="number"
                                     placeholder="Masukkan Nominal Pembayaran"
-                                    value={sisaHutang}
+                                    value={bayar_hutang}
+                                    id='id_pinjaman'
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                    onChange={e => setSisaHutang(e.target.value)}
+                                    onChange={e => setBayar_hutang(e.target.value)}
                                 />
                                 {errorMessage && (
                                     <div className=" text-red-500 " role="alert">
@@ -249,8 +332,8 @@ const InfoDashboard = () => {
                         <tbody>
                             {currentItems.map((pinjaman, index) => (
                                 <tr key={pinjaman.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-4 py-2">{pinjaman.user_id}</td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.jumlah_pinjaman.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
+                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{pinjaman.jumlah_pinjaman.toLocaleString()}<button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)} className='bg-[#4aad7c]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>+</span></button></div></td>
                                     <td className="border text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
@@ -262,13 +345,13 @@ const InfoDashboard = () => {
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleEditClick(pinjaman.id)}
+                                            onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusPinjaman(pinjaman.id)}
+                                            onClick={() => hapusPinjaman(pinjaman.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>

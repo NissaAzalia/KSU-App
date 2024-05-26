@@ -1,6 +1,7 @@
 import { faMagnifyingGlass, faPlusCircle, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { useMembers } from './AdminContext';
 
 // Data users dan simpanans
 const users = [
@@ -108,25 +109,29 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const initialNasabah = users.map(user => {
-        const simpanan = simpanans.find(s => s.user_id === user.id_user) || {
-            simpanan_pokok: 0,
-            simpanan_wajib: 0,
-            simpanan_sukarela: 0,
-            simpanan_hariraya: 0
-        };
-        return {
-            id: user.id_user,
-            nama: user.user,
-            password: user.password,
-            simpananPokok: simpanan.simpanan_pokok,
-            simpananWajib: simpanan.simpanan_wajib,
-            simpananSukarela: simpanan.simpanan_sukarela,
-            simpananHariRaya: simpanan.simpanan_hariraya
-        };
-    });
+    const {simpanans } = useMembers();
 
-    const [nasabah, setNasabah] = useState(initialNasabah);
+    console.log(simpanans)
+
+    // const initialNasabah = users.map(user => {
+    //     const simpanan = simpanans.find(s => s.user_id === user.id_user) || {
+    //         simpanan_pokok: 0,
+    //         simpanan_wajib: 0,
+    //         simpanan_sukarela: 0,
+    //         simpanan_hariraya: 0
+    //     };
+    //     return {
+    //         id: user.id_user,
+    //         nama: user.user,
+    //         password: user.password,
+    //         simpananPokok: simpanan.simpanan_pokok,
+    //         simpananWajib: simpanan.simpanan_wajib,
+    //         simpananSukarela: simpanan.simpanan_sukarela,
+    //         simpananHariRaya: simpanan.simpanan_hariraya
+    //     };
+    // });
+
+    // const [nasabah, setNasabah] = useState(initialNasabah);
     const [simpananPokok, setSimpananPokok] = useState('');
     const [simpananWajib, setSimpananWajib] = useState('');
     const [simpananSukarela, setSimpananSukarela] = useState('');
@@ -261,7 +266,7 @@ const DaftarSimpanan = () => {
         setNasabah(updatedNasabah);
         handleCloseHr();
     };
-    const filteredNasabah = nasabah.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
+    const filteredNasabah = simpanans.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
 
     // Hitung index untuk pagination
@@ -437,12 +442,12 @@ const DaftarSimpanan = () => {
                             {currentItems.map((nasabah, index) => (
                                 <tr key={nasabah.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{nasabah.nama}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpananPokok.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpananWajib.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananSukarela.toLocaleString()}
+                                    <td className="border text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
+                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_sukarela.toLocaleString()}
                                         <button onClick={() => handleKurangClickSkr(nasabah.id)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
-                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpananHariRaya.toLocaleString()}
+                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_hariraya.toLocaleString()}
                                         <button onClick={() => handleKurangClickHr(nasabah.id)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">

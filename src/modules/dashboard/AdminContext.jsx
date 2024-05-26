@@ -2,14 +2,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, fetchInfoPinjaman } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 const initialMembersState = {
   members: [],
+  simpanans: [],
+  tampilkanPinjaman: () => {},
+  tampilkanBayarHutang: () => {},
+  tampilkanTambahPinjamLagi: () => {},
+  infoPinjaman: [],
   users: [],
   curentMembers: null,
   loadingAdd: false,
+  loadingAddPinjaman: false,
   loadingAnggota: false,
   // handleFetchId: () => {},
   addMember: () => { },
@@ -18,7 +24,8 @@ const initialMembersState = {
   // handleEditClick: () => {},
   fetchAnggota: () => { },
   // tambahAnggota: () => { },
-  // tampilkanPinjaman: () => {},
+
+  tampilkanSimpanans: () => {},
 
 }
 
@@ -40,6 +47,7 @@ const MemberProvider = ({ children }) => {
   const [loadingAnggota, setLoadingAnggota] = useState(false);
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
   const [infoPinjaman, setInfoPinjaman] = useState([]);
+  const [simpanans, setSimpanans] = useState([])
   const [curentMembers, setcurentMembers] = useState(null)
 
 
@@ -72,7 +80,7 @@ const MemberProvider = ({ children }) => {
     if (status != 'Success') {
       Swal.hideLoading()
       Swal.fire({
-        title: `Gagal mengirim service`,
+        title: `Gagal`,
         text: message,
         showConfirmButton: true
       })
@@ -85,9 +93,50 @@ const MemberProvider = ({ children }) => {
     Swal.hideLoading()
     Swal.fire({
       title: 'Sukses',
-      text: 'Berhasil mengirim data servis'
+      text: 'Berhasil'
     }) 
 };
+
+
+const handleTambahPinjaman = async (nama, jumlah_pinjaman) => {
+  if (loadingPinjaman) return;
+
+    // set loading true
+    setLoadingPinjaman(true);
+
+    // tampilkan loading pake swal
+    Swal.fire({
+      title: "Loading",
+      text: "Mengirim data.."
+    });
+    Swal.showLoading();
+
+  const apiResult = await tambahPinjaman(nama, jumlah_pinjaman)
+
+  console.log('apiresult' ,apiResult)
+
+  const { status, message } = apiResult.data 
+   // cek sukses / error 
+   if (status != 'Success') {
+    Swal.hideLoading()
+    Swal.fire({
+      title: `Gagal`,
+      text: message,
+      showConfirmButton: true
+    })
+  }
+
+  // set loading false 
+  setLoadingAdd(false)
+
+  // hilangkan tampilan loading
+  Swal.hideLoading()
+  Swal.fire({
+    title: 'Sukses',
+    text: 'Berhasil'
+  }) 
+}
+
 
 
   // Fungsi edit nasabah
@@ -118,6 +167,30 @@ const MemberProvider = ({ children }) => {
   }
 
 
+  const tampilkanBayarHutang = async (id, bayar_hutang) => {
+    fetchBayarHutang(id, bayar_hutang);
+  };
+
+  const tampilkanTambahPinjamLagi = async (id, hutang) => {
+    fetchTambahPinjamanLagi(id, hutang);
+  };
+
+  const handleDeletePinjaman = async(id) => {
+    fetchHapusPinjaman(id)
+  }
+
+
+  const tampilkanSimpanans = async () => {
+    if (loadingAnggota) return
+
+    setLoadingAnggota(true)
+    const apiCall = await fetchSimpanans()
+    const { data } = apiCall.data
+    setSimpanans(data.simpanans)
+    // console.log (members)
+    setLoadingAnggota(false)
+  };
+
   // fungsi menampilkan anggota 
   const fetchAnggota = async () => {
     if (loadingAnggota) return
@@ -132,18 +205,22 @@ const MemberProvider = ({ children }) => {
     setLoadingAnggota(false)
   };
 
+
+console.log(simpanans)
   useEffect(() => {
+    tampilkanSimpanans();
     fetchAnggota();
     tampilkanPinjaman();
   }, []);
 
+console.log(simpanans)
   // console.log(`Nilai dari "members":`, ...members);
   // console.log(`Nilai dari info pinjaman`, ...infoPinjaman);
 
 
 
   return (
-    <MemberContext.Provider value={{ members, infoPinjaman, loadingAdd, fetchAnggota, tambahAnggota, tampilkanPinjaman, handleDelete  }}>
+    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, handleTambahPinjaman,fetchAnggota,handleDelete, handleDeletePinjaman, tambahAnggota,tampilkanBayarHutang,tampilkanTambahPinjamLagi, tampilkanPinjaman,tampilkanSimpanans  }}>
       {children}
     </MemberContext.Provider>
   );
