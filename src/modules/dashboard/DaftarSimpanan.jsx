@@ -200,7 +200,7 @@ const DaftarSimpanan = () => {
 
                 {showFormTambahAllSimpanan && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
+                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[50%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
                             <div className="w-[600px]">
                                 <button
                                     className="top-1 left-1 text-gray-500 hover:text-gray-700"
