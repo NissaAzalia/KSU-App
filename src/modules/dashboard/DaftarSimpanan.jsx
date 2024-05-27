@@ -1,6 +1,7 @@
 import { faMagnifyingGlass, faPlusCircle, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
 import { useMembers } from './AdminContext';
 
 const DaftarSimpanan = () => {
@@ -13,11 +14,12 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {simpanans,kurangHariRaya, handleTambahSimpanan,handleDelete,tampilkanSimpanans, kurangSukarela } = useMembers();
+    const {simpanans,kurangHariRaya, handleTambahSimpanan,handleDelete,tampilkanSimpanans, kurangSukarela } = useMembers()
 
     console.log(simpanans)
 
     // const [nasabah, setNasabah] = useState(initialNasabah);
+    const [nama, setNama] = useState('')
     const [simpananPokok, setSimpananPokok] = useState('');
     const [simpananWajib, setSimpananWajib] = useState('');
     const [simpananSukarela, setSimpananSukarela] = useState('');
@@ -100,11 +102,12 @@ const DaftarSimpanan = () => {
         setErrorMessage(''); // Reset error message when opening the form
         setShowFormTambahAllSimpanan(true);
     };
-    const handleKurangClickSkr = id => {
+
+    const handleKurangClickSkr = (id) => {
         setCurrentNasabah(id)
         setNama(nama)
         setSimpananSukarela(simpananSukarela)
-        setShowFormSimpananSkr(true);
+        setShowFormSimpananSkr(true)
     };
 
     const handleKurangClickHr = id => {
@@ -136,10 +139,6 @@ const DaftarSimpanan = () => {
             });
         }
     }
-
-        
-
-    
 
     const handleKurangSimpananHr = async () => {
         if (!simpananHariRaya) {
@@ -296,8 +295,8 @@ const DaftarSimpanan = () => {
 
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                                <p >simpanan hari raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
+                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <p >simpanan hari raya sebelumnya : {simpananHariRaya}</p>
                                 <input
                                     type="number" placeholder="Masukkan Nominal Penarikan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
@@ -344,7 +343,7 @@ const DaftarSimpanan = () => {
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_sukarela.toLocaleString()}
-                                        <button onClick={() => handleKurangClickSkr(nasabah.id)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
+                                        <button onClick={() => handleKurangClickSkr(nasabah.id_simpanan)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_hariraya.toLocaleString()}
                                         <button onClick={() => handleKurangClickHr(nasabah.id_simpanan)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
@@ -352,7 +351,7 @@ const DaftarSimpanan = () => {
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => handleClickTambahAllSimpanan(nasabah.id)}
+                                            onClick={() => handleClickTambahAllSimpanan(nasabah.id_simpanan, nasabah.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} />
                                         </button>
