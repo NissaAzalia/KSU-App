@@ -14,7 +14,7 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {simpanans,kurangHariRaya, handleTambahSimpanan,handleDelete,tampilkanSimpanans, kurangSukarela } = useMembers()
+    const { simpanans, kurangHariRaya, handleTambahSimpanan, handleDelete, tampilkanSimpanans, kurangSukarela } = useMembers();
 
     console.log(simpanans)
 
@@ -26,19 +26,19 @@ const DaftarSimpanan = () => {
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
     const hapusNasabah = async (id) => {
-        const konfirm = confirm ("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
-        if(konfirm){
+        const konfirm = confirm("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
+        if (konfirm) {
             try {
                 await handleDelete(id)
                 alert("berhasil menghapus")
-                tampilkanSimpanans()
-            }catch (error){
+            } catch (error) {
                 alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
 
             }
-        } else{
-            alert ("Penghapusan Dibatalkan")
+        } else {
+            alert("Penghapusan Dibatalkan")
         }
+        tampilkanSimpanans()
     }
 
     const handleCloseFormTambah = () => {
@@ -48,18 +48,21 @@ const DaftarSimpanan = () => {
         setSimpananWajib('');
         setSimpananSukarela('');
         setSimpananHariRaya('');
+        tampilkanSimpanans()
     };
 
     const handleCloseSkr = () => {
         setShowFormSimpananSkr(false);
         setCurrentNasabah(null);
         setSimpananSukarela('');
+        tampilkanSimpanans()
     };
 
     const handleCloseHr = () => {
         setShowFormSimpananHr(false);
         setCurrentNasabah(null);
         setSimpananHariRaya('');
+        tampilkanSimpanans()
     };
 
     const handleTambahAllSimpanan = async () => {
@@ -75,9 +78,7 @@ const DaftarSimpanan = () => {
             setSimpananWajib('');
             setSimpananSukarela('');
             setSimpananHariRaya('');
-            await tampilkanSimpanans();
             setShowFormTambahAllSimpanan(false);
-            await tampilkanSimpanans();
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -89,6 +90,7 @@ const DaftarSimpanan = () => {
         }
 
         handleCloseFormTambah();
+        tampilkanSimpanans()
     };
 
 
@@ -108,6 +110,7 @@ const DaftarSimpanan = () => {
         setNama(nama)
         setSimpananSukarela(simpananSukarela)
         setShowFormSimpananSkr(true)
+        tampilkanSimpanans()
     };
 
     const handleKurangClickHr = id => {
@@ -117,7 +120,7 @@ const DaftarSimpanan = () => {
         setShowFormSimpananHr(true);
     };
 
-    const handleKurangSimpananSkr =  async () => {
+    const handleKurangSimpananSkr = async () => {
         if (!simpananSukarela) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
@@ -126,9 +129,7 @@ const DaftarSimpanan = () => {
         try {
             await kurangSukarela(currentNasabah, simpananSukarela, simpananHariRaya);
             setSimpananSukarela('')
-            tampilkanSimpanans()
             setShowFormSimpananSkr(false)
-            tampilkanSimpanans()
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -138,6 +139,8 @@ const DaftarSimpanan = () => {
                 confirmButtonText: 'OK'
             });
         }
+            tampilkanSimpanans()
+
     }
 
     const handleKurangSimpananHr = async () => {
@@ -149,9 +152,7 @@ const DaftarSimpanan = () => {
         try {
             await kurangHariRaya(currentNasabah, simpananSukarela, simpananHariRaya);
             setSimpananHariRaya('')
-            tampilkanSimpanans()
             setShowFormSimpananHr(false)
-            tampilkanSimpanans()
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -161,6 +162,7 @@ const DaftarSimpanan = () => {
                 confirmButtonText: 'OK'
             });
         }
+        tampilkanSimpanans()
     };
 
     const filteredNasabah = simpanans.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -338,7 +340,7 @@ const DaftarSimpanan = () => {
                         </thead>
                         <tbody>
                             {currentItems.map((nasabah, index) => (
-                                <tr key={nasabah.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                                <tr key={nasabah.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{nasabah.nama}</td>
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
