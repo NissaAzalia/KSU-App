@@ -101,10 +101,9 @@ const DaftarSimpanan = () => {
         setShowFormTambahAllSimpanan(true);
     };
     const handleKurangClickSkr = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
-        setCurrentNasabah(selectedNasabah);
-        setErrorMessage('');
-        setSimpananSukarela(''); // Set input menjadi kosong saat membuka form
+        setCurrentNasabah(id)
+        setNama(nama)
+        setSimpananSukarela(simpananSukarela)
         setShowFormSimpananSkr(true);
     };
 
@@ -136,20 +135,11 @@ const DaftarSimpanan = () => {
                 confirmButtonText: 'OK'
             });
         }
+    }
 
-        const updatedNasabah = nasabah.map(n => {
-            if (n.id === currentNasabah.id) {
-                return {
-                    ...n,
-                    simpananSukarela: n.simpananSukarela - jumlahKurang
-                };
-            }
-            return n;
-        });
+        
 
-        setNasabah(updatedNasabah);
-        handleCloseSkr();
-    };
+    
 
     const handleKurangSimpananHr = async () => {
         if (!simpananHariRaya) {
