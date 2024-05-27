@@ -222,3 +222,23 @@ export const kurangiSukarela = async (id, simpananSukarela,simpananHariraya) => 
       return err.response
   })
 }
+
+export const kurangiHariRaya = async (id, simpananSukarela,simpananHariraya) => {
+  const token = getToken();
+
+  return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
+    simpanan_sukarela: simpananSukarela,
+    simpanan_hariraya: simpananHariraya
+  },
+    {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(response => {
+      return response
+    })
+    .catch(err => {
+      return err.response
+  })
+}

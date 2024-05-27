@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
+import { kurangiHariRaya } from './apiAdmin';
 
 // Data users dan simpanans
 const users = [
@@ -110,7 +111,7 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {simpanans, handleTambahSimpanan,tampilkanSimpanans, kurangSukarela } = useMembers();
+    const { simpanans, handleTambahSimpanan, tampilkanSimpanans, kurangSukarela ,kurangHariRaya} = useMembers();
 
     console.log(simpanans)
 
@@ -173,14 +174,14 @@ const DaftarSimpanan = () => {
 
 
         try {
-            await handleTambahSimpanan(currentNasabah,simpananPokok, simpananWajib, simpananSukarela, simpananHariRaya);  
+            await handleTambahSimpanan(currentNasabah, simpananPokok, simpananWajib, simpananSukarela, simpananHariRaya);
             setSimpananPokok('');
             setSimpananWajib('');
             setSimpananSukarela('');
             setSimpananHariRaya('');
-            await tampilkanSimpanans();  
-            setShowFormTambahAllSimpanan(false);  
-            await tampilkanSimpanans();  
+            await tampilkanSimpanans();
+            setShowFormTambahAllSimpanan(false);
+            await tampilkanSimpanans();
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -190,12 +191,12 @@ const DaftarSimpanan = () => {
                 confirmButtonText: 'OK'
             });
         }
-        
+
         handleCloseFormTambah();
     };
 
 
-    const handleClickTambahAllSimpanan = (id,nama) => {
+    const handleClickTambahAllSimpanan = (id, nama) => {
         setNama(nama)
         setCurrentNasabah(id);
         setSimpananPokok('');
@@ -214,28 +215,25 @@ const DaftarSimpanan = () => {
     };
 
     const handleKurangClickHr = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
-        setCurrentNasabah(selectedNasabah);
-        setErrorMessage('');
-        setSimpananHariRaya(''); // Set input menjadi kosong saat membuka form
+        setCurrentNasabah(id)
+        setNama(nama)
+        setSimpananHariRaya(simpananHariRaya)
         setShowFormSimpananHr(true);
     };
 
-   
-
-    const handleKurangSimpananSkr = async () => {
+    const handleKurangSimpananSkr =  async () => {
         if (!simpananSukarela) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
         }
 
-        try{
+        try {
             await kurangSukarela(currentNasabah, simpananSukarela, simpananHariRaya);
-            setSimpananSukarela()
-            await tampilkanSimpanans()
+            setSimpananSukarela('')
+            tampilkanSimpanans()
             setShowFormSimpananSkr(false)
-            await tampilkanSimpanans()
-        }catch (error) {
+            tampilkanSimpanans()
+        } catch (error) {
             console.log('Error:', error);
             Swal.fire({
                 title: 'Error!',
@@ -246,32 +244,29 @@ const DaftarSimpanan = () => {
         }
     }
 
-    const handleKurangSimpananHr = () => {
+    const handleKurangSimpananHr = async () => {
         if (!simpananHariRaya) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
             return;
         }
 
-        const jumlahKurang = parseInt(simpananHariRaya, 10);
-
-        if (jumlahKurang > currentNasabah.simpananHariRaya) {
-            setErrorMessage('*Jumlah pengurangan tidak boleh lebih dari jumlah yang dikurang.');
-            return;
+        try {
+            await kurangHariRaya(currentNasabah, simpananSukarela, simpananHariRaya);
+            setSimpananHariRaya('')
+            tampilkanSimpanans()
+            setShowFormSimpananHr(false)
+            tampilkanSimpanans()
+        } catch (error) {
+            console.log('Error:', error);
+            Swal.fire({
+                title: 'Error!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
         }
-
-        const updatedNasabah = nasabah.map(n => {
-            if (n.id === currentNasabah.id) {
-                return {
-                    ...n,
-                    simpananHariRaya: n.simpananHariRaya - jumlahKurang
-                };
-            }
-            return n;
-        });
-
-        setNasabah(updatedNasabah);
-        handleCloseHr();
     };
+
     const filteredNasabah = simpanans.filter(n => n.nama.toLowerCase().includes(searchQuery.toLowerCase()));
 
 
@@ -322,28 +317,28 @@ const DaftarSimpanan = () => {
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                                <p>simpanan Pokok sebelumnya : {simpananPokok}</p>
+                                <p>simpanan Pokok sebelumnya : {currentNasabah?.simpananPokok}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananPokok}
                                     onChange={e => setSimpananPokok(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Wajib sebelumnya : {simpananWajib}</p>
+                                <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananWajib}
                                     onChange={e => setSimpananWajib(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {simpananSukarela}</p>
+                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
                                     value={simpananSukarela}
                                     onChange={e => setSimpananSukarela(e.target.value)}
                                 />
-                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {simpananHariRaya}</p>
+                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
@@ -374,7 +369,7 @@ const DaftarSimpanan = () => {
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                                <p>simpanan sukarela sebelumnya : {simpananSukarela}</p>
+                                <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
                                 <input
                                     type="number" placeholder="Masukkan Nominal Penarikan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
@@ -389,36 +384,6 @@ const DaftarSimpanan = () => {
                         </div>
                     </div>
                 )}
-
-                {/* {showFormSimpananSkr && (
-                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
-                                <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
-                                    onClick={handleCloseSkr}
-                                >
-                                    <FontAwesomeIcon icon={faXmark} size="lg" />
-                                </button>
-                            </div>
-
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
-                            <div className="flex flex-col gap-2">
-                                <h1 className="text-2xl text-[#121212] font-bold">{currentNasabah?.nama}</h1>
-                                <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
-                                <input
-                                    type="number" placeholder="Masukkan Nominal Penarikan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
-                                    onChange={e => setSimpananSukarela(e.target.value)}
-                                />
-                                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                                <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
-                                    Kirim
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )} */}
 
                 {showFormSimpananHr && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
@@ -485,7 +450,7 @@ const DaftarSimpanan = () => {
                                         <button onClick={() => handleKurangClickSkr(nasabah.id_simpanan)} className='bg-[#ff7373]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{nasabah.simpanan_hariraya.toLocaleString()}
-                                        <button onClick={() => handleKurangClickHr(nasabah.id)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
+                                        <button onClick={() => handleKurangClickHr(nasabah.id_simpanan)} className='bg-[#ff7373] pr-[10px] pl-[10px] rounded-full '><span className='text-white'>-</span></button></div>
                                     </td>
                                     <td className="px-4 py-2 flex justify-evenly items-center align-middle">
                                         <button
