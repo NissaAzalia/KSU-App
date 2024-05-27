@@ -2,7 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan, kurangiSukarela, kurangiHariRaya } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan, kurangiSukarela, kurangiHariRaya } from './apiAdmin';
+
 import Swal from 'sweetalert2';
 
 // Initial state for member data
@@ -131,6 +132,7 @@ const MemberProvider = ({ children }) => {
   // Function to delete a member
   const handleDelete = async (id) => {
     await deleteMember(id);
+    await hapusNasabah(id);
     console.log(id);
   };
 

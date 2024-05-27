@@ -181,6 +181,21 @@ export const fetchSimpanans = async () => {
 };
 
 
+export const hapusNasabah= async (id) => {
+  const token = getToken();
+
+  return axios.delete(`https://apiksu.ndamelweb.com/nasabah/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response.data;
+    });
+}
 export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya) => {
   const token = getToken();
 

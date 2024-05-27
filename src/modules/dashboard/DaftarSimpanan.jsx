@@ -3,103 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
-import { kurangiHariRaya } from './apiAdmin';
-
-// Data users dan simpanans
-const users = [
-    { "id_user": 1, "user": "alfian", "password": "12345" },
-    { "id_user": 2, "user": "Rasya", "password": "admin" },
-    { "id_user": 3, "user": "Rasya", "password": "admin" },
-    { "id_user": 4, "user": "ARA", "password": "UWU" },
-    { "id_user": 5, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 6, "user": "anas", "password": "user" },
-    { "id_user": 7, "user": "akaka", "password": "user" },
-    { "id_user": 8, "user": "UWU", "password": "amao" },
-    { "id_user": 9, "user": "alfian", "password": "12345" },
-    { "id_user": 10, "user": "Rasya", "password": "admin" },
-    { "id_user": 11, "user": "Rasya", "password": "admin" },
-    { "id_user": 12, "user": "ARA", "password": "UWU" },
-    { "id_user": 13, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 14, "user": "anas", "password": "user" },
-    { "id_user": 15, "user": "akaka", "password": "user" },
-    { "id_user": 16, "user": "UWU", "password": "amao" },
-    { "id_user": 17, "user": "alfian", "password": "12345" },
-    { "id_user": 18, "user": "Rasya", "password": "admin" },
-    { "id_user": 19, "user": "Rasya", "password": "admin" },
-    { "id_user": 20, "user": "ARA", "password": "UWU" },
-    { "id_user": 21, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 22, "user": "anas", "password": "user" },
-    { "id_user": 23, "user": "akaka", "password": "user" },
-    { "id_user": 24, "user": "UWU", "password": "amao" },
-    { "id_user": 25, "user": "alfian", "password": "12345" },
-    { "id_user": 26, "user": "Rasya", "password": "admin" },
-    { "id_user": 27, "user": "Rasya", "password": "admin" },
-    { "id_user": 28, "user": "ARA", "password": "UWU" },
-    { "id_user": 29, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 30, "user": "anas", "password": "user" },
-    { "id_user": 31, "user": "akaka", "password": "user" },
-    { "id_user": 33, "user": "UWU", "password": "amao" },
-    { "id_user": 34, "user": "Rasya", "password": "admin" },
-    { "id_user": 35, "user": "Rasya", "password": "admin" },
-    { "id_user": 36, "user": "ARA", "password": "UWU" },
-    { "id_user": 37, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 38, "user": "anas", "password": "user" },
-    { "id_user": 39, "user": "akaka", "password": "user" },
-    { "id_user": 40, "user": "UWU", "password": "amao" },
-    { "id_user": 41, "user": "ARA", "password": "UWU" },
-    { "id_user": 42, "user": "AMAK", "password": "FAAFAF" },
-    { "id_user": 43, "user": "anas", "password": "user" },
-    { "id_user": 44, "user": "akaka", "password": "user" },
-    { "id_user": 45, "user": "UWU", "password": "amao" },
-];
-
-const simpanans = [
-    { "id_simpanan": 1, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 1 },
-    { "id_simpanan": 2, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 2 },
-    { "id_simpanan": 3, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 3 },
-    { "id_simpanan": 4, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 4 },
-    { "id_simpanan": 5, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 5 },
-    { "id_simpanan": 6, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 6 },
-    { "id_simpanan": 7, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 7 },
-    { "id_simpanan": 8, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 8 },
-    { "id_simpanan": 9, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 9 },
-    { "id_simpanan": 10, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 10 },
-    { "id_simpanan": 11, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 11 },
-    { "id_simpanan": 12, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 12 },
-    { "id_simpanan": 13, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 13 },
-    { "id_simpanan": 14, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 14 },
-    { "id_simpanan": 15, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 15 },
-    { "id_simpanan": 16, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 16 },
-    { "id_simpanan": 17, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 17 },
-    { "id_simpanan": 18, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 18 },
-    { "id_simpanan": 19, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 19 },
-    { "id_simpanan": 20, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 20 },
-    { "id_simpanan": 21, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 21 },
-    { "id_simpanan": 22, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 22 },
-    { "id_simpanan": 23, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 23 },
-    { "id_simpanan": 24, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 24 },
-    { "id_simpanan": 25, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 25 },
-    { "id_simpanan": 26, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 26 },
-    { "id_simpanan": 27, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 27 },
-    { "id_simpanan": 28, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 28 },
-    { "id_simpanan": 29, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 29 },
-    { "id_simpanan": 30, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 30 },
-    { "id_simpanan": 31, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 31 },
-    { "id_simpanan": 32, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 32 },
-    { "id_simpanan": 33, "simpanan_pokok": 750000, "simpanan_wajib": 100000, "simpanan_sukarela": 100000, "simpanan_hariraya": 100000, "user_id": 33 },
-    { "id_simpanan": 34, "simpanan_pokok": 750000, "simpanan_wajib": 200000, "simpanan_sukarela": 200000, "simpanan_hariraya": 200000, "user_id": 34 },
-    { "id_simpanan": 35, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 35 },
-    { "id_simpanan": 36, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 36 },
-    { "id_simpanan": 37, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 37 },
-    { "id_simpanan": 38, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 38 },
-    { "id_simpanan": 39, "simpanan_pokok": 750000, "simpanan_wajib": 800000, "simpanan_sukarela": 800000, "simpanan_hariraya": 800000, "user_id": 39 },
-    { "id_simpanan": 40, "simpanan_pokok": 750000, "simpanan_wajib": 700000, "simpanan_sukarela": 700000, "simpanan_hariraya": 700000, "user_id": 40 },
-    { "id_simpanan": 41, "simpanan_pokok": 750000, "simpanan_wajib": 300000, "simpanan_sukarela": 300000, "simpanan_hariraya": 300000, "user_id": 41 },
-    { "id_simpanan": 42, "simpanan_pokok": 750000, "simpanan_wajib": 500000, "simpanan_sukarela": 500000, "simpanan_hariraya": 500000, "user_id": 42 },
-    { "id_simpanan": 43, "simpanan_pokok": 750000, "simpanan_wajib": 400000, "simpanan_sukarela": 400000, "simpanan_hariraya": 400000, "user_id": 43 },
-    { "id_simpanan": 44, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 44 },
-    { "id_simpanan": 45, "simpanan_pokok": 750000, "simpanan_wajib": 600000, "simpanan_sukarela": 600000, "simpanan_hariraya": 600000, "user_id": 45 },
-];
 
 const DaftarSimpanan = () => {
     const [showFormSimpananSkr, setShowFormSimpananSkr] = useState(false);
@@ -111,27 +14,9 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const { simpanans, handleTambahSimpanan, tampilkanSimpanans, kurangSukarela ,kurangHariRaya} = useMembers();
+    const {simpanans,kurangHariRaya, handleTambahSimpanan,handleDelete,tampilkanSimpanans, kurangSukarela } = useMembers();
 
     console.log(simpanans)
-
-    // const initialNasabah = users.map(user => {
-    //     const simpanan = simpanans.find(s => s.user_id === user.id_user) || {
-    //         simpanan_pokok: 0,
-    //         simpanan_wajib: 0,
-    //         simpanan_sukarela: 0,
-    //         simpanan_hariraya: 0
-    //     };
-    //     return {
-    //         id: user.id_user,
-    //         nama: user.user,
-    //         password: user.password,
-    //         simpananPokok: simpanan.simpanan_pokok,
-    //         simpananWajib: simpanan.simpanan_wajib,
-    //         simpananSukarela: simpanan.simpanan_sukarela,
-    //         simpananHariRaya: simpanan.simpanan_hariraya
-    //     };
-    // });
 
     // const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('')
@@ -140,10 +25,21 @@ const DaftarSimpanan = () => {
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
-    const hapusNasabah = id => {
-        const updatedNasabah = nasabah.filter(nasabah => nasabah.id !== id);
-        setNasabah(updatedNasabah);
-    };
+    const hapusNasabah = async (id) => {
+        const konfirm = confirm ("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
+        if(konfirm){
+            try {
+                await handleDelete(id)
+                alert("berhasil menghapus")
+                tampilkanSimpanans()
+            }catch (error){
+                alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
+
+            }
+        } else{
+            alert ("Penghapusan Dibatalkan")
+        }
+    }
 
     const handleCloseFormTambah = () => {
         setShowFormTambahAllSimpanan(false);
@@ -461,7 +357,7 @@ const DaftarSimpanan = () => {
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusNasabah(nasabah.id)}
+                                            onClick={() => hapusNasabah(nasabah.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
