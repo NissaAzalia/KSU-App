@@ -55,8 +55,8 @@ const InfoDashboard = () => {
             const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
             if (existingMember) {
                 throw new Error('Nama sudah ada di tabel. Tidak dapat menambahkan pinjaman.');
-            } 
-    
+            }
+
             // Jika nama belum ada, tambahkan pinjaman
             await handleTambahPinjaman(nama, jumlah_pinjaman);
             setNama('');
@@ -97,13 +97,13 @@ const InfoDashboard = () => {
             tampilkanTambahPinjamLagi()
             return;
         }
-    
+
         try {
-            await tampilkanBayarHutang(currentId, bayar_hutang);  
-            setBayar_hutang('');  
-            await tampilkanPinjaman();  
-            setShowFormPinjaman(false);  
-            await tampilkanPinjaman();  
+            await tampilkanBayarHutang(currentId, bayar_hutang);
+            setBayar_hutang('');
+            await tampilkanPinjaman();
+            setShowFormPinjaman(false);
+            await tampilkanPinjaman();
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -128,14 +128,14 @@ const InfoDashboard = () => {
             return;
         }
 
-        try{
+        try {
             await tampilkanTambahPinjamLagi(currentId, hutang);
             sethutang('')
             await tampilkanPinjaman()
             setShowFormTambahPinjamanLagi(false)
             await tampilkanPinjaman()
-            
-        } catch ( error ) {
+
+        } catch (error) {
             console.log('Error:', error);
             Swal.fire({
                 title: 'Error!',
@@ -227,7 +227,7 @@ const InfoDashboard = () => {
                     </div>
                 )}
 
-                 {showFormTambahPinjamanLagi && (
+                {showFormTambahPinjamanLagi && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
                         <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
                             <div className="w-[600px]">
@@ -333,7 +333,7 @@ const InfoDashboard = () => {
                         </thead>
                         <tbody>
                             {currentItems.map((pinjaman, index) => (
-                                <tr key={pinjaman.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                                <tr key={pinjaman.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
                                     <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{pinjaman.jumlah_pinjaman.toLocaleString()}<button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)} className='bg-[#4aad7c]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>+</span></button></div></td>
                                     <td className="border text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>

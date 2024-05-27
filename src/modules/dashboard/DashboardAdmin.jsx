@@ -12,7 +12,7 @@ const DashboardAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
 
-    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember, } = useMembers();
+    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember,tampilkanSimpanans } = useMembers();
 
     const [nama, setNama] = useState('');
     const [nomorHp, setNomorHp] = useState('');
@@ -29,7 +29,7 @@ const DashboardAdmin = () => {
             setPassword('');
             setShowFormTambah(false);
             fetchAnggota()
-
+            tampilkanSimpanans()
         } catch (error) {
             console.log('error', error)
             Swal.fire({
@@ -250,8 +250,8 @@ const DashboardAdmin = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentItems.map((anggota, index) => (
-                                <tr key={anggota.id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
+                        {currentItems.map((anggota, index) => (
+                                <tr key={anggota.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-2 py-2">{anggota.nama}</td>
                                     <td className="border text-center px-2 py-2">{anggota.no_telp}</td>
                                     <td className="border text-center px-2 py-2 flex justify-around  w-[50px]">
