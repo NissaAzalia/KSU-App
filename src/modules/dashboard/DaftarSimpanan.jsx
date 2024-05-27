@@ -13,11 +13,7 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-<<<<<<< HEAD
-    const {simpanans } = useMembers();
-=======
     const {simpanans,kurangHariRaya, handleTambahSimpanan,handleDelete,tampilkanSimpanans, kurangSukarela } = useMembers();
->>>>>>> 82fed0e6acdb7e41f0808416366092ff6ae68e0b
 
     console.log(simpanans)
 
@@ -64,11 +60,6 @@ const DaftarSimpanan = () => {
         setSimpananHariRaya('');
     };
 
-<<<<<<< HEAD
-    const handleClickTambahAllSimpanan = id => {
-        const selectedNasabah = nasabah.find(n => n.id === id);
-        setCurrentNasabah(selectedNasabah);
-=======
     const handleTambahAllSimpanan = async () => {
         if (!simpananPokok && !simpananWajib && !simpananSukarela && !simpananHariRaya) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong semua.');
@@ -102,7 +93,6 @@ const DaftarSimpanan = () => {
     const handleClickTambahAllSimpanan = (id, nama) => {
         setNama(nama)
         setCurrentNasabah(id);
->>>>>>> 82fed0e6acdb7e41f0808416366092ff6ae68e0b
         setSimpananPokok('');
         setSimpananWajib('');
         setSimpananSukarela('');
