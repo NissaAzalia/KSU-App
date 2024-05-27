@@ -2,7 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan, kurangiSukarela } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan, kurangiSukarela, kurangiHariRaya } from './apiAdmin';
+
 import Swal from 'sweetalert2';
 
 // Initial state for member data
@@ -14,12 +15,14 @@ const initialMembersState = {
   tampilkanTambahPinjamLagi: () => {},
   handleTambahSimpanan: () => {},
   kurangSukarela: () => {},
+  kurangHariRaya:() => {},
   infoPinjaman: [],
   users: [],
   curentMembers: null,
   loadingAdd: false,
   loadingAddPinjaman: false,
   loadingAnggota: false,
+  loadingSimpanan: false,
   addMember: () => { },
   // editMember: () => {},
   // handleDelete: () => {},
@@ -41,6 +44,7 @@ const MemberProvider = ({ children }) => {
   const [members, setMembers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingAnggota, setLoadingAnggota] = useState(false);
+  const [loadingSimpanan, setLoadingSimpanan] = useState(false)
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
   const [infoPinjaman, setInfoPinjaman] = useState([]);
   const [simpanans, setSimpanans] = useState([]);
@@ -128,6 +132,7 @@ const MemberProvider = ({ children }) => {
   // Function to delete a member
   const handleDelete = async (id) => {
     await deleteMember(id);
+    await hapusNasabah(id);
     console.log(id);
   };
 
@@ -161,6 +166,10 @@ const MemberProvider = ({ children }) => {
 
   const kurangSukarela = async (id, simpanan_sukarela, simpanan_hariraya) => {
     kurangiSukarela(id, simpanan_sukarela, simpanan_hariraya)
+  }
+
+  const kurangHariRaya = async (id, simpanan_sukarela, simpanan_hariraya) => {
+    kurangiHariRaya(id, simpanan_sukarela, simpanan_hariraya)
   }
 
   // Function to pay debts
@@ -207,7 +216,7 @@ const MemberProvider = ({ children }) => {
   console.log(simpanans);
 
   return (
-    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, handleTambahSimpanan, kurangSukarela, fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
+    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, handleTambahSimpanan, kurangSukarela, kurangHariRaya,fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
       {children}
     </MemberContext.Provider>
   );

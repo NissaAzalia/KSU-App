@@ -181,6 +181,21 @@ export const fetchSimpanans = async () => {
 };
 
 
+export const hapusNasabah= async (id) => {
+  const token = getToken();
+
+  return axios.delete(`https://apiksu.ndamelweb.com/nasabah/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response;
+    })
+    .catch(err => {
+      return err.response.data;
+    });
+}
 export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya) => {
   const token = getToken();
 
@@ -204,6 +219,26 @@ export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, si
 }
 
 export const kurangiSukarela = async (id, simpananSukarela,simpananHariraya) => {
+  const token = getToken();
+
+  return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
+    simpanan_sukarela: simpananSukarela,
+    simpanan_hariraya: simpananHariraya
+  },
+    {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
+    .then(response => {
+      return response
+    })
+    .catch(err => {
+      return err.response
+  })
+}
+
+export const kurangiHariRaya = async (id, simpananSukarela,simpananHariraya) => {
   const token = getToken();
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
