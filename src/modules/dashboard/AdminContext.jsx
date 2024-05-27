@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, hapusNasabah } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan, kurangiSukarela } from './apiAdmin';
 import Swal from 'sweetalert2';
 
 // Initial state for member data
@@ -12,6 +12,8 @@ const initialMembersState = {
   tampilkanPinjaman: () => {},
   tampilkanBayarHutang: () => {},
   tampilkanTambahPinjamLagi: () => {},
+  handleTambahSimpanan: () => {},
+  kurangSukarela: () => {},
   infoPinjaman: [],
   users: [],
   curentMembers: null,
@@ -154,6 +156,14 @@ const MemberProvider = ({ children }) => {
     setLoadingAnggota(false);
   };
 
+  const handleTambahSimpanan = async ( id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya ) => {
+    fetchTambahSimpanan( id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya );
+  };
+
+  const kurangSukarela = async (id, simpanan_sukarela, simpanan_hariraya) => {
+    kurangiSukarela(id, simpanan_sukarela, simpanan_hariraya)
+  }
+
   // Function to pay debts
   const tampilkanBayarHutang = async (id, bayar_hutang) => {
     fetchBayarHutang(id, bayar_hutang);
@@ -198,7 +208,7 @@ const MemberProvider = ({ children }) => {
   console.log(simpanans);
 
   return (
-    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
+    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, handleTambahSimpanan, kurangSukarela, fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
       {children}
     </MemberContext.Provider>
   );
