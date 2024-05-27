@@ -109,7 +109,8 @@ const DaftarSimpanan = () => {
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const {simpanans } = useMembers();
+    const {simpanans, handleDelete, tampilkanSimpanans } = useMembers();
+    
 
     console.log(simpanans)
 
@@ -137,10 +138,25 @@ const DaftarSimpanan = () => {
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
-    const hapusNasabah = id => {
-        const updatedNasabah = nasabah.filter(nasabah => nasabah.id !== id);
-        setNasabah(updatedNasabah);
-    };
+    // const hapusNasabah = id => {
+    //     const updatedNasabah = nasabah.filter(nasabah => nasabah.id !== id);
+    //     setNasabah(updatedNasabah);
+    // };
+    const hapusNasabah = async (id) => {
+        const konfirm = confirm ("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
+        if(konfirm){
+            try {
+                await handleDelete(id)
+                alert("berhasil menghapus")
+                tampilkanSimpanans()
+            }catch (error){
+                alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
+
+            }
+        } else{
+            alert ("Penghapusan Dibatalkan")
+        }
+    }
 
     const handleCloseFormTambah = () => {
         setShowFormTambahAllSimpanan(false);
@@ -459,7 +475,7 @@ const DaftarSimpanan = () => {
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
-                                            onClick={() => hapusNasabah(nasabah.id)}
+                                            onClick={() => hapusNasabah(nasabah.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} />
                                         </button>
