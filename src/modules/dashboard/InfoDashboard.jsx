@@ -348,7 +348,7 @@ const InfoDashboard = () => {
                                     ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
                                         hutang
                                     </div>}</td>
-                                    <td className="pl-[25%] py-2 flex gap-[20px] items-center align-middle">
+                                    <td className=" text-center md:px-[30%] px-[10px]  py-2 flex gap-[10px] items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
                                             onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
