@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
-
+import emailjs from 'emailjs-com';
 import Swal from "sweetalert2"
 
 
@@ -47,8 +47,6 @@ const DasboardNasabah = ({ doLogout }) => {
         setShowFormPinjamMobil(true);
         setShowFormPinjamUang(false);
     };
-
-
 
     const openPinjamUangForm = () => {
         setShowFormServis(false);
@@ -93,7 +91,6 @@ const DasboardNasabah = ({ doLogout }) => {
         }
     }
 
-
     const handleClickPinjamMobil = async () => {
         try {
             await doPinjamMobil(tanggal, gunakanSopir);
@@ -110,13 +107,37 @@ const DasboardNasabah = ({ doLogout }) => {
         }
     }
 
-    const handleClickPinjamUang = async () => {
+    const handleClickPinjamUang =  async () => {
         try {
+            // Melakukan peminjaman uang
             await doPinjamUang(jumlah, tenor);
+    
+            // Konfigurasi EmailJS
+            const serviceID = 'service_00hgm8c';
+            const templateID = 'template_v58g62o';
+            const userID = '3K0u3vlIRw0_Po4Od'; // Ganti ini dengan User ID yang Anda dapat dari EmailJS
+    
+            const templateParams = {
+                jumlah: jumlah,
+                tenor: tenor,
+            };
+    
+            // Mengirim email dengan EmailJS
+            await emailjs.send(serviceID, templateID, templateParams, userID);
+            console.log('Email berhasil dikirim!');
+    
+            // Mengatur ulang form setelah berhasil
             setJumlah('');
             setTenor('');
             setShowFormPinjamUang(false);
-
+    
+            Swal.fire({
+                title: 'Berhasil!',
+                text: 'Peminjaman uang berhasil dan email telah dikirim.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+    
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
@@ -126,7 +147,6 @@ const DasboardNasabah = ({ doLogout }) => {
             });
         }
     }
-
 
 
     return (
