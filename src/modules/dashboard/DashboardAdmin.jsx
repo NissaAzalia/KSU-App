@@ -148,7 +148,7 @@ const DashboardAdmin = () => {
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                                 <p>Nomor Hp</p>
                                 <input
-                                    type="number" placeholder="Masukkan Nomor Hp"
+                                    type="string" placeholder="Masukkan Nomor Hp"
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={noBaru}
                                     onChange={(e) => setNoBaru(e.target.value)}
@@ -257,7 +257,7 @@ const DashboardAdmin = () => {
                                 <tr key={anggota.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-2 py-2">{anggota.nama}</td>
                                     <td className="border text-center px-2 py-2">{anggota.no_telp}</td>
-                                    <td className="border text-center pl-[30%] py-2 flex gap-[40px]   ">
+                                    <td className="border text-center md:px-[30%] px-[30px]  py-2 flex gap-[10px]     ">
                                         <button
                                             className="text-[#626262]  hover:text-[#505050]"
                                             onClick={() => handleEditClick(anggota.id_user)}
