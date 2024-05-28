@@ -12,7 +12,7 @@ const DashboardAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
 
-    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember,tampilkanSimpanans } = useMembers();
+    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember,tampilkanSimpanans, tampilkanPinjaman } = useMembers();
 
     const [nama, setNama] = useState('');
     const [nomorHp, setNomorHp] = useState('');
@@ -48,6 +48,8 @@ const DashboardAdmin = () => {
                 await handleDelete(id)
                 alert("berhasil menghapus")
                 fetchAnggota()
+                tampilkanSimpanans()
+                tampilkanPinjaman()
             }catch (error){
                 alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
 
@@ -118,9 +120,9 @@ const DashboardAdmin = () => {
 
 
     return (
-        <div className="flex flex-col bg-[#F4F4F4] w-[100%] h-screen pt-[80px] p-[25px]">
+        <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
-                <div className="mx-[30px] py-[20px]">
+                <div className="mx-[30px] md:py-[20px] py-[10px] ">
                     <h2 className="text-white font-normal text-2xl">Halo,</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
@@ -131,27 +133,27 @@ const DashboardAdmin = () => {
 
                 {showNomorHp && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
                                 <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700"
                                     onClick={handleClose}
                                 >
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                                 <p>Nomor Hp</p>
                                 <input
                                     type="number" placeholder="Masukkan Nomor Hp"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={noBaru}
                                     onChange={(e) => setNoBaru(e.target.value)}
                                 />
-                                <button onClick={handleUpdateNomorHp} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                <button onClick={handleUpdateNomorHp} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px]">
                                     Kirim
                                 </button>
                             </div>
@@ -161,10 +163,10 @@ const DashboardAdmin = () => {
 
                 {showFormTambah && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className=" absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
+                        <div className=" absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[350px] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
                                 <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700"
                                     onClick={handleClose}
                                 >
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -175,31 +177,31 @@ const DashboardAdmin = () => {
                             <div className="flex flex-col gap-2">
                                 <div className="flex flex-col gap-2">
                                     <input
-                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                         type="text" placeholder="Nama"
                                         value={nama}
                                         onChange={(e) => setNama(e.target.value)}
                                     />
                                     <input
-                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                         type="tel" placeholder="No Hp"
                                         value={nomorHp}
                                         onChange={(e) => setNomorHp(e.target.value)}
                                     />
                                     <input
-                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                         type="text" placeholder="Username"
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                     />
                                     <input
-                                        className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                         type="password" placeholder="Password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
-                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]"
+                                <button onClick={handleTambahAnggota} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
                                     disabled={loadingAdd}>
                                     {loadingAdd ? (
                                         <div>
@@ -217,23 +219,24 @@ const DashboardAdmin = () => {
 
 
 
-                <div className="flex pt-[10px] gap-3">
+                <div className="md:flex  pt-[10px] md:gap-3">
                     <div className="mb-[30px]">
                         <button
-                            className="mb-[20px] rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px]"
+                            className="md:mb-[20px] rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px]"
                             onClick={() => setShowFormTambah(true)}
                         >
                             Tambah Anggota
                         </button>
                     </div>
+                    
                     <input
-                        className="rounded-full w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
+                        className="rounded-full md:w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
                         type="text"
-                        placeholder="Cari nama nasabah..."
+                        placeholder="Cari nama nasabah"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <div className="ml-[-50px] mt-[8px]">
+                    <div className="md:ml-[-50px] ml-[180px] md:mt-[8px] mt-[-32px] mb-[30px]">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </div>
 
@@ -244,9 +247,9 @@ const DashboardAdmin = () => {
                     <table className="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th className="w-1/1 px-2 py-2">Nama</th>
-                                <th className="w-1/1 px-2 py-2">Nomor Hp</th>
-                                <th className="w-1/1 px-2 py-2 w-[50px]">Aksi</th>
+                                <th className="w-[50%] px-2 py-2">Nama</th>
+                                <th className="w-[30%] px-2 py-2">Nomor Hp</th>
+                                <th className="w-[20px] px-2 py-2 ">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -254,18 +257,18 @@ const DashboardAdmin = () => {
                                 <tr key={anggota.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-2 py-2">{anggota.nama}</td>
                                     <td className="border text-center px-2 py-2">{anggota.no_telp}</td>
-                                    <td className="border text-center px-2 py-2 flex justify-around  w-[50px]">
+                                    <td className="border text-center pl-[30%] py-2 flex gap-[40px]   ">
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#626262]  hover:text-[#505050]"
                                             onClick={() => handleEditClick(anggota.id_user)}
                                         >
-                                            <FontAwesomeIcon icon={faPenToSquare} />
+                                            <FontAwesomeIcon  icon={faPenToSquare} size='2xl' />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
                                             onClick={() => deleteMember(anggota.id_user)}
                                         >
-                                            <FontAwesomeIcon icon={faTrashCan} />
+                                            <FontAwesomeIcon icon={faTrashCan} size='2xl' />
                                         </button>
                                     </td>
                                 </tr>
