@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan,kurangiSimpanan } from './apiAdmin';
 
 import Swal from 'sweetalert2';
+import { useAuth } from '../auth/Auth';
 
 // Initial state for member data
 const initialMembersState = {
@@ -50,6 +51,7 @@ const MemberProvider = ({ children }) => {
   const [infoPinjaman, setInfoPinjaman] = useState([]);
   const [simpanans, setSimpanans] = useState([]);
   const [curentMembers, setcurentMembers] = useState(null);
+  const {name} = useAuth()
 
   // Function to add a member
   const tambahAnggota = async (nama, nomorHp, username, password) => {
@@ -172,12 +174,12 @@ const MemberProvider = ({ children }) => {
   };
 
   const kurangSimpanan = async (id, type_simpanan, penarikan) => {
-    kurangiSimpanan(id, type_simpanan, penarikan)
+    kurangiSimpanan(id, type_simpanan, penarikan) 
   }
 
 //   const kurangHariRaya = async (id, type_simpanan, penarikan) => {
 //     kurangiHariRaya(id, type_simpanan, penarikan)
-//   }
+//  }
 
 
   // Function to pay debts

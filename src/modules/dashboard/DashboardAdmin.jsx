@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import { faMagnifyingGlass, faTrashCan, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
+import { useAuth } from '../auth/Auth';
 
 const DashboardAdmin = () => {
     const [showNomorHp, setShowNomorHp] = useState(false);
@@ -19,6 +21,8 @@ const DashboardAdmin = () => {
     const [noBaru, setNoBaru] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const {name} = useAuth()
 
     const handleTambahAnggota = async () => {
         try {
@@ -54,9 +58,7 @@ const DashboardAdmin = () => {
                 alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
 
             }
-        } else{
-            alert ("Penghapusan Dibatalkan")
-        }
+        } 
     }
 
     const handleUpdateNomorHp = async () => {
@@ -123,7 +125,7 @@ const DashboardAdmin = () => {
         <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] md:py-[20px] py-[10px] ">
-                    <h2 className="text-white font-normal text-2xl">Halo,</h2>
+                    <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
             </div>

@@ -208,7 +208,7 @@ const DasboardNasabahProvider = ({ children }) => {
 
 
 
-  const doPinjamUang = async (jumlah, tenor) => {
+  const doPinjamUang = async (jumlah, tenor, setNama) => {
     // cek loading
     if (loadingPinjamUang) return
 
@@ -244,6 +244,9 @@ const DasboardNasabahProvider = ({ children }) => {
 
   // hilangkan tampilan loading
   Swal.hideLoading()
+  const {nama} = apiResult.data.data;
+
+  setNama(nama);
   Swal.fire({
     title: 'Sukses',
     text: 'Berhasil mengirim data pinjam uang'

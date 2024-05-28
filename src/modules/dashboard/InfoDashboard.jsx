@@ -103,8 +103,10 @@ const InfoDashboard = () => {
             await tampilkanBayarHutang(currentId, bayar_hutang);
             setNama('')
             setBayar_hutang('');
-            await tampilkanPinjaman();
+            tampilkanPinjaman();
             setShowFormPinjaman(false);
+            setBayar_hutang()
+            tampilkanPinjaman();
           
         } catch (error) {
             console.log('Error:', error);
@@ -133,9 +135,10 @@ const InfoDashboard = () => {
         try {
             await tampilkanTambahPinjamLagi(currentId, hutang);
             sethutang('')
-            await tampilkanPinjaman()
+            tampilkanPinjaman()
             setShowFormTambahPinjamanLagi(false)
-            await tampilkanPinjaman()
+            sethutang()
+            tampilkanPinjaman()
 
         } catch (error) {
             console.log('Error:', error);
@@ -183,7 +186,7 @@ const InfoDashboard = () => {
         <div className="flex flex-col bg-[#F4F4F4] w-[100%] md:h-screen  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] md:py-[20px] py-[10px]">
-                    <h2 className="text-white font-normal text-2xl">Halo,</h2>
+                    <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
             </div>

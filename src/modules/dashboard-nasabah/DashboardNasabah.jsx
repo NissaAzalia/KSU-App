@@ -6,9 +6,10 @@ import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 import emailjs from 'emailjs-com';
 import Swal from "sweetalert2"
+import { useAuth } from '../auth/Auth';
 
 
-const DasboardNasabah = ({ doLogout }) => {
+const DasboardNasabah = ({ doLogout,name }) => {
     const [showFormServis, setShowFormServis] = useState(false);
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
@@ -21,10 +22,10 @@ const DasboardNasabah = ({ doLogout }) => {
     const [tenor, setTenor] = useState("");
     const [nama_barang, setNama_barang] = useState("");
     const [jumlah_barang, setJumlah_barang] = useState("");
+    const [nama, setNama] = useState('')
     const [tanggal, setTanggal] = useState("");
     const [gunakanSopir, setGunakanSopir] = useState(false);
     const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamMobil, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamMobil, loadingUang } = useDashboardNasabah()
-
 
 
     const openServisForm = () => {
@@ -90,6 +91,9 @@ const DasboardNasabah = ({ doLogout }) => {
             });
         }
     }
+    const handleSetNama = (nama) => {
+        return setNama(nama)
+    }
 
     const handleClickPinjamMobil = async () => {
         try {
@@ -110,20 +114,24 @@ const DasboardNasabah = ({ doLogout }) => {
     const handleClickPinjamUang =  async () => {
         try {
             // Melakukan peminjaman uang
-            await doPinjamUang(jumlah, tenor);
+            await doPinjamUang(jumlah, tenor,handleSetNama);
     
             // Konfigurasi EmailJS
             const serviceID = 'service_00hgm8c';
             const templateID = 'template_v58g62o';
             const userID = '3K0u3vlIRw0_Po4Od'; // Ganti ini dengan User ID yang Anda dapat dari EmailJS
+            const username = nama;
+
     
-            const templateParams = {
+            const templateParams = {  
+                username:username,
                 jumlah: jumlah,
                 tenor: tenor,
             };
     
             // Mengirim email dengan EmailJS
             await emailjs.send(serviceID, templateID, templateParams, userID);
+
             console.log('Email berhasil dikirim!');
     
             // Mengatur ulang form setelah berhasil
@@ -137,6 +145,7 @@ const DasboardNasabah = ({ doLogout }) => {
                 icon: 'success',
                 confirmButtonText: 'OK'
             });
+            return;
     
         } catch (error) {
             Swal.fire({
@@ -168,7 +177,7 @@ const DasboardNasabah = ({ doLogout }) => {
                 <div className="rounded-xl  h-[80px] md:w-[95%] w-[85%] md:mx-[30px] mx-[30px]    bg-gradient-to-r from-[#2C6975] to-[#52C5DB]" >
 
                     <div className="md:mx-[3%] mx-[6%] py-[6px] mt-[25px] md:py-[10px]">
-                        <h2 className="text-white font-normal text-1xl md:text-2xl">Halo,</h2>
+                        <h2 className="text-white font-normal text-1xl md:text-2xl">Halo, {name}</h2>
                         <p className="text-white font-thin text-sm md:text-base">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                     </div>
                 </div>

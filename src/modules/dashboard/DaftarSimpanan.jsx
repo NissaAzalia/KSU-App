@@ -1,4 +1,4 @@
-import { faMagnifyingGlass, faPlusCircle, faTrashCan, faXmark, faMinus, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPlusCircle, faTrashCan, faXmark, faCircleMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
@@ -17,14 +17,14 @@ const DaftarSimpanan = () => {
     const [nominal, setNominal] = useState('');
     const [type_simpananan, setType_simpananan] = useState()
 
-    const { simpanans, kurangSimpanan, handleTambahSimpanan, handleDelete, tampilkanSimpanans, kurangSukarela, fetchAnggota } = useMembers();
+    const { simpanans, kurangSimpanan, handleTambahSimpanan, handleDelete, tampilkanSimpanans, fetchAnggota } = useMembers();
 
     // console.log(simpanans)
 
     // const [nasabah, setNasabah] = useState(initialNasabah);
     const [nama, setNama] = useState('')
-    const [simpananPokok, setSimpananPokok] = useState('');
-    const [simpananWajib, setSimpananWajib] = useState('');
+    // const [simpananPokok, setSimpananPokok] = useState('');
+    // const [simpananWajib, setSimpananWajib] = useState('');
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
 
@@ -49,8 +49,8 @@ const DaftarSimpanan = () => {
     const handleCloseFormTambah = () => {
         setShowFormTambahAllSimpanan(false);
         setCurrentNasabah(null);
-        setSimpananPokok('');
-        setSimpananWajib('');
+        // setSimpananPokok('');
+        // setSimpananWajib('');
         setSimpananSukarela('');
         setSimpananHariRaya('');
         tampilkanSimpanans()
@@ -204,13 +204,13 @@ const DaftarSimpanan = () => {
         <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] md:py-[20px] py-[10px]">
-                    <h2 className="text-white font-normal text-2xl">Halo,</h2>
+                    <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
             </div>
 
             <div className="mt-[25px]">
-                <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
+                <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Simpanan Koperasi</h2>
 
                 {showFormTambahAllSimpanan && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>

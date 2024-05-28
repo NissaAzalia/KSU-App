@@ -6,12 +6,13 @@ import { getToken, removeToken, saveToken } from "../../helpers/LocalStorage"
 import Swal from "sweetalert2"
 // nilai default
 const initialAuthState = {
-    isLoggedin: false,
-    authority: "",
-    doLogin: () => { },
-    doLoginAdmin: () => {},
-    doLogout: () => { },
-    changeAuthority: () => {},
+  isLoggedin: false,
+  authority: "",
+  name: "",
+  doLogin: () => { },
+  doLoginAdmin: () => { },
+  doLogout: () => { },
+  changeAuthority: () => { },
 }
 
 // buat context
@@ -19,117 +20,157 @@ const AuthContext = createContext(initialAuthState)
 
 //buat costum hook
 const useAuth = () => {
-    return useContext(AuthContext)
+  return useContext(AuthContext)
 }
 
 // buat provider
 const AuthProvider = ({ children }) => {
-    // state
-    const [isLoggedin, setIsLoggedin] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const [authority, setAuthority] = useState("")
+  // state
+  const [isLoggedin, setIsLoggedin] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [authority, setAuthority] = useState("")
+  const [name,setName] = useState("");
 
+  console.log(name)
 
-    const doLogin = async (user,password) => {
-        if (isLoading) return
+  const doRole = (role) => {
+    return localStorage.setItem('User_Role',role);
+  }
 
-        setIsLoading(true)
-        Swal.fire({
-          title: "Loading",
-          text: "Mengirim data.."
-        })
-        Swal.showLoading()
+  const getRole = () => {
+    return localStorage.getItem('User_Role') ?? null;
+  }
 
-        // memanggil api menggunakan axios
-        const apiResult = await handleLogin(user,password)
-        const { status, data, message } = apiResult.data
+  const removeRole = () => {
+    return localStorage.removeItem('User_Role');
+  }
 
-        if (status !=  'success') {
-            // jika gagal tampilkan peringatan  
-            Swal.hideLoading()
-            Swal.fire({
-                title:`Login Gagal`,
-                text: message,
-                icon:'error',
-                showConfirmButton:false,
-            })
-            return;
-        }
-        saveToken(data.token)
-        setIsLoading(false)
-        Swal.hideLoading()
-        Swal.fire({
-          title: 'Sukses',
-          text: 'Berhasil Login'
-        })
-          setIsLoggedin(true)
+  const saveUserName = (name) => {
+    return localStorage.setItem('User_Name',name);
+  }
+
+  const getUserName = () => {
+    return localStorage.getItem('User_Name') ?? null;
+  }
+
+  const removeUserName = () => {
+    return localStorage.removeItem('User_Name');
+  }
+
+  const doLogin = async (user, password) => {
+    if (isLoading) return
+
+    setIsLoading(true)
+    Swal.fire({
+      title: "Loading",
+      text: "Mengirim data.."
+    })
+    Swal.showLoading()
+
+    // memanggil api menggunakan axios
+    const apiResult = await handleLogin(user, password)
+    const { status, data, message } = apiResult.data
+
+    if (status != 'success') {
+      // jika gagal tampilkan peringatan  
+      Swal.hideLoading()
+      Swal.fire({
+        title: `Login Gagal`,
+        text: message,
+        icon: 'error',
+        showConfirmButton: false,
+      })
+      return;
+    }
+    saveUserName(data.name);
+    saveToken(data.token)
+    setIsLoading(false)
+    Swal.hideLoading()
+    Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil Login'
+    })
+    doRole('Nasabah')
+    setIsLoggedin(true)
+    setName(data.name); 
+  }
+
+  const doLoginAdmin = async (user, password) => {
+    if (isLoading) return
+
+    setIsLoading(true)
+
+    // memanggil api dengan data email & password
+    // console.log("akan melakukan login dengan: ", user,password)
+
+    Swal.fire({
+      title: "Loading",
+      text: "Mengirim data.."
+    })
+    Swal.showLoading()
+    // memanggil api menggunakan axios
+    const apiResult = await handleLoginAdmin(user, password)
+    const { status, data, message } = apiResult.data
+
+    if (status != 'success') {
+      // jika gagal tampilkan peringatan  
+      // alert(`Login gagal: ${message}`)
+      Swal.hideLoading()
+      Swal.fire({
+        title: `Login Gagal`,
+        text: message,
+        icon: 'error',
+        showConfirmButton: false,
+      })
+      return;
     }
 
-    const doLoginAdmin = async (user,password) => {
-        if (isLoading) return
+    saveUserName(data.name);
+    saveToken(data.token)
+    setIsLoading(false)
+    Swal.hideLoading()
+    // jika berhasil maka setIsLoggedin -> true
+    Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil Login'
+    })
+    doRole('Admin')
+    setIsLoggedin(true)
+    setName(data.name); 
+  }
 
-        setIsLoading(true)
+  const doLogout = () => {
+    getToken()
+    setIsLoggedin(false)
+    removeToken();
+    removeRole();
+    removeUserName()
+    setName("");
+  }
 
-        // memanggil api dengan data email & password
-        // console.log("akan melakukan login dengan: ", user,password)
+  const changeAuthority = (auth) => {
+    setAuthority(auth)
+  }
+  
 
-        Swal.fire({
-          title: "Loading",
-          text: "Mengirim data.."
-        })
-        Swal.showLoading()
-        // memanggil api menggunakan axios
-        const apiResult = await handleLoginAdmin(user,password)
-        const { status, data, message } = apiResult.data
-
-        if (status !=  'success') {
-           // jika gagal tampilkan peringatan  
-            // alert(`Login gagal: ${message}`)
-            Swal.hideLoading()
-            Swal.fire({
-              title:`Login Gagal`,
-              text: message,
-              icon:'error',
-              showConfirmButton:false,
-            })
-            return;
-        }
-
-        saveToken(data.token)
-        setIsLoading(false)
-        Swal.hideLoading()
-        // jika berhasil maka setIsLoggedin -> true
-        Swal.fire({
-          title: 'Sukses',
-          text: 'Berhasil Login'
-        })
-          setIsLoggedin(true)
-
+  useEffect(() => {
+    const token = getToken();
+    const Role = getRole();
+    const Name = getUserName();
+    if (token !== null && Role !== null || Name !== null) {
+      setName(Name);
+      setIsLoggedin(true);
+      setAuthority(Role);
     }
+  }, [name]);
 
-    const doLogout = () => {
-        setIsLoggedin(false)
-        removeToken();
-    }
-
-    const changeAuthority = (auth) => {
-        setAuthority(auth)
-    }
-
-    useEffect(() => {
-      const token = getToken();
-      if(token !== null){
-        setIsLoggedin(true);
-      }
-    },[]);
-
-    // return provider
-    return(
-        <AuthContext.Provider value={ {isLoggedin, authority, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority} }>
-            {children}
-        </AuthContext.Provider>
-    )
+  // return provider
+  return (
+    <AuthContext.Provider value={{ isLoggedin, authority, name, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 // export provider & hook
-export {AuthProvider,useAuth}
+export { AuthProvider, useAuth }

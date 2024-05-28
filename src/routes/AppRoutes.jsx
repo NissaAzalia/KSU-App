@@ -12,7 +12,7 @@ import { MemberProvider } from '../modules/dashboard/AdminContext'
 
 const AppRoutes = () => {
 
-  const {authority, isLoggedin,doLogout} = useAuth();
+  const {authority, isLoggedin,doLogout,name} = useAuth();
 
 
   const handleLogout = () => {
@@ -37,12 +37,10 @@ const AppRoutes = () => {
               {
                 authority === 'Admin' ?
                   // jika yang login adalah admin
-                  <Route element={<MainLayout />}>
-                    <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin /></MemberProvider>  } />
-                    {/* <Route path='/input-simpanan' element={<DasboardInputSimpanan />} /> */}
-                    <Route path='/daftar-simpanan' element={<MemberProvider><DaftarSimpanan /></MemberProvider> } />
-                    <Route path='info' element={<MemberProvider><InfoDashboard /></MemberProvider>  } />
-                    {/* <Route path='/input-tambah' element={<InputTambah />} /> */}
+                  <Route element={<MainLayout  />}>
+                    <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin name={name}  /></MemberProvider>  } />
+                    <Route path='/daftar-simpanan' element={<MemberProvider><DaftarSimpanan name={name} /></MemberProvider> } />
+                    <Route path='info' element={<MemberProvider><InfoDashboard name={name} /></MemberProvider>  } />
                     <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
                   </Route>
 
@@ -51,12 +49,12 @@ const AppRoutes = () => {
                   <Route>
                     <Route path='nasabah' element={
                       <DasboardNasabahProvider>
-                        <DashboardNasabah doLogout={handleLogout}/>
+                        <DashboardNasabah name={name} doLogout={handleLogout}/>
                       </DasboardNasabahProvider>
                       } />
                     <Route path='*' element={<Navigate to={"/nasabah"} />} />
                   </Route>
-              }
+              } 
             </Route>
 
         }

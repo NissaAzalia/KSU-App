@@ -225,7 +225,7 @@ export const kurangiSimpanan = async (id, type_simpanan, penarikan) => {
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
     type_simpanan: type_simpanan,
-    penarikan: penarikan
+    penarikan: parseInt(penarikan)
   },
     {
       headers: {
@@ -257,6 +257,6 @@ export const kurangiSimpanan = async (id, type_simpanan, penarikan) => {
 //     })
 //     .catch(err => {
 //       return err.response
-//     })
+//    })
 // }
 
