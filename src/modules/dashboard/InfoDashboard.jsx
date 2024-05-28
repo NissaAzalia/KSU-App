@@ -79,6 +79,7 @@ const InfoDashboard = () => {
         if (confirm) {
             await handleDeletePinjaman(id);
             tampilkanPinjaman();
+        
         }
     };
 
@@ -100,10 +101,11 @@ const InfoDashboard = () => {
 
         try {
             await tampilkanBayarHutang(currentId, bayar_hutang);
+            setNama('')
             setBayar_hutang('');
             await tampilkanPinjaman();
             setShowFormPinjaman(false);
-            await tampilkanPinjaman();
+          
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -124,7 +126,7 @@ const InfoDashboard = () => {
     const handleEditTambahPinjaman = async () => {
         if (!hutang) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-            tampilkanPinjaman()
+            
             return;
         }
 
@@ -178,9 +180,9 @@ const InfoDashboard = () => {
     ));
 
     return (
-        <div className="flex flex-col bg-[#F4F4F4] w-[100%] h-screen pt-[80px] p-[25px]">
+        <div className="flex flex-col bg-[#F4F4F4] w-[100%] md:h-screen  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
-                <div className="mx-[30px] py-[20px]">
+                <div className="mx-[30px] md:py-[20px] py-[10px]">
                     <h2 className="text-white font-normal text-2xl">Halo,</h2>
                     <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
@@ -192,33 +194,33 @@ const InfoDashboard = () => {
 
                 {showForm && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
-                                <button className="top-1 left-1 text-gray-500 hover:text-gray-700" onClick={handleClose}>
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[270px] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
+                                <button className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700" onClick={handleClose}>
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjaman Anggota</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[30px]">Pinjaman Anggota</h1>
                             <div className="flex flex-col gap-2">
                                 <input
                                     type="text"
                                     placeholder="Nama"
                                     value={nama}
                                     onChange={e => setNama(e.target.value)}
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                 />
                                 <input
                                     type="number"
                                     placeholder="Masukkan Nominal Pinjaman"
                                     value={jumlah_pinjaman}
                                     onChange={(e) => setJumlah_pinjaman(e.target.value)}
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                 />
 
                                 <button
                                     onClick={tambahPinjaman}
-                                    className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]"
+                                    className="rounded bg-[#2C6975] hover:bg-[#358595] text-white  md:w-[600px] w-[200px] h-[40px] mb-[20px]"
                                 >
                                     Kirim
                                 </button>
@@ -229,27 +231,27 @@ const InfoDashboard = () => {
 
                 {showFormTambahPinjamanLagi && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[200px] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
                                 <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700"
                                     onClick={handleClose}
                                 >
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                                 <input
                                     type="number" placeholder="Masukkan Nominal Penarikan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={hutang}
                                     onChange={e => sethutang(e.target.value)}
                                 />
                                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                                <button onClick={handleEditTambahPinjaman} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                <button onClick={handleEditTambahPinjaman} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">
                                     Kirim
                                 </button>
                             </div>
@@ -260,14 +262,14 @@ const InfoDashboard = () => {
 
                 {showFormPinjaman && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] w-[700px] py-[30px] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
-                                <button className="top-1 left-1 text-gray-500 hover:text-gray-700" onClick={handleClose}>
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
+                                <button className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700" onClick={handleClose}>
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Bayar hutang Anggota</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[30px]">Bayar hutang Anggota</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                                 <p></p>
@@ -276,7 +278,7 @@ const InfoDashboard = () => {
                                     placeholder="Masukkan Nominal Pembayaran"
                                     value={bayar_hutang}
                                     id='id_pinjaman'
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     onChange={e => setBayar_hutang(e.target.value)}
                                 />
                                 {errorMessage && (
@@ -287,7 +289,7 @@ const InfoDashboard = () => {
 
                                 <button
                                     onClick={editPinjaman}
-                                    className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px] mb-[20px]"
+                                    className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
                                 >
                                     Kirim
                                 </button>
@@ -296,7 +298,7 @@ const InfoDashboard = () => {
                     </div>
                 )}
 
-                <div className="flex pt-[10px] gap-3">
+                <div className="md:flex pt-[10px] gap-3">
                     <div className="mb-[30px]">
                         <button
                             className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[5px]"
@@ -307,13 +309,13 @@ const InfoDashboard = () => {
 
                     </div>
                     <input
-                        className="rounded-full w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
+                        className="rounded-full  md:w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
                         type="text"
-                        placeholder="Cari nama nasabah..."
+                        placeholder="Cari nama nasabah"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <div className="ml-[-45px] mt-[8px]">
+                    <div className="md:ml-[-50px] ml-[180px] md:mt-[8px] mt-[-32px] mb-[30px]">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </div>
 
@@ -324,18 +326,20 @@ const InfoDashboard = () => {
                     <table className="min-w-full bg-white">
                         <thead>
                             <tr>
-                                <th className="w-20 px-4 py-2">Nama</th>
-                                <th className="w-20 px-4 py-2">Pinjaman</th>
+                                <th className="w-[25%] px-4 py-2">Nama</th>
+                                <th className="w-[20px] px-4 py-2">Pinjaman</th>
                                 <th className="w-10 px-4 py-2">Sisa Hutang</th>
                                 <th className="w-1 px-4 py-2">Status</th>
-                                <th className="w-1 px-2 py-2">Action</th>
+                                <th className="w-[10px] px-2 py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentItems.map((pinjaman, index) => (
                                 <tr key={pinjaman.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
                                     <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
-                                    <td className="border text-center px-4 py-2"><div className='flex justify-evenly'>{pinjaman.jumlah_pinjaman.toLocaleString()}<button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)} className='bg-[#4aad7c]  pr-[10px] pl-[10px] rounded-full '><span className='text-white'>+</span></button></div></td>
+                                    <td className="border text-center px-4 py-2">
+                                        <div className='flex justify-evenly'>
+                                            {pinjaman.jumlah_pinjaman.toLocaleString()}<button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)}><span className='text-white'><FontAwesomeIcon icon={faPlusCircle} size='xl' style={{color: "#4aad7c",}} /></span></button></div></td>
                                     <td className="border text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
                                     <td className="border text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
@@ -344,18 +348,18 @@ const InfoDashboard = () => {
                                     ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
                                         hutang
                                     </div>}</td>
-                                    <td className="px-4 py-2 flex justify-evenly items-center align-middle">
+                                    <td className="pl-[25%] py-2 flex gap-[20px] items-center align-middle">
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
                                             onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
                                         >
-                                            <FontAwesomeIcon icon={faPlusCircle} />
+                                            <FontAwesomeIcon icon={faPlusCircle} size='xl' />
                                         </button>
                                         <button
                                             className="text-[#626262] hover:text-[#505050]"
                                             onClick={() => hapusPinjaman(pinjaman.id_user)}
                                         >
-                                            <FontAwesomeIcon icon={faTrashCan} />
+                                            <FontAwesomeIcon icon={faTrashCan} size='xl' />
                                         </button>
                                     </td>
                                 </tr>

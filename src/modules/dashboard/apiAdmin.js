@@ -196,14 +196,16 @@ export const hapusNasabah= async (id) => {
       return err.response.data;
     });
 }
-export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, simpanan_sukarela, simpanan_hariraya) => {
+export const fetchTambahSimpanan = async (id, type_simpanan, jumlahSimpanan) => {
   const token = getToken();
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/updatesimpanan/` + id, {
-    simpanan_pokok: simpanan_pokok,
-    simpanan_wajib: simpanan_wajib,
-    simpanan_sukarela: simpanan_sukarela,
-    simpanan_hariraya: simpanan_hariraya
+    type_simpanan: type_simpanan,
+    jumlahSimpanan: jumlahSimpanan
+    // simpanan_pokok: simpanan_pokok,
+    // simpanan_wajib: simpanan_wajib,
+    // simpanan_sukarela: simpanan_sukarela,
+    // simpanan_hariraya: simpanan_hariraya
   },
     {
       headers: {
@@ -218,12 +220,12 @@ export const fetchTambahSimpanan = async (id, simpanan_pokok, simpanan_wajib, si
     })
 }
 
-export const kurangiSukarela = async (id, simpananSukarela,simpananHariraya) => {
+export const kurangiSimpanan = async (id, type_simpanan, penarikan) => {
   const token = getToken();
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
-    simpanan_sukarela: simpananSukarela,
-    simpanan_hariraya: simpananHariraya
+    type_simpanan: type_simpanan,
+    penarikan: penarikan
   },
     {
       headers: {
@@ -235,25 +237,26 @@ export const kurangiSukarela = async (id, simpananSukarela,simpananHariraya) => 
     })
     .catch(err => {
       return err.response
-  })
+    })
 }
 
-export const kurangiHariRaya = async (id, simpananSukarela,simpananHariraya) => {
-  const token = getToken();
+// export const kurangiHariRaya = async (id, type_simpanan, penarikan) => {
+//   const token = getToken();
 
-  return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
-    simpanan_sukarela: simpananSukarela,
-    simpanan_hariraya: simpananHariraya
-  },
-    {
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    })
-    .then(response => {
-      return response
-    })
-    .catch(err => {
-      return err.response
-  })
-}
+//   return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
+//     type_simpanan: type_simpanan,
+//     penarikan: penarikan
+//   },
+//     {
+//       headers: {
+//         'Authorization': 'Bearer ' + token
+//       }
+//     })
+//     .then(response => {
+//       return response
+//     })
+//     .catch(err => {
+//       return err.response
+//     })
+// }
+
