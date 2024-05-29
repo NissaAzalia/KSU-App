@@ -201,7 +201,7 @@ export const fetchTambahSimpanan = async (id, type_simpanan, jumlahSimpanan) => 
 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/updatesimpanan/` + id, {
     type_simpanan: type_simpanan,
-    jumlahSimpanan: jumlahSimpanan
+    jumlahSimpanan: Number(jumlahSimpanan)
     // simpanan_pokok: simpanan_pokok,
     // simpanan_wajib: simpanan_wajib,
     // simpanan_sukarela: simpanan_sukarela,

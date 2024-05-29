@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { faMagnifyingGlass, faTrashCan, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTrashCan, faPenToSquare, faXmark, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
@@ -14,7 +14,7 @@ const DashboardAdmin = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
 
-    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember,tampilkanSimpanans, tampilkanPinjaman } = useMembers();
+    const { members, tambahAnggota, loadingAdd, handleDelete, fetchAnggota, updateMember, tampilkanSimpanans, tampilkanPinjaman } = useMembers();
 
     const [nama, setNama] = useState('');
     const [nomorHp, setNomorHp] = useState('');
@@ -22,7 +22,7 @@ const DashboardAdmin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const {name} = useAuth()
+    const { name } = useAuth()
 
     const handleTambahAnggota = async () => {
         try {
@@ -42,23 +42,26 @@ const DashboardAdmin = () => {
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
+
         }
+
+
     }
 
     const deleteMember = async (id) => {
-        const konfirm = confirm ("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
-        if(konfirm){
+        const konfirm = confirm("Apakah Anda Yakin Ingin Menghapus Anggota Ini?")
+        if (konfirm) {
             try {
                 await handleDelete(id)
                 alert("berhasil menghapus")
                 fetchAnggota()
                 tampilkanSimpanans()
                 tampilkanPinjaman()
-            }catch (error){
+            } catch (error) {
                 alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
 
             }
-        } 
+        }
     }
 
     const handleUpdateNomorHp = async () => {
@@ -220,57 +223,67 @@ const DashboardAdmin = () => {
                 )}
 
 
+                <div className='bg-white p-[20px] pb-[30px] pt-[10px] justify-center shadow-sm'>
+                    <div className="md:flex md:gap-3 items-center">
+                        <div className="">
+                            <button
+                                className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mt-[20px] flex justify-center items-center gap-2"
+                                onClick={() => setShowFormTambah(true)}
+                            >
+                                <div>
+                                    <FontAwesomeIcon icon={faPlusCircle} size='xl' />
+                                </div>
+                                <p>Tambah Anggota</p>
 
-                <div className="md:flex  pt-[10px] md:gap-3">
-                    <div className="mb-[30px]">
-                        <button
-                            className="md:mb-[20px] rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px]"
-                            onClick={() => setShowFormTambah(true)}
-                        >
-                            Tambah Anggota
-                        </button>
-                    </div>
-                    
-                    <input
-                        className="rounded-full md:w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
-                        type="text"
-                        placeholder="Cari nama nasabah"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <div className="md:ml-[-50px] ml-[180px] md:mt-[8px] mt-[-32px] mb-[30px]">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </div>
+                            </button>
+                        </div>
 
+
+                        <div className="flex mt-[20px] w-[100%]">
+                            <input
+                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                                type="text"
+                                placeholder="Cari nama nasabah"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <div className=' border olid p-[5px] pl-[10px] pr-[10px]  items-center  rounded rounded-l-none '>
+                                <FontAwesomeIcon className='' icon={faMagnifyingGlass} />
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
 
-                <div className="max-h-60 overflow-y-auto overflow-x-auto shadow-lg">
+
+
+                <div className="max-h-[100h] mt-[25px] overflow-y-auto overflow-x-auto bg-white p-[20px] shadow-lg">
                     <table className="min-w-full bg-white">
                         <thead>
-                            <tr>
-                                <th className="w-[50%] px-2 py-2">Nama</th>
-                                <th className="w-[30%] px-2 py-2">Nomor Hp</th>
-                                <th className="w-[20px] px-2 py-2 ">Aksi</th>
+                            <tr className='text-[#f4f4f4]'>
+                                <th className="w-[50%] bg-[#2c6975eb] rounded rounded-r-none px-4 py-2">NAMA</th>
+                                <th className="w-[30%] bg-[#2c6975eb] rounded-none px-4 py-2">NO. HP</th>
+                                <th className="w-[20px] bg-[#2c6975eb] rounded rounded-l-none px-4 py-2 ">AKSI</th>
                             </tr>
                         </thead>
                         <tbody>
-                        {currentItems.map((anggota, index) => (
+                            {currentItems.map((anggota, index) => (
                                 <tr key={anggota.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-2 py-2">{anggota.nama}</td>
-                                    <td className="border text-center px-2 py-2">{anggota.no_telp}</td>
-                                    <td className="border text-center md:px-[30%] px-[30px]  py-2 flex gap-[10px]     ">
+                                    <td className="border-b border-solid text-center px-2 py-2">{anggota.nama}</td>
+                                    <td className="border-b border-solid border-gray-300 text-center px-2 py-2">{anggota.no_telp}</td>
+                                    <td className="border-b border-solid border-gray-300 text-center items-center py-1 ">
                                         <button
-                                            className="text-[#626262]  hover:text-[#505050]"
+                                            className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => handleEditClick(anggota.id_user)}
                                         >
-                                            <FontAwesomeIcon  icon={faPenToSquare} size='2xl' />
+                                            <FontAwesomeIcon icon={faPenToSquare} size='xl' />
                                         </button>
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => deleteMember(anggota.id_user)}
                                         >
-                                            <FontAwesomeIcon icon={faTrashCan} size='2xl' />
+                                            <FontAwesomeIcon icon={faTrashCan} size='xl' />
                                         </button>
                                     </td>
                                 </tr>

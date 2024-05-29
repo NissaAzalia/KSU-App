@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
+import { useAuth } from '../auth/Auth';
 
 
 const InfoDashboard = () => {
@@ -11,12 +12,7 @@ const InfoDashboard = () => {
     const [showFormTambahPinjamanLagi, setShowFormTambahPinjamanLagi] = useState(false)
     const [currentId, setCurrentId] = useState(null);
     const { infoPinjaman, handleDeletePinjaman, handleTambahPinjaman, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanBayarHutang } = useMembers();
-
-    // const [pinjamanAnggota, setPinjamanAnggota] = useState([
-    //     // { id: 1, nama: 'tes', nominal: 50000, sisaHutang: 50000 },
-    //     // { id: 2, nama: 'tesstt', nominal: 20000, sisaHutang: 20000 },
-    // ]);
-
+    const { name } = useAuth()
 
     // const [nama, setNama] = useState('');
     // const [nominal, setNominal] = useState('');
@@ -28,26 +24,6 @@ const InfoDashboard = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(20);
     const [errorMessage, setErrorMessage] = useState('');
-
-    // const tambahPinjaman = () => {
-    //     if (!nama || !nominal) {
-    //         setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-    //         return;
-    //     }
-
-    //     const newData = {
-    //         id: infoPinjaman.length + 1,
-    //         nama: nama,
-    //         nominal: parseFloat(nominal),
-    //         sisaHutang: parseFloat(nominal),
-    //     };
-    //     setPinjamanAnggota([...infoPinjaman, newData]);
-    //     setNama('');
-    //     setNominal('');
-    //     setShowForm(false);
-    //     setErrorMessage('');
-    // };
-
 
     const tambahPinjaman = async () => {
         try {
@@ -79,7 +55,7 @@ const InfoDashboard = () => {
         if (confirm) {
             await handleDeletePinjaman(id);
             tampilkanPinjaman();
-        
+
         }
     };
 
@@ -107,7 +83,7 @@ const InfoDashboard = () => {
             setShowFormPinjaman(false);
             setBayar_hutang()
             tampilkanPinjaman();
-          
+
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -128,7 +104,7 @@ const InfoDashboard = () => {
     const handleEditTambahPinjaman = async () => {
         if (!hutang) {
             setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-            
+
             return;
         }
 
@@ -301,65 +277,77 @@ const InfoDashboard = () => {
                     </div>
                 )}
 
-                <div className="md:flex pt-[10px] gap-3">
-                    <div className="mb-[30px]">
-                        <button
-                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mb-[5px]"
-                            onClick={() => setShowForm(true)}
-                        >
-                            Input Pinjaman
-                        </button>
+                <div className='bg-white p-[20px] pb-[30px] pt-[10px] justify-center shadow-sm'>
+                    <div className="md:flex md:gap-3 items-center">
+                        <div className="">
+                            <button
+                                className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[200px] h-[40px] mt-[20px]"
+                                onClick={() => setShowForm(true)}
+                            >
+                                Input Pinjaman
+                            </button>
+                        </div>
 
-                    </div>
-                    <input
-                        className="rounded-full  md:w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
-                        type="text"
-                        placeholder="Cari nama nasabah"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <div className="md:ml-[-50px] ml-[180px] md:mt-[8px] mt-[-32px] mb-[30px]">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </div>
 
+                        <div className="flex mt-[20px] w-[100%]">
+                            <input
+                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                                type="text"
+                                placeholder="Cari nama nasabah"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <div className=' border olid p-[5px] pl-[10px] pr-[10px]  items-center  rounded rounded-l-none '>
+                                <FontAwesomeIcon className='' icon={faMagnifyingGlass} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
-                <div className="max-h-60 overflow-y-auto overflow-x-auto  shadow-lg">
+                <div className="max-h-[100h] mt-[25px] overflow-y-auto overflow-x-auto bg-white p-[20px] shadow-lg">
                     <table className="min-w-full bg-white">
                         <thead>
-                            <tr>
-                                <th className="w-[25%] px-4 py-2">Nama</th>
-                                <th className="w-[20px] px-4 py-2">Pinjaman</th>
-                                <th className="w-10 px-4 py-2">Sisa Hutang</th>
-                                <th className="w-1 px-4 py-2">Status</th>
-                                <th className="w-[10px] px-2 py-2">Action</th>
+                            <tr className='text-[#f4f4f4]'>
+                                <th className="bg-[#2c6975eb] rounded rounded-r-none px-4 py-2">Nama</th>
+                                <th className="bg-[#2c6975eb] rounded-none px-4 py-2">Pinjaman</th>
+                                <th className="bg-[#2c6975eb] rounded-none px-4 py-2">Sisa Hutang</th>
+                                <th className="bg-[#2c6975eb] rounded-none px-4 py-2">Status</th>
+                                <th className="bg-[#2c6975eb] rounded rounded-l-none px-2 py-2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentItems.map((pinjaman, index) => (
                                 <tr key={pinjaman.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-4 py-2">{pinjaman.nama}</td>
-                                    <td className="border text-center px-4 py-2">
-                                        <div className='flex justify-evenly'>
-                                            {pinjaman.jumlah_pinjaman.toLocaleString()}<button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)}><span className='text-white'><FontAwesomeIcon icon={faPlusCircle} size='xl' style={{color: "#4aad7c",}} /></span></button></div></td>
-                                    <td className="border text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
+                                    <td className="border-b border-solid text-center px-4 py-2">{pinjaman.nama}</td>
+                                    <td className="border-b border-solid text-center px-4 py-2">
+                                        <div className='flex justify-between'>
+                                            <div>
+                                                {pinjaman.jumlah_pinjaman.toLocaleString()}
+                                            </div>
+
+                                            <button onClick={() => handleEditClickTambahPinjaman(pinjaman.id_pinjaman)}>
+                                                <span className='text-white'><FontAwesomeIcon icon={faPlusCircle} size='xl' style={{ color: "#4aad7c", }} /></span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td className="border-b border-solid text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
+                                    <td className="border-b border-solid text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
                                         <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
                                             Lunas
                                         </div>
                                     ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
                                         hutang
                                     </div>}</td>
-                                    <td className=" text-center md:px-[30%] px-[10px]  py-2 flex gap-[10px] items-center align-middle">
+                                    <td className="border-b border-solid  text-center items-center">
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} size='xl' />
                                         </button>
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => hapusPinjaman(pinjaman.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} size='xl' />
