@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useMembers } from './AdminContext';
+import { useAuth } from '../auth/Auth';
 
 const DaftarSimpanan = () => {
     const [showFormSimpananSkr, setShowFormSimpananSkr] = useState(false);
@@ -19,6 +20,7 @@ const DaftarSimpanan = () => {
 
     const { simpanans, kurangSimpanan, handleTambahSimpanan, handleDelete, tampilkanSimpanans, fetchAnggota } = useMembers();
 
+    const { name } = useAuth()
     // console.log(simpanans)
 
     // const [nasabah, setNasabah] = useState(initialNasabah);
@@ -107,7 +109,7 @@ const DaftarSimpanan = () => {
         setCurrentNasabah(id);
         setNominal('');
         setJenisSimpanan('')
-        setErrorMessage(''); // Reset error message when opening the form
+        setErrorMessage('');
         setShowFormTambahAllSimpanan(true);
     };
 
@@ -227,7 +229,7 @@ const DaftarSimpanan = () => {
                             <h1 className="text-center text-2xl font-bold text-[#2C6975]">Simpanan</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                                <p>simpanan Pokok sebelumnya : {currentNasabah?.simpanan_pokok}</p>
+
                                 <input
                                     type="number" placeholder="Masukkan nominal untuk ditambahkan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[250px] h-[40px] px-[15px] mb-[20px]"
@@ -247,6 +249,7 @@ const DaftarSimpanan = () => {
                                                 checked={jenisSimpanan === 'simpanan_pokok'}
                                                 onChange={(e) => setJenisSimpanan(e.target.value)}
                                                 className="mr-[10px]"
+
                                                 required />
                                             <label htmlFor="simpanan_pokok" className="mr-[20px]">Simpanan Pokok</label>
                                         </div>
@@ -287,27 +290,7 @@ const DaftarSimpanan = () => {
 
 
                                 </div>
-                                {/* <p className='mt-[10px]'>simpanan Wajib sebelumnya : {currentNasabah?.simpananWajib}</p>
-                                <input
-                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[250px] h-[40px] px-[15px]"
-                                    value={simpananWajib}
-                                    onChange={e => setSimpananWajib(e.target.value)}
-                                />
-                                <p className='mt-[10px]'>simpanan Sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
-                                <input
-                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[250px] h-[40px] px-[15px]"
-                                    value={simpananSukarela}
-                                    onChange={e => setSimpananSukarela(e.target.value)}
-                                />
-                                <p className='mt-[10px]'>simpanan Hari Raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
-                                <input
-                                    type="number" placeholder="Masukkan nominal untuk ditambahkan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[250px] h-[40px] px-[15px]"
-                                    value={simpananHariRaya}
-                                    onChange={e => setSimpananHariRaya(e.target.value)}
-                                /> */}
+
                                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
                                 <button onClick={handleTambahAllSimpanan} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[250px] h-[40px]">
                                     Kirim
@@ -380,60 +363,70 @@ const DaftarSimpanan = () => {
                 )}
 
 
-                <div className="flex pt-[10px] mb-[25px]">
-                    <input
-                        className="rounded-full md:w-[50%] h-[40px] border-solid border-[1px] shadow-lg pl-[30px]"
-                        type="text"
-                        placeholder="Cari nama nasabah..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <div className="ml-[-30px] mt-[8px]">
-                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                <div className='bg-white p-[20px] pb-[30px] pt-[10px] justify-center shadow-sm'>
+                    <div className="md:flex md:gap-3 items-center">
+                        <div className="flex mt-[20px] w-[100%]">
+                            <input
+                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                                type="text"
+                                placeholder="Cari nama nasabah"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <div className=' border olid p-[5px] pl-[10px] pr-[10px]  items-center  rounded rounded-l-none '>
+                                <FontAwesomeIcon className='' icon={faMagnifyingGlass} />
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
-                <div className="max-h-60 overflow-y-auto overflow-x-auto shadow-lg">
+                <div className="max-h-[100h] mt-[25px] overflow-y-auto overflow-x-auto bg-white p-[20px] shadow-lg">
                     <table className="min-w-full bg-white">
                         <thead>
-                            <tr>
-                                <th className=" px-4 py-2">Nama</th>
-                                <th className=" px-4 py-2">Simpanan Pokok</th>
-                                <th className=" px-4 py-2">Simpanan Wajib</th>
-                                <th className=" px-4 py-2">Simpanan Sukarela</th>
-                                <th className="px-4 py-2">Simpanan Hari Raya</th>
-                                <th className=" px-2 py-2">Aksi</th>
+                            <tr className='text-[#f4f4f4]'>
+                                <th className=" bg-[#2c6975eb] rounded rounded-r-none px-4 py-2">Nama</th>
+                                <th className=" bg-[#2c6975eb] rounded-none px-4 py-2">Simpanan Pokok</th>
+                                <th className=" bg-[#2c6975eb] rounded-none px-4 py-2">Simpanan Wajib</th>
+                                <th className=" bg-[#2c6975eb] rounded-none px-4 py-2">Simpanan Sukarela</th>
+                                <th className=" bg-[#2c6975eb] rounded-none px-4 py-2">Simpanan Hari Raya</th>
+                                <th className=" bg-[#2c6975eb] rounded rounded-l-none px-2 py-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             {currentItems.map((nasabah, index) => (
                                 <tr key={nasabah.id_user} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}`}>
-                                    <td className="border text-center px-4 py-2">{nasabah.nama}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
-                                    <td className="border text-center px-4 py-2">
-                                        <div className='flex justify-evenly'>{nasabah.simpanan_sukarela.toLocaleString()}
+                                    <td className="border-b border-solid text-center px-4 py-2">{nasabah.nama}</td>
+                                    <td className="border-b border-solid text-center px-4 py-2">{nasabah.simpanan_pokok.toLocaleString()}</td>
+                                    <td className="border-b border-solid text-center px-4 py-2">{nasabah.simpanan_wajib.toLocaleString()}</td>
+                                    <td className="border-b border-solid text-center px-4 py-2">
+                                        <div className='flex justify-between'>
+                                            <div>
+                                            {nasabah.simpanan_sukarela.toLocaleString()}
+                                            </div>
+                                            
                                             <button onClick={() => handleKurangClickSkr(nasabah.id_simpanan)}>
                                                 <span className='text-white'><FontAwesomeIcon icon={faCircleMinus} size='xl' style={{ color: "#ff7373", }} /></span>
                                             </button>
                                         </div>
                                     </td>
-                                    <td className="border text-center px-4 py-2">
-                                        <div className='flex justify-evenly'>{nasabah.simpanan_hariraya.toLocaleString()}
+                                    <td className="border-b border-solid text-center px-4 py-1">
+                                        <div className='text-[#919191] flex justify-between  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#767676]'>
+                                           <div> {nasabah.simpanan_hariraya.toLocaleString()}</div>
                                             <button onClick={() => handleKurangClickHr(nasabah.id_simpanan)} >
-                                                <span className='text-white'> <FontAwesomeIcon icon={faCircleMinus} size='xl' style={{ color: "#ff7373", }} /></span>
+                                                <FontAwesomeIcon icon={faCircleMinus} size='xl' style={{ color: "#ff7373", }} />
                                             </button>
                                         </div>
                                     </td>
-                                    <td className="px-4 py-2 flex gap-[20px] items-center align-middle">
+                                    <td className="border-b border-solid  text-center items-center  ">
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => handleClickTambahAllSimpanan(nasabah.id_simpanan, nasabah.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} size='xl' />
                                         </button>
                                         <button
-                                            className="text-[#626262] hover:text-[#505050]"
+                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => hapusNasabah(nasabah.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} size='xl' />
