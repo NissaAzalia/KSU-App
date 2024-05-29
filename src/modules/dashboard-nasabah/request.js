@@ -1,8 +1,6 @@
 import axios from "axios"
-
 import { http } from "../../config/url"
 import { getToken } from "../../helpers/LocalStorage"
-
 
 export const apiFetchSimpanan = async () => {
     const token = getToken();
@@ -54,13 +52,12 @@ export const apiFetchServis = async (jenisBarang, alamat, jenisKerusakan) => {
     }
 }
 
-
 export const apiFetchPinjamMobil = async (waktu_pinjam, supir) => {
     const token = getToken();
     try {
         const response = await axios.post(http + "/pinjam-mobil", {
             waktu_pinjam: waktu_pinjam,
-            supir: supir,
+            supir: Boolean(supir)
         }, {
             headers: {
                 'Authorization ': ' Bearer ' + token
@@ -88,7 +85,6 @@ export const apiFetchPinjamUang = async (jumlah, tenor) => {
         return error.response.data;
     }
 }
-
       
 export const apiFetchBeliBarang = async (nama_barang, alamat, jumlah_barang) =>{
     const token = getToken();

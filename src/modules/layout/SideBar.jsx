@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGroup, faArrowLeft, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../auth/Auth";
 
 const SideBar = () => {
@@ -11,38 +11,35 @@ const SideBar = () => {
     const closeBar = () => {
         setBar(false);
     }
-    const sidebarRef = useRef(null);  
-    const handleClickOutside = (event) => {
-        if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-            closeBar();
-        }
-    };
-    useEffect(() => {
-        if (bar) {
-            document.addEventListener('click', handleClickOutside, true);
-        }
-        return
-    }, [bar]);
-
     return (
         <>
 
-            {!bar && (
-                <div onClick={() => setBar(!bar)} className="flex fixed my-[-15px] mx-[25px] bg-[#ffffff] w-[100%] ml-[-1px]">
-                    <div className="flex items-center m-[20px] mb-[10px] gap-5">
-                        <span className="text-[#222a] flex items-center justify-center align-middle cursor-pointer  hover:text-[#7D7D7D]"><FontAwesomeIcon className="h-[25px] " icon={faBars} /></span>
+
+            <div className="sidebar1 flex fixed my-[-15px] mx-[25px] bg-[#ffffff] w-[100%] ml-[-1px]">
+                <div className="flex items-center m-[20px] mb-[10px] gap-5">
+                    {!bar && (
+                        <span onClick={() => setBar(!bar)} className="text-[#222a] flex items-center justify-center align-middle cursor-pointer  hover:text-[#7D7D7D]"><FontAwesomeIcon className="h-[25px] " icon={faBars} /></span>
+                    )}  <div>
                         <img src="src/assets/logoKSU.png" alt="" className="h-10 w-10 wml-[20px]" />
                         <p className="font-bold ">Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                     </div>
+
                 </div>
-            )}
+            </div>
 
             {bar && (
-                <div     ref={sidebarRef} className="flex relatve sm:fixed flex-col bg-[#fafafa] w-[300px] overflow-hidden h-screen pb-[25px] border-r-[3px] border-gray-200 " >
+
+                <div className="flex flex-col bg-[#f4f4f4] w-[340px] mr-[25px] overflow-hidden h-screen pb-[25px] " >p</div>
+            )}
+
+
+            {bar && (
+
+                <div className="flex  fixed flex-col bg-[#fafafa] w-[300px] overflow-hidden h-screen pb-[25px] border-r-[3px] border-gray-200 " >
                     <div className="flex justify-between pl-[15px] pt-[10px] pr-[15px]">
                         <div className="flex">
-                            <img src="src/assets/logoKSU.png" alt="" className="w-[50px] h-[50px]" />
-                            <h1 className="pl-[15px] pt-[13px] font-bold "> KSU TEKNIKA MANDIRI</h1>
+                            <img src="src/assets/logoKSU.png" alt="" className="w-[50px] h-[50px] mt-[10px]" />
+                            <h1 className="pl-[20px] pt-[13px] font-bold "> Koperasi Konsumen <p className="text-[13px]">KSU TEKNIKA MANDIRI</p></h1>
                         </div>
                         <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="xl" /></button>
                     </div>
@@ -97,8 +94,6 @@ const SideBar = () => {
             <Outlet />
         </>
     );
-
-
 
 }
 

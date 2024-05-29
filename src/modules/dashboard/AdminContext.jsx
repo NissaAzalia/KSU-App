@@ -11,13 +11,6 @@ import { useAuth } from '../auth/Auth';
 const initialMembersState = {
   members: [],
   simpanans: [],
-  tampilkanPinjaman: () => {},
-  tampilkanBayarHutang: () => {},
-  tampilkanTambahPinjamLagi: () => {},
-  handleTambahSimpanan: () => {},
-  kurangSukarela: () => {},
-  kurangHariRaya:() => {},
-  kurangSimpanan:()=>{},
   infoPinjaman: [],
   users: [],
   curentMembers: null,
@@ -25,12 +18,15 @@ const initialMembersState = {
   loadingAddPinjaman: false,
   loadingAnggota: false,
   loadingSimpanan: false,
+  tampilkanPinjaman: () => {},
+  tampilkanBayarHutang: () => {},
+  tampilkanTambahPinjamLagi: () => {},
+  handleTambahSimpanan: () => {},
+  kurangSukarela: () => {},
+  kurangHariRaya:() => {},
+  kurangSimpanan:()=>{},
   addMember: () => { },
-  // editMember: () => {},
-  // handleDelete: () => {},
-  // handleEditClick: () => {},
   fetchAnggota: () => { },
-  // tambahAnggota: () => { },
   tampilkanSimpanans: () => {},
 };
 
@@ -166,9 +162,9 @@ const MemberProvider = ({ children }) => {
 
     try {
       await fetchTambahSimpanan(id, jumlahSimpanan, nominal);
-      console.log('Simpanan berhasil ditambahkan');
+   
     } catch (error) {
-      console.error('Terjadi kesalahan saat menambahkan simpanan:', error);
+      console.error(error);
     }
     // fetchTambahSimpanan( id,jumlahSimpanan, type_simpanan );
   };
@@ -176,12 +172,7 @@ const MemberProvider = ({ children }) => {
   const kurangSimpanan = async (id, type_simpanan, penarikan) => {
     kurangiSimpanan(id, type_simpanan, penarikan) 
   }
-
-//   const kurangHariRaya = async (id, type_simpanan, penarikan) => {
-//     kurangiHariRaya(id, type_simpanan, penarikan)
-//  }
-
-
+  
   // Function to pay debts
   const tampilkanBayarHutang = async (id, bayar_hutang) => {
     fetchBayarHutang(id, bayar_hutang);

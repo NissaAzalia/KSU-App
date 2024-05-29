@@ -31,8 +31,6 @@ const AuthProvider = ({ children }) => {
   const [authority, setAuthority] = useState("")
   const [name,setName] = useState("");
 
-  console.log(name)
-
   const doRole = (role) => {
     return localStorage.setItem('User_Role',role);
   }
@@ -100,9 +98,6 @@ const AuthProvider = ({ children }) => {
 
     setIsLoading(true)
 
-    // memanggil api dengan data email & password
-    // console.log("akan melakukan login dengan: ", user,password)
-
     Swal.fire({
       title: "Loading",
       text: "Mengirim data.."
@@ -152,7 +147,6 @@ const AuthProvider = ({ children }) => {
     setAuthority(auth)
   }
   
-
   useEffect(() => {
     const token = getToken();
     const Role = getRole();
@@ -164,7 +158,6 @@ const AuthProvider = ({ children }) => {
     }
   }, [name]);
 
-  // return provider
   return (
     <AuthContext.Provider value={{ isLoggedin, authority, name, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority }}>
       {children}
@@ -172,5 +165,4 @@ const AuthProvider = ({ children }) => {
   )
 }
 
-// export provider & hook
 export { AuthProvider, useAuth }
