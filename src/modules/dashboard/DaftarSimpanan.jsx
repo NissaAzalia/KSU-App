@@ -319,10 +319,10 @@ const DaftarSimpanan = () => {
 
                 {showFormSimpananSkr && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
                                 <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    className="mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                     onClick={handleCloseSkr}
                                 >
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -335,12 +335,12 @@ const DaftarSimpanan = () => {
                                 <p>simpanan sukarela sebelumnya : {currentNasabah?.simpananSukarela}</p>
                                 <input
                                     type="number" placeholder="Masukkan Nominal Penarikan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={simpananSukarela}
                                     onChange={e => setSimpananSukarela(e.target.value)}
                                 />
                                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                                <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                <button onClick={handleKurangSimpananSkr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px]">
                                     Kirim
                                 </button>
                             </div>
@@ -351,10 +351,10 @@ const DaftarSimpanan = () => {
 
                 {showFormSimpananHr && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform -translate-x-1/2 -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] w-[700px] py-[3%] flex flex-col items-center shadow-2xl">
-                            <div className="w-[600px]">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] py-[3%] flex flex-col items-center shadow-2xl">
+                            <div className="md:w-[600px]">
                                 <button
-                                    className="top-1 left-1 text-gray-500 hover:text-gray-700"
+                                    className="mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                     onClick={handleCloseHr}
                                 >
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -367,11 +367,11 @@ const DaftarSimpanan = () => {
                                 <p >simpanan hari raya sebelumnya : {currentNasabah?.simpananHariRaya}</p>
                                 <input
                                     type="number" placeholder="Masukkan Nominal Penarikan"
-                                    className="border-solid border-[1px] border-[#2C6975] rounded w-[600px] h-[40px] px-[15px]"
+                                    className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     onChange={e => setSimpananHariRaya(e.target.value)}
                                 />
                                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                                <button onClick={handleKurangSimpananHr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white w-[600px] h-[40px]">
+                                <button onClick={handleKurangSimpananHr} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px]">
                                     Kirim
                                 </button>
                             </div>

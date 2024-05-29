@@ -193,9 +193,9 @@ const DasboardNasabah = ({ doLogout,name }) => {
                 <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#2D5275] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#2D5275]  w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]">
                                 <span>Pokok</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -214,9 +214,9 @@ const DasboardNasabah = ({ doLogout,name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#37808F] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#37808F] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]  ">
                                 <span>Wajib</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -235,12 +235,12 @@ const DasboardNasabah = ({ doLogout,name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
+                        <div className="flex gap-[5px] ">
                             <div className="bg-[#439FB1] w-[75px] h-[75px] ">
                                 <FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} />
                             </div>
 
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]  ">
                                 <span>Sukarela</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -258,10 +258,10 @@ const DasboardNasabah = ({ doLogout,name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#50BDD3] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
-                                <span>Hari Raya</span>
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#50BDD3] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]   ">
+                                <span className=''>Hari Raya</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
@@ -310,7 +310,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
                     <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
 
                         {showFormServis ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
@@ -381,7 +381,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
 
 
                         {showFormBeliBarang ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -442,7 +442,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
                         </div>
 
                         {showFormPinjamMobil ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -461,8 +461,8 @@ const DasboardNasabah = ({ doLogout,name }) => {
 
                                         <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                         <div className="flex items-center pt-[10px]">
-                                            <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={() => setGunakanSopir(true)}  className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                            <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                            <input type="radio" id="sopir_ya" name="sopir"  onChange={() => setGunakanSopir(true)}  className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                            <input type="radio" id="sopir_tidak" name="sopir"  onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
                                         </div>
                                     </div>
 
@@ -504,7 +504,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
                         </div>
 
                         {showFormPinjamUang ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className="absolute left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] flex flex-col items-center shadow-2xl">
                                 <div className="md:w-[600px] ">
                                     <button
                                         className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -561,7 +561,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
                         ) : null}
 
                         <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
-                            <div className="flex gap-[25px] ">
+                            <div className="flex gap-[25px] text-left ">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
                                 <span onClick={openPinjamUangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pinjam Uang</span>
                             </div>
