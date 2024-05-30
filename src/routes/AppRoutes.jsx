@@ -11,9 +11,7 @@ import { DasboardNasabahProvider } from '../modules/dashboard-nasabah/DashboardN
 import { MemberProvider } from '../modules/dashboard/AdminContext'
 
 const AppRoutes = () => {
-
   const {authority, isLoggedin,doLogout,name} = useAuth();
-
 
   const handleLogout = () => {
     doLogout()

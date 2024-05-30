@@ -25,25 +25,30 @@ const DashboardAdmin = () => {
     const { name } = useAuth()
 
     const handleTambahAnggota = async () => {
-        try {
-            await tambahAnggota(nama, nomorHp, username, password);
-            setNama('');
-            setNomorHp('');
-            setUsername('');
-            setPassword('');
-            setShowFormTambah(false);
-            fetchAnggota()
-            tampilkanSimpanans()
-        } catch (error) {
-            console.log('error', error)
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        if (!nama , !nomorHp , !username , !password) {
+            alert("inputan tidak boleh ada yang kosong")
+        } else {
+            try {
+                await tambahAnggota(nama, nomorHp, username, password);
+                setNama('');
+                setNomorHp('');
+                setUsername('');
+                setPassword('');
+                setShowFormTambah(false);
+                fetchAnggota()
+                tampilkanSimpanans()
+            } catch (error) {
+                console.error('error', error)
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
 
+            }
         }
+
 
 
     }
@@ -65,21 +70,25 @@ const DashboardAdmin = () => {
     }
 
     const handleUpdateNomorHp = async () => {
-        try {
-            await updateMember(currentId, noBaru);
-            alert("berhasil mengubah")
-            setNoBaru('');
-            await fetchAnggota();
-            setShowNomorHp(false);
-            await fetchAnggota();
-        } catch (error) {
-            console.log('Error:', error);
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        if (!noBaru) {
+            alert("inputan tidak boleh kosong")
+        } else {
+            try {
+                await updateMember(currentId, noBaru);
+                setNoBaru('');
+                await fetchAnggota();
+                setShowNomorHp(false);
+                await fetchAnggota();
+                alert("berhasil mengubah")
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
     };
 
@@ -122,10 +131,8 @@ const DashboardAdmin = () => {
         </li>
     ));
 
-
-
     return (
-        <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
+        <div className="layer flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] md:py-[20px] py-[10px] ">
                     <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
@@ -138,7 +145,7 @@ const DashboardAdmin = () => {
 
                 {showNomorHp && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[200px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button
                                     className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700"
@@ -148,17 +155,16 @@ const DashboardAdmin = () => {
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Ganti No. HP</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                                <p>Nomor Hp</p>
                                 <input
                                     type="string" placeholder="Masukkan Nomor Hp"
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={noBaru}
                                     onChange={(e) => setNoBaru(e.target.value)}
                                 />
-                                <button onClick={handleUpdateNomorHp} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px]">
+                                <button onClick={handleUpdateNomorHp} className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]">
                                     Kirim
                                 </button>
                             </div>

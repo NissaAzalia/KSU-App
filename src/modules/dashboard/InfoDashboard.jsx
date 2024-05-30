@@ -5,7 +5,6 @@ import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
 import { useAuth } from '../auth/Auth';
 
-
 const InfoDashboard = () => {
     const [showForm, setShowForm] = useState(false);
     const [showFormPinjaman, setShowFormPinjaman] = useState(false);
@@ -13,9 +12,6 @@ const InfoDashboard = () => {
     const [currentId, setCurrentId] = useState(null);
     const { infoPinjaman, handleDeletePinjaman, handleTambahPinjaman, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanBayarHutang } = useMembers();
     const { name } = useAuth()
-
-    // const [nama, setNama] = useState('');
-    // const [nominal, setNominal] = useState('');
     const [hutang, sethutang] = useState('')
     const [bayar_hutang, setBayar_hutang] = useState('')
     const [nama, setNama] = useState('');
@@ -26,27 +22,28 @@ const InfoDashboard = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const tambahPinjaman = async () => {
-        try {
-            // Cek apakah nama sudah ada di tabel
-            const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
-            if (existingMember) {
-                throw new Error('Nama sudah ada di tabel. Tidak dapat menambahkan pinjaman.');
+        if (!nama, !jumlah_pinjaman) {
+            alert("inputan tidak boleh kosong")
+        } else {
+            try {
+                const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
+                if (existingMember) {
+                    throw new Error('Nama sudah ada di tabel. Tidak dapat menambahkan pinjaman.');
+                }
+                await handleTambahPinjaman(nama, jumlah_pinjaman);
+                setNama('');
+                setJumlah_pinjaman('');
+                setShowForm(false);
+                tampilkanPinjaman();
+            } catch (error) {
+                console.error('error', error)
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
-
-            // Jika nama belum ada, tambahkan pinjaman
-            await handleTambahPinjaman(nama, jumlah_pinjaman);
-            setNama('');
-            setJumlah_pinjaman('');
-            setShowForm(false);
-            tampilkanPinjaman();
-        } catch (error) {
-            console.log('error', error)
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
         }
     }
 
@@ -70,28 +67,27 @@ const InfoDashboard = () => {
 
     const editPinjaman = async () => {
         if (!bayar_hutang) {
-            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-            tampilkanTambahPinjamLagi()
+            alert('inputan tidak boleh kosong')
             return;
-        }
+        } else {
+            try {
+                await tampilkanBayarHutang(currentId, bayar_hutang);
+                setNama('')
+                setBayar_hutang('');
+                tampilkanPinjaman();
+                setShowFormPinjaman(false);
+                setBayar_hutang()
+                tampilkanPinjaman();
 
-        try {
-            await tampilkanBayarHutang(currentId, bayar_hutang);
-            setNama('')
-            setBayar_hutang('');
-            tampilkanPinjaman();
-            setShowFormPinjaman(false);
-            setBayar_hutang()
-            tampilkanPinjaman();
-
-        } catch (error) {
-            console.log('Error:', error);
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+            } catch (error) {
+                console.log('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
     };
 
@@ -103,27 +99,25 @@ const InfoDashboard = () => {
 
     const handleEditTambahPinjaman = async () => {
         if (!hutang) {
-            setErrorMessage('*Tidak bisa mengirim jika inputan kosong.');
-
+            alert('inputan tidak boleh kosong')
             return;
-        }
-
-        try {
-            await tampilkanTambahPinjamLagi(currentId, hutang);
-            sethutang('')
-            tampilkanPinjaman()
-            setShowFormTambahPinjamanLagi(false)
-            sethutang()
-            tampilkanPinjaman()
-
-        } catch (error) {
-            console.log('Error:', error);
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        } else {
+            try {
+                await tampilkanTambahPinjamLagi(currentId, hutang);
+                sethutang('')
+                tampilkanPinjaman()
+                setShowFormTambahPinjamanLagi(false)
+                sethutang()
+                tampilkanPinjaman()
+            } catch (error) {
+                console.log('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
     }
 
@@ -137,8 +131,6 @@ const InfoDashboard = () => {
         pinjaman.nama && pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-
-    // Hitung index untuk pagination
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = filteredPinjaman.slice(indexOfFirstItem, indexOfLastItem);
@@ -191,7 +183,7 @@ const InfoDashboard = () => {
                                 />
                                 <input
                                     type="number"
-                                    placeholder="Masukkan Nominal Pinjaman"
+                                    placeholder="Masukkan Pinjaman"
                                     value={jumlah_pinjaman}
                                     onChange={(e) => setJumlah_pinjaman(e.target.value)}
                                     className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]"
@@ -220,11 +212,11 @@ const InfoDashboard = () => {
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Simpanan</h1>
+                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Tambah Pinjaman</h1>
                             <div className="flex flex-col gap-2">
                                 <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
                                 <input
-                                    type="number" placeholder="Masukkan Nominal Penarikan"
+                                    type="number" placeholder="Nominal penambahan"
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
                                     value={hutang}
                                     onChange={e => sethutang(e.target.value)}
@@ -241,20 +233,21 @@ const InfoDashboard = () => {
 
                 {showFormPinjaman && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-2xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700" onClick={handleClose}>
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
                             </div>
 
-                            <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[30px]">Bayar hutang Anggota</h1>
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
-                                <p></p>
+
+
+                            <h1 className="text-center text-2xl md:textl-lg font-bold text-[#2C6975] mb-[20px]">Bayar hutang</h1>
+                                <h1 className="text-lg text-[#5d5d5d] font-bold mt-[-10px]">{nama}</h1>
                                 <input
                                     type="number"
-                                    placeholder="Masukkan Nominal Pembayaran"
+                                    placeholder="Nominal Pembayaran"
                                     value={bayar_hutang}
                                     id='id_pinjaman'
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
@@ -339,15 +332,15 @@ const InfoDashboard = () => {
                                     ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
                                         hutang
                                     </div>}</td>
-                                    <td className="border-b border-solid  text-center items-center">
+                                    <td className="border-b border-solid border-gray-300 text-center items-center py-1">
                                         <button
-                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
+                                            className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
                                         >
                                             <FontAwesomeIcon icon={faPlusCircle} size='xl' />
                                         </button>
                                         <button
-                                            className="text-[#707070]  rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
+                                            className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => hapusPinjaman(pinjaman.id_user)}
                                         >
                                             <FontAwesomeIcon icon={faTrashCan} size='xl' />

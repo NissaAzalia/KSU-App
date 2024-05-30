@@ -8,13 +8,11 @@ import emailjs from 'emailjs-com';
 import Swal from "sweetalert2"
 import { useAuth } from '../auth/Auth';
 
-
-const DasboardNasabah = ({ doLogout,name }) => {
+const DasboardNasabah = ({ doLogout, name }) => {
     const [showFormServis, setShowFormServis] = useState(false);
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
-
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
     const [jenisKerusakan, setjenisKerusakan] = useState("");
@@ -24,9 +22,8 @@ const DasboardNasabah = ({ doLogout,name }) => {
     const [jumlah_barang, setJumlah_barang] = useState("");
     const [nama, setNama] = useState('')
     const [tanggal, setTanggal] = useState("");
-    const [gunakanSopir, setGunakanSopir] = useState(false);
+    const [gunakanSopir, setGunakanSopir] = useState(Boolean);
     const { simpanan, pinjaman, doServis, doBeliBarang, doPinjamMobil, doPinjamUang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamMobil, loadingUang } = useDashboardNasabah()
-
 
     const openServisForm = () => {
         setShowFormServis(true);
@@ -57,111 +54,107 @@ const DasboardNasabah = ({ doLogout,name }) => {
     };
 
     const handleClickServis = async () => {
-        try {
-            await doServis(jenisBarang, alamat, jenisKerusakan);
-            setJenisBarang('');
-            setAlamat('');
-            setjenisKerusakan('');
-            setShowFormServis(false);
+        if (!jenisBarang, !alamat, !jenisKerusakan) {
+            alert('inputan tidak boleh kosong')
+            return;
+        } else {
+            try {
+                await doServis(jenisBarang, alamat, jenisKerusakan);
+                setJenisBarang('');
+                setAlamat('');
+                setjenisKerusakan('');
+                setShowFormServis(false);
 
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
+
     }
 
     const handleClickBeliBarang = async () => {
-        try {
-            await doBeliBarang(nama_barang, alamat, jumlah_barang);
-            setNama_barang('');
-            setAlamat('');
-            setJumlah_barang('');
-            setShowFormBeliBarang(false);
-
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        if (!nama_barang, !alamat, !jumlah_barang) {
+            alert('inputan tidak boleh kosong')
+            return;
+        } else {
+            try {
+                await doBeliBarang(nama_barang, alamat, jumlah_barang);
+                setNama_barang('');
+                setAlamat('');
+                setJumlah_barang('');
+                setShowFormBeliBarang(false);
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
-    }
-    const handleSetNama = (nama) => {
-        return setNama(nama)
     }
 
     const handleClickPinjamMobil = async () => {
-        try {
-            await doPinjamMobil(tanggal, gunakanSopir);
-            setTanggal('');
-            setGunakanSopir('');
-            setShowFormPinjamMobil(false);
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        }
-    }
-
-    const handleClickPinjamUang =  async () => {
-        try {
-            // Melakukan peminjaman uang
-            await doPinjamUang(jumlah, tenor,handleSetNama);
-    
-            // Konfigurasi EmailJS
-            const serviceID = 'service_00hgm8c';
-            const templateID = 'template_v58g62o';
-            const userID = '3K0u3vlIRw0_Po4Od'; // Ganti ini dengan User ID yang Anda dapat dari EmailJS
-            const username = nama;
-
-    
-            const templateParams = {  
-                username:username,
-                jumlah: jumlah,
-                tenor: tenor,
-            };
-    
-            // Mengirim email dengan EmailJS
-            await emailjs.send(serviceID, templateID, templateParams, userID);
-
-            console.log('Email berhasil dikirim!');
-    
-            // Mengatur ulang form setelah berhasil
-            setJumlah('');
-            setTenor('');
-            setShowFormPinjamUang(false);
-    
-            Swal.fire({
-                title: 'Berhasil!',
-                text: 'Peminjaman uang berhasil dan email telah dikirim.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
+        if (!tanggal) {
+            alert('inputan tidak boleh kosong')
             return;
-    
-        } catch (error) {
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+        } else {
+            try {
+                await doPinjamMobil(tanggal, gunakanSopir);
+                setTanggal('');
+                setGunakanSopir('');
+                setShowFormPinjamMobil(false);
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         }
     }
 
+    const handleClickPinjamUang = async () => {
+        if (!jumlah, !tenor) {
+            alert('inputan tidak boleh kosong')
+            return;
+        } else {
+            try {
+                await doPinjamUang(jumlah, tenor);
+                console.log('Email berhasil dikirim!');
+                setJumlah('');
+                setTenor('');
+                setShowFormPinjamUang(false);
+
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: 'Peminjaman uang berhasil dan email telah dikirim.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+                return;
+
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
 
-            <div className=" flex justify-between     md:w-[95%]   ">
+            <div className=" flex justify-between md:w-[95%]   ">
 
                 <div className="logo flex md:ml-[30px] ml-[30px]  md:w-[430px] w-[260px]        ">
                     <img src="src/assets/logoKSU.png" alt="" className=" w-[65px] md:w-[50px] h-[65px] md:h-[100%]  md:pt-[10px] pt-[15px]  md:ml-[20px]   " />
@@ -186,7 +179,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
 
             <div className="simpanan">
                 <div className="md:ml-[4%] mx-[30px]">
-                    <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[30px]   font-bold">Info Simpanan & Sisa Hutang</h1>
+                    <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[30px]   font-bold">Informasi</h1>
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[1px] ml-[1%]">Simpanan</h2>
                 </div>
 
@@ -280,7 +273,7 @@ const DasboardNasabah = ({ doLogout,name }) => {
                 </div>
 
                 <div>
-                    <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[10%] mb-[25px] md:ml-[50px] ml-[30px] ">Informasi</h2>
+                    <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[10%] mb-[25px] md:ml-[50px] ml-[30px] ">Sisa Hutang</h2>
 
                     <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa Pokok Hutang</h2>
@@ -310,63 +303,65 @@ const DasboardNasabah = ({ doLogout,name }) => {
                     <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
 
                         {showFormServis ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
-                                <div className="md:w-[600px] ">
-                                    <button
-                                        className=" mt-[10px] mr-[260px]   text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormServis(false)}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} size="lg" />
-                                    </button>
-                                </div>
-
-                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Servis</h1>
-
-
-                                <div className="flex flex-col gap-2 ">
-
-                                    <input value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
-
-                                    <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
-                                    <textarea
-                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] px-[15px] pt-[5px]"
-                                        placeholder="Jenis Kerusakan"
-                                        value={jenisKerusakan}
-                                        onChange={(e) => setjenisKerusakan(e.target.value)}
-                                        rows="2"
-                                    ></textarea>
-
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Jenis barang : mesin cuci
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Alamat : Kab, Kec, Ds, Dk, RT/RW
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Kerusakan : mesin cuci tidak berputar
-                                        </p>
-
-
+                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                    <div className="md:w-[600px] ">
+                                        <button
+                                            className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                            onClick={() => setShowFormServis(false)}
+                                        >
+                                            <FontAwesomeIcon icon={faXmark} size="lg" />
+                                        </button>
                                     </div>
 
-                                    <button
-                                        onClick={handleClickServis}
-                                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
-                                        disabled={loadingServis} // Tambahkan atribut disabled saat sedang loading
-                                    >
-                                        {loadingServis ? (
+                                    <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Servis</h1>
 
-                                            <div>
-                                                <p>Pengajuan sedang diproses</p>
 
-                                            </div>
-                                        ) : (
+                                    <div className="flex flex-col gap-2 ">
 
-                                            "Kirim"
-                                        )}
-                                    </button>
+                                        <input value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+
+                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
+                                        <textarea
+                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px]"
+                                            placeholder="Jenis Kerusakan"
+                                            value={jenisKerusakan}
+                                            onChange={(e) => setjenisKerusakan(e.target.value)}
+                                            rows="2"
+                                        ></textarea>
+
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                            <p className="text-gray-600">contoh pengisian form :</p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Jenis barang : mesin cuci
+                                            </p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Alamat : Kab, Kec, Ds, Dk, RT/RW
+                                            </p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Kerusakan : mesin cuci tidak berputar
+                                            </p>
+
+
+                                        </div>
+
+                                        <button
+                                            onClick={handleClickServis}
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            disabled={loadingServis}
+                                        >
+                                            {loadingServis ? (
+
+                                                <div>
+                                                    <p>Pengajuan sedang diproses</p>
+
+                                                </div>
+                                            ) : (
+
+                                                "Kirim"
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ) : null}
@@ -381,56 +376,57 @@ const DasboardNasabah = ({ doLogout,name }) => {
 
 
                         {showFormBeliBarang ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
-                                <div className="md:w-[600px] ">
-                                    <button
-                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormBeliBarang(false)}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} size="lg" />
-                                    </button>
-                                </div>
-
-                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
-
-
-                                <div className="flex flex-col gap-2 ">
-
-                                    <textarea value={nama_barang} onChange={(e) => setNama_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px] pt-[5px] " type="string" placeholder="Jenis Barang & Spesifikasi"></textarea>
-                                    <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
-                                    <input value={jumlah_barang} onChange={(e) => setJumlah_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Jenis Barang & Spesifikasi : TV (Polytron)
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Alamat Kirim: Kab, Kec, Ds, Dk, RT/RW
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Jumlah Barang : 1
-                                        </p>
-
+                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                    <div className="md:w-[600px] ">
+                                        <button
+                                            className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                            onClick={() => setShowFormBeliBarang(false)}
+                                        >
+                                            <FontAwesomeIcon icon={faXmark} size="lg" />
+                                        </button>
                                     </div>
-                                    <button
-                                        onClick={handleClickBeliBarang}
-                                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
-                                        disabled={loadingBeliBarang} // Tambahkan atribut disabled saat sedang loading
-                                    >
-                                        {loadingServis ? (
 
-                                            <div>
-                                                <p>Pengajuan sedang diproses</p>
+                                    <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Beli Barang</h1>
 
-                                            </div>
-                                        ) : (
 
-                                            "Kirim"
-                                        )}
-                                    </button>
+                                    <div className="flex flex-col gap-2 ">
+
+                                        <textarea value={nama_barang} onChange={(e) => setNama_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px] " type="string" placeholder="Jenis Barang & Spesifikasi"></textarea>
+                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
+                                        <input value={jumlah_barang} onChange={(e) => setJumlah_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                            <p className="text-gray-600">contoh pengisian form :</p>
+
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Jenis Barang & Spesifikasi : TV (Polytron)
+                                            </p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Alamat Kirim: Kab, Kec, Ds, Dk, RT/RW
+                                            </p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Jumlah Barang : 1
+                                            </p>
+
+                                        </div>
+                                        <button
+                                            onClick={handleClickBeliBarang}
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            disabled={loadingBeliBarang}
+                                        >
+                                            {loadingServis ? (
+
+                                                <div>
+                                                    <p>Pengajuan sedang diproses</p>
+
+                                                </div>
+                                            ) : (
+
+                                                "Kirim"
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
-
                             </div>
                         ) : null}
 
@@ -442,120 +438,118 @@ const DasboardNasabah = ({ doLogout,name }) => {
                         </div>
 
                         {showFormPinjamMobil ? (
-                            <div className="absolute  left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
-                                <div className="md:w-[600px] ">
-                                    <button
-                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormPinjamMobil(false)}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} size="lg" />
-                                    </button>
-                                </div>
-
-                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
-
-
-                                <div className="flex flex-col gap-2 ">
-                                    <input value={tanggal} onChange={(e) => setTanggal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
-                                    <div className="flex flex-col gap/[10px] mb-[5px]">
-
-                                        <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
-                                        <div className="flex items-center pt-[10px]">
-                                            <input type="radio" id="sopir_ya" name="sopir"  onChange={() => setGunakanSopir(true)}  className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                            <input type="radio" id="sopir_tidak" name="sopir"  onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
-                                        </div>
+                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                    <div className="md:w-[600px] ">
+                                        <button
+                                            className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                            onClick={() => setShowFormPinjamMobil(false)}
+                                        >
+                                            <FontAwesomeIcon icon={faXmark} size="lg" />
+                                        </button>
                                     </div>
 
-
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1"> Tanggal :  2 - 3 Mei
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Menggunakan Sopir : Ya </p>
+                                    <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Mobil</h1>
 
 
-                                    </div>
-                                    <button
-                                        onClick={handleClickPinjamMobil}
-                                        className="rounded bg-[#2C6975]  hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px] "
-                                        disabled={loadingPinjamMobil}
-                                    >
-                                        {loadingPinjamMobil ? (
-                                            <div>
-                                                <p>Pengajuan sedang diproses</p>
+                                    <div className="flex flex-col gap-2 ">
+                                        <input value={tanggal} onChange={(e) => setTanggal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
+                                        <div className="flex flex-col gap/[10px] mb-[5px]">
+
+                                            <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
+                                            <div className="flex items-center pt-[10px]">
+                                                <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={() => setGunakanSopir(true)} className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                                <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
                                             </div>
-                                        ) : (
-                                            "kirim"
-                                        )}
-                                    </button>
+                                        </div>
+
+
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                            <p className="text-gray-600">contoh pengisian form :</p>
+                                            <p className="font-light text-gray-600 text"> Tanggal :  2 - 3 Mei
+                                            </p>
+                                            <p className="font-light text-gray-600 text">
+                                                Menggunakan Sopir : Ya </p>
+                                        </div>
+                                        <button
+                                            onClick={handleClickPinjamMobil}
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            disabled={loadingPinjamMobil}
+                                        >
+                                            {loadingPinjamMobil ? (
+                                                <div>
+                                                    <p>Pengajuan sedang diproses</p>
+                                                </div>
+                                            ) : (
+                                                "kirim"
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ) : null}
 
-
                         <div onClick={openPinjamMobilForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
                             <div className="flex gap-[25px] text-left">
-                                {/* <div className="bg-[#687D87]  w-[90px] h-[65px] rounded-full   "> */}
                                 <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
-                                {/* </div> */}
                                 <span onClick={openPinjamMobilForm} className="text-white flex items-center md:text-2xl text-2xl cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
                             </div>
                         </div>
 
                         {showFormPinjamUang ? (
-                            <div className="absolute left-[55%] transform md:-translate-x-[400px] -translate-x-[165px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] flex flex-col items-center shadow-2xl">
-                                <div className="md:w-[600px] ">
-                                    <button
-                                        className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
-                                        onClick={() => setShowFormPinjamUang(false)}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} size="lg" />
-                                    </button>
-                                </div>
-
-                                <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Uang</h1>
-
-
-                                <div className="flex flex-col gap-2 ">
-
-                                    <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded  md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
-
-                                    <textarea
-                                        className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] px-[15px] pt-[5px]"
-                                        placeholder="Tenor"
-                                        value={tenor}
-                                        onChange={(e) => setTenor(e.target.value)}
-                                        rows="2"
-                                    ></textarea>
-
-                                    <div className="border border-gray-400 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] ">
-                                        <p className="text-gray-600">contoh pengisian form :</p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Nominal : Rp100.000
-                                        </p>
-                                        <p className="font-light text-gray-600 text mb-1">
-                                            Tenor : Diangsur 6 kali
-                                        </p>
-
+                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                                    <div className="md:w-[600px] ">
+                                        <button
+                                            className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
+                                            onClick={() => setShowFormPinjamUang(false)}
+                                        >
+                                            <FontAwesomeIcon icon={faXmark} size="lg" />
+                                        </button>
                                     </div>
 
-                                    <button
-                                        onClick={handleClickPinjamUang}
-                                        className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
-                                        disabled={loadingUang} // Tambahkan atribut disabled saat sedang loading
-                                    >
-                                        {loadingUang ? (
+                                    <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Pinjam Uang</h1>
 
-                                            <div>
-                                                <p>Pengajuan sedang diproses</p>
+                                    <div className="flex flex-col gap-2 ">
 
-                                            </div>
-                                        ) : (
+                                        <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
 
-                                            "Kirim"
-                                        )}
-                                    </button>
+                                        <textarea
+                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px] "
+                                            placeholder="Tenor"
+                                            value={tenor}
+                                            onChange={(e) => setTenor(e.target.value)}
+                                            rows="2"
+                                        ></textarea>
+
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                            <p className="text-gray-600">contoh pengisian form :</p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Nominal : Rp100.000
+                                            </p>
+                                            <p className="font-light text-gray-600 text mb-1">
+                                                Tenor : Diangsur 6 kali
+                                            </p>
+
+                                        </div>
+
+                                        <button
+                                            onClick={handleClickPinjamUang}
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            disabled={loadingUang}
+                                        >
+                                            {loadingUang ? (
+
+                                                <div>
+                                                    <p>Pengajuan sedang diproses</p>
+
+                                                </div>
+                                            ) : (
+
+                                                "Kirim"
+                                            )}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ) : null}
@@ -574,9 +568,6 @@ const DasboardNasabah = ({ doLogout,name }) => {
             <div className="block md:hidden h-[50px] pt-[12px]   font-semibold text-white   bg-[#2D5275]  text-center">
                 <button onClick={doLogout}>Logout</button>
             </div>
-
-
-
         </div>
     )
 }
