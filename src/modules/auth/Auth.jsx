@@ -36,7 +36,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const getRole = () => {
-    return localStorage.getItem('User_Role') ?? null;
+    return localStorage.getItem('User_Role') ?? null ;
   }
 
   const removeRole = () => {
