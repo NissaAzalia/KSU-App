@@ -125,7 +125,9 @@ const DaftarSimpanan = () => {
             await kurangSimpanan(currentNasabah, type_simpananan, simpananSukarela);
             setSimpananSukarela('')
             setType_simpananan("simpanan_sukarela")
+            tampilkanSimpanans()
             setShowFormSimpananSkr(false)
+            tampilkanSimpanans()
         } catch (error) {
             console.log('Error:', error);
             Swal.fire({
@@ -135,7 +137,7 @@ const DaftarSimpanan = () => {
                 confirmButtonText: 'OK'
             });
         }
-        tampilkanSimpanans()
+            tampilkanSimpanans()
     }
 
     const handleKurangSimpananHr = async () => {
@@ -143,19 +145,17 @@ const DaftarSimpanan = () => {
             alert("inputan tidak boleh kosong")
             return;
         }
+          Swal.showLoading()
         try {
             await kurangSimpanan(currentNasabah, type_simpananan, simpananHariRaya);
             setSimpananHariRaya('')
             setType_simpananan("simpanan_hariraya")
+            tampilkanSimpanans()
             setShowFormSimpananHr(false)
+            tampilkanSimpanans()
+            Swal.showLoading()
         } catch (error) {
-            console.log('Error:', error);
-            Swal.fire({
-                title: 'Error!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
+           return error
         }
         tampilkanSimpanans()
     };

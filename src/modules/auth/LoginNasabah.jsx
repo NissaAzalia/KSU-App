@@ -17,6 +17,9 @@ const LoginNasabah = () => {
 
   const handleClick = async () => {
     doLogin(username,password)
+    if(!username, !password) {
+      alert("")
+    }
     changeAuthority('nasabah')
   }
 

@@ -21,7 +21,7 @@ const SideBar = () => {
                         <span onClick={() => setBar(!bar)} className="text-[#222a] flex items-center justify-center align-middle cursor-pointer  hover:text-[#7D7D7D]"><FontAwesomeIcon className="h-[25px] " icon={faBars} /></span>
                     )}  <div className="flex items-center gap-5">
                         <img src="src/assets/logoKSU.png" alt="" className="h-10 w-10 wml-[20px]" />
-                        <p className="font-bold ">Koperasi Konsumen KSU TEKNIKA MANDIRI </p>
+                        <p className="  font-bold ">KOPERASI Konsumen <br /><span className="text-[14px] text-[#797979]"> KSU TEKNIKA MANDIRI</span> </p>
                     </div>
 
                 </div>

@@ -29,14 +29,14 @@ const AuthProvider = ({ children }) => {
   const [isLoggedin, setIsLoggedin] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [authority, setAuthority] = useState("")
-  const [name,setName] = useState("");
+  const [name, setName] = useState("");
 
   const doRole = (role) => {
-    return localStorage.setItem('User_Role',role);
+    return localStorage.setItem('User_Role', role);
   }
 
   const getRole = () => {
-    return localStorage.getItem('User_Role') ?? null ;
+    return localStorage.getItem('User_Role') ?? null;
   }
 
   const removeRole = () => {
@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const saveUserName = (name) => {
-    return localStorage.setItem('User_Name',name);
+    return localStorage.setItem('User_Name', name);
   }
 
   const getUserName = () => {
@@ -56,82 +56,97 @@ const AuthProvider = ({ children }) => {
   }
 
   const doLogin = async (user, password) => {
+    //loading di set
     if (isLoading) return
 
     setIsLoading(true)
     Swal.fire({
       title: "Loading",
-      text: "Mengirim data.."
     })
     Swal.showLoading()
 
     // memanggil api menggunakan axios
     const apiResult = await handleLogin(user, password)
-    const { status, data, message } = apiResult.data
+    const { data, status, message } = apiResult.data
 
+    //loading berhenti ketika error
+    Swal.hideLoading()
+    setIsLoading(false)
     if (status != 'success') {
-      // jika gagal tampilkan peringatan  
-      Swal.hideLoading()
       Swal.fire({
-        title: `Login Gagal`,
-        text: message,
-        icon: 'error',
-        showConfirmButton: false,
+        title: `${message}`
       })
       return;
     }
+
+    //lanjut loading jika tidak ada kesalahan
+    Swal.showLoading()
+    setIsLoading(true)
+    //setData
     saveUserName(data.name);
     saveToken(data.token)
+    //loading berhenti
     setIsLoading(false)
-    Swal.hideLoading()
+    //loading aktif
+    setIsLoading(true)
+    //muncul keterangan sukses
     Swal.fire({
       title: 'Sukses',
       text: 'Berhasil Login'
     })
+    //check apakah dia nasabah
     doRole('Nasabah')
+    //jika benar semua maka bisa masuk ke halaman dasboard
     setIsLoggedin(true)
-    setName(data.name); 
+    //mengeset nama
+    setName(data.name);
   }
 
   const doLoginAdmin = async (user, password) => {
-    if (isLoading) return
+        //loading di set
+        if (isLoading) return
 
-    setIsLoading(true)
-
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    })
-    Swal.showLoading()
+        setIsLoading(true)
+        Swal.fire({
+          title: "Loading",
+        })
+        Swal.showLoading()
+    
     // memanggil api menggunakan axios
     const apiResult = await handleLoginAdmin(user, password)
     const { status, data, message } = apiResult.data
 
+    //loading berhenti ketika error
+    Swal.hideLoading()
+    setIsLoading(false)
     if (status != 'success') {
-      // jika gagal tampilkan peringatan  
-      // alert(`Login gagal: ${message}`)
-      Swal.hideLoading()
       Swal.fire({
-        title: `Login Gagal`,
-        text: message,
-        icon: 'error',
-        showConfirmButton: false,
+        title: `${message}`
       })
       return;
     }
 
+    //lanjut loading jika tidak ada kesalahan
+    Swal.showLoading()
+    setIsLoading(true)
+    //setData
     saveUserName(data.name);
     saveToken(data.token)
+    //loading berhenti
     setIsLoading(false)
-    Swal.hideLoading()
-    // jika berhasil maka setIsLoggedin -> true
+    //loading aktif
+    setIsLoading(true)
+    //muncul keterangan sukses
     Swal.fire({
       title: 'Sukses',
       text: 'Berhasil Login'
     })
+    //check apakah dia nasabah
     doRole('Admin')
+    //jika benar semua maka bisa masuk ke halaman dasboard
     setIsLoggedin(true)
-    setName(data.name); 
+    //mengeset nama
+    setName(data.name);
   }
 
   const doLogout = () => {
@@ -141,12 +156,13 @@ const AuthProvider = ({ children }) => {
     removeRole();
     removeUserName()
     setName("");
+    window.location.reload() 
   }
 
   const changeAuthority = (auth) => {
     setAuthority(auth)
   }
-  
+
   useEffect(() => {
     const token = getToken();
     const Role = getRole();
@@ -159,7 +175,7 @@ const AuthProvider = ({ children }) => {
   }, [name]);
 
   return (
-    <AuthContext.Provider value={{ isLoggedin, authority, name, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority }}>
+    <AuthContext.Provider value={{ isLoggedin, isLoading, authority, name, setIsLoading, setIsLoggedin, doLogin, doLoginAdmin, doLogout, changeAuthority }}>
       {children}
     </AuthContext.Provider>
   )

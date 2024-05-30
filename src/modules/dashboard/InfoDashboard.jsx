@@ -24,11 +24,12 @@ const InfoDashboard = () => {
     const tambahPinjaman = async () => {
         if (!nama, !jumlah_pinjaman) {
             alert("inputan tidak boleh kosong")
+        
         } else {
             try {
                 const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
                 if (existingMember) {
-                    throw new Error('Nama sudah ada di tabel. Tidak dapat menambahkan pinjaman.');
+                    throw new Error('Nama sudah ada di tabel.');
                 }
                 await handleTambahPinjaman(nama, jumlah_pinjaman);
                 setNama('');
@@ -36,11 +37,8 @@ const InfoDashboard = () => {
                 setShowForm(false);
                 tampilkanPinjaman();
             } catch (error) {
-                console.error('error', error)
                 Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
+                    text:'inputan harus diisi semua',
                     confirmButtonText: 'OK'
                 });
             }
@@ -52,7 +50,6 @@ const InfoDashboard = () => {
         if (confirm) {
             await handleDeletePinjaman(id);
             tampilkanPinjaman();
-
         }
     };
 

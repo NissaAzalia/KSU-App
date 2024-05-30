@@ -79,38 +79,38 @@ const DasboardNasabahProvider = ({ children }) => {
 
 
 
-   const doServis = async (jenisBarang, alamat, jenisKerusakan, setNama) => {
-      // cek loading
-      if (loadingServis) return
+  const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
+    // cek loading
+    //loading di set
+    if (loadingServis) return
 
-      // set loading true
-      setLoadingServis(true)
+    setLoadingServis(true)
+    Swal.fire({
+      title: "Loading",
+    })
 
-      Swal.fire({
-        title: "Loading",
-        text: "Mengirim data.."
-      })
-      Swal.showLoading()
+    Swal.showLoading()
 
     // fetch api
     const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
+    Swal.hideLoading()
+    setLoadingServis(false)
     const { status, message } = apiResult.data
 
     // cek sukses / error
     if (status != 'success') {
-      Swal.hideLoading()
       Swal.fire({
-        title: `Gagal mengirim service`,
-        text: message,
-        showConfirmButton: true
+        title: `${message}`
       })
+      return;
     }
 
+    Swal.showLoading()
     // set loading false
     setLoadingServis(false)
 
     // hilangkan tampilan loading
-    Swal.hideLoading()
+
     // const {nama} = apiResult.data.data;
 
     // setNama(nama);
@@ -126,20 +126,17 @@ const DasboardNasabahProvider = ({ children }) => {
     if (loadingBeliBarang) return
     setLoadingBeliBarang(true)
 
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    })
     Swal.showLoading()
 
     const apiResult = await apiFetchBeliBarang(nama_barang, alamat, jumlah_barang)
+
+    Swal.hideLoading()
+    setLoadingBeliBarang(false)
     const { status, message } = apiResult.data
 
     if (status != 'success') {
       Swal.hideLoading()
       Swal.fire({
-        title: 'Gagal mengirim service',
-        text: message,
         showConfirmButton: true
       })
     }
@@ -153,7 +150,7 @@ const DasboardNasabahProvider = ({ children }) => {
     })
   }
 
-  
+
   const doPinjamMobil = async (tanggal, gunakanSopir) => {
     // cek loading
     if (loadingPinjamMobil) return
@@ -162,16 +159,15 @@ const DasboardNasabahProvider = ({ children }) => {
     setLoadingPinjamMobil(true)
 
     // tampilkan loading pake swal
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    })
     Swal.showLoading()
 
     // fetch api
     const apiResult = await apiFetchPinjamMobil(tanggal, gunakanSopir)
+    Swal.hideLoading()
+    setLoadingPinjamUang(false)
     const { status, message } = apiResult.data
 
+  
     // cek sukses / error
     if (status != 'success') {
       Swal.hideLoading()
@@ -204,55 +200,49 @@ const DasboardNasabahProvider = ({ children }) => {
     setLoadingPinjamUang(true)
 
     // tampilkan loading pake swal
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    })
     Swal.showLoading()
 
-  // fetch api
-  const apiResult = await apiFetchPinjamUang(jumlah, tenor)
-  const { status, message} = apiResult.data
-
-  // cek sukses / error
-  if (status != 'success') {
+    // fetch api
+    const apiResult = await apiFetchPinjamUang(jumlah, tenor)
     Swal.hideLoading()
+    setLoadingPinjamUang(false)
+    const { status, message } = apiResult.data
+
+
+    // cek sukses / error
+    if (status != 'success') {
+      Swal.hideLoading()
+      Swal.fire({
+        title: `Gagal mengirim data`,
+        text: message,
+        showConfirmButton: true
+      })
+    }
+
+    Swal.showLoading()
+    // set loading false
+    setLoadingPinjamUang(false)
     Swal.fire({
-      title: `Gagal mengirim data`,
-      text: message,
-      showConfirmButton: true
+      title: 'Sukses',
+      text: 'Berhasil mengirim data pinjam uang'
     })
+
+    // selesai
+
   }
 
-  // set loading false
-  setLoadingPinjamUang(false)
+  useEffect(() => {
+    fetchPinjaman()
+    fetchSimpanan()
+  }, [])
 
-  // hilangkan tampilan loading
-  Swal.hideLoading()
-  const {nama} = apiResult.data.data;
 
-  setNama(nama);
-  Swal.fire({
-    title: 'Sukses',
-    text: 'Berhasil mengirim data pinjam uang'
-  })
-
-  // selesai
+  return (
+    <DashboardNasabahContext.Provider value={{ simpanan, pinjaman, servis, beliBarang, pinjamMobil, pinjamUang, setServis, doServis, doPinjamUang, doPinjamMobil, setBeliBarang, setPinjamMobil, setPinjamUang, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamMobil, loadingPinjamUang }}>
+      {children}
+    </DashboardNasabahContext.Provider>
+  )
 
 }
 
-    useEffect(() => {
-      fetchPinjaman()
-      fetchSimpanan()
-    }, [])
-
-
-    return (
-        <DashboardNasabahContext.Provider value={{ simpanan, pinjaman, servis, beliBarang, pinjamMobil, pinjamUang, setServis, doServis, doPinjamUang, doPinjamMobil, setBeliBarang, setPinjamMobil, setPinjamUang, doBeliBarang, loadingSimpanan, loadingPinjaman, loadingServis, loadingBeliBarang, loadingPinjamMobil , loadingPinjamUang }}>
-          {children}
-        </DashboardNasabahContext.Provider>
-        )
-    
-}
-
-        export {useDashboardNasabah, DasboardNasabahProvider}
+export { useDashboardNasabah, DasboardNasabahProvider }

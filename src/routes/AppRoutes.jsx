@@ -11,7 +11,7 @@ import { DasboardNasabahProvider } from '../modules/dashboard-nasabah/DashboardN
 import { MemberProvider } from '../modules/dashboard/AdminContext'
 
 const AppRoutes = () => {
-  const {authority, isLoggedin,doLogout,name} = useAuth();
+  const { authority, isLoggedin, doLogout, name } = useAuth();
 
   const handleLogout = () => {
     doLogout()
@@ -24,7 +24,7 @@ const AppRoutes = () => {
           isLoggedin !== true ?
             // jika belum login
             <Route>
-              <Route path='admin' element={<Login  />} />
+              <Route path='admin' element={<Login />} />
               <Route path='login' element={<LoginNasabah />} />
               <Route path='*' element={<Navigate to={"/login"} />} />
             </Route>
@@ -35,10 +35,10 @@ const AppRoutes = () => {
               {
                 authority === 'Admin' ?
                   // jika yang login adalah admin
-                  <Route element={<MainLayout  />}>
-                    <Route path='daftar-anggota' element={ <MemberProvider><DashboardAdmin name={name}  /></MemberProvider>  } />
-                    <Route path='/daftar-simpanan' element={<MemberProvider><DaftarSimpanan name={name} /></MemberProvider> } />
-                    <Route path='info' element={<MemberProvider><InfoDashboard name={name} /></MemberProvider>  } />
+                  <Route element={<MainLayout />}>
+                    <Route path='daftar-anggota' element={<MemberProvider><DashboardAdmin name={name} /></MemberProvider>} />
+                    <Route path='/daftar-simpanan' element={<MemberProvider><DaftarSimpanan name={name} /></MemberProvider>} />
+                    <Route path='info' element={<MemberProvider><InfoDashboard name={name} /></MemberProvider>} />
                     <Route path='*' element={<Navigate to={"/daftar-anggota"} />} />
                   </Route>
 
@@ -46,13 +46,14 @@ const AppRoutes = () => {
                   // jika yang login bukan admin
                   <Route>
                     <Route path='nasabah' element={
-                      <DasboardNasabahProvider>
-                        <DashboardNasabah name={name} doLogout={handleLogout}/>
-                      </DasboardNasabahProvider>
-                      } />
+                        <DasboardNasabahProvider>
+                          <DashboardNasabah name={name} doLogout={handleLogout} />
+                        </DasboardNasabahProvider>
+                    } />
+
                     <Route path='*' element={<Navigate to={"/nasabah"} />} />
                   </Route>
-              } 
+              }
             </Route>
 
         }
