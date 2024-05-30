@@ -49,6 +49,18 @@ const MemberProvider = ({ children }) => {
   const [curentMembers, setcurentMembers] = useState(null);
   const {name} = useAuth()
 
+    // Function to fetch members
+    const fetchAnggota = async () => {
+      if (loadingAnggota) return;
+  
+      setLoadingAnggota(true);
+      const apiCall = await daftarAnggota();
+      const { data } = apiCall.data;
+  
+      setMembers(data.users);
+      setLoadingAnggota(false);
+    };
+
   // Function to add a member
   const tambahAnggota = async (nama, nomorHp, username, password) => {
     // Check loading state
@@ -58,19 +70,20 @@ const MemberProvider = ({ children }) => {
     setLoadingAdd(true);
 
     // Show loading using Swal
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    });
     Swal.showLoading();
 
     // Fetch API
     const apiResult = await addAnggota(nama, nomorHp, username, password);
 
+    Swal.hideLoading();
+    Swal.fire({
+      text: 'isi semua inputan terlebih dahulu'
+    });
+    setLoadingAdd(false);
     // Handle success or error
     const { status, message } = apiResult.data;
     if (status !== 'Success') {
-      Swal.hideLoading();
+
       Swal.fire({
         title: `Gagal`,
         text: message,
@@ -80,7 +93,6 @@ const MemberProvider = ({ children }) => {
 
     // Set loading to false
     setLoadingAdd(false);
-
     // Hide loading
     Swal.hideLoading();
     Swal.fire({
@@ -91,28 +103,23 @@ const MemberProvider = ({ children }) => {
 
   // Function to handle adding a loan
   const handleTambahPinjaman = async (nama, jumlah_pinjaman) => {
-    if (loadingPinjaman) return;
+     //loading di set
+     if (loadingPinjaman) return
 
-    // Set loading to true
-    setLoadingPinjaman(true);
-
-    // Show loading using Swal
-    Swal.fire({
-      title: "Loading",
-      text: "Mengirim data.."
-    });
-    Swal.showLoading();
-
-    // Fetch API
+     setLoadingPinjaman(true)
+     Swal.showLoading()
+ 
+     // memanggil api menggunakan axios
     const apiResult = await tambahPinjaman(nama, jumlah_pinjaman);
 
+    Swal.hideLoading()
+    setLoadingPinjaman(false)
     // Handle success or error
-    const { status, message } = apiResult.data;
+    const { status } = apiResult.data;
     if (status !== 'Success') {
       Swal.hideLoading();
       Swal.fire({
-        title: `Gagal`,
-        text: message,
+        title: `inputan harus diisi sem`,
         showConfirmButton: true
       });
     }
@@ -186,19 +193,6 @@ const MemberProvider = ({ children }) => {
   // Function to delete a loan
   const handleDeletePinjaman = async(id) => {
     fetchHapusPinjaman(id);
-  };
-
-  // Function to fetch members
-  const fetchAnggota = async () => {
-    if (loadingAnggota) return;
-
-    setLoadingAnggota(true);
-    const apiCall = await daftarAnggota();
-    const { data } = apiCall.data;
-
-    setMembers(data.users);
-
-    setLoadingAnggota(false);
   };
 
   // Function to update member information

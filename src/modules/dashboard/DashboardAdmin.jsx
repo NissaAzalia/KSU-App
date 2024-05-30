@@ -25,9 +25,6 @@ const DashboardAdmin = () => {
     const { name } = useAuth()
 
     const handleTambahAnggota = async () => {
-        if (!nama , !nomorHp , !username , !password) {
-            alert("inputan tidak boleh ada yang kosong")
-        } else {
             try {
                 await tambahAnggota(nama, nomorHp, username, password);
                 setNama('');
@@ -38,16 +35,9 @@ const DashboardAdmin = () => {
                 fetchAnggota()
                 tampilkanSimpanans()
             } catch (error) {
-                console.error('error', error)
-                Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                });
-
+                return error;
             }
-        }
+        
 
 
 

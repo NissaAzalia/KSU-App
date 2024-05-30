@@ -54,10 +54,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
     };
 
     const handleClickServis = async () => {
-        if (!jenisBarang, !alamat, !jenisKerusakan) {
-            alert('inputan tidak boleh kosong')
-            return;
-        } else {
+
             try {
                 await doServis(jenisBarang, alamat, jenisKerusakan);
                 setJenisBarang('');
@@ -67,21 +64,17 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
+                    text: 'inputan tidak boleh kosong',
                     confirmButtonText: 'OK'
                 });
             }
-        }
+        
 
     }
 
     const handleClickBeliBarang = async () => {
-        if (!nama_barang, !alamat, !jumlah_barang) {
-            alert('inputan tidak boleh kosong')
-            return;
-        } else {
+
+      
             try {
                 await doBeliBarang(nama_barang, alamat, jumlah_barang);
                 setNama_barang('');
@@ -90,18 +83,18 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 setShowFormBeliBarang(false);
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
+                    text: 'inputan tidak boleh kosong',
                     confirmButtonText: 'OK'
                 });
             }
-        }
+        
     }
 
     const handleClickPinjamMobil = async () => {
         if (!tanggal) {
-            alert('inputan tidak boleh kosong')
+            Swal.fire({
+                text: 'inputan tidak boleh kosong'
+              })
             return;
         } else {
             try {
@@ -111,9 +104,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 setShowFormPinjamMobil(false);
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
+                    text: 'inputan tidak boleh kosong',
                     confirmButtonText: 'OK'
                 });
             }
@@ -121,53 +112,36 @@ const DasboardNasabah = ({ doLogout, name }) => {
     }
 
     const handleClickPinjamUang = async () => {
-        if (!jumlah, !tenor) {
-            alert('inputan tidak boleh kosong')
-            return;
-        } else {
             try {
                 await doPinjamUang(jumlah, tenor);
-                console.log('Email berhasil dikirim!');
                 setJumlah('');
                 setTenor('');
                 setShowFormPinjamUang(false);
-
-                Swal.fire({
-                    title: 'Berhasil!',
-                    text: 'Peminjaman uang berhasil dan email telah dikirim.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-                return;
-
             } catch (error) {
                 Swal.fire({
-                    title: 'Error!',
-                    text: error.message,
-                    icon: 'error',
+                    text: 'inputan tidak boleh kosong',
                     confirmButtonText: 'OK'
                 });
             }
-        }
     }
 
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
 
-            <div className=" flex justify-between md:w-[95%]   ">
+            <div className=" flex justify-between fixed bg-white w-[100%] top-[0px] pt-[10px] pb-[10px]">
 
-                <div className="logo flex md:ml-[30px] ml-[30px]  md:w-[430px] w-[260px]        ">
-                    <img src="src/assets/logoKSU.png" alt="" className=" w-[65px] md:w-[50px] h-[65px] md:h-[100%]  md:pt-[10px] pt-[15px]  md:ml-[20px]   " />
-                    <h1 className="md:mt-[1px] pt-[22px] ml-[20px] md:text-1xl font-bold   "> Koperasi Konsumen KSU TEKNIKA MANDIRI</h1>
+                <div className="logo flex md:ml-[50px]  md:w-[430px] w-[260px] ">
+                    <img src="src/assets/logoKSU.png" alt="" className="fixed h-[50px] w-[50px]    " />
+                    <h1 className=" ml-[70px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[13px]'>KSU TEKNIKA MANDIRI</span></h1>
                 </div>
-                <div className=" hidden md:block md:mt-[20px] mt-[22px] font-semibold ">
+                <div className=" font-semibold flex text-center mr-[60px]">
                     <button onClick={doLogout}>Logout</button>
                 </div>
             </div>
 
-            <div className="md:ml-[20px]  ">
+            <div className="mt-[100px] md:ml-[20px] ">
 
-                <div className="rounded-xl  h-[80px] md:w-[95%] w-[85%] md:mx-[30px] mx-[30px]    bg-gradient-to-r from-[#2C6975] to-[#52C5DB]" >
+                <div className="rounded-xl  h-[80px] xl:w-[97%] lg:w-[95%] md:[80%]  md:mx-[30px] mx-[30px] bg-gradient-to-r from-[#2C6975] to-[#52C5DB]" >
 
                     <div className="md:mx-[3%] mx-[6%] py-[6px] mt-[25px] md:py-[10px]">
                         <h2 className="text-white font-normal text-1xl md:text-2xl">Halo, {name}</h2>
@@ -179,11 +153,11 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
             <div className="simpanan">
                 <div className="md:ml-[4%] mx-[30px]">
-                    <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[30px]   font-bold">Informasi</h1>
+                    <h1 className="text-2xl md:text-3xl text-[#2C6975] mt-[30px] font-bold">Informasi</h1>
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[1px] ml-[1%]">Simpanan</h2>
                 </div>
 
-                <div className="flex flex-col md:flex-row md:flex-wrap lg:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
+                <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
                         <div className="flex gap-[5px] ">
@@ -275,7 +249,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 <div>
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[10%] mb-[25px] md:ml-[50px] ml-[30px] ">Sisa Hutang</h2>
 
-                    <div className="2 rounded-[8px] w-[85%] md:w-[95%] md:h-[90px] md:mx-[50px] mx-[30px]  px-[30px] py-[8px] flex flex-col gap-[20px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
+                    <div className="rounded-xl h-[80px] xl:w-[97%] lg:w-[95%] md:[80%]  md:mx-[30px] mx-[30px]   px-[30px] py-[8px] flex flex-col gap-[5px]  shadow-2xl bg-[#439FB1]  md:bg-[#439FB1] ">
                         <h2 className="text-white text-xl ">Sisa Pokok Hutang</h2>
                         <span className="text-white text-xl">
                             {loadingPinjaman ?
@@ -563,10 +537,6 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                     </div>
                 </div>
-
-            </div>
-            <div className="block md:hidden h-[50px] pt-[12px]   font-semibold text-white   bg-[#2D5275]  text-center">
-                <button onClick={doLogout}>Logout</button>
             </div>
         </div>
     )
