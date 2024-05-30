@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getToken } from "../../helpers/LocalStorage";
 import { http } from "../../config/url";
-// import { get } from "react-model/src/helper";
 
 export const daftarAnggota = async () => {
   const token = getToken();
@@ -67,13 +66,12 @@ export const apiUpdateMember = async (id, noBaru) => {
     }
   })
     .then(response => {
-      return response.data; // Mengembalikan data yang diterima dari backend
+      return response.data;
     })
     .catch(err => {
-      throw err.response.data; // Melemparkan pesan error dari backend
+      throw err.response.data;
     });
 }
-
 
 export const fetchInfoPinjaman = async () => {
   const token = getToken();
@@ -161,9 +159,6 @@ export const tambahPinjaman = async (nama, jumlah_pinjaman) => {
   }
 }
 
-
-
-
 export const fetchSimpanans = async () => {
   const token = getToken();
 
@@ -179,7 +174,6 @@ export const fetchSimpanans = async () => {
       return error.response.data
     })
 };
-
 
 export const hapusNasabah= async (id) => {
   const token = getToken();
@@ -202,10 +196,6 @@ export const fetchTambahSimpanan = async (id, type_simpanan, jumlahSimpanan) => 
   return axios.put(`https://apiksu.ndamelweb.com/nasabah/updatesimpanan/` + id, {
     type_simpanan: type_simpanan,
     jumlahSimpanan: Number(jumlahSimpanan)
-    // simpanan_pokok: simpanan_pokok,
-    // simpanan_wajib: simpanan_wajib,
-    // simpanan_sukarela: simpanan_sukarela,
-    // simpanan_hariraya: simpanan_hariraya
   },
     {
       headers: {
@@ -239,24 +229,4 @@ export const kurangiSimpanan = async (id, type_simpanan, penarikan) => {
       return err.response
     })
 }
-
-// export const kurangiHariRaya = async (id, type_simpanan, penarikan) => {
-//   const token = getToken();
-
-//   return axios.put(`https://apiksu.ndamelweb.com/nasabah/withdrawsimpanan/` + id, {
-//     type_simpanan: type_simpanan,
-//     penarikan: penarikan
-//   },
-//     {
-//       headers: {
-//         'Authorization': 'Bearer ' + token
-//       }
-//     })
-//     .then(response => {
-//       return response
-//     })
-//     .catch(err => {
-//       return err.response
-//    })
-// }
 

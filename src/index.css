@@ -1,39 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
+
+* {
     box-sizing: border-box;
-}
-
-/* .animate{
-    transition: all .4s ease-in-out;
-}
-
-table,th{
-    border-radius: 10px;
-}
-
-.ajukan{
-    padding-top: 50px;
-    padding-left: 90px;
-}
-.text{
-    color: #626262;
-    font-size: large;
-} */
-
-@media (max-width: 768px) {
-.sidebar {
-    position: absolute;
-z-index: 50;
-left: 0;
-top: 0;
-}
-}
-
-@media (min-width: 769px) {
-.sidebar {
-    position: relative;
-z-index: auto;
-}
 }

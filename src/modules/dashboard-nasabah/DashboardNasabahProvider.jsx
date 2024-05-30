@@ -28,7 +28,6 @@ const initDashboardNasabah = {
   fetchBeliBarang: () => { },
   fetchPinjamMobil: () => { },
   fetchPinjamUang: () => { },
-
 }
 
 const DashboardNasabahContext = createContext(initDashboardNasabah)
@@ -53,14 +52,11 @@ const DasboardNasabahProvider = ({ children }) => {
   const [loadingPinjamMobil, setLoadingPinjamMobil] = useState(false)
   const [loadingPinjamUang, setLoadingPinjamUang] = useState(false)
 
-
-
-
   const fetchSimpanan = async () => {
     if (loadingSimpanan == true) return
 
     setLoadingSimpanan(true)
-    // call api
+
     const apiCall = await apiFetchSimpanan()
     const { data } = apiCall.data
 
@@ -69,37 +65,32 @@ const DasboardNasabahProvider = ({ children }) => {
     setLoadingSimpanan(false)
   }
 
-
-
   const fetchPinjaman = async () => {
     if (loadingPinjaman == true) return
 
     setLoadingPinjaman(true)
-    // call api
+
     const apiCall = await apiFetchPinjaman()
     const { data } = apiCall.data
 
     setPinjaman(data.pinjaman)
-    console.log(data.pinjaman)
     setLoadingPinjaman(false)
   }
 
 
 
-   const doServis = async (jenisBarang, alamat, jenisKerusakan) => {
+   const doServis = async (jenisBarang, alamat, jenisKerusakan, setNama) => {
       // cek loading
       if (loadingServis) return
 
       // set loading true
       setLoadingServis(true)
 
-      // tampilkan loading pake swal
       Swal.fire({
         title: "Loading",
         text: "Mengirim data.."
       })
       Swal.showLoading()
-
 
     // fetch api
     const apiResult = await apiFetchServis(jenisBarang, alamat, jenisKerusakan)
@@ -120,16 +111,16 @@ const DasboardNasabahProvider = ({ children }) => {
 
     // hilangkan tampilan loading
     Swal.hideLoading()
+    // const {nama} = apiResult.data.data;
+
+    // setNama(nama);
     Swal.fire({
       title: 'Sukses',
       text: 'Berhasil mengirim data servis'
     })
 
     // selesai
-
   }
-
-
 
   const doBeliBarang = async (nama_barang, alamat, jumlah_barang) => {
     if (loadingBeliBarang) return
@@ -205,9 +196,6 @@ const DasboardNasabahProvider = ({ children }) => {
 
   }
 
-
-
-
   const doPinjamUang = async (jumlah, tenor, setNama) => {
     // cek loading
     if (loadingPinjamUang) return
@@ -222,9 +210,6 @@ const DasboardNasabahProvider = ({ children }) => {
     })
     Swal.showLoading()
 
-
-
-    
   // fetch api
   const apiResult = await apiFetchPinjamUang(jumlah, tenor)
   const { status, message} = apiResult.data
