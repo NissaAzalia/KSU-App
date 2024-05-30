@@ -32,7 +32,7 @@ const SideBar = () => {
                     <div className="flex items-center m-[20px] mb-[10px] gap-5">
                         <span className="text-[#222a] flex items-center justify-center align-middle cursor-pointer  hover:text-[#7D7D7D]"><FontAwesomeIcon className="h-[25px] " icon={faBars} /></span>
                         <img src="src/assets/logoKSU.png" alt="" className="h-10 w-10 wml-[20px]" />
-                        <p className="font-bold ">Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
+                        <p className="font-bold ">Koperasi Konsumen KSU TEKNIKA MANDIRI </p>
                     </div>
                 </div>
             )}
