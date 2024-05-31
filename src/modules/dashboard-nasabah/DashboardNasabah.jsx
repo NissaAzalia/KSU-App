@@ -132,36 +132,35 @@ const DasboardNasabah = ({ doLogout, name }) => {
             <div className=" flex justify-between fixed bg-white w-[100%] top-[0px] pt-[10px] pb-[10px]">
 
                 <div className="logo flex md:ml-[50px] ml-[10px]  md:w-[430px] w-[260px] ">
-                    {/* <FontAwesomeIcon className="md:hidden disabled:block mt-[10px] mr-[10px] h-[25px]   " icon={faBars} /> */}
-                    <span onClick={() => setBar(!bar)} className="md:hidden disabled:block mt-[10px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
-                        <FontAwesomeIcon className="h-[25px] " icon={faBars} />
-                    </span>
-
                     <img src="src/assets/logoKSU.png" alt="" className="md:fixed h-[50px] w-[50px]    " />
                     <h1 className="md:ml-[65px] ml-[10px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[13px]'>KSU TEKNIKA MANDIRI</span></h1>
+
                 </div>
 
-                <div className={`md:hidden fixed mt-[65px] left-0 bg-white w-[150px] shadow-md transition-all ${bar ? "translate-x-0" : "-translate-x-full"}`}>
-                    {/* Konten Sidebar */}
+                {/* <div className={`md:hidden fixed mt-[65px] top-[-0px] left-0 bg-white w-[110px] h-[60px] shadow-md ${bar}`}>
+          
                     {bar ? (
                         <div className='flex'>
                             <div className="p-[15px]">
-                                <button onClick={doLogout} className="bg-[#2C6975] text-white px-4 py-2 rounded-md ">Logout</button>
+                                <button onClick={doLogout} className="font-bold text-[#676767] px-4 py-2 rounded-md ">Logout</button>
                             </div>
-                            {/* Menggunakan ikon anak panah untuk tombol Close */}
+           
 
                         </div>
                     ) : (
                         <div className="absolute right-0 top-2 m-4" onClick={() => setBar(!bar)}>
-                            {/* <FontAwesomeIcon icon={faArrowLeft} className="text-black cursor-pointer" /> */}
+                          
                         </div>
                     )}
-                </div>
+                </div> */}
 
 
 
-                <div className="hidden disabled:block font-semibold md:flex text-center mr-[25px]">
-                    <button onClick={doLogout}>Logout</button>
+                <div onClick={doLogout} className="disabled:block font-semibold flex text-center mr-[25px] gap-3">
+                    <button className="text-center" >Logout</button>
+                    <span  className="text center disabled:block mt-[10px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
+                        <FontAwesomeIcon className="h-[25px] " icon={faBars} />
+                    </span>
                 </div>
             </div>
 

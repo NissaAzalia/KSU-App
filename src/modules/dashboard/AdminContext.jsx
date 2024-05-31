@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useEffect, useState } from 'react';
-import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, tambahPinjaman, fetchTambahSimpanan,kurangiSimpanan } from './apiAdmin';
+import { addAnggota, daftarAnggota, deleteMember, apiUpdateMember, fetchBayarHutang, fetchHapusPinjaman, hapusNasabah , fetchInfoPinjaman, fetchSimpanans, fetchTambahPinjamanLagi, fetchTambahPinjaman, fetchTambahSimpanan,kurangiSimpanan } from './apiAdmin';
 
 import Swal from 'sweetalert2';
 import { useAuth } from '../auth/Auth';
@@ -14,6 +14,7 @@ const initialMembersState = {
   infoPinjaman: [],
   users: [],
   curentMembers: null,
+  isLoading: false,
   loadingAdd: false,
   loadingAddPinjaman: false,
   loadingAnggota: false,
@@ -42,6 +43,7 @@ const MemberProvider = ({ children }) => {
   const [members, setMembers] = useState([]);
   const [loadingAdd, setLoadingAdd] = useState(false);
   const [loadingAnggota, setLoadingAnggota] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const [loadingSimpanan, setLoadingSimpanan] = useState(false)
   const [loadingPinjaman, setLoadingPinjaman] = useState(false);
   const [infoPinjaman, setInfoPinjaman] = useState([]);
@@ -75,30 +77,28 @@ const MemberProvider = ({ children }) => {
     // Fetch API
     const apiResult = await addAnggota(nama, nomorHp, username, password);
 
-    Swal.hideLoading();
-    Swal.fire({
-      text: 'isi semua inputan terlebih dahulu'
-    });
-    setLoadingAdd(false);
+  
+    setLoadingAdd(false)
+    Swal.hideLoading()
     // Handle success or error
-    const { status, message } = apiResult.data;
-    if (status !== 'Success') {
-
+    const { status } = apiResult.data;
+    if (status === 'fail') {
       Swal.fire({
-        title: `Gagal`,
-        text: message,
-        showConfirmButton: true
-      });
-    }
-
+        title: `nama tidak terdaftar`,
+       
+      }); 
+    } else {
     // Set loading to false
     setLoadingAdd(false);
+
     // Hide loading
-    Swal.hideLoading();
-    Swal.fire({
+      Swal.hideLoading();
+      Swal.fire({
       title: 'Sukses',
       text: 'Berhasil'
     });
+
+  }
   };
 
   // Function to handle adding a loan
@@ -109,30 +109,30 @@ const MemberProvider = ({ children }) => {
      setLoadingPinjaman(true)
      Swal.showLoading()
  
-     // memanggil api menggunakan axios
-    const apiResult = await tambahPinjaman(nama, jumlah_pinjaman);
+         // memanggil api menggunakan axios
+    const apiResult = await fetchTambahPinjaman(nama, jumlah_pinjaman);
 
     Swal.hideLoading()
     setLoadingPinjaman(false)
     // Handle success or error
     const { status } = apiResult.data;
-    if (status !== 'Success') {
-      Swal.hideLoading();
+    if (status === 'fail') {
       Swal.fire({
-        title: `inputan harus diisi sem`,
-        showConfirmButton: true
-      });
-    }
-
+        title: `nama tidak terdaftar`,
+       
+      }); 
+    } else {
     // Set loading to false
     setLoadingAdd(false);
 
     // Hide loading
-    Swal.hideLoading();
-    Swal.fire({
+      Swal.hideLoading();
+      Swal.fire({
       title: 'Sukses',
       text: 'Berhasil'
     });
+
+  }
   };
 
   // Function to delete a member
@@ -166,28 +166,104 @@ const MemberProvider = ({ children }) => {
   };
 
   const handleTambahSimpanan = async ( id,jumlahSimpanan, nominal ) => {
+    if (isLoading) return;
+    setIsLoading(true);
 
-    try {
-      await fetchTambahSimpanan(id, jumlahSimpanan, nominal);
-   
-    } catch (error) {
-      console.error(error);
+    Swal.showLoading();
+
+    const apiResult = await fetchTambahSimpanan(id, jumlahSimpanan, nominal);
+
+    setIsLoading(false);
+    Swal.hideLoading();
+
+    const { status } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.fire({
+        text: `berhasil`,
+        showConfirmButton: true
+      });
     }
-    // fetchTambahSimpanan( id,jumlahSimpanan, type_simpanan );
+  
+   
   };
 
   const kurangSimpanan = async (id, type_simpanan, penarikan) => {
-    kurangiSimpanan(id, type_simpanan, penarikan) 
+    if (isLoading) return;
+    setIsLoading(true);
+
+    Swal.showLoading();
+
+    const apiResult = await kurangiSimpanan(id, type_simpanan, penarikan) 
+
+    Swal.hideLoading();
+    Swal.fire({
+      text: 'isi semua inputan terlebih dahulu'
+    });
+   setIsLoading(false);
+   Swal.hideLoading()
+    // Handle success or error
+    const { status } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.fire({
+        text: `berhasil`,
+        showConfirmButton: true
+      });
+    }
+   
+
   }
   
   // Function to pay debts
   const tampilkanBayarHutang = async (id, bayar_hutang) => {
-    fetchBayarHutang(id, bayar_hutang);
+    if (isLoading) return;
+    setIsLoading(true);
+
+    Swal.showLoading();
+
+    const apiResult = await  fetchBayarHutang(id, bayar_hutang);
+
+    Swal.hideLoading();
+    Swal.fire({
+      text: 'isi semua inputan terlebih dahulu'
+    });
+   setIsLoading(false);
+   Swal.hideLoading()
+    // Handle success or error
+    const { status } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.fire({
+        text: `berhasil`,
+        showConfirmButton: true
+      });
+    }
+   
+
   };
 
   // Function to add another loan
   const tampilkanTambahPinjamLagi = async (id, hutang) => {
-    fetchTambahPinjamanLagi(id, hutang);
+
+    if (isLoading) return;
+    setIsLoading(true);
+
+    Swal.showLoading();
+
+    const apiResult = await fetchTambahPinjamanLagi(id, hutang);
+
+    Swal.hideLoading();
+    Swal.fire({
+      text: 'isi semua inputan terlebih dahulu'
+    });
+   setIsLoading(false);
+   Swal.hideLoading()
+    // Handle success or error
+    const { status } = apiResult.data;
+    if (status !== 'Success') {
+      Swal.fire({
+        text: `berhasil`,
+        showConfirmButton: true
+      });
+    }
   };
 
   // Function to delete a loan
@@ -208,7 +284,7 @@ const MemberProvider = ({ children }) => {
 
 
   return (
-    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, updateMember, handleTambahPinjaman, handleTambahSimpanan, kurangSimpanan,fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
+    <MemberContext.Provider value={{ members, simpanans, infoPinjaman, loadingAdd, fetchTambahPinjaman, updateMember, handleTambahPinjaman, handleTambahSimpanan, kurangSimpanan,fetchAnggota, handleDelete, handleDeletePinjaman, tambahAnggota, tampilkanBayarHutang, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanSimpanans }}>
       {children}
     </MemberContext.Provider>
   );

@@ -22,14 +22,14 @@ const InfoDashboard = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const tambahPinjaman = async () => {
-        if (!nama, !jumlah_pinjaman) {
+        if (!nama || !jumlah_pinjaman) {
             alert("inputan tidak boleh kosong")
-        
+
         } else {
             try {
                 const existingMember = infoPinjaman.find(member => member.nama.toLowerCase() === nama.toLowerCase());
                 if (existingMember) {
-                    throw new Error('Nama sudah ada di tabel.');
+                    throw new Error();
                 }
                 await handleTambahPinjaman(nama, jumlah_pinjaman);
                 setNama('');
@@ -37,10 +37,9 @@ const InfoDashboard = () => {
                 setShowForm(false);
                 tampilkanPinjaman();
             } catch (error) {
-                Swal.fire({
-                    text:'inputan harus diisi semua',
-                    confirmButtonText: 'OK'
-                });
+               Swal.fire({
+                text:"nama sudah ada di tabel"
+               })
             }
         }
     }
@@ -240,7 +239,7 @@ const InfoDashboard = () => {
                             <div className="flex flex-col gap-2">
 
 
-                            <h1 className="text-center text-2xl md:textl-lg font-bold text-[#2C6975] mb-[20px]">Bayar hutang</h1>
+                                <h1 className="text-center text-2xl md:textl-lg font-bold text-[#2C6975] mb-[20px]">Bayar hutang</h1>
                                 <h1 className="text-lg text-[#5d5d5d] font-bold mt-[-10px]">{nama}</h1>
                                 <input
                                     type="number"

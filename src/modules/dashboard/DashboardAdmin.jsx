@@ -25,7 +25,15 @@ const DashboardAdmin = () => {
     const { name } = useAuth()
 
     const handleTambahAnggota = async () => {
+        if (!nama || !nomorHp || !username || !password) {
+            alert("inputan tidak boleh kosong")
+
+        } else {
             try {
+                const existingMember = members.find(member => member.nama.toLowerCase() === nama.toLowerCase());
+                if (existingMember) {
+                    throw new Error();
+                }
                 await tambahAnggota(nama, nomorHp, username, password);
                 setNama('');
                 setNomorHp('');
@@ -35,9 +43,11 @@ const DashboardAdmin = () => {
                 fetchAnggota()
                 tampilkanSimpanans()
             } catch (error) {
-                return error;
+                Swal.fire({
+                    text:"Nama sudah terdaftar" 
+                });
             }
-        
+        }
 
 
 
@@ -122,7 +132,7 @@ const DashboardAdmin = () => {
     ));
 
     return (
-        <div className="layer flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
+        <div className="layer flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px} ">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
                 <div className="mx-[30px] md:py-[20px] py-[10px] ">
                     <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>

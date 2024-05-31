@@ -153,7 +153,6 @@ const DaftarSimpanan = () => {
             tampilkanSimpanans()
             setShowFormSimpananHr(false)
             tampilkanSimpanans()
-            Swal.showLoading()
         } catch (error) {
            return error
         }

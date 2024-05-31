@@ -142,7 +142,7 @@ export const fetchHapusPinjaman = async (id) => {
       return err.response.data;
     });
 }
-export const tambahPinjaman = async (nama, jumlah_pinjaman) => {
+export const fetchTambahPinjaman = async (nama, jumlah_pinjaman) => {
   const token = getToken();
   try {
     const response = await axios.post(http + "/add-pinjaman", {
