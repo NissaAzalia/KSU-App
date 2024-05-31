@@ -41,7 +41,7 @@ const SideBar = () => {
                             <img src="src/assets/logoKSU.png" alt="" className="w-[50px] h-[50px] mt-[10px]" />
                             <h1 className="pl-[20px] pt-[13px] font-bold text-[15px] "> Koperasi Konsumen <span className="text-[13px] text-[#797979]"> KSU TEKNIKA MANDIRI</span> </h1>
                         </div>
-                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} size="xl" /></button>
+                        <button className="top-1 left-1 text-gray-500 hover:text-gray-700 pl-[30px]" onClick={closeBar}><FontAwesomeIcon icon={faXmark} /></button>
                     </div>
                     <div className="flex flex-col justify-between text-center bg-[#fafafa] min-w-[274px] h-screen pb-[50px] p-[25px]">
                         <div className="flex flex-col mt-[20px] gap-3 overflow-x-hidden">
@@ -64,7 +64,7 @@ const SideBar = () => {
                                 }
                             >
                                
-                                <FontAwesomeIcon icon={faMoneyCheck} size="xl" style={{ marginTop:'-5px'}} className="pt-[5px]" />
+                                <FontAwesomeIcon icon={faMoneyCheck} style={{ marginTop:'-5px'}} className="pt-[5px]" />
                                 Daftar Simpanan
                             </NavLink>
                             <NavLink
@@ -74,7 +74,7 @@ const SideBar = () => {
                                 }
                             >
                              
-                                <FontAwesomeIcon icon={faMoneyBillTransfer}  size="xl" style={{ marginTop:'-5px'}} className="pt-[5px]" />
+                                <FontAwesomeIcon icon={faMoneyBillTransfer}  style={{ marginTop:'-5px'}} className="pt-[5px]" />
                                 Info Pinjaman
                             </NavLink>
                         </div>

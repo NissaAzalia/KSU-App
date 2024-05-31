@@ -139,7 +139,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 <div onClick={doLogout} className=" font-semibold flex text-center mr-[25px] gap-3">
                     <button className="text-[#616161] text-lg text-center hidden md:block" >Logout</button>
                     <span  className="text center mt-[12px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#797979]">
-                    <FontAwesomeIcon icon={faArrowRightFromBracket} size='md' style={{color: "#616161",}} />
+                    <FontAwesomeIcon icon={faArrowRightFromBracket}  style={{color: "#616161",}} />
                     </span>
                 </div>
             </div>
