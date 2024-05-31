@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useMembers } from './AdminContext';
-import { useAuth } from '../auth/Auth';
 
 const DaftarSimpanan = () => {
     const [showFormSimpananSkr, setShowFormSimpananSkr] = useState(false);
@@ -17,7 +16,6 @@ const DaftarSimpanan = () => {
     const [nominal, setNominal] = useState('');
     const [type_simpananan, setType_simpananan] = useState()
     const { simpanans, kurangSimpanan, handleTambahSimpanan, handleDelete, tampilkanSimpanans, fetchAnggota } = useMembers();
-    const { name } = useAuth()
     const [nama, setNama] = useState('')
     const [simpananSukarela, setSimpananSukarela] = useState('');
     const [simpananHariRaya, setSimpananHariRaya] = useState('');
@@ -27,7 +25,6 @@ const DaftarSimpanan = () => {
         if (konfirm) {
             try {
                 await handleDelete(id)
-                alert("berhasil menghapus")
                 fetchAnggota()
             } catch (error) {
                 alert("Terjadi Kesalahan Saat Menghapus Anggota:" + error.message);
@@ -182,18 +179,11 @@ const DaftarSimpanan = () => {
 
     return (
         <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
-            <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
-                <div className="mx-[30px] md:py-[20px] py-[10px]">
-                    <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
-                    <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
-                </div>
-            </div>
-
             <div className="mt-[25px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Simpanan Koperasi</h2>
 
                 {showFormTambahAllSimpanan && (
-                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                    <div className='fixed overlay bg-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
                         <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px]  -translate-y-[50%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[420px]  flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button
@@ -339,7 +329,7 @@ const DaftarSimpanan = () => {
                     <div className="md:flex md:gap-3 items-center">
                         <div className="flex mt-[20px] w-[100%]">
                             <input
-                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                              className=" w-[100%] h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
                                 type="text"
                                 placeholder="Cari nama nasabah"
                                 value={searchQuery}

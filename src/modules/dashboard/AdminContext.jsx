@@ -79,7 +79,7 @@ const MemberProvider = ({ children }) => {
 
   
     setLoadingAdd(false)
-    Swal.hideLoading()
+      Swal.hideLoading()
     // Handle success or error
     const { status } = apiResult.data;
     if (status === 'fail') {
@@ -137,11 +137,28 @@ const MemberProvider = ({ children }) => {
 
   // Function to delete a member
   const handleDelete = async (id) => {
-    await deleteMember(id);
-    await hapusNasabah(id);
-  };
+    if (isLoading) return;
+    setIsLoading(true);
 
-  // Function to display loans
+    Swal.showLoading();
+
+   await  deleteMember(id);
+   await hapusNasabah(id);
+
+    setIsLoading(false);
+
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil menghapus'
+    });
+  }
+  
+  
+
+
+
   const tampilkanPinjaman = async () => {
     if (loadingPinjaman) return;
 
@@ -154,7 +171,9 @@ const MemberProvider = ({ children }) => {
     setLoadingPinjaman(false);
   };
 
-  // Function to display savings
+
+
+
   const tampilkanSimpanans = async () => {
     if (loadingAnggota) return;
 
@@ -165,6 +184,8 @@ const MemberProvider = ({ children }) => {
     setLoadingAnggota(false);
   };
 
+
+
   const handleTambahSimpanan = async ( id,jumlahSimpanan, nominal ) => {
     if (isLoading) return;
     setIsLoading(true);
@@ -173,18 +194,27 @@ const MemberProvider = ({ children }) => {
 
     const apiResult = await fetchTambahSimpanan(id, jumlahSimpanan, nominal);
 
-    setIsLoading(false);
-    Swal.hideLoading();
-
+    Swal.hideLoading()
+    setIsLoading(false)
+    // Handle success or error
     const { status } = apiResult.data;
-    if (status !== 'Success') {
+    if (status === 'error') {
       Swal.fire({
-        text: `berhasil`,
-        showConfirmButton: true
-      });
-    }
-  
-   
+        text: `inputan melebihi 750.000`,
+       
+      }); 
+    } else {
+    // Set loading to false
+    setIsLoading(false);
+
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil'
+    });
+
+  }
   };
 
   const kurangSimpanan = async (id, type_simpanan, penarikan) => {
@@ -195,23 +225,27 @@ const MemberProvider = ({ children }) => {
 
     const apiResult = await kurangiSimpanan(id, type_simpanan, penarikan) 
 
-    Swal.hideLoading();
-    Swal.fire({
-      text: 'isi semua inputan terlebih dahulu'
-    });
-   setIsLoading(false);
-   Swal.hideLoading()
+    Swal.hideLoading()
+    setIsLoading(false)
     // Handle success or error
     const { status } = apiResult.data;
-    if (status !== 'Success') {
+    if (status === 'failed') {
       Swal.fire({
-        text: `berhasil`,
-        showConfirmButton: true
-      });
-    }
-   
+        text: `inputan tidak boleh melebihi simpanan`,
+       
+      }); 
+    } else {
+    // Set loading to false
+    setIsLoading(false);
 
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil'
+    });
   }
+  };
   
   // Function to pay debts
   const tampilkanBayarHutang = async (id, bayar_hutang) => {
@@ -222,22 +256,26 @@ const MemberProvider = ({ children }) => {
 
     const apiResult = await  fetchBayarHutang(id, bayar_hutang);
 
-    Swal.hideLoading();
-    Swal.fire({
-      text: 'isi semua inputan terlebih dahulu'
-    });
-   setIsLoading(false);
-   Swal.hideLoading()
+    Swal.hideLoading()
+    setIsLoading(false)
     // Handle success or error
     const { status } = apiResult.data;
-    if (status !== 'Success') {
+    if (status === 'fail') {
       Swal.fire({
-        text: `berhasil`,
-        showConfirmButton: true
-      });
-    }
-   
+        text: `inputan tidak boleh melebihi jumlah hutang`,
+       
+      }); 
+    } else {
+    // Set loading to false
+    setIsLoading(false);
 
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil'
+    });
+  }
   };
 
   // Function to add another loan
@@ -268,13 +306,51 @@ const MemberProvider = ({ children }) => {
 
   // Function to delete a loan
   const handleDeletePinjaman = async(id) => {
-    fetchHapusPinjaman(id);
-  };
+    if (isLoading) return;
+    setIsLoading(true);
+
+    Swal.showLoading();
+
+   await fetchHapusPinjaman(id);
+
+  
+    // Set loading to false
+    setIsLoading(false);
+
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil menghapus'
+    });
+  }
+  
+
+  
+    
+  
 
   // Function to update member information
   const updateMember = async (id, noBaru) =>{
-    await apiUpdateMember(id, noBaru);
-  };
+    if (isLoading) return;
+    setIsLoading(true);
+
+    Swal.showLoading();
+
+   await apiUpdateMember(id, noBaru);
+
+    setIsLoading(false);
+
+    // Hide loading
+      Swal.hideLoading();
+      Swal.fire({
+      title: 'Sukses',
+      text: 'Berhasil mengupdate'
+    });
+  }
+  
+
+
 
   useEffect(() => {
     fetchAnggota();

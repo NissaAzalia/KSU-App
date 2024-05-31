@@ -44,7 +44,7 @@ const DashboardAdmin = () => {
                 tampilkanSimpanans()
             } catch (error) {
                 Swal.fire({
-                    text:"Nama sudah terdaftar" 
+                    text: "Nama sudah terdaftar"
                 });
             }
         }
@@ -58,7 +58,6 @@ const DashboardAdmin = () => {
         if (konfirm) {
             try {
                 await handleDelete(id)
-                alert("berhasil menghapus")
                 fetchAnggota()
                 tampilkanSimpanans()
                 tampilkanPinjaman()
@@ -79,7 +78,6 @@ const DashboardAdmin = () => {
                 await fetchAnggota();
                 setShowNomorHp(false);
                 await fetchAnggota();
-                alert("berhasil mengubah")
             } catch (error) {
                 console.error('Error:', error);
                 Swal.fire({
@@ -132,11 +130,11 @@ const DashboardAdmin = () => {
     ));
 
     return (
-        <div className="layer flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px} ">
+        <div className="flex flex-col bg-[#F4F4F4] w-[100%]  md:pt-[80px] pt-[100px] p-[25px]">
             <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
-                <div className="mx-[30px] md:py-[20px] py-[10px] ">
+                <div className="mx-[30px] md:py-[20px] py-[10px]">
                     <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
-                    <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
+                    <p className="text-white font-light">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                 </div>
             </div>
 
@@ -144,7 +142,7 @@ const DashboardAdmin = () => {
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Daftar Anggota Koperasi</h2>
 
                 {showNomorHp && (
-                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                    <div className='fixed overlay bg-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
                         <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[200px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button
@@ -157,7 +155,7 @@ const DashboardAdmin = () => {
 
                             <h1 className="text-center text-2xl font-bold text-[#2C6975] mb-[20px]">Ganti No. HP</h1>
                             <div className="flex flex-col gap-2">
-                                <h1 className="text-2xl text-[#121212] font-bold">{nama}</h1>
+                                <h1 className="text-2xl bg-[#151515] font-bold">{nama}</h1>
                                 <input
                                     type="string" placeholder="Masukkan Nomor Hp"
                                     className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]"
@@ -173,7 +171,7 @@ const DashboardAdmin = () => {
                 )}
 
                 {showFormTambah && (
-                    <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
+                    <div className='fixed overlay bg-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
                         <div className=" absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[350px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button
@@ -247,7 +245,7 @@ const DashboardAdmin = () => {
 
                         <div className="flex mt-[20px] w-[100%]">
                             <input
-                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                                className=" w-[100%] h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
                                 type="text"
                                 placeholder="Cari nama nasabah"
                                 value={searchQuery}
@@ -259,6 +257,7 @@ const DashboardAdmin = () => {
 
                         </div>
                     </div>
+
                 </div>
 
 

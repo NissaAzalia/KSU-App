@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
 import Swal from 'sweetalert2';
-import { useAuth } from '../auth/Auth';
+
 
 const InfoDashboard = () => {
     const [showForm, setShowForm] = useState(false);
@@ -11,8 +11,8 @@ const InfoDashboard = () => {
     const [showFormTambahPinjamanLagi, setShowFormTambahPinjamanLagi] = useState(false)
     const [currentId, setCurrentId] = useState(null);
     const { infoPinjaman, handleDeletePinjaman, handleTambahPinjaman, tampilkanTambahPinjamLagi, tampilkanPinjaman, tampilkanBayarHutang } = useMembers();
-    const { name } = useAuth()
     const [hutang, sethutang] = useState('')
+    const [filter, setFilter] = useState('all');
     const [bayar_hutang, setBayar_hutang] = useState('')
     const [nama, setNama] = useState('');
     const [jumlah_pinjaman, setJumlah_pinjaman] = useState('')
@@ -37,9 +37,9 @@ const InfoDashboard = () => {
                 setShowForm(false);
                 tampilkanPinjaman();
             } catch (error) {
-               Swal.fire({
-                text:"nama sudah ada di tabel"
-               })
+                Swal.fire({
+                    text: "nama sudah ada di tabel"
+                })
             }
         }
     }
@@ -49,7 +49,7 @@ const InfoDashboard = () => {
         if (confirm) {
             await handleDeletePinjaman(id);
             tampilkanPinjaman();
-        }
+        } tampilkanPinjaman();
     };
 
     const handleClose = () => {
@@ -123,9 +123,17 @@ const InfoDashboard = () => {
         setShowFormTambahPinjamanLagi(true)
     }
 
-    const filteredPinjaman = infoPinjaman.filter(pinjaman =>
-        pinjaman.nama && pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+
+    const filteredPinjaman = infoPinjaman.filter(pinjaman => {
+        const matchesSearch = pinjaman.nama && pinjaman.nama.toLowerCase().includes(searchQuery.toLowerCase());
+        if (filter === 'hutang') {
+            return matchesSearch && pinjaman.sisa_hutang > 0;
+        } else if (filter === 'lunas') {
+            return matchesSearch && pinjaman.sisa_hutang === 0;
+        } else {
+            return matchesSearch;
+        }
+    });
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -148,13 +156,6 @@ const InfoDashboard = () => {
 
     return (
         <div className="flex flex-col bg-[#F4F4F4] w-[100%] md:h-screen  md:pt-[80px] pt-[100px] p-[25px]">
-            <div className="rounded-s-xl rounded-e-xl bg-gradient-to-r from-[#2C6975] to-[#52C5DB]">
-                <div className="mx-[30px] md:py-[20px] py-[10px]">
-                    <h2 className="text-white font-normal text-2xl">Halo, {name}</h2>
-                    <p className="text-white font-thin">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
-                </div>
-            </div>
-
             <div className="mt-[25px]">
                 <h2 className="text-2xl text-[#2C6975] mb-[20px] font-bold">Info Pinjaman Anggota</h2>
 
@@ -198,7 +199,7 @@ const InfoDashboard = () => {
 
                 {showFormTambahPinjamanLagi && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-[35%] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[200px] flex flex-col items-center shadow-2xl">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[220px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button
                                     className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700"
@@ -229,7 +230,7 @@ const InfoDashboard = () => {
 
                 {showFormPinjaman && (
                     <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[1px]'>
-                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-2xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
+                        <div className="absolute top-1/2 left-[55%] transform md:-translate-x-1/2 -translate-x-[165px] -translate-y-1/2 bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] h-[250px] flex flex-col items-center shadow-2xl">
                             <div className="md:w-[600px]">
                                 <button className="mt-[10px] mr-[240px] text-gray-500 hover:text-gray-700" onClick={handleClose}>
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
@@ -278,20 +279,38 @@ const InfoDashboard = () => {
                         </div>
 
 
-                        <div className="flex mt-[20px] w-[100%]">
-                            <input
-                                className=" md:w-[100%]  h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
-                                type="text"
-                                placeholder="Cari nama nasabah"
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                            />
-                            <div className=' border olid p-[5px] pl-[10px] pr-[10px]  items-center  rounded rounded-l-none '>
-                                <FontAwesomeIcon className='' icon={faMagnifyingGlass} />
+                        <div className='flex w-[100%]'>
+
+                            <div className="flex mt-[20px] w-[100%]">
+                                <input
+                                    className=" w-[100%] h-[40px] border-solid border-[1px] shadow-sm pl-[30px]  rounded rounded-r-none "
+                                    type="text"
+                                    placeholder="Cari nama nasabah"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                />
+                                <div className=' border olid p-[5px] pl-[10px] pr-[10px]  items-center  rounded rounded-l-none '>
+                                    <FontAwesomeIcon className='' icon={faMagnifyingGlass} />
+                                </div>
                             </div>
+
+                            <div className="mt-5">
+                                <select
+                                    value={filter}
+                                    onChange={e => setFilter(e.target.value)}
+                                    className="border border-gray-300 rounded py-2 px-4 ml-2"
+                                >
+                                    <option value="all">All</option>
+                                    <option value="hutang">Hutang</option>
+                                    <option value="lunas">Lunas</option>
+                                </select>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
+
 
 
                 <div className="max-h-[100h] mt-[25px] overflow-y-auto overflow-x-auto bg-white p-[20px] shadow-lg">
@@ -322,10 +341,10 @@ const InfoDashboard = () => {
                                     </td>
                                     <td className="border-b border-solid text-center px-4 py-2">{pinjaman.sisa_hutang.toLocaleString()}</td>
                                     <td className="border-b border-solid text-center px-4 py-2">   {pinjaman.sisa_hutang === 0 ? (
-                                        <div className="bg-[#4aad7c] text-white rounded px-2 inline-block">
+                                        <div className="bg-[#17c6544b] text-[#17c653] rounded px-2 inline-block">
                                             Lunas
                                         </div>
-                                    ) : <div className="bg-[#ff7373] text-white rounded px-2 inline-block">
+                                    ) : <div className="bg-[#ff737357] text-[#ff7373] rounded px-2 inline-block">
                                         hutang
                                     </div>}</td>
                                     <td className="border-b border-solid border-gray-300 text-center items-center py-1">

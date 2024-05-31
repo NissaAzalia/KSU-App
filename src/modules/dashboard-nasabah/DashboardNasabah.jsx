@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 import emailjs from 'emailjs-com';
@@ -129,37 +129,17 @@ const DasboardNasabah = ({ doLogout, name }) => {
     return (
         <div className="w-100% md:w-full  h-auto bg-[#F4F4F4] ">
 
-            <div className=" flex justify-between fixed bg-white w-[100%] top-[0px] pt-[10px] pb-[10px]">
+            <div className=" flex justify-between fixed bg-white w-[100%] top-[0px] pt-[10px] pb-[10px] shadow-sm">
 
                 <div className="logo flex md:ml-[50px] ml-[10px]  md:w-[430px] w-[260px] ">
                     <img src="src/assets/logoKSU.png" alt="" className="md:fixed h-[50px] w-[50px]    " />
-                    <h1 className="md:ml-[65px] ml-[10px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[13px]'>KSU TEKNIKA MANDIRI</span></h1>
-
+                    <h1 className="md:ml-[65px] ml-[10px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[15px] text-[#616161]'>KSU TEKNIKA MANDIRI</span></h1>
                 </div>
 
-                {/* <div className={`md:hidden fixed mt-[65px] top-[-0px] left-0 bg-white w-[110px] h-[60px] shadow-md ${bar}`}>
-          
-                    {bar ? (
-                        <div className='flex'>
-                            <div className="p-[15px]">
-                                <button onClick={doLogout} className="font-bold text-[#676767] px-4 py-2 rounded-md ">Logout</button>
-                            </div>
-           
-
-                        </div>
-                    ) : (
-                        <div className="absolute right-0 top-2 m-4" onClick={() => setBar(!bar)}>
-                          
-                        </div>
-                    )}
-                </div> */}
-
-
-
                 <div onClick={doLogout} className=" font-semibold flex text-center mr-[25px] gap-3">
-                    <button className=" text-lg text-center hidden md:block" >Logout</button>
-                    <span  className="text center mt-[12px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
-                    <FontAwesomeIcon icon={faRightFromBracket} size='xl' style={{color: "#000000",}} />
+                    <button className="text-[#616161] text-lg text-center hidden md:block" >Logout</button>
+                    <span  className="text center mt-[12px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#797979]">
+                    <FontAwesomeIcon icon={faArrowRightFromBracket} size='md' style={{color: "#616161",}} />
                     </span>
                 </div>
             </div>
@@ -170,7 +150,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                     <div className="md:mx-[3%] mx-[6%] py-[6px] mt-[25px] md:py-[10px]">
                         <h2 className="text-white font-normal text-1xl md:text-2xl">Halo, {name}</h2>
-                        <p className="text-white font-thin text-sm md:text-base">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
+                        <p className="text-white font-light text-sm md:text-base">Selamat Datang Di Koperasi Konsumen KSU TEKNIKA MANDIRI</p>
                     </div>
                 </div>
 
@@ -185,7 +165,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex gap-[5px] ">
+                        <div className="flex gap-[15px] ">
                             <div className="bg-[#2D5275]  w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl md:gap-[15px]">
                                 <span>Pokok</span>
@@ -206,7 +186,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex gap-[5px] ">
+                        <div className="flex gap-[15px] ">
                             <div className="bg-[#37808F] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl md:gap-[15px]  ">
                                 <span>Wajib</span>
@@ -227,7 +207,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex gap-[5px] ">
+                        <div className="flex gap-[15px] ">
                             <div className="bg-[#439FB1] w-[75px] h-[75px] ">
                                 <FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} />
                             </div>
@@ -250,7 +230,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex gap-[5px] ">
+                        <div className="flex gap-[15px] ">
                             <div className="bg-[#50BDD3] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
                             <div className="flex flex-col text-left text-xl md:gap-[15px]   ">
                                 <span className=''>Hari Raya</span>
@@ -302,7 +282,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]">
 
                         {showFormServis ? (
-                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
                                 <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
@@ -375,7 +355,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
 
                         {showFormBeliBarang ? (
-                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
                                 <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
@@ -437,7 +417,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                         </div>
 
                         {showFormPinjamMobil ? (
-                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                            <div className='fixed overlay bg-[#f4f4f4] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
                                 <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
@@ -496,7 +476,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                         </div>
 
                         {showFormPinjamUang ? (
-                            <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
                                 <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
