@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark, faBars, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 import emailjs from 'emailjs-com';
@@ -156,10 +156,10 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
 
 
-                <div onClick={doLogout} className="disabled:block font-semibold flex text-center mr-[25px] gap-3">
-                    <button className="text-center" >Logout</button>
-                    <span  className="text center disabled:block mt-[10px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
-                        <FontAwesomeIcon className="h-[25px] " icon={faBars} />
+                <div onClick={doLogout} className=" font-semibold flex text-center mr-[25px] gap-3">
+                    <button className=" text-lg text-center hidden md:block" >Logout</button>
+                    <span  className="text center mt-[12px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
+                    <FontAwesomeIcon icon={faRightFromBracket} size='xl' style={{color: "#000000",}} />
                     </span>
                 </div>
             </div>
