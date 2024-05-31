@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faHandHoldingDollar, faUserGear, faSackDollar, faCar, faBoxesPacking, faXmark, faBars, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { useDashboardNasabah } from "./DashboardNasabahProvider"
 import emailjs from 'emailjs-com';
@@ -13,6 +13,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
     const [showFormBeliBarang, setShowFormBeliBarang] = useState(false);
     const [showFormPinjamMobil, setShowFormPinjamMobil] = useState(false);
     const [showFormPinjamUang, setShowFormPinjamUang] = useState(false);
+    const [bar, setBar] = useState(false);
     const [jenisBarang, setJenisBarang] = useState("");
     const [alamat, setAlamat] = useState("");
     const [jenisKerusakan, setjenisKerusakan] = useState("");
@@ -55,46 +56,46 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
     const handleClickServis = async () => {
 
-            try {
-                await doServis(jenisBarang, alamat, jenisKerusakan);
-                setJenisBarang('');
-                setAlamat('');
-                setjenisKerusakan('');
-                setShowFormServis(false);
+        try {
+            await doServis(jenisBarang, alamat, jenisKerusakan);
+            setJenisBarang('');
+            setAlamat('');
+            setjenisKerusakan('');
+            setShowFormServis(false);
 
-            } catch (error) {
-                Swal.fire({
-                    text: 'inputan tidak boleh kosong',
-                    confirmButtonText: 'OK'
-                });
-            }
-        
+        } catch (error) {
+            Swal.fire({
+                text: 'inputan tidak boleh kosong',
+                confirmButtonText: 'OK'
+            });
+        }
+
 
     }
 
     const handleClickBeliBarang = async () => {
 
-      
-            try {
-                await doBeliBarang(nama_barang, alamat, jumlah_barang);
-                setNama_barang('');
-                setAlamat('');
-                setJumlah_barang('');
-                setShowFormBeliBarang(false);
-            } catch (error) {
-                Swal.fire({
-                    text: 'inputan tidak boleh kosong',
-                    confirmButtonText: 'OK'
-                });
-            }
-        
+
+        try {
+            await doBeliBarang(nama_barang, alamat, jumlah_barang);
+            setNama_barang('');
+            setAlamat('');
+            setJumlah_barang('');
+            setShowFormBeliBarang(false);
+        } catch (error) {
+            Swal.fire({
+                text: 'inputan tidak boleh kosong',
+                confirmButtonText: 'OK'
+            });
+        }
+
     }
 
     const handleClickPinjamMobil = async () => {
         if (!tanggal) {
             Swal.fire({
                 text: 'inputan tidak boleh kosong'
-              })
+            })
             return;
         } else {
             try {
@@ -112,17 +113,17 @@ const DasboardNasabah = ({ doLogout, name }) => {
     }
 
     const handleClickPinjamUang = async () => {
-            try {
-                await doPinjamUang(jumlah, tenor);
-                setJumlah('');
-                setTenor('');
-                setShowFormPinjamUang(false);
-            } catch (error) {
-                Swal.fire({
-                    text: 'inputan tidak boleh kosong',
-                    confirmButtonText: 'OK'
-                });
-            }
+        try {
+            await doPinjamUang(jumlah, tenor);
+            setJumlah('');
+            setTenor('');
+            setShowFormPinjamUang(false);
+        } catch (error) {
+            Swal.fire({
+                text: 'inputan tidak boleh kosong',
+                confirmButtonText: 'OK'
+            });
+        }
     }
 
     return (
@@ -130,11 +131,36 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
             <div className=" flex justify-between fixed bg-white w-[100%] top-[0px] pt-[10px] pb-[10px]">
 
-                <div className="logo flex md:ml-[50px]  md:w-[430px] w-[260px] ">
-                    <img src="src/assets/logoKSU.png" alt="" className="fixed h-[50px] w-[50px]    " />
-                    <h1 className=" ml-[70px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[13px]'>KSU TEKNIKA MANDIRI</span></h1>
+                <div className="logo flex md:ml-[50px] ml-[10px]  md:w-[430px] w-[260px] ">
+                    {/* <FontAwesomeIcon className="md:hidden disabled:block mt-[10px] mr-[10px] h-[25px]   " icon={faBars} /> */}
+                    <span onClick={() => setBar(!bar)} className="md:hidden disabled:block mt-[10px] mr-[10px] h-[25px] cursor-pointer  hover:text-[#7D7D7D]">
+                        <FontAwesomeIcon className="h-[25px] " icon={faBars} />
+                    </span>
+
+                    <img src="src/assets/logoKSU.png" alt="" className="md:fixed h-[50px] w-[50px]    " />
+                    <h1 className="md:ml-[65px] ml-[10px] md:text-1xl font-bold "> KOPERASI Konsumen <br /><span className='text-[13px]'>KSU TEKNIKA MANDIRI</span></h1>
                 </div>
-                <div className=" font-semibold flex text-center mr-[60px]">
+
+                <div className={`md:hidden fixed mt-[65px] left-0 bg-white w-[150px] shadow-md transition-all ${bar ? "translate-x-0" : "-translate-x-full"}`}>
+                    {/* Konten Sidebar */}
+                    {bar ? (
+                        <div className='flex'>
+                            <div className="p-[15px]">
+                                <button onClick={doLogout} className="bg-[#2C6975] text-white px-4 py-2 rounded-md ">Logout</button>
+                            </div>
+                            {/* Menggunakan ikon anak panah untuk tombol Close */}
+
+                        </div>
+                    ) : (
+                        <div className="absolute right-0 top-2 m-4" onClick={() => setBar(!bar)}>
+                            {/* <FontAwesomeIcon icon={faArrowLeft} className="text-black cursor-pointer" /> */}
+                        </div>
+                    )}
+                </div>
+
+
+
+                <div className="hidden disabled:block font-semibold md:flex text-center mr-[25px]">
                     <button onClick={doLogout}>Logout</button>
                 </div>
             </div>
@@ -160,9 +186,9 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]   ">
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#2D5275] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#2D5275]  w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]">
                                 <span>Pokok</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -181,9 +207,9 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#37808F] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#37808F] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]  ">
                                 <span>Wajib</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -202,12 +228,12 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
+                        <div className="flex gap-[5px] ">
                             <div className="bg-[#439FB1] w-[75px] h-[75px] ">
                                 <FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} />
                             </div>
 
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]  ">
                                 <span>Sukarela</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
@@ -225,10 +251,10 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     </div>
 
                     <div className="rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-white ">
-                        <div className="flex ">
-                            <div className="bg-[#50BDD3] w-[75px] h-[75px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
-                            <div className="flex flex-col text-left text-xl gap-[15px] ml-[25px]">
-                                <span>Hari Raya</span>
+                        <div className="flex gap-[5px] ">
+                            <div className="bg-[#50BDD3] w-[70px] h-[70px] "><FontAwesomeIcon className="pt-[12px] w-[50px] h-[50px]" icon={faHandHoldingDollar} style={{ color: "#fafafa", }} /> </div>
+                            <div className="flex flex-col text-left text-xl md:gap-[15px]   ">
+                                <span className=''>Hari Raya</span>
                                 <span className="font-bold">
                                     {loadingSimpanan ?
                                         <>
@@ -274,7 +300,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                 <div className="h-auto md:pb-[50px] pb-[30px] flex flex-col">
                     <h2 className="text-xl md:text-2xl text-black font-semibold md:mt-[4%] mt-[20px] mb-[25px] md:ml-[50px] ml-[30px] ">Layanan</h2>
 
-                    <div className="flex flex-col md:flex-row mx-[3em] md:gap-[30px] gap-[20px] flex-wrap">
+                    <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]">
 
                         {showFormServis ? (
                             <div className='fixed overlay bg-black bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
@@ -340,7 +366,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                             </div>
                         ) : null}
 
-                        <div onClick={openServisForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
+                        <div onClick={openServisForm} className="1 flex rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#2D5275] ">
                             <div className="flex gap-[25px] ">
                                 <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faUserGear} style={{ color: "#ffff", }} />
                                 <span onClick={openServisForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Servis</span>
@@ -404,7 +430,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                             </div>
                         ) : null}
 
-                        <div onClick={openBeliBarangForm} className="1 flex rounded-[8px] md:w-[30%] w-[100%] h-[100px] text-center items-center p-[12px]  shadow-2xl bg-[#307280] ">
+                        <div onClick={openBeliBarangForm} className="1 flex rounded-[8px] md:w-[45%] lg:flex-grow w-[100%] h-[100px] text-center items-center p-[12px]  shadow-2xl bg-[#307280] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className="h-[50px]" icon={faBoxesPacking} style={{ color: "#ffff", }} />
                                 <span onClick={openBeliBarangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pembelian Barang</span>
@@ -463,7 +489,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                             </div>
                         ) : null}
 
-                        <div onClick={openPinjamMobilForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
+                        <div onClick={openPinjamMobilForm} className="1 flex rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#439FB1] ">
                             <div className="flex gap-[25px] text-left">
                                 <FontAwesomeIcon className="ml-[10px] h-[50px]" icon={faCar} style={{ color: "#ffff", }} />
                                 <span onClick={openPinjamMobilForm} className="text-white flex items-center md:text-2xl text-2xl cursor-pointer hover:text-[#7D7D7D]">Pinjaman Mobil</span>
@@ -528,8 +554,8 @@ const DasboardNasabah = ({ doLogout, name }) => {
                             </div>
                         ) : null}
 
-                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[30%] w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
-                            <div className="flex gap-[25px] ">
+                        <div onClick={openPinjamUangForm} className="1 flex rounded-[8px] md:w-[45%] lg:flex-grow w-[99%] h-[100px] text-center  items-center p-[12px]  shadow-2xl bg-[#50BDD3] ">
+                            <div className="flex gap-[25px] text-left ">
                                 <FontAwesomeIcon className=" mt-[10px] ml-[10px] h-[50px] " icon={faSackDollar} style={{ color: "#ffff", }} />
                                 <span onClick={openPinjamUangForm} className="text-white md:text-2xl text-2xl flex items-center cursor-pointer hover:text-[#7D7D7D]">Pinjam Uang</span>
                             </div>
