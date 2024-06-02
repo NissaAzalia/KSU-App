@@ -1,4 +1,4 @@
-import { faTrashCan, faPlusCircle, faXmark, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan, faPlusCircle, faXmark, faMagnifyingGlass, faCircleMinus  } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useMembers } from './AdminContext';
@@ -352,7 +352,7 @@ const InfoDashboard = () => {
                                             className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
                                             onClick={() => handleEditClick(pinjaman.id_pinjaman, pinjaman.nama)}
                                         >
-                                            <FontAwesomeIcon icon={faPlusCircle} size='xl' />
+                                            <FontAwesomeIcon icon={faCircleMinus} size='xl' />
                                         </button>
                                         <button
                                             className="text-[#707070]  p-2 rounded-sm mr-[10px] ml-[10px] hover:text-[#979696]"
