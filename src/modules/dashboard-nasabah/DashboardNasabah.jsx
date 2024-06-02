@@ -282,8 +282,8 @@ const DasboardNasabah = ({ doLogout, name }) => {
                     <div className="flex flex-col md:flex-row md:flex-wrap xl:flex-nowrap gap-[10px] md:gap-[50px] md:mx-[50px] mx-[30px]">
 
                         {showFormServis ? (
-                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
-                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className='fixed overlay bg-[#000000] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[167px] md:-translate-y-[250px] -translate-y-[230px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
                                             className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -298,26 +298,26 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                                     <div className="flex flex-col gap-2 ">
 
-                                        <input value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
+                                        <input value={jenisBarang} onChange={(e) => setJenisBarang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[270px]  h-[40px] px-[15px]" type="text" placeholder="Jenis Barang" />
 
-                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Alamat" />
+                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[270px]  h-[40px] px-[15px]" type="text" placeholder="Alamat" />
                                         <textarea
-                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px]"
+                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[270px] md:h-[80px] h-[40px] px-[15px] pt-[5px]"
                                             placeholder="Jenis Kerusakan"
                                             value={jenisKerusakan}
                                             onChange={(e) => setjenisKerusakan(e.target.value)}
                                             rows="2"
                                         ></textarea>
 
-                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                        <div className="border border-gray-300 pl-[10px] md:h-[120px] h-[130px] pt-[10px] pb-[10px] md:w-[600px] w-[270px] bg-[#fcf7f6]">
                                             <p className="text-gray-600">contoh pengisian form :</p>
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Jenis barang : mesin cuci
                                             </p>
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Alamat : Kab, Kec, Ds, Dk, RT/RW
                                             </p>
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Kerusakan : mesin cuci tidak berputar
                                             </p>
 
@@ -326,7 +326,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                                         <button
                                             onClick={handleClickServis}
-                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[270px] h-[40px] mb-[20px]"
                                             disabled={loadingServis}
                                         >
                                             {loadingServis ? (
@@ -355,9 +355,9 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
 
                         {showFormBeliBarang ? (
-                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
-                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
-                                    <div className="md:w-[600px] ">
+                            <div className='fixed overlay bg-[#000000] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[167px] md:-translate-y-[225px] -translate-y-[230px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px] flex flex-col items-center shadow-2xl">
+                                    <div className="md:w-[600px] w-[50px] md:mr-[0px] mr-[200px]  ">
                                         <button
                                             className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
                                             onClick={() => setShowFormBeliBarang(false)}
@@ -371,26 +371,26 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                                     <div className="flex flex-col gap-2 ">
 
-                                        <textarea value={nama_barang} onChange={(e) => setNama_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px] " type="string" placeholder="Jenis Barang & Spesifikasi"></textarea>
-                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
-                                        <input value={jumlah_barang} onChange={(e) => setJumlah_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
-                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
-                                            <p className="text-gray-600">contoh pengisian form :</p>
+                                        <textarea value={nama_barang} onChange={(e) => setNama_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[20270px0px] md:h-[80px] h-[40px] px-[15px] pt-[5px] " type="string" placeholder="Jenis Barang & Spesifikasi"></textarea>
+                                        <input value={alamat} onChange={(e) => setAlamat(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[270px] h-[40px] px-[15px]" type="text" placeholder="Alamat Kirim" />
+                                        <input value={jumlah_barang} onChange={(e) => setJumlah_barang(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[270px] h-[40px] px-[15px]" type="number" placeholder="Jumlah Barang" />
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:h-[120px] h-[130px] md:w-[600px] w-[270px] bg-[#fcf7f6]">
+                                            <p className="text-gray-600 md:text-[16px] text-sm ">contoh pengisian form :</p>
 
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Jenis Barang & Spesifikasi : TV (Polytron)
                                             </p>
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Alamat Kirim: Kab, Kec, Ds, Dk, RT/RW
                                             </p>
-                                            <p className="font-light text-gray-600 text mb-1">
+                                            <p className="font-light text-gray-600 md:text-[16px] text-sm mb-1">
                                                 Jumlah Barang : 1
                                             </p>
 
                                         </div>
                                         <button
                                             onClick={handleClickBeliBarang}
-                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[270px] h-[40px] mb-[20px]"
                                             disabled={loadingBeliBarang}
                                         >
                                             {loadingServis ? (
@@ -417,8 +417,8 @@ const DasboardNasabah = ({ doLogout, name }) => {
                         </div>
 
                         {showFormPinjamMobil ? (
-                            <div className='fixed overlay bg-[#f4f4f4] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
-                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className='fixed overlay bg-[#000000] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[167px] md:-translate-y-[250px] -translate-y-[200px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
                                             className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -432,18 +432,18 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
 
                                     <div className="flex flex-col gap-2 ">
-                                        <input value={tanggal} onChange={(e) => setTanggal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
+                                        <input value={tanggal} onChange={(e) => setTanggal(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="text" placeholder="Tanggal" />
                                         <div className="flex flex-col gap/[10px] mb-[5px]">
 
                                             <label className="text-md font-medium text-[#2C6975]">Menggunakan Sopir:</label>
                                             <div className="flex items-center pt-[10px]">
-                                                <input type="radio" id="sopir_ya" name="sopir" checked={gunakanSopir} onChange={() => setGunakanSopir(true)} className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
-                                                <input type="radio" id="sopir_tidak" name="sopir" checked={!gunakanSopir} onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
+                                                <input type="radio" id="sopir_ya" name="sopir"  onChange={() => setGunakanSopir(true)} className="mr-[10px]" required />                                            <label htmlFor="sopir_ya" className="mr-[20px]">Ya</label>
+                                                <input type="radio" id="sopir_tidak" name="sopir"  onChange={() => setGunakanSopir(false)} className="mr-[10px]" required />                                            <label htmlFor="sopir_tidak">Tidak</label>
                                             </div>
                                         </div>
 
 
-                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] bg-[#fcf7f6]">
                                             <p className="text-gray-600">contoh pengisian form :</p>
                                             <p className="font-light text-gray-600 text"> Tanggal :  2 - 3 Mei
                                             </p>
@@ -452,7 +452,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
                                         </div>
                                         <button
                                             onClick={handleClickPinjamMobil}
-                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
                                             disabled={loadingPinjamMobil}
                                         >
                                             {loadingPinjamMobil ? (
@@ -476,8 +476,8 @@ const DasboardNasabah = ({ doLogout, name }) => {
                         </div>
 
                         {showFormPinjamUang ? (
-                            <div className='fixed overlay text-[#151515] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
-                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[200px] md:-translate-y-[250px] -translate-y-[300px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[350px]    flex flex-col items-center shadow-2xl">
+                            <div className='fixed overlay bg-[#000000] bg-opacity-50 w-screen h-screen bottom-[1px] right-[-2px]'>
+                                <div className="absolute top-[55%] left-[55%] transform md:-translate-x-[400px] -translate-x-[167px] md:-translate-y-[210px] -translate-y-[210px] bg-white rounded-3xl border-[#2C6975] md:w-[700px] w-[300px]    flex flex-col items-center shadow-2xl">
                                     <div className="md:w-[600px] ">
                                         <button
                                             className=" mt-[10px] mr-[260px] text-gray-500 hover:text-gray-700"
@@ -491,17 +491,17 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                                     <div className="flex flex-col gap-2 ">
 
-                                        <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
+                                        <input value={jumlah} onChange={(e) => setJumlah(e.target.value)} className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[40px] px-[15px]" type="number" placeholder="Nominal" />
 
                                         <textarea
-                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[300px] h-[80px] px-[15px] pt-[5px] "
+                                            className="border-solid border-[1px] border-[#2C6975] rounded md:w-[600px] w-[200px] h-[80px] px-[15px] pt-[5px] "
                                             placeholder="Tenor"
                                             value={tenor}
                                             onChange={(e) => setTenor(e.target.value)}
                                             rows="2"
                                         ></textarea>
 
-                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-300px] bg-[#fcf7f6]">
+                                        <div className="border border-gray-300 pl-[10px] pt-[10px] pb-[10px] md:w-[600px] w-[200px] bg-[#fcf7f6]">
                                             <p className="text-gray-600">contoh pengisian form :</p>
                                             <p className="font-light text-gray-600 text mb-1">
                                                 Nominal : Rp100.000
@@ -514,7 +514,7 @@ const DasboardNasabah = ({ doLogout, name }) => {
 
                                         <button
                                             onClick={handleClickPinjamUang}
-                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[300px] h-[40px] mb-[20px]"
+                                            className="rounded bg-[#2C6975] hover:bg-[#358595] text-white md:w-[600px] w-[200px] h-[40px] mb-[20px]"
                                             disabled={loadingUang}
                                         >
                                             {loadingUang ? (
