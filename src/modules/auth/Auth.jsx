@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
     setIsLoading(false)
     if (status != 'success') {
       Swal.fire({
-        title: `${message}`
+        title: ` ${message}`
       })
       return;
     }

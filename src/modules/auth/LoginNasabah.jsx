@@ -20,7 +20,7 @@ const LoginNasabah = () => {
    
     doLogin(username, password)
     if (!username, !password) {
-      alert("")
+      alert("Inputan tidak boleh kosong")
     }
     changeAuthority('nasabah')
   }
