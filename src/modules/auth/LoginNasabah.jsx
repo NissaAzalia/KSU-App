@@ -5,17 +5,19 @@ import { useAuth } from "./Auth";
 
 const LoginNasabah = () => {
 
-  const { doLogin, changeAuthority } = useAuth()
+  const { doLogin, changeAuthority} = useAuth()
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+ 
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleClick = async () => {
+   
     doLogin(username, password)
     if (!username, !password) {
       alert("")
@@ -26,7 +28,7 @@ const LoginNasabah = () => {
   const handleClickAdmin = () => {
     const confirm = window.confirm("Apakah Anda yakin ingin pindah ke halaman admin?");
     if (confirm === true) {
-      window.location.href = '/admin';
+      window.location.href = './admin';
     }
   };
 

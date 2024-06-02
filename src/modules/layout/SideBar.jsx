@@ -84,8 +84,9 @@ const SideBar = () => {
                                 className="animate flex bg-[#2C6975] rounded-md hover:bg-[#419aab] text-white gap-[10px] h-[45px] pt-[10px] px-[130px] ml-[0] pl-[85px]"
                                 onClick={() => doLogout()}
                             >
+                                 <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ marginTop:'4px', color: "#f4f4f4", transform: "scaleX(-1)" }} />
                                 <h2>Logout</h2>
-                                <FontAwesomeIcon icon={faArrowRightFromBracket} size='md' style={{ marginTop:'4px', color: "#f4f4f4", transform: "scaleX(-1)" }} />
+                               
                             </div>
                         </NavLink>
                     </div>

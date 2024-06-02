@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "./Auth";
 
+
+
 const Login = () => {
   const { doLoginAdmin, changeAuthority } = useAuth()
 
@@ -12,6 +14,7 @@ const Login = () => {
   
 
   const handleClick = async () => {
+
      await doLoginAdmin (username, password);
      changeAuthority('Admin')
   };
@@ -23,7 +26,7 @@ const Login = () => {
   const handleClickAdmin = () => {
     const confirm = window.confirm("Apakah Anda yakin ingin pindah ke halaman Nasabah?");
     if (confirm === true) {
-      window.location.href = '/login';
+      window.location.href = './login';
     }
   };
 

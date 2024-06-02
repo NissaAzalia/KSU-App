@@ -99,9 +99,8 @@ const DashboardAdmin = () => {
         setPassword('');
     };
 
-    const handleEditClick = (id, no_telp) => {
+    const handleEditClick = (id) => {
         setCurrentId(id)
-        setNoBaru(no_telp)
         setShowNomorHp(true);
     };
 
