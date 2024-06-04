@@ -22,6 +22,10 @@ const AppRoutes = () => {
       <Routes>
         {
           isLoggedin !== true ?
+
+          <Route path='/' element={<h1>Hello World</h1>}><Route/>
+          <Route path='*' element={"/"}/>
+
             // jika belum login
             <Route>
               <Route path='admin' element={<Login />} />
