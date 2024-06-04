@@ -9,6 +9,7 @@ import LoginNasabah from '../modules/auth/LoginNasabah'
 import { useAuth } from '../modules/auth/Auth'
 import { DasboardNasabahProvider } from '../modules/dashboard-nasabah/DashboardNasabahProvider'
 import { MemberProvider } from '../modules/dashboard/AdminContext'
+import StartingLayout from '../modules/layout/StartingLayout'
 
 const AppRoutes = () => {
   const { authority, isLoggedin, doLogout, name } = useAuth();
@@ -26,7 +27,7 @@ const AppRoutes = () => {
 
             // jika belum login
             <Route>
-              <Route path='/' element={<h1>Hello World</h1>}/>
+              <Route path='/' element={<StartingLayout/>}/>
               <Route path='admin' element={<Login />} />
               <Route path='login' element={<LoginNasabah />} />
               <Route path='*' element={<Navigate to={"/"} />} />

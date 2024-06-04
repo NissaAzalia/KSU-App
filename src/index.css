@@ -8,3 +8,21 @@
     font-family: "Inter", Helvetica, sans-serif
 
 }
+
+.btn-start{
+    width: 20%;
+    background: rgb(44 105 117);
+    color: #f8f8f8;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 20px;    
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 756px){
+    .btn-start{
+        width: 40%;
+        padding: 15px;
+        font-size: 20px;
+    }
+}
