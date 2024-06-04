@@ -5,7 +5,7 @@ export default function(){
         <>
         <div className="flex flex-col justify-center items-center text-center h-[100vh] gap-[2em]">
             <NavLink to={"admin"} className={'btn-start'}>Admin</NavLink>
-            <NavLink to={"admin"} className={'btn-start'}>Nasabah</NavLink>
+            <NavLink to={"login"} className={'btn-start'}>Nasabah</NavLink>
         </div>
         </>
     );
